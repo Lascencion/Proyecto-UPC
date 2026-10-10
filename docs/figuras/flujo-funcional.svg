@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="1060" viewBox="0 0 1220 1060" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
+<rect width="1220" height="1060" fill="#ffffff"/>
+<text x="610.0" y="44" font-size="26" font-weight="700" fill="#14213d" text-anchor="middle">Flujo funcional del sistema</text>
+<text x="610.0" y="72" font-size="15" fill="#4a5262" text-anchor="middle">Generación de casos de prueba funcionales con LLM</text>
+<rect x="40" y="96" width="380" height="944" fill="#e8f0fc" fill-opacity="0.35" stroke="#d5dae3"/>
+<rect x="40" y="96" width="380" height="44" fill="#1f5fbf"/>
+<text x="230" y="124" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Analista QA</text>
+<rect x="420" y="96" width="380" height="944" fill="#f1ebfb" fill-opacity="0.35" stroke="#d5dae3"/>
+<rect x="420" y="96" width="380" height="44" fill="#6a3fb5"/>
+<text x="610" y="124" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Sistema (LLM)</text>
+<rect x="800" y="96" width="380" height="944" fill="#e8f5e9" fill-opacity="0.35" stroke="#d5dae3"/>
+<rect x="800" y="96" width="380" height="44" fill="#2e7d32"/>
+<text x="990" y="124" font-size="17" font-weight="700" fill="#fff" text-anchor="middle">Líder QA</text>
+<rect x="95.0" y="160.0" width="270" height="60" rx="10" fill="#e8f0fc" stroke="#1f5fbf" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="230" y="195.2">Inicia sesión</tspan></text>
+<rect x="475.0" y="160.0" width="270" height="60" rx="10" fill="#f1ebfb" stroke="#6a3fb5" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="610" y="185.5">Valida credenciales y</tspan><tspan x="610" y="205.0">muestra el menú según el rol</tspan></text>
+<rect x="95.0" y="260.0" width="270" height="60" rx="10" fill="#e8f0fc" stroke="#1f5fbf" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="230" y="285.5">Registra información histórica</tspan><tspan x="230" y="305.0">(individual o masiva)</tspan></text>
+<rect x="475.0" y="260.0" width="270" height="60" rx="10" fill="#f1ebfb" stroke="#6a3fb5" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="610" y="285.5">Valida y almacena en la</tspan><tspan x="610" y="305.0">base de conocimiento</tspan></text>
+<rect x="95.0" y="360.0" width="270" height="60" rx="10" fill="#e8f0fc" stroke="#1f5fbf" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="230" y="385.5">Ingresa el requerimiento</tspan><tspan x="230" y="405.0">a validar</tspan></text>
+<rect x="475.0" y="360.0" width="270" height="60" rx="10" fill="#f1ebfb" stroke="#6a3fb5" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="610" y="385.5">Recupera reglas, requerimientos</tspan><tspan x="610" y="405.0">y casos históricos similares</tspan></text>
+<rect x="475.0" y="460.0" width="270" height="60" rx="10" fill="#f1ebfb" stroke="#6a3fb5" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="610" y="485.5">El LLM genera los casos</tspan><tspan x="610" y="505.0">de prueba funcionales</tspan></text>
+<rect x="95.0" y="530.0" width="270" height="60" rx="10" fill="#e8f0fc" stroke="#1f5fbf" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="230" y="565.2">Revisa los casos generados</tspan></text>
+<polygon points="230,623.0 305.0,665 230,707.0 155.0,665" fill="#fff" stroke="#1f5fbf" stroke-width="1.6"/>
+<text font-size="14" font-weight="600" fill="#1d2433" text-anchor="middle"><tspan x="230" y="660.8">¿Son</tspan><tspan x="230" y="679.0">correctos?</tspan></text>
+<rect x="95.0" y="740.0" width="270" height="60" rx="10" fill="#e8f0fc" stroke="#1f5fbf" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="230" y="775.2">Envía los casos a aprobación</tspan></text>
+<rect x="855.0" y="740.0" width="270" height="60" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="990" y="775.2">Revisa los casos de prueba</tspan></text>
+<polygon points="990,833.0 1065.0,875 990,917.0 915.0,875" fill="#fff" stroke="#2e7d32" stroke-width="1.6"/>
+<text font-size="14" font-weight="600" fill="#1d2433" text-anchor="middle"><tspan x="990" y="879.9">¿Aprueba?</tspan></text>
+<rect x="475.0" y="845.0" width="270" height="60" rx="10" fill="#f1ebfb" stroke="#6a3fb5" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="610" y="870.5">Registra los casos aprobados</tspan><tspan x="610" y="890.0">y genera reportes</tspan></text>
+<rect x="855.0" y="945.0" width="270" height="60" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.6"/>
+<text font-size="15" font-weight="400" fill="#1d2433" text-anchor="middle"><tspan x="990" y="980.2">Devuelve con observaciones</tspan></text>
+<path d="M 365.0,190 L 475.0,190" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 610,220 L 610,240 L 230,240 L 230,260" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 365.0,290 L 475.0,290" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 610,320 L 610,340 L 230,340 L 230,360" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 365.0,390 L 475.0,390" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 610,420 L 610,460" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 475.0,490 L 415.0,490 L 415.0,560 L 365.0,560" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 230,590 L 230,623" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 305,665 L 610,665 L 610,520" fill="none" stroke="#4a5262" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="320" y="655" font-size="13" font-weight="600" fill="#4a5262" text-anchor="start">No</text>
+<text x="620" y="600" font-size="13" font-weight="400" fill="#4a5262" text-anchor="start">Solicita nueva</text>
+<text x="620" y="617" font-size="13" font-weight="400" fill="#4a5262" text-anchor="start">generación</text>
+<path d="M 230,707 L 230,740" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="240" y="728" font-size="13" font-weight="600" fill="#4a5262" text-anchor="start">Sí</text>
+<path d="M 365.0,770 L 855.0,770" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 990,800 L 990,833" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 915,875 L 745.0,875" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="900" y="866" font-size="13" font-weight="600" fill="#4a5262" text-anchor="end">Sí</text>
+<path d="M 990,917 L 990,945" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="1000" y="935" font-size="13" font-weight="600" fill="#4a5262" text-anchor="start">No</text>
+<path d="M 855.0,975 L 60,975 L 60,560 L 95.0,560" fill="none" stroke="#4a5262" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="420" y="995" font-size="13" font-weight="400" fill="#4a5262" text-anchor="middle">El Analista QA ajusta y vuelve a revisar</text>
+</svg>
