@@ -1,0 +1,42 @@
+.back {
+  margin-left: -12px;
+}
+
+.meta {
+  font-size: 13px;
+}
+
+.form-card {
+  max-width: 1100px;
+}
+
+h3 {
+  margin: 8px 0 12px;
+  font: var(--mat-sys-title-medium);
+}
+
+.scope {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.error-hint {
+  color: var(--mat-sys-error);
+}
+
+mat-card-actions {
+  gap: 8px;
+  padding: 16px;
+}
+
+@media (max-width: 600px) {
+  .scope {
+    grid-template-columns: 1fr;
+  }
+}

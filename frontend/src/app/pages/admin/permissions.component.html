@@ -1,0 +1,63 @@
+<header class="page-header">
+  <div>
+    <h1>Permisos por rol</h1>
+    <p class="muted">Defina a qué módulos accede cada rol y qué acciones puede realizar. Los cambios aplican de inmediato.</p>
+  </div>
+</header>
+
+@if (matrix(); as m) {
+  <mat-tab-group mat-stretch-tabs="false" animationDuration="0">
+    @for (r of m.roles; track r.role) {
+      <mat-tab [label]="r.label + (dirty().has(r.role) ? ' •' : '')">
+        <div class="table-wrapper matrix">
+          <table>
+            <thead>
+              <tr>
+                <th class="module-col">Módulo</th>
+                @for (a of m.actions; track a.action) {
+                  <th>{{ a.label }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (mod of m.modules; track mod.module) {
+                <tr [class.unavailable]="!mod.available">
+                  <td class="module-col">
+                    <strong>{{ mod.label }}</strong>
+                    @if (!mod.available) {
+                      <span class="tag soon">Próximamente</span>
+                    }
+                    <div class="muted small">{{ mod.description }}</div>
+                  </td>
+                  @for (a of m.actions; track a.action) {
+                    <td>
+                      @if (mod.actions.includes(a.action)) {
+                        <mat-checkbox
+                          [checked]="has(r.role, mod.module, a.action)"
+                          [disabled]="locked(r.role, mod) || !auth.can('ADMIN', 'EDIT')"
+                          (change)="toggle(r.role, mod.module, a.action, $event.checked)"
+                          [matTooltip]="locked(r.role, mod) ? 'El administrador siempre conserva este acceso' : ''"
+                          [attr.aria-label]="r.label + ' - ' + mod.label + ' - ' + a.label"
+                        />
+                      } @else {
+                        <span class="muted">—</span>
+                      }
+                    </td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        @if (auth.can('ADMIN', 'EDIT')) {
+          <div class="actions">
+            <button mat-button (click)="discard(r.role)" [disabled]="!dirty().has(r.role) || saving()">Descartar cambios</button>
+            <button mat-flat-button (click)="save(r.role)" [disabled]="!dirty().has(r.role) || saving()">
+              <mat-icon>save</mat-icon> Guardar permisos de {{ r.label }}
+            </button>
+          </div>
+        }
+      </mat-tab>
+    }
+  </mat-tab-group>
+}

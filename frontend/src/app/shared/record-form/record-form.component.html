@@ -1,0 +1,110 @@
+<form [formGroup]="form" class="record-form">
+  @for (field of fields(); track field.key) {
+    <div class="field" [class.wide]="isWide(field)">
+      @switch (field.type) {
+        @case ('steps') {
+          <fieldset class="steps" [class.invalid]="steps(field.key).touched && steps(field.key).invalid">
+            <legend>{{ field.label }}{{ field.required ? ' *' : '' }}</legend>
+            <div [formArrayName]="field.key">
+              @for (step of steps(field.key).controls; track step; let i = $index) {
+                <div class="step" [formGroupName]="i">
+                  <span class="step-number">{{ i + 1 }}</span>
+                  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Acción</mat-label>
+                    <textarea matInput formControlName="action" cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                    <mat-label>Resultado esperado</mat-label>
+                    <textarea matInput formControlName="expectedResult" cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+                  </mat-form-field>
+                  @if (!readonly()) {
+                    <div class="step-actions">
+                      <button mat-icon-button type="button" matTooltip="Subir" (click)="moveStep(field.key, i, -1)" [disabled]="i === 0">
+                        <mat-icon>arrow_upward</mat-icon>
+                      </button>
+                      <button mat-icon-button type="button" matTooltip="Bajar" (click)="moveStep(field.key, i, 1)"
+                        [disabled]="i === steps(field.key).length - 1">
+                        <mat-icon>arrow_downward</mat-icon>
+                      </button>
+                      <button mat-icon-button type="button" matTooltip="Eliminar paso" (click)="removeStep(field.key, i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                  }
+                </div>
+              } @empty {
+                <p class="muted">Sin pasos registrados.</p>
+              }
+            </div>
+            @if (!readonly()) {
+              <button mat-stroked-button type="button" (click)="addStep(field.key)">
+                <mat-icon>add</mat-icon> Agregar paso
+              </button>
+            }
+            @if (steps(field.key).touched && steps(field.key).invalid) {
+              <p class="error-text">{{ errorText(field) || 'Complete la acción y el resultado esperado de cada paso.' }}</p>
+            }
+          </fieldset>
+        }
+        @case ('enum') {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControl]="control(field.key)" [required]="!!field.required">
+              @if (!field.required) {
+                <mat-option value="">— Sin especificar —</mat-option>
+              }
+              @for (option of field.options; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+              }
+              @if (control(field.key).value && !field.options?.includes(control(field.key).value)) {
+                <mat-option [value]="control(field.key).value" disabled>{{ control(field.key).value }} (no válido)</mat-option>
+              }
+            </mat-select>
+            @if (field.help) {
+              <mat-hint>{{ field.help }}</mat-hint>
+            }
+            <mat-error>{{ errorText(field) }}</mat-error>
+          </mat-form-field>
+        }
+        @case ('date') {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput type="date" [formControl]="control(field.key)" [required]="!!field.required" />
+            <mat-error>{{ errorText(field) }}</mat-error>
+          </mat-form-field>
+        }
+        @case ('text') {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <textarea matInput [formControl]="control(field.key)" [required]="!!field.required"
+              cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
+            @if (field.help) {
+              <mat-hint>{{ field.help }}</mat-hint>
+            }
+            <mat-error>{{ errorText(field) }}</mat-error>
+          </mat-form-field>
+        }
+        @case ('list') {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <textarea matInput [formControl]="control(field.key)" [required]="!!field.required"
+              cdkTextareaAutosize cdkAutosizeMinRows="2"></textarea>
+            <mat-hint>Un elemento por línea.</mat-hint>
+            <mat-error>{{ errorText(field) }}</mat-error>
+          </mat-form-field>
+        }
+        @default {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [formControl]="control(field.key)" [required]="!!field.required"
+              [class.uppercase]="field.type === 'code' || field.type === 'ref' || field.type === 'refList'" />
+            @if (field.help) {
+              <mat-hint>{{ field.help }}</mat-hint>
+            }
+            <mat-error>{{ errorText(field) }}</mat-error>
+          </mat-form-field>
+        }
+      }
+    </div>
+  }
+</form>

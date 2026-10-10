@@ -1,0 +1,85 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav #drawer [mode]="isMobile() ? 'over' : 'side'" [opened]="!isMobile()" class="sidenav">
+    <div class="brand">
+      <mat-icon>science</mat-icon>
+      <div>
+        <strong>QA Knowledge</strong>
+        <small>Generación de casos de prueba</small>
+      </div>
+    </div>
+    <mat-nav-list (click)="isMobile() && drawer.close()">
+      <a mat-list-item routerLink="/inicio" routerLinkActive="active">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Inicio</span>
+      </a>
+
+      @if (auth.can('KNOWLEDGE', 'VIEW')) {
+        <div mat-subheader>Base de conocimiento</div>
+        @for (link of knowledgeLinks(); track link.type) {
+          <a mat-list-item [routerLink]="['/conocimiento', link.type]" routerLinkActive="active">
+            <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
+            <span matListItemTitle>{{ link.label }}</span>
+          </a>
+        }
+        @if (auth.can('KNOWLEDGE', 'BULK_UPLOAD')) {
+          <a mat-list-item routerLink="/carga-masiva" routerLinkActive="active">
+            <mat-icon matListItemIcon>upload_file</mat-icon>
+            <span matListItemTitle>Carga masiva</span>
+          </a>
+        }
+      }
+
+      <div mat-subheader>Generación</div>
+      <a mat-list-item disabled matTooltip="Disponible en la próxima iteración">
+        <mat-icon matListItemIcon>auto_awesome</mat-icon>
+        <span matListItemTitle>Generar casos de prueba</span>
+        <span matListItemLine class="soon">Próximamente</span>
+      </a>
+
+      @if (auth.can('CATALOGS', 'VIEW') || auth.can('ADMIN', 'VIEW')) {
+        <div mat-subheader>Configuración</div>
+      }
+      @if (auth.can('CATALOGS', 'VIEW')) {
+        <a mat-list-item routerLink="/catalogos" routerLinkActive="active">
+          <mat-icon matListItemIcon>category</mat-icon>
+          <span matListItemTitle>Proyectos y módulos</span>
+        </a>
+      }
+      @if (auth.can('ADMIN', 'VIEW')) {
+        <a mat-list-item routerLink="/admin/usuarios" routerLinkActive="active">
+          <mat-icon matListItemIcon>group</mat-icon>
+          <span matListItemTitle>Usuarios</span>
+        </a>
+        <a mat-list-item routerLink="/admin/permisos" routerLinkActive="active">
+          <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+          <span matListItemTitle>Permisos por rol</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="toolbar">
+      @if (isMobile()) {
+        <button mat-icon-button (click)="drawer.toggle()" aria-label="Menú"><mat-icon>menu</mat-icon></button>
+      }
+      <span class="spacer"></span>
+      @if (auth.user(); as user) {
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+          <mat-icon>account_circle</mat-icon>
+          <span class="user-name">{{ user.name }}</span>
+          <span class="role">{{ user.roleLabel }}</span>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <div class="menu-header">{{ user.email }}</div>
+          <mat-divider />
+          <button mat-menu-item (click)="changePassword()"><mat-icon>key</mat-icon>Cambiar contraseña</button>
+          <button mat-menu-item (click)="auth.logout()"><mat-icon>logout</mat-icon>Cerrar sesión</button>
+        </mat-menu>
+      }
+    </mat-toolbar>
+    <main class="content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

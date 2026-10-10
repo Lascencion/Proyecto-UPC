@@ -1,0 +1,73 @@
+<header class="page-header">
+  <div>
+    <h1>Proyectos y módulos</h1>
+    <p class="muted">
+      Catálogos para clasificar la información histórica. Un proyecto es el sistema bajo prueba (p. ej. la tienda de un
+      videojuego) y un módulo es un flujo funcional dentro de él (p. ej. compra de monedas virtuales).
+    </p>
+  </div>
+</header>
+
+<div class="grid">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Proyectos</mat-card-title>
+      @if (auth.can('CATALOGS', 'CREATE')) {
+        <button mat-flat-button class="header-btn" (click)="editProject()"><mat-icon>add</mat-icon> Nuevo</button>
+      }
+    </mat-card-header>
+    <mat-selection-list [multiple]="false" hideSingleSelectionIndicator (selectionChange)="select($event.options[0].value)">
+      @for (p of projects(); track p.id) {
+        <mat-list-option [value]="p.id" [selected]="p.id === selectedId()" [class.inactive]="!p.active">
+          <span matListItemTitle>{{ p.name }}{{ p.active ? '' : ' (inactivo)' }}</span>
+          <span matListItemLine>{{ p.description || '—' }}</span>
+        </mat-list-option>
+      } @empty {
+        <p class="muted pad">Aún no hay proyectos.</p>
+      }
+    </mat-selection-list>
+    @if (selected(); as p) {
+      <mat-card-actions align="end">
+        @if (auth.can('CATALOGS', 'EDIT')) {
+          <button mat-button (click)="editProject(p)"><mat-icon>edit</mat-icon> Editar</button>
+          <button mat-button (click)="toggleProject(p)">
+            <mat-icon>{{ p.active ? 'toggle_off' : 'toggle_on' }}</mat-icon> {{ p.active ? 'Desactivar' : 'Activar' }}
+          </button>
+        }
+        @if (auth.can('CATALOGS', 'DELETE')) {
+          <button mat-button (click)="deleteProject(p)"><mat-icon>delete</mat-icon> Eliminar</button>
+        }
+      </mat-card-actions>
+    }
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Módulos / flujos {{ selected() ? 'de ' + selected()!.name : '' }}</mat-card-title>
+      @if (auth.can('CATALOGS', 'CREATE') && selected()) {
+        <button mat-flat-button class="header-btn" (click)="editModule()"><mat-icon>add</mat-icon> Nuevo</button>
+      }
+    </mat-card-header>
+    <mat-list>
+      @for (m of modules(); track m.id) {
+        <mat-list-item [class.inactive]="!m.active">
+          <span matListItemTitle>{{ m.name }}{{ m.active ? '' : ' (inactivo)' }}</span>
+          <span matListItemLine>{{ m.description || '—' }}</span>
+          <span matListItemMeta class="row-actions">
+            @if (auth.can('CATALOGS', 'EDIT')) {
+              <button mat-icon-button matTooltip="Editar" (click)="editModule(m)"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button [matTooltip]="m.active ? 'Desactivar' : 'Activar'" (click)="toggleModule(m)">
+                <mat-icon>{{ m.active ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+              </button>
+            }
+            @if (auth.can('CATALOGS', 'DELETE')) {
+              <button mat-icon-button matTooltip="Eliminar" (click)="deleteModule(m)"><mat-icon>delete</mat-icon></button>
+            }
+          </span>
+        </mat-list-item>
+      } @empty {
+        <p class="muted pad">{{ selected() ? 'Este proyecto aún no tiene módulos.' : 'Seleccione un proyecto.' }}</p>
+      }
+    </mat-list>
+  </mat-card>
+</div>

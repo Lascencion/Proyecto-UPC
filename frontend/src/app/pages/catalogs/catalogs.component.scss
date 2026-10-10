@@ -1,0 +1,34 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+mat-card-header {
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.header-btn {
+  margin-left: auto;
+}
+
+.inactive {
+  opacity: 0.6;
+}
+
+.pad {
+  padding: 8px 16px;
+}
+
+.row-actions {
+  display: flex;
+  width: auto !important;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

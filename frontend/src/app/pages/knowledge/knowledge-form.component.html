@@ -1,0 +1,87 @@
+@if (definition(); as def) {
+  <header class="page-header">
+    <div>
+      <a mat-button [routerLink]="['/conocimiento', type()]" class="back"><mat-icon>arrow_back</mat-icon> {{ def.labelPlural }}</a>
+      <h1>
+        @if (isNew()) {
+          Nuevo {{ def.label.toLowerCase() }}
+        } @else {
+          {{ record()?.['code'] }} · {{ record()?.[def.titleField] }}
+        }
+      </h1>
+      @if (record(); as r) {
+        <p class="muted meta">
+          Origen: {{ r.origin.type === 'MASIVO' ? 'carga masiva (' + (r.origin.fileName ?? '') + ')' : 'registro individual' }} ·
+          Creado por {{ r.createdBy?.name ?? '—' }} el {{ r.createdAt | date: 'dd/MM/yyyy HH:mm' }} ·
+          Última modificación: {{ r.updatedBy?.name ?? '—' }}, {{ r.updatedAt | date: 'dd/MM/yyyy HH:mm' }}
+        </p>
+      }
+    </div>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else {
+    <mat-card appearance="outlined" class="form-card">
+      <mat-card-content>
+        @if (readonly()) {
+          <p class="info-box">Su rol solo permite consultar este registro.</p>
+        }
+        @if (warnings().length) {
+          <ul class="warning-box">
+            @for (w of warnings(); track $index) {
+              <li>{{ w.message }}</li>
+            }
+          </ul>
+        }
+
+        <h3>Clasificación</h3>
+        <div class="scope">
+          <mat-form-field>
+            <mat-label>Proyecto</mat-label>
+            <mat-select [(ngModel)]="project" (selectionChange)="onProjectChange()" [disabled]="readonly()" required>
+              @for (p of projects(); track p.id) {
+                <mat-option [value]="p.id">{{ p.name }}</mat-option>
+              }
+              @if (record() && !hasProject(project)) {
+                <mat-option [value]="project" disabled>{{ record()!.project.name }} (inactivo)</mat-option>
+              }
+            </mat-select>
+            @if (!projects().length) {
+              <mat-hint>No hay proyectos activos. Regístrelos en "Proyectos y módulos".</mat-hint>
+            }
+            @if (scopeErrors()['project']) {
+              <mat-hint class="error-hint">{{ scopeErrors()['project'] }}</mat-hint>
+            }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Módulo / flujo</mat-label>
+            <mat-select [(ngModel)]="module" [disabled]="readonly() || !project" required>
+              @for (m of modules(); track m.id) {
+                <mat-option [value]="m.id" [disabled]="!m.active">{{ m.name }}{{ m.active ? '' : ' (inactivo)' }}</mat-option>
+              }
+            </mat-select>
+            @if (scopeErrors()['module']) {
+              <mat-hint class="error-hint">{{ scopeErrors()['module'] }}</mat-hint>
+            }
+          </mat-form-field>
+        </div>
+
+        <h3>Datos del {{ def.label.toLowerCase() }}</h3>
+        <app-record-form [definition]="def" [value]="formSeed()" [readonly]="readonly()" />
+      </mat-card-content>
+
+      @if (!readonly()) {
+        <mat-card-actions align="end">
+          <button mat-button (click)="back()">Cancelar</button>
+          @if (isNew()) {
+            <button mat-stroked-button (click)="save(true)" [disabled]="saving()">Guardar y registrar otro</button>
+          }
+          <button mat-flat-button (click)="save()" [disabled]="saving()">
+            <mat-icon>save</mat-icon> Guardar
+          </button>
+        </mat-card-actions>
+      }
+    </mat-card>
+  }
+}

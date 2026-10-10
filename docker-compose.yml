@@ -1,0 +1,40 @@
+# Levanta todo el sistema: MongoDB + API (NestJS) + Web (Angular servido por nginx).
+#   docker compose up -d --build        -> http://localhost:8080
+# Solo la base de datos (para desarrollo local con npm):
+#   docker compose up -d mongo
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo:27017/qa_knowledge
+      JWT_SECRET: ${JWT_SECRET:-cambiar-este-secreto}
+      JWT_EXPIRES_IN: 8h
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@qa.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin123!}
+      ADMIN_NAME: Administrador
+      CORS_ORIGIN: http://localhost:8080
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  mongo-data:

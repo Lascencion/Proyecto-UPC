@@ -1,0 +1,196 @@
+<header class="page-header">
+  <div>
+    <a mat-button routerLink="/carga-masiva" class="back"><mat-icon>arrow_back</mat-icon> Carga masiva</a>
+    <h1>Revisión de carga</h1>
+    @if (batch(); as b) {
+      <p class="muted meta">
+        {{ fileNames(b) }} · Proyecto <strong>{{ b.project.name }}</strong> ·
+        Módulo predeterminado {{ b.defaultModule?.name }} · {{ b.createdBy.name }}, {{ b.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+      </p>
+    }
+  </div>
+  @if (batch(); as b) {
+    <span class="status big status-{{ b.status }}">{{ batchLabels[b.status] }}</span>
+  }
+</header>
+
+@if (loading()) {
+  <mat-progress-bar mode="indeterminate" />
+}
+
+@if (batch(); as b) {
+  @if (b.status === 'CONFIRMADO' && b.result) {
+    <div class="success-box">
+      Carga confirmada por {{ b.confirmedBy?.name }} el {{ b.confirmedAt | date: 'dd/MM/yyyy HH:mm' }}:
+      <strong>{{ b.result.created }}</strong> creados, <strong>{{ b.result.updated }}</strong> actualizados,
+      <strong>{{ b.result.skipped }}</strong> omitidos@if (b.result.failed) {, <strong class="error-text">{{ b.result.failed }} con falla</strong>}.
+    </div>
+  }
+  @if (b.status === 'CANCELADO') {
+    <div class="info-box">Este lote fue cancelado; sus filas se descartaron.</div>
+  }
+
+  @if (b.status !== 'CANCELADO') {
+    <section class="summary">
+      <button class="chip" [class.selected]="statusFilter() === 'all'" (click)="setStatusFilter('all')">
+        <span class="n">{{ b.summary['total'] }}</span> Todas
+      </button>
+      <button class="chip valid" [class.selected]="statusFilter() === 'valid'" (click)="setStatusFilter('valid')">
+        <span class="n">{{ b.summary['valid'] }}</span> Válidas
+      </button>
+      <button class="chip warning" [class.selected]="statusFilter() === 'warning'" (click)="setStatusFilter('warning')">
+        <span class="n">{{ b.summary['warning'] }}</span> Con advertencias
+      </button>
+      <button class="chip error" [class.selected]="statusFilter() === 'error'" (click)="setStatusFilter('error')">
+        <span class="n">{{ b.summary['error'] }}</span> Con errores
+      </button>
+      <button class="chip excluded" [class.selected]="statusFilter() === 'excluded'" (click)="setStatusFilter('excluded')">
+        <span class="n">{{ b.summary['excluded'] }}</span> Excluidas
+      </button>
+      <span class="chip static"><span class="n">{{ b.summary['duplicates'] }}</span> Códigos ya existentes</span>
+    </section>
+  }
+
+  @if (b.issues.length) {
+    <mat-accordion>
+      <mat-expansion-panel class="issues-panel">
+        <mat-expansion-panel-header>
+          <mat-icon class="warn-icon">info</mat-icon>&nbsp; Observaciones de lectura de archivos ({{ b.issues.length }})
+        </mat-expansion-panel-header>
+        <ul>
+          @for (issue of b.issues; track $index) {
+            <li [class.error-text]="issue.level === 'error'"><strong>{{ issue.fileName }}:</strong> {{ issue.message }}</li>
+          }
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  }
+
+  @if (b.status !== 'CANCELADO') {
+    <section class="controls">
+      <mat-form-field subscriptSizing="dynamic">
+        <mat-label>Tipo</mat-label>
+        <mat-select [value]="typeFilter()" (selectionChange)="setTypeFilter($event.value)">
+          <mat-option value="all">Todos</mat-option>
+          @for (d of typesInBatch(); track d.type) {
+            <mat-option [value]="d.type">{{ d.labelPlural }} ({{ b.summary[d.type] }})</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if (editable() && b.summary['duplicates']) {
+        <div class="dup">
+          <span>Códigos existentes:</span>
+          <mat-button-toggle-group [value]="b.duplicateStrategy" (change)="setStrategy($event.value)" [disabled]="busy()"
+            hideSingleSelectionIndicator>
+            <mat-button-toggle value="skip">Omitir todos</mat-button-toggle>
+            <mat-button-toggle value="update">Actualizar todos</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      }
+    </section>
+
+    <div class="table-wrapper">
+      @if (busy()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      <table mat-table [dataSource]="pagedRows()">
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef>#</th>
+          <td mat-cell *matCellDef="let r">{{ r.index + 1 }}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let r" class="nowrap">{{ definitionOf(r.type)?.label }}</td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let r" class="code-cell">{{ r.data.code || '—' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Título / nombre</th>
+          <td mat-cell *matCellDef="let r" class="title-cell">{{ title(r) }}</td>
+        </ng-container>
+        <ng-container matColumnDef="module">
+          <th mat-header-cell *matHeaderCellDef>Módulo</th>
+          <td mat-cell *matCellDef="let r" [class.error-text]="!r.module && r.moduleName">{{ moduleLabel(r) }}</td>
+        </ng-container>
+        <ng-container matColumnDef="source">
+          <th mat-header-cell *matHeaderCellDef>Ubicación</th>
+          <td mat-cell *matCellDef="let r">
+            <div class="source-file">{{ r.source.fileName }}</div>
+            <small class="muted">{{ r.source.location }}</small>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let r"><span class="row-status {{ r.status }}">{{ statusLabels[r.status] }}</span></td>
+        </ng-container>
+        <ng-container matColumnDef="issues">
+          <th mat-header-cell *matHeaderCellDef>Observaciones</th>
+          <td mat-cell *matCellDef="let r" class="issues-cell">
+            @for (e of r.fieldErrors; track $index) {
+              <div class="error-text">• {{ e.message }}</div>
+            }
+            @for (w of r.fieldWarnings; track $index) {
+              <div class="warning-text">• {{ w.message }}</div>
+            }
+            @if (r.resultMessage) {
+              <div class="error-text">• {{ r.resultMessage }}</div>
+            }
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="duplicate">
+          <th mat-header-cell *matHeaderCellDef>Si existe</th>
+          <td mat-cell *matCellDef="let r">
+            @if (r.duplicateOf && !r.excluded) {
+              <mat-select class="dup-select" [value]="r.duplicateAction" (selectionChange)="setRowDuplicate(r, $event.value)"
+                [disabled]="busy()" aria-label="Acción para código existente">
+                <mat-option value="skip">Omitir</mat-option>
+                <mat-option value="update">Actualizar</mat-option>
+              </mat-select>
+            }
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="result">
+          <th mat-header-cell *matHeaderCellDef>Resultado</th>
+          <td mat-cell *matCellDef="let r">{{ r.result ? resultLabels[r.result] : r.excluded ? 'Excluido' : '—' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let r" class="actions-cell">
+            @if (!r.excluded) {
+              <button mat-icon-button matTooltip="Revisar y corregir" (click)="edit(r)" [disabled]="busy()"><mat-icon>edit</mat-icon></button>
+            }
+            <button mat-icon-button [matTooltip]="r.excluded ? 'Volver a incluir' : 'Excluir de la carga'" (click)="toggleExcluded(r)"
+              [disabled]="busy()">
+              <mat-icon>{{ r.excluded ? 'undo' : 'block' }}</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns()"></tr>
+        <tr mat-row *matRowDef="let r; columns: columns()" [class.excluded-row]="r.excluded"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell empty" [attr.colspan]="columns().length">No hay filas con el filtro seleccionado.</td>
+        </tr>
+      </table>
+      <mat-paginator [length]="filteredRows().length" [pageIndex]="pageIndex()" [pageSize]="pageSize()"
+        [pageSizeOptions]="[25, 50, 100]" (page)="onPage($event)" />
+    </div>
+
+    @if (editable()) {
+      <footer class="sticky-actions">
+        <span class="muted">
+          @if (b.summary['error']) {
+            Corrija o excluya las {{ b.summary['error'] }} fila(s) con errores para poder confirmar.
+          } @else {
+            Todo listo. Las advertencias no impiden guardar.
+          }
+        </span>
+        <button mat-button (click)="cancel()" [disabled]="busy()">Cancelar lote</button>
+        <button mat-flat-button (click)="confirm()" [disabled]="busy() || b.summary['error'] > 0">
+          <mat-icon>save</mat-icon> Confirmar y guardar
+        </button>
+      </footer>
+    }
+  }
+}

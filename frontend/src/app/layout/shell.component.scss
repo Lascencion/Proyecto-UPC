@@ -1,0 +1,80 @@
+.container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 264px;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 12px;
+  color: var(--mat-sys-primary);
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  small {
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.active {
+  background: var(--mat-sys-secondary-container);
+}
+
+.soon {
+  font-size: 11px;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--mat-sys-surface);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-button .role {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.menu-header {
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.content {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 16px;
+  }
+
+  .user-name,
+  .user-button .role {
+    display: none;
+  }
+}

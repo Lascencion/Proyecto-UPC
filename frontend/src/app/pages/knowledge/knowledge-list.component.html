@@ -1,0 +1,122 @@
+<header class="page-header">
+  <div>
+    <h1>Base de conocimiento</h1>
+    <p class="muted">Información histórica registrada de forma individual o por carga masiva. Seleccione un registro para revisarlo o corregirlo.</p>
+  </div>
+  <div class="header-actions">
+    @if (auth.can('KNOWLEDGE', 'BULK_UPLOAD')) {
+      <a mat-stroked-button routerLink="/carga-masiva"><mat-icon>upload_file</mat-icon> Carga masiva</a>
+    }
+    @if (auth.can('KNOWLEDGE', 'CREATE') && definition()) {
+      <a mat-flat-button [routerLink]="['/conocimiento', type(), 'nuevo']">
+        <mat-icon>add</mat-icon> Nuevo {{ definition()!.label.toLowerCase() }}
+      </a>
+    }
+  </div>
+</header>
+
+<mat-tab-group [selectedIndex]="tabIndex()" (selectedIndexChange)="selectTab($event)" mat-stretch-tabs="false" animationDuration="0">
+  @for (d of definitions(); track d.type) {
+    <mat-tab [label]="d.labelPlural" />
+  }
+</mat-tab-group>
+
+<section class="filters">
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Buscar</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [(ngModel)]="search" (ngModelChange)="onSearch()" placeholder="Código, título, descripción…" />
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Proyecto</mat-label>
+    <mat-select [(ngModel)]="project" (selectionChange)="onProjectChange()">
+      <mat-option value="">Todos</mat-option>
+      @for (p of projects(); track p.id) {
+        <mat-option [value]="p.id">{{ p.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Módulo / flujo</mat-label>
+    <mat-select [(ngModel)]="module" (selectionChange)="reload()" [disabled]="!project">
+      <mat-option value="">Todos</mat-option>
+      @for (m of modules(); track m.id) {
+        <mat-option [value]="m.id">{{ m.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Origen</mat-label>
+    <mat-select [(ngModel)]="origin" (selectionChange)="reload()">
+      <mat-option value="">Todos</mat-option>
+      <mat-option value="MANUAL">Registro individual</mat-option>
+      <mat-option value="MASIVO">Carga masiva</mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>
+
+<div class="table-wrapper">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+  <table mat-table [dataSource]="records()" matSort [matSortActive]="sort.active" [matSortDirection]="sort.direction"
+    (matSortChange)="onSort($event)" class="clickable-rows">
+    @for (col of columns(); track col.key) {
+      <ng-container [matColumnDef]="col.key">
+        <th mat-header-cell *matHeaderCellDef [mat-sort-header]="col.key" [disabled]="col.type === 'refList'">{{ col.label }}</th>
+        <td mat-cell *matCellDef="let r" [class.code-cell]="col.type === 'code'">
+          @if (col.type === 'enum' && r[col.key]) {
+            <span class="tag" [attr.data-value]="r[col.key]">{{ r[col.key] }}</span>
+          } @else {
+            {{ display(col, r[col.key]) }}
+          }
+        </td>
+      </ng-container>
+    }
+    <ng-container matColumnDef="module">
+      <th mat-header-cell *matHeaderCellDef>Proyecto / módulo</th>
+      <td mat-cell *matCellDef="let r">
+        <div>{{ r.module?.name }}</div>
+        <small class="muted">{{ r.project?.name }}</small>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="origin">
+      <th mat-header-cell *matHeaderCellDef>Origen</th>
+      <td mat-cell *matCellDef="let r">
+        @if (r.origin?.type === 'MASIVO') {
+          <mat-icon class="small-icon" [matTooltip]="'Carga masiva: ' + (r.origin.fileName ?? '')">upload_file</mat-icon>
+        } @else {
+          <mat-icon class="small-icon" matTooltip="Registro individual">edit_note</mat-icon>
+        }
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="updatedAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="updatedAt">Actualizado</th>
+      <td mat-cell *matCellDef="let r">
+        <div>{{ r.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+        <small class="muted">{{ r.updatedBy?.name }}</small>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let r" class="actions-cell">
+        <button mat-icon-button [matTooltip]="auth.can('KNOWLEDGE', 'EDIT') ? 'Revisar / editar' : 'Ver'" (click)="open(r)">
+          <mat-icon>{{ auth.can('KNOWLEDGE', 'EDIT') ? 'edit' : 'visibility' }}</mat-icon>
+        </button>
+        @if (auth.can('KNOWLEDGE', 'DELETE')) {
+          <button mat-icon-button matTooltip="Eliminar" (click)="remove(r, $event)"><mat-icon>delete</mat-icon></button>
+        }
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+    <tr mat-row *matRowDef="let r; columns: displayedColumns()" (click)="open(r)"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell empty" [attr.colspan]="displayedColumns().length">
+        {{ loading() ? 'Cargando…' : 'No hay registros con los filtros seleccionados.' }}
+      </td>
+    </tr>
+  </table>
+  <mat-paginator [length]="total()" [pageIndex]="page" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 50, 100]"
+    (page)="onPage($event)" showFirstLastButtons />
+</div>

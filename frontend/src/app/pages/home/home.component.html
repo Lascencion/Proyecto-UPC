@@ -1,0 +1,79 @@
+<header class="page-header">
+  <div>
+    <h1>Hola, {{ auth.user()?.name }}</h1>
+    <p class="muted">
+      Registre la información histórica (requerimientos, reglas de negocio, casos de prueba y defectos) que servirá de
+      base para generar casos de prueba funcionales con el LLM.
+    </p>
+  </div>
+</header>
+
+@if (auth.can('KNOWLEDGE', 'VIEW')) {
+  <section class="toolbar-row">
+    <h2>Base de conocimiento</h2>
+    <mat-form-field subscriptSizing="dynamic" class="project-filter">
+      <mat-label>Proyecto</mat-label>
+      <mat-select [(ngModel)]="project" (selectionChange)="loadSummary()">
+        <mat-option value="">Todos los proyectos</mat-option>
+        @for (p of projects(); track p.id) {
+          <mat-option [value]="p.id">{{ p.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <div class="cards">
+    @for (item of summary(); track item.type) {
+      <a class="stat-card" [routerLink]="['/conocimiento', item.type]" [queryParams]="project ? { project } : {}">
+        <mat-icon>{{ icons[item.type] }}</mat-icon>
+        <span class="value">{{ item.total }}</span>
+        <span class="label">{{ item.label }}</span>
+      </a>
+    }
+  </div>
+
+  <h2>Acciones rápidas</h2>
+  <div class="actions-grid">
+    @if (auth.can('KNOWLEDGE', 'CREATE')) {
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>edit_note</mat-icon>
+          <mat-card-title>Registro individual</mat-card-title>
+          <mat-card-subtitle>Complete un formulario por registro</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <a mat-button routerLink="/conocimiento/requirements/nuevo">Requerimiento</a>
+          <a mat-button routerLink="/conocimiento/business-rules/nuevo">Regla</a>
+          <a mat-button routerLink="/conocimiento/test-cases/nuevo">Caso</a>
+          <a mat-button routerLink="/conocimiento/defects/nuevo">Defecto</a>
+        </mat-card-actions>
+      </mat-card>
+    }
+    @if (auth.can('KNOWLEDGE', 'BULK_UPLOAD')) {
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>upload_file</mat-icon>
+          <mat-card-title>Carga masiva</mat-card-title>
+          <mat-card-subtitle>Excel, Word o CSV con el formato de la plantilla</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <a mat-flat-button routerLink="/carga-masiva">Cargar archivos</a>
+        </mat-card-actions>
+      </mat-card>
+    }
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>download</mat-icon>
+        <mat-card-title>Plantillas</mat-card-title>
+        <mat-card-subtitle>Formato requerido para la carga masiva, con ejemplos</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-button (click)="download('xlsx')">Excel</button>
+        <button mat-button (click)="download('docx')">Word</button>
+        <a mat-button routerLink="/carga-masiva">CSV</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+} @else {
+  <p class="muted">Su rol no tiene acceso a la base de conocimiento. Consulte con el administrador.</p>
+}
