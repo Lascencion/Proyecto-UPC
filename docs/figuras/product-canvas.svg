@@ -94,16 +94,19 @@
 <text x="1082.4" y="460" font-size="15" font-weight="700" fill="#1d2433">EP-01 Gestión de información histórica</text>
 <text x="1098.4" y="481.25" font-size="14.5" font-weight="400" fill="#1d2433">HU-01 Registrar información histórica</text>
 <text x="1098.4" y="500.825" font-size="14.5" font-weight="400" fill="#1d2433">HU-02 Cargar información histórica masivamente</text>
-<text x="1098.4" y="520.4" font-size="14.5" font-weight="400" fill="#1d2433">HU-03 Consultar y seleccionar información histórica</text>
+<text x="1098.4" y="520.4" font-size="14.5" font-weight="400" fill="#1d2433">HU-03 Corregir y mantener información histórica</text>
 <text x="1082.4" y="549.975" font-size="15" font-weight="700" fill="#1d2433">EP-02 Generación de casos de prueba con LLM</text>
-<text x="1098.4" y="571.225" font-size="14.5" font-weight="400" fill="#1d2433">HU-04 Generar casos de prueba a partir de un requerimiento</text>
-<text x="1082.4" y="600.8000000000001" font-size="15" font-weight="700" fill="#1d2433">EP-03 Revisión y regeneración de casos</text>
-<text x="1098.4" y="622.0500000000001" font-size="14.5" font-weight="400" fill="#1d2433">HU-05 Revisar casos y registrar observaciones</text>
-<text x="1098.4" y="641.6250000000001" font-size="14.5" font-weight="400" fill="#1d2433">HU-06 Regenerar casos con observaciones</text>
-<text x="1082.4" y="671.2000000000002" font-size="15" font-weight="700" fill="#1d2433">EP-04 Aprobación de casos de prueba</text>
-<text x="1098.4" y="692.4500000000002" font-size="14.5" font-weight="400" fill="#1d2433">HU-07 Enviar casos a aprobación</text>
-<text x="1098.4" y="712.0250000000002" font-size="14.5" font-weight="400" fill="#1d2433">HU-08 Aprobar o devolver casos con observaciones</text>
-<text x="1082.4" y="741.6000000000003" font-size="15" font-weight="700" fill="#1d2433">EP-05 Reportería</text>
-<text x="1098.4" y="762.8500000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-09 Consultar reportes del proceso</text>
+<text x="1098.4" y="571.225" font-size="14.5" font-weight="400" fill="#1d2433">HU-04 Seleccionar información histórica relacionada</text>
+<text x="1098.4" y="590.8000000000001" font-size="14.5" font-weight="400" fill="#1d2433">HU-05 Generar casos de prueba con LLM</text>
+<text x="1082.4" y="620.3750000000001" font-size="15" font-weight="700" fill="#1d2433">EP-03 Revisión y regeneración de casos</text>
+<text x="1098.4" y="641.6250000000001" font-size="14.5" font-weight="400" fill="#1d2433">HU-06 Revisar casos y registrar observaciones</text>
+<text x="1098.4" y="661.2000000000002" font-size="14.5" font-weight="400" fill="#1d2433">HU-07 Regenerar casos con observaciones</text>
+<text x="1082.4" y="690.7750000000002" font-size="15" font-weight="700" fill="#1d2433">EP-04 Aprobación de casos de prueba</text>
+<text x="1098.4" y="712.0250000000002" font-size="14.5" font-weight="400" fill="#1d2433">HU-08 Enviar casos a aprobación</text>
+<text x="1098.4" y="731.6000000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-09 Aprobar o devolver casos</text>
+<text x="1098.4" y="751.1750000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-10 Exportar casos aprobados</text>
+<text x="1082.4" y="780.7500000000003" font-size="15" font-weight="700" fill="#1d2433">EP-05 Reportería</text>
+<text x="1098.4" y="802.0000000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-11 Consultar reportes del proceso</text>
+<text x="1098.4" y="821.5750000000004" font-size="14.5" font-weight="400" fill="#1d2433">HU-12 Consultar reporte de cobertura</text>
 <text x="1570" y="972" font-size="12" fill="#6b7280" text-anchor="end">Basado en la plantilla Product Canvas de Roman Pichler.</text>
 </svg>
