@@ -3,7 +3,6 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ApiService } from '../../core/api.service';
-import { DuplicateAction, FieldIssue, FlowModule, ImportBatch, Project } from '../../core/models';
+import { FieldIssue, FlowModule, ImportBatch, Project } from '../../core/models';
 import { NotifyService } from '../../core/notify.service';
 import { BATCH_STATUS_LABELS } from '../../shared/display';
 
@@ -32,7 +31,6 @@ const MAX_SIZE = 10 * 1024 * 1024;
     DatePipe,
     MatCardModule,
     MatButtonModule,
-    MatButtonToggleModule,
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -62,7 +60,6 @@ export class ImportUploadComponent implements OnInit {
 
   project = '';
   defaultModule = '';
-  duplicateStrategy: DuplicateAction = 'skip';
 
   async ngOnInit(): Promise<void> {
     try {
@@ -138,7 +135,7 @@ export class ImportUploadComponent implements OnInit {
     this.uploading.set(true);
     this.uploadIssues.set([]);
     try {
-      const res = await firstValueFrom(this.api.uploadImport(this.files(), this.project, this.defaultModule, this.duplicateStrategy));
+      const res = await firstValueFrom(this.api.uploadImport(this.files(), this.project, this.defaultModule));
       this.notify.success(`Se leyeron ${res.batch.summary['total']} registros. Revíselos antes de confirmar.`);
       this.router.navigate(['/carga-masiva', res.batch.id]);
     } catch (e) {

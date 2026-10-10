@@ -14,7 +14,7 @@ import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { Action, AppModule } from '../common/access.constants';
 import { AuthUser, CurrentUser } from '../common/decorators/current-user.decorator';
 import { RequirePermission } from '../common/decorators/require-permission.decorator';
-import { CreateImportDto, UpdateBatchDto, UpdateRowDto } from './dto/import.dto';
+import { CreateImportDto, UpdateRowDto } from './dto/import.dto';
 import { ImportsService } from './imports.service';
 
 export const MAX_FILES = 10;
@@ -46,12 +46,6 @@ export class ImportsController {
   @RequirePermission(AppModule.KNOWLEDGE, Action.BULK_UPLOAD)
   get(@Param('id') id: string) {
     return this.imports.get(id);
-  }
-
-  @Patch(':id')
-  @RequirePermission(AppModule.KNOWLEDGE, Action.BULK_UPLOAD)
-  updateBatch(@Param('id') id: string, @Body() dto: UpdateBatchDto) {
-    return this.imports.updateBatch(id, dto.duplicateStrategy);
   }
 
   @Patch(':id/rows/:rowId')

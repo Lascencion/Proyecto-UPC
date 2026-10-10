@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection, Model, Types } from 'mongoose';
 import { CatalogsService } from '../catalogs/catalogs.service';
@@ -6,6 +6,7 @@ import { AuthUser } from '../common/decorators/current-user.decorator';
 import { toObjectId } from '../common/utils/object-id';
 import { escapeRegex } from '../common/utils/text';
 import { ENTITY_DEFINITIONS, EntityDefinition, EntityType, getDefinition } from './definitions/entity-definitions';
+import { CodeGeneratorService } from './code-generator.service';
 import { OriginType } from './knowledge.schemas';
 import { collectReferences, FieldIssue, validateRecord } from './validation/record-validator';
 
@@ -38,6 +39,7 @@ export class KnowledgeService {
   constructor(
     @InjectConnection() private readonly connection: Connection,
     private readonly catalogs: CatalogsService,
+    private readonly codes: CodeGeneratorService,
   ) {}
 
   definition(type: string): EntityDefinition {
@@ -143,52 +145,72 @@ export class KnowledgeService {
       }));
   }
 
-  private conflict(def: EntityDefinition, code: unknown) {
-    return new ConflictException({
-      message: `Ya existe un ${def.label.toLowerCase()} con el código ${code} en el proyecto.`,
-      errors: [{ field: 'code', message: 'El código ya existe en el proyecto.' }],
-    });
+  /** Código que se asignará al próximo registro del tipo en el proyecto. */
+  async nextCode(type: string, projectId: string) {
+    const def = this.definition(type);
+    return { code: await this.codes.preview(def, toObjectId(projectId, 'proyecto')) };
   }
 
-  async create(type: string, body: Record<string, unknown>, user: AuthUser, origin: RecordOrigin = { type: 'MANUAL' }) {
+  /** Registros del proyecto para las listas de selección (código y título). */
+  async options(type: string, projectId: string) {
+    const def = this.definition(type);
+    const docs = await this.model(def)
+      .find({ project: toObjectId(projectId, 'proyecto') }, { code: 1, [def.titleField]: 1 })
+      .sort({ code: 1 })
+      .lean();
+    return docs.map((d) => ({ code: d.code as string, title: (d[def.titleField] as string) ?? '' }));
+  }
+
+  /**
+   * Inserta un registro asignándole el siguiente código. Si el código ya estuviera
+   * ocupado (p. ej. por datos previos), reintenta con el siguiente.
+   */
+  async insertWithCode(def: EntityDefinition, projectId: Types.ObjectId, doc: Record<string, unknown>) {
+    for (let attempt = 0; ; attempt++) {
+      const code = await this.codes.next(def, projectId);
+      try {
+        return await this.model(def).create({ ...doc, project: projectId, code });
+      } catch (e) {
+        if ((e as { code?: number }).code !== 11000 || attempt >= 20) throw e;
+      }
+    }
+  }
+
+  async create(type: string, body: Record<string, unknown>, user: AuthUser) {
     const def = this.definition(type);
     const scope = await this.resolveScope(body.project, body.module);
-    const { value, errors, warnings } = validateRecord(def, body);
+    const { value, errors, warnings } = validateRecord(def, { ...body, code: null });
     if (errors.length) throw new BadRequestException({ message: 'Hay campos con errores.', errors });
-    try {
-      const doc = await this.model(def).create({
-        ...value,
-        ...scope,
-        origin,
-        createdBy: toObjectId(user.id),
-        updatedBy: toObjectId(user.id),
-      });
-      const record = await this.get(type, String(doc._id));
-      return { record, warnings: [...warnings, ...(await this.referenceWarnings(def, scope.project, value))] };
-    } catch (e) {
-      if ((e as { code?: number }).code === 11000) throw this.conflict(def, value.code);
-      throw e;
-    }
+    const { code: _ignored, ...fields } = value;
+    const doc = await this.insertWithCode(def, scope.project, {
+      ...fields,
+      module: scope.module,
+      origin: { type: 'MANUAL' } as RecordOrigin,
+      createdBy: toObjectId(user.id),
+      updatedBy: toObjectId(user.id),
+    });
+    const record = await this.get(type, String(doc._id));
+    return { record, warnings: [...warnings, ...(await this.referenceWarnings(def, scope.project, value))] };
   }
 
   async update(type: string, id: string, body: Record<string, unknown>, user: AuthUser) {
     const def = this.definition(type);
     const scope = await this.resolveScope(body.project, body.module);
-    const { value, errors, warnings } = validateRecord(def, body);
+    const { value, errors, warnings } = validateRecord(def, { ...body, code: null });
     if (errors.length) throw new BadRequestException({ message: 'Hay campos con errores.', errors });
-    try {
-      const doc = await this.model(def).findByIdAndUpdate(
-        toObjectId(id),
-        { ...value, ...scope, updatedBy: toObjectId(user.id) },
-        { new: true },
-      );
-      if (!doc) throw new NotFoundException(`${def.label} no encontrado.`);
-      const record = await this.get(type, id);
-      return { record, warnings: [...warnings, ...(await this.referenceWarnings(def, scope.project, value))] };
-    } catch (e) {
-      if ((e as { code?: number }).code === 11000) throw this.conflict(def, value.code);
-      throw e;
+    const current = (await this.model(def).findById(toObjectId(id)).lean()) as { _id: Types.ObjectId; project: Types.ObjectId } | null;
+    if (!current) throw new NotFoundException(`${def.label} no encontrado.`);
+    // El código no se modifica, y como es único dentro del proyecto, tampoco se cambia de proyecto.
+    if (String(current.project) !== String(scope.project)) {
+      throw new BadRequestException({
+        message: 'Hay campos con errores.',
+        errors: [{ field: 'project', message: 'El proyecto de un registro no se puede cambiar.' }],
+      });
     }
+    const { code: _ignored, ...fields } = value;
+    await this.model(def).updateOne({ _id: current._id }, { ...fields, module: scope.module, updatedBy: toObjectId(user.id) });
+    const record = await this.get(type, id);
+    return { record, warnings: [...warnings, ...(await this.referenceWarnings(def, scope.project, value))] };
   }
 
   async remove(type: string, id: string) {

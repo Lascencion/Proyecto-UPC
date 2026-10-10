@@ -18,10 +18,13 @@ function expectExamples(result: ParseResult) {
     expect({ location: row.source.location, errors }).toEqual({ location: row.source.location, errors: [] });
     expect(row.moduleName).toBe('Compra de monedas virtuales');
   }
-  const cp1 = result.rows.find((r) => r.data.code === 'CP-001')!;
+  const cp1 = result.rows.find((r) => r.data.code === 'CP1')!;
   const { value } = validateRecord(getDefinition('test-cases')!, cp1.data);
   expect((value.steps as unknown[]).length).toBe(4);
-  expect(value.relatedRules).toEqual(['RN-001']);
+  expect(value.relatedRules).toEqual(['RN1']);
+  expect(value.requirements).toEqual(['REQ1']);
+  const def1 = result.rows.find((r) => r.data.code === 'DEF1')!;
+  expect(validateRecord(getDefinition('defects')!, def1.data).value.testCases).toEqual(['CP2']);
 }
 
 describe('parseFiles (ida y vuelta con las plantillas)', () => {
@@ -34,7 +37,7 @@ describe('parseFiles (ida y vuelta con las plantillas)', () => {
     const file = await templates.word();
     const result = await parseFiles([{ originalname: file.fileName, buffer: file.buffer }]);
     expectExamples(result);
-    const req = result.rows.find((r) => r.data.code === 'REQ-001')!;
+    const req = result.rows.find((r) => r.data.code === 'REQ1')!;
     const { value } = validateRecord(getDefinition('requirements')!, req.data);
     expect((value.acceptanceCriteria as string[]).length).toBe(3);
   });

@@ -156,11 +156,6 @@ export function validateRecord(def: EntityDefinition, input: Record<string, unkn
     }
   }
 
-  const code = value.code as string | null;
-  if (code && !code.startsWith(`${def.codePrefix}-`)) {
-    warnings.push({ field: 'code', message: `Se recomienda que el código inicie con "${def.codePrefix}-".` });
-  }
-
   return { value, errors, warnings };
 }
 

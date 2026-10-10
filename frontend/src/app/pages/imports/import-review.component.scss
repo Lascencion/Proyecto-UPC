@@ -72,11 +72,6 @@
   margin-bottom: 12px;
 }
 
-.dup {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
 .code-cell {
   font-weight: 600;
@@ -95,6 +90,10 @@
   white-space: nowrap;
 }
 
+.module-cell {
+  min-width: 160px;
+}
+
 .title-cell {
   min-width: 180px;
 }
@@ -106,9 +105,6 @@
   padding-bottom: 6px;
 }
 
-.dup-select {
-  width: 110px;
-}
 
 .actions-cell {
   white-space: nowrap;

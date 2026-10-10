@@ -3,9 +3,8 @@ import { HydratedDocument, Schema as MongooseSchema, Types } from 'mongoose';
 import { ENTITY_TYPES, EntityType } from '../knowledge/definitions/entity-definitions';
 
 export type BatchStatus = 'EN_REVISION' | 'CONFIRMADO' | 'CANCELADO';
-export type DuplicateAction = 'skip' | 'update';
 export type RowStatus = 'valid' | 'warning' | 'error' | 'excluded';
-export type RowResult = 'created' | 'updated' | 'skipped' | 'failed';
+export type RowResult = 'created' | 'failed';
 
 @Schema({ _id: false })
 class Issue {
@@ -31,9 +30,6 @@ export class ImportBatch {
   @Prop({ required: true, default: 'EN_REVISION', enum: ['EN_REVISION', 'CONFIRMADO', 'CANCELADO'] })
   status!: BatchStatus;
 
-  @Prop({ default: 'skip', enum: ['skip', 'update'] })
-  duplicateStrategy!: DuplicateAction;
-
   @Prop({ type: [IssueSchema], default: [] })
   issues!: Issue[];
 
@@ -41,7 +37,7 @@ export class ImportBatch {
   summary!: Record<string, number>;
 
   @Prop({ type: Object })
-  result?: { created: number; updated: number; skipped: number; failed: number };
+  result?: { created: number; failed: number };
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   createdBy!: Types.ObjectId;
@@ -69,7 +65,7 @@ export class ImportRow {
   @Prop({ type: { fileName: String, location: String, _id: false } })
   source!: { fileName: string; location: string };
 
-  /** Valores del registro (normalizados en cada validación). */
+  /** Valores del registro (normalizados en cada validación). `data.code` es la referencia temporal del archivo. */
   @Prop({ type: MongooseSchema.Types.Mixed, default: {} })
   data!: Record<string, unknown>;
 
@@ -91,14 +87,11 @@ export class ImportRow {
   @Prop({ default: false })
   excluded!: boolean;
 
-  /** Id del registro existente con el mismo código en el proyecto. */
-  @Prop({ type: String, default: null })
-  duplicateOf?: string | null;
+  /** Código definitivo asignado por el sistema al confirmar el lote. */
+  @Prop()
+  finalCode?: string;
 
-  @Prop({ default: 'skip', enum: ['skip', 'update'] })
-  duplicateAction!: DuplicateAction;
-
-  @Prop({ enum: ['created', 'updated', 'skipped', 'failed'] })
+  @Prop({ enum: ['created', 'failed'] })
   result?: RowResult;
 
   @Prop()

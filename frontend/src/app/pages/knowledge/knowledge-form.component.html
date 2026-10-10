@@ -4,7 +4,7 @@
       <a mat-button [routerLink]="['/conocimiento', type()]" class="back"><mat-icon>arrow_back</mat-icon> {{ def.labelPlural }}</a>
       <h1>
         @if (isNew()) {
-          Nuevo {{ def.label.toLowerCase() }}
+          Registrar {{ def.label.toLowerCase() }}
         } @else {
           {{ record()?.['code'] }} · {{ record()?.[def.titleField] }}
         }
@@ -27,19 +27,12 @@
         @if (readonly()) {
           <p class="info-box">Su rol solo permite consultar este registro.</p>
         }
-        @if (warnings().length) {
-          <ul class="warning-box">
-            @for (w of warnings(); track $index) {
-              <li>{{ w.message }}</li>
-            }
-          </ul>
-        }
 
         <h3>Clasificación</h3>
         <div class="scope">
           <mat-form-field>
             <mat-label>Proyecto</mat-label>
-            <mat-select [(ngModel)]="project" (selectionChange)="onProjectChange()" [disabled]="readonly()" required>
+            <mat-select [(ngModel)]="project" (selectionChange)="onProjectChange()" [disabled]="readonly() || !isNew()" required>
               @for (p of projects(); track p.id) {
                 <mat-option [value]="p.id">{{ p.name }}</mat-option>
               }
@@ -49,6 +42,8 @@
             </mat-select>
             @if (!projects().length) {
               <mat-hint>No hay proyectos activos. Regístrelos en "Proyectos y módulos".</mat-hint>
+            } @else if (isNew()) {
+              <mat-hint>Elija el proyecto para obtener el código y los registros relacionables.</mat-hint>
             }
             @if (scopeErrors()['project']) {
               <mat-hint class="error-hint">{{ scopeErrors()['project'] }}</mat-hint>
@@ -67,16 +62,14 @@
           </mat-form-field>
         </div>
 
-        <h3>Datos del {{ def.label.toLowerCase() }}</h3>
-        <app-record-form [definition]="def" [value]="formSeed()" [readonly]="readonly()" />
+        <h3>Datos del registro</h3>
+        <app-record-form [definition]="def" [value]="formSeed()" [readonly]="readonly()" mode="manual"
+          [refOptions]="refOptions()" [codePreview]="codePreview()" />
       </mat-card-content>
 
       @if (!readonly()) {
         <mat-card-actions align="end">
           <button mat-button (click)="back()">Cancelar</button>
-          @if (isNew()) {
-            <button mat-stroked-button (click)="save(true)" [disabled]="saving()">Guardar y registrar otro</button>
-          }
           <button mat-flat-button (click)="save()" [disabled]="saving()">
             <mat-icon>save</mat-icon> Guardar
           </button>

@@ -3,17 +3,18 @@ import { EntityType } from '../knowledge/definitions/entity-definitions';
 /**
  * Ejemplos que acompañan a las plantillas. Corresponden al flujo de compra de
  * monedas virtuales en un videojuego en línea, pero el formato es genérico.
+ * `code` es la referencia temporal del archivo (REQ1, RN1…): el sistema asigna
+ * el código definitivo al confirmar la carga.
  */
 export const EXAMPLE_MODULE = 'Compra de monedas virtuales';
 
 export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = {
   requirements: [
     {
-      code: 'REQ-001',
+      code: 'REQ1',
       title: 'Compra de paquete de gemas con tarjeta',
       description:
         'Como jugador quiero comprar paquetes de gemas desde la tienda del juego pagando con tarjeta de crédito o débito para usarlas en artículos del juego.',
-      type: 'Funcional',
       priority: 'Alta',
       acceptanceCriteria: [
         'Se muestran los paquetes disponibles con su precio en moneda local',
@@ -25,11 +26,10 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       source: 'HU-125',
     },
     {
-      code: 'REQ-002',
+      code: 'REQ2',
       title: 'Límite diario de compra para cuentas de menores de edad',
       description:
         'El sistema debe limitar el monto diario de compras de monedas virtuales en cuentas de jugadores menores de 18 años.',
-      type: 'Funcional',
       priority: 'Alta',
       acceptanceCriteria: [
         'El límite diario para menores es de 50 USD',
@@ -42,7 +42,7 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
   ],
   'business-rules': [
     {
-      code: 'RN-001',
+      code: 'RN1',
       name: 'Acreditación solo con pago aprobado',
       description: 'Las gemas compradas se acreditan al saldo del jugador únicamente cuando la pasarela confirma el pago.',
       type: 'Flujo',
@@ -50,10 +50,10 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       action: 'Acreditar al saldo del jugador la cantidad de gemas del paquete comprado',
       exceptions: 'Si el estado es PENDIENTE, las gemas se acreditan al recibir la confirmación (máximo 24 horas)',
       criticality: 'Alta',
-      relatedRequirements: ['REQ-001'],
+      relatedRequirements: ['REQ1'],
     },
     {
-      code: 'RN-002',
+      code: 'RN2',
       name: 'Límite diario para menores de edad',
       description: 'Una cuenta de menor de edad no puede superar 50 USD en compras por día calendario.',
       type: 'Validación',
@@ -61,10 +61,10 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       action: 'Rechazar la compra y mostrar el mensaje "Alcanzaste el límite diario de compras"',
       exceptions: '',
       criticality: 'Alta',
-      relatedRequirements: ['REQ-002'],
+      relatedRequirements: ['REQ2'],
     },
     {
-      code: 'RN-003',
+      code: 'RN3',
       name: 'Transacción no duplicada',
       description: 'Una misma transacción de pago no debe acreditar gemas más de una vez.',
       type: 'Restricción',
@@ -72,15 +72,15 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       action: 'Acreditar las gemas una sola vez e ignorar las notificaciones repetidas',
       exceptions: '',
       criticality: 'Alta',
-      relatedRequirements: ['REQ-001'],
+      relatedRequirements: ['REQ1'],
     },
   ],
   'test-cases': [
     {
-      code: 'CP-001',
+      code: 'CP1',
       title: 'Compra exitosa de paquete de 500 gemas con tarjeta válida',
-      requirement: 'REQ-001',
-      relatedRules: ['RN-001'],
+      requirements: ['REQ1'],
+      relatedRules: ['RN1'],
       scenarioType: 'Positivo',
       designTechnique: 'Partición de equivalencia',
       priority: 'Alta',
@@ -97,13 +97,13 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       executionStatus: 'Exitoso',
       executionDate: '2025-03-20',
       executedBy: 'María Pérez',
-      defect: '',
+      defects: [],
     },
     {
-      code: 'CP-002',
+      code: 'CP2',
       title: 'Compra de menor de edad que supera el límite diario',
-      requirement: 'REQ-002',
-      relatedRules: ['RN-002'],
+      requirements: ['REQ2'],
+      relatedRules: ['RN2'],
       scenarioType: 'Valor límite',
       designTechnique: 'Análisis de valores límite',
       priority: 'Alta',
@@ -118,20 +118,20 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       executionStatus: 'Fallido',
       executionDate: '2025-03-21',
       executedBy: 'María Pérez',
-      defect: 'DEF-001',
+      defects: ['DEF1'],
     },
   ],
   defects: [
     {
-      code: 'DEF-001',
+      code: 'DEF1',
       title: 'Un menor de edad puede superar el límite diario de compra',
       description: 'El límite de 50 USD no se valida cuando el monto acumulado más la compra lo supera por pocos centavos.',
       stepsToReproduce:
         '1. Iniciar sesión con una cuenta de 15 años con 49.99 USD comprados en el día\n2. Comprar el paquete de 100 gemas (0.99 USD)',
       severity: 'Alta',
       status: 'Cerrado',
-      testCase: 'CP-002',
-      requirement: 'REQ-002',
+      testCases: ['CP2'],
+      requirements: ['REQ2'],
       reportedDate: '2025-03-21',
       reportedBy: 'María Pérez',
     },

@@ -63,7 +63,7 @@ export interface RowEditData {
           <mat-hint>En el archivo: "{{ row().moduleName }}" (no existe en el catálogo)</mat-hint>
         }
       </mat-form-field>
-      <app-record-form [definition]="data.definition" [value]="seed()" />
+      <app-record-form [definition]="data.definition" [value]="seed()" mode="bulk" />
     </mat-dialog-content>
     @if (saving()) {
       <mat-progress-bar mode="indeterminate" />

@@ -3,6 +3,7 @@ import {
   ENTITY_DEFINITIONS,
   EntityDefinition,
   MODULE_COLUMN,
+  REFERENCE_COLUMN,
   STEP_COLUMNS,
 } from '../../knowledge/definitions/entity-definitions';
 import { CellValue, ParseResult, RawTable } from './parse.types';
@@ -21,8 +22,11 @@ function headerMap(columns: ColumnSpec[]): Map<string, string> {
   return map;
 }
 
+/** Columnas de un tipo en los archivos: la de código es la referencia temporal del lote. */
 export const entityColumns = (def: EntityDefinition): ColumnSpec[] => [
-  ...def.fields.filter((f) => f.type !== 'steps'),
+  ...def.fields
+    .filter((f) => f.type !== 'steps')
+    .map((f) => (f.type === 'code' ? { key: f.key, label: REFERENCE_COLUMN.label, aliases: REFERENCE_COLUMN.aliases } : f)),
   MODULE_COLUMN,
 ];
 

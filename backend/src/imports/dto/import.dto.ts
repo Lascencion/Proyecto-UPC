@@ -1,6 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsBoolean, IsIn, IsMongoId, IsObject, IsOptional } from 'class-validator';
-import { DuplicateAction } from '../import.schemas';
+import { IsBoolean, IsMongoId, IsObject, IsOptional } from 'class-validator';
 
 export class CreateImportDto {
   @ApiProperty() @IsMongoId({ message: 'Seleccione un proyecto válido.' })
@@ -9,13 +8,6 @@ export class CreateImportDto {
   @ApiProperty() @IsMongoId({ message: 'Seleccione un módulo válido.' })
   defaultModule!: string;
 
-  @ApiPropertyOptional({ enum: ['skip', 'update'] }) @IsOptional() @IsIn(['skip', 'update'])
-  duplicateStrategy?: DuplicateAction;
-}
-
-export class UpdateBatchDto {
-  @ApiProperty({ enum: ['skip', 'update'] }) @IsIn(['skip', 'update'])
-  duplicateStrategy!: DuplicateAction;
 }
 
 export class UpdateRowDto {
@@ -28,6 +20,4 @@ export class UpdateRowDto {
   @ApiPropertyOptional() @IsOptional() @IsBoolean()
   excluded?: boolean;
 
-  @ApiPropertyOptional({ enum: ['skip', 'update'] }) @IsOptional() @IsIn(['skip', 'update'])
-  duplicateAction?: DuplicateAction;
 }

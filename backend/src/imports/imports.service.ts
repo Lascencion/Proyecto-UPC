@@ -6,6 +6,7 @@ import { AuthUser } from '../common/decorators/current-user.decorator';
 import { toObjectId } from '../common/utils/object-id';
 import { normalizeKey } from '../common/utils/text';
 import { EntityType, getDefinition } from '../knowledge/definitions/entity-definitions';
+import { CodeGeneratorService } from '../knowledge/code-generator.service';
 import { KnowledgeService } from '../knowledge/knowledge.service';
 import { collectReferences, FieldIssue, validateRecord } from '../knowledge/validation/record-validator';
 import { CreateImportDto, UpdateRowDto } from './dto/import.dto';
@@ -21,6 +22,7 @@ export class ImportsService {
     @InjectModel(ImportRow.name) private readonly rows: Model<ImportRow>,
     private readonly knowledge: KnowledgeService,
     private readonly catalogs: CatalogsService,
+    private readonly codes: CodeGeneratorService,
   ) {}
 
   /** Lee los archivos, crea el lote en revisión y valida sus filas. */
@@ -41,7 +43,6 @@ export class ImportsService {
       project: scope.project,
       defaultModule: scope.module,
       files: files.map((f) => ({ name: f.originalname, size: f.buffer.length })),
-      duplicateStrategy: dto.duplicateStrategy ?? 'skip',
       issues: parsed.issues,
       createdBy: toObjectId(user.id),
     });
@@ -53,7 +54,6 @@ export class ImportsService {
         source: r.source,
         data: r.data,
         moduleName: r.moduleName,
-        duplicateAction: batch.duplicateStrategy,
       })),
     );
     await this.revalidate(batch);
@@ -112,15 +112,6 @@ export class ImportsService {
     return batch;
   }
 
-  async updateBatch(id: string, duplicateStrategy: 'skip' | 'update') {
-    const batch = await this.getEditableBatch(id);
-    batch.duplicateStrategy = duplicateStrategy;
-    await batch.save();
-    await this.rows.updateMany({ batch: batch._id }, { duplicateAction: duplicateStrategy });
-    await this.revalidate(batch);
-    return this.get(id);
-  }
-
   async updateRow(id: string, rowId: string, dto: UpdateRowDto) {
     const batch = await this.getEditableBatch(id);
     const row = await this.rows.findOne({ _id: toObjectId(rowId, 'fila'), batch: batch._id });
@@ -136,15 +127,15 @@ export class ImportsService {
       row.moduleName = undefined;
     }
     if (dto.excluded !== undefined) row.excluded = dto.excluded;
-    if (dto.duplicateAction) row.duplicateAction = dto.duplicateAction;
     await row.save();
     await this.revalidate(batch);
     return this.get(id);
   }
 
   /**
-   * Valida todas las filas del lote: campos, módulo, códigos repetidos dentro del
-   * lote, códigos ya existentes en el proyecto y referencias entre registros.
+   * Valida todas las filas del lote: campos, módulo, referencias temporales
+   * repetidas dentro del lote y referencias entre registros (del lote o ya
+   * registrados en el proyecto).
    */
   async revalidate(batch: ImportBatchDocument): Promise<void> {
     const rows = await this.rows.find({ batch: batch._id }).sort({ index: 1 });
@@ -155,7 +146,7 @@ export class ImportsService {
 
     type Work = { row: ImportRowDocument; errors: FieldIssue[]; warnings: FieldIssue[]; value: Record<string, unknown> };
     const work: Work[] = [];
-    const batchCodes = new Map<EntityType, Map<string, number[]>>();
+    const batchRefs = new Map<EntityType, Map<string, number[]>>();
 
     for (const row of rows) {
       if (row.excluded) continue;
@@ -180,9 +171,9 @@ export class ImportsService {
       }
 
       if (value.code) {
-        const codes = batchCodes.get(row.type) ?? new Map<string, number[]>();
-        codes.set(value.code as string, [...(codes.get(value.code as string) ?? []), row.index]);
-        batchCodes.set(row.type, codes);
+        const refs = batchRefs.get(row.type) ?? new Map<string, number[]>();
+        refs.set(value.code as string, [...(refs.get(value.code as string) ?? []), row.index]);
+        batchRefs.set(row.type, refs);
       }
       work.push({ row, errors, warnings, value });
     }
@@ -190,37 +181,25 @@ export class ImportsService {
     for (const w of work) {
       const { row, value, errors, warnings } = w;
       const def = getDefinition(row.type)!;
-      const code = value.code as string | null;
+      const ref = value.code as string | null;
 
-      if (code) {
-        const same = batchCodes.get(row.type)!.get(code)!;
+      if (ref) {
+        const same = batchRefs.get(row.type)!.get(ref)!;
         if (same.length > 1) {
           errors.push({
             field: 'code',
-            message: `El código ${code} se repite en el lote (filas ${same.map((i) => i + 1).join(', ')}).`,
+            message: `La referencia ${ref} se repite en el lote (filas ${same.map((i) => i + 1).join(', ')}).`,
           });
         }
-        const existingId = existing.get(row.type)!.get(code) ?? null;
-        row.duplicateOf = existingId;
-        if (existingId) {
-          warnings.push({
-            field: 'code',
-            message:
-              row.duplicateAction === 'update'
-                ? `El código ${code} ya existe en el proyecto: el registro se actualizará.`
-                : `El código ${code} ya existe en el proyecto: el registro se omitirá.`,
-          });
-        }
-      } else {
-        row.duplicateOf = null;
       }
 
-      for (const ref of collectReferences(def, value)) {
-        const t = ref.field.refType!;
-        if (!existing.get(t)!.has(ref.code) && !batchCodes.get(t)?.has(ref.code)) {
+      // Una referencia apunta primero a un registro del lote y, si no está, a uno ya registrado.
+      for (const r of collectReferences(def, value)) {
+        const t = r.field.refType!;
+        if (!batchRefs.get(t)?.has(r.code) && !existing.get(t)!.has(r.code)) {
           warnings.push({
-            field: ref.field.key,
-            message: `${ref.field.label}: el código ${ref.code} no existe en el proyecto ni en el lote.`,
+            field: r.field.key,
+            message: `${r.field.label}: ${r.code} no está en el lote ni registrado en el proyecto; se descartará al guardar.`,
           });
         }
       }
@@ -248,7 +227,6 @@ export class ImportsService {
       warning: count('warning'),
       error: count('error'),
       excluded: count('excluded'),
-      duplicates: rows.filter((r) => !r.excluded && r.duplicateOf).length,
       ...Object.fromEntries(
         [...new Set(rows.map((r) => r.type))].map((t) => [t, rows.filter((r) => r.type === t && !r.excluded).length]),
       ),
@@ -257,7 +235,10 @@ export class ImportsService {
     await batch.save();
   }
 
-  /** Guarda en la base de conocimiento las filas del lote. */
+  /**
+   * Guarda las filas del lote en la base de conocimiento: asigna a cada registro
+   * su código definitivo y traduce las referencias temporales a esos códigos.
+   */
   async confirm(id: string, user: AuthUser) {
     const batch = await this.getEditableBatch(id);
     await this.revalidate(batch);
@@ -267,37 +248,51 @@ export class ImportsService {
       );
     }
     const rows = await this.rows.find({ batch: batch._id, excluded: false }).sort({ index: 1 });
-    const result = { created: 0, updated: 0, skipped: 0, failed: 0 };
-    const userId = toObjectId(user.id);
+    const existing = await this.knowledge.existingCodes(batch.project);
 
+    // 1. Códigos definitivos para todas las filas (las referencias pueden apuntar hacia adelante).
+    const finalCodes = new Map<EntityType, Map<string, string>>();
+    for (const row of rows) {
+      row.finalCode = await this.codes.next(getDefinition(row.type)!, batch.project);
+      const ref = row.data.code as string | null;
+      if (ref) {
+        const map = finalCodes.get(row.type) ?? new Map<string, string>();
+        map.set(ref, row.finalCode);
+        finalCodes.set(row.type, map);
+      }
+    }
+
+    // 2. Inserción con las referencias traducidas.
+    const result = { created: 0, failed: 0 };
+    const userId = toObjectId(user.id);
     for (const row of rows) {
       const def = getDefinition(row.type)!;
-      const model = this.knowledge.model(def);
-      try {
-        if (row.duplicateOf && row.duplicateAction === 'skip') {
-          row.result = 'skipped';
-        } else if (row.duplicateOf) {
-          await model.updateOne(
-            { _id: new Types.ObjectId(row.duplicateOf) },
-            { ...row.data, module: row.module, updatedBy: userId },
-          );
-          row.result = 'updated';
+      const { code: _ref, ...fields } = row.data;
+      for (const field of def.fields.filter((f) => f.type === 'refList' || f.type === 'ref')) {
+        const t = field.refType!;
+        const resolve = (c: string) => finalCodes.get(t)?.get(c) ?? (existing.get(t)!.has(c) ? c : null);
+        if (field.type === 'refList') {
+          fields[field.key] = [...new Set(((fields[field.key] as string[]) ?? []).map(resolve).filter((c): c is string => !!c))];
         } else {
-          await model.create({
-            ...row.data,
-            project: batch.project,
-            module: row.module,
-            origin: { type: 'MASIVO', fileName: row.source?.fileName, batchId: batch._id },
-            createdBy: userId,
-            updatedBy: userId,
-          });
-          row.result = 'created';
+          fields[field.key] = fields[field.key] ? resolve(fields[field.key] as string) : null;
         }
+      }
+      try {
+        await this.knowledge.model(def).create({
+          ...fields,
+          code: row.finalCode,
+          project: batch.project,
+          module: row.module,
+          origin: { type: 'MASIVO', fileName: row.source?.fileName, batchId: batch._id },
+          createdBy: userId,
+          updatedBy: userId,
+        });
+        row.result = 'created';
       } catch (e) {
         row.result = 'failed';
         row.resultMessage =
           (e as { code?: number }).code === 11000
-            ? 'El código fue registrado por otro usuario mientras se revisaba el lote.'
+            ? `El código ${row.finalCode} ya estaba ocupado en el proyecto.`
             : (e as Error).message;
       }
       result[row.result]++;

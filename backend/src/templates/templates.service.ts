@@ -20,6 +20,7 @@ import {
   FieldDefinition,
   getDefinition,
   MODULE_COLUMN,
+  REFERENCE_COLUMN,
   STEP_COLUMNS,
   TEST_CASE_DEFINITION,
 } from '../knowledge/definitions/entity-definitions';
@@ -38,7 +39,7 @@ const REQUIRED_FILL = 'FFC00000';
 function templateColumns(def: EntityDefinition): { key: string; label: string; field?: FieldDefinition }[] {
   const fields = def.fields.filter((f) => f.type !== 'steps');
   return [
-    { key: fields[0].key, label: fields[0].label, field: fields[0] },
+    { key: fields[0].key, label: REFERENCE_COLUMN.label, field: fields[0] },
     { key: MODULE_COLUMN.key, label: MODULE_COLUMN.label },
     ...fields.slice(1).map((f) => ({ key: f.key, label: f.label, field: f })),
   ];
@@ -54,11 +55,17 @@ function exampleValue(example: Record<string, unknown>, key: string): string {
 }
 
 function fieldHelp(field?: FieldDefinition): string {
+  if (field?.type === 'code') {
+    return 'Opcional. Referencia temporal (p. ej. REQ1) para relacionar registros de este archivo. El sistema asigna el código definitivo (REQ-001…) al confirmar la carga.';
+  }
   if (!field) return 'Opcional. Nombre del módulo/flujo; si se deja vacío se usa el módulo elegido al cargar.';
   const parts = [field.required ? 'Obligatorio.' : 'Opcional.'];
   if (field.type === 'enum') parts.push(`Valores: ${field.options!.join(', ')}.`);
   if (field.type === 'date') parts.push('Formato AAAA-MM-DD o DD/MM/AAAA.');
   if (field.type === 'list') parts.push('Varios valores separados por ";".');
+  if (field.type === 'refList') {
+    parts.push('Referencias de este archivo o códigos ya registrados en el proyecto, separados por ";".');
+  }
   if (field.help) parts.push(field.help);
   return parts.join(' ');
 }
@@ -137,17 +144,18 @@ export class TemplatesService {
       ['', '3. Elimine las filas de ejemplo antes de cargar el archivo.'],
       ['', '4. No cambie los nombres de las hojas ni de los encabezados.'],
       ['', '5. Los pasos de los casos de prueba van en la hoja "PasosCasoPrueba", enlazados por el código del caso.'],
-      ['', '6. Para relacionar registros use sus códigos (p. ej. REQ-001). Varios códigos se separan con ";".'],
-      ['', '7. El proyecto se elige al cargar el archivo. La columna "Módulo" es opcional: si se deja vacía se usa el módulo elegido al cargar.'],
-      ['', '8. Los códigos deben ser únicos dentro del proyecto. Si ya existen, al cargar podrá elegir omitirlos o actualizarlos.'],
+      ['', '6. La columna "Referencia" es temporal (p. ej. REQ1, RN1, CP1): sirve para relacionar registros de este archivo y debe ser única por hoja.'],
+      ['', '7. El sistema asigna los códigos definitivos (REQ-001, RN-001…) al confirmar la carga y actualiza las relaciones.'],
+      ['', '8. Para relacionar con registros ya guardados use su código (p. ej. REQ-001). Varios valores se separan con ";".'],
+      ['', '9. El proyecto se elige al cargar el archivo. La columna "Módulo" es opcional: si se deja vacía se usa el módulo elegido al cargar.'],
       ['', ''],
       ['Hojas', ''],
-      ...ENTITY_DEFINITIONS.map((d) => [d.sheetName, `${d.labelPlural} (código sugerido ${d.codePrefix}-001)`] as [string, string]),
+      ...ENTITY_DEFINITIONS.map((d) => [d.sheetName, `${d.labelPlural} (código asignado: ${d.codePrefix}-001, ${d.codePrefix}-002…)`] as [string, string]),
       [STEP_COLUMNS.sheetName, 'Pasos de cada caso de prueba (un paso por fila)'],
     ];
     lines.forEach((l) => ws.addRow(l));
     ws.getRow(1).font = { bold: true, size: 14 };
-    ws.getCell('A12').font = { bold: true };
+    ws.getCell('A13').font = { bold: true };
     ws.getCell('A3').font = { bold: true };
   }
 
@@ -237,9 +245,10 @@ export class TemplatesService {
       p('1. Cada registro es una tabla de dos columnas (Campo | Valor). La primera fila indica el tipo: Requerimiento, Regla de negocio, Caso de prueba o Defecto.'),
       p('2. Los campos marcados con * son obligatorios. No cambie los nombres de la primera columna.'),
       p('3. Los pasos de un caso de prueba van en una tabla inmediatamente después de su tabla, con las columnas "N° paso | Acción | Resultado esperado".'),
-      p('4. En listas (criterios de aceptación, códigos relacionados) escriba un valor por línea o sepárelos con ";".'),
-      p('5. Para agregar registros copie y pegue una tabla del mismo tipo. Elimine los ejemplos antes de cargar el archivo.'),
-      p('6. El proyecto se elige al cargar el archivo; el campo "Módulo" es opcional.'),
+      p('4. En listas (criterios de aceptación, registros relacionados) escriba un valor por línea o sepárelos con ";".'),
+      p('5. "Referencia" es temporal (p. ej. REQ1): sirve para relacionar registros de este documento. El sistema asigna los códigos definitivos (REQ-001…) al confirmar la carga. Para relacionar con registros ya guardados use su código.'),
+      p('6. Para agregar registros copie y pegue una tabla del mismo tipo. Elimine los ejemplos antes de cargar el archivo.'),
+      p('7. El proyecto se elige al cargar el archivo; el campo "Módulo" es opcional.'),
     ];
     for (const def of ENTITY_DEFINITIONS) {
       children.push(new Paragraph({ text: def.labelPlural, heading: HeadingLevel.HEADING_1 }));

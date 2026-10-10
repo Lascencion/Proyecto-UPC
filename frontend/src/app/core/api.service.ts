@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import {
-  DuplicateAction,
   EntityDefinition,
   FlowModule,
   ImportBatch,
@@ -12,6 +11,7 @@ import {
   PermissionMap,
   PermissionMatrix,
   Project,
+  RecordOption,
   Role,
   SaveResult,
   User,
@@ -48,6 +48,14 @@ export class ApiService {
 
   listRecords(type: string, query: Record<string, unknown>) {
     return this.http.get<Page<KnowledgeRecord>>(`/api/knowledge/${type}`, { params: params(query) });
+  }
+
+  nextCode(type: string, project: string) {
+    return this.http.get<{ code: string }>(`/api/knowledge/${type}/next-code`, { params: params({ project }) });
+  }
+
+  recordOptions(type: string, project: string) {
+    return this.http.get<RecordOption[]>(`/api/knowledge/${type}/options`, { params: params({ project }) });
   }
 
   getRecord(type: string, id: string) {
@@ -96,12 +104,11 @@ export class ApiService {
   }
 
   // ----- Carga masiva -----
-  uploadImport(files: File[], project: string, defaultModule: string, duplicateStrategy: DuplicateAction) {
+  uploadImport(files: File[], project: string, defaultModule: string) {
     const form = new FormData();
     files.forEach((f) => form.append('files', f, f.name));
     form.append('project', project);
     form.append('defaultModule', defaultModule);
-    form.append('duplicateStrategy', duplicateStrategy);
     return this.http.post<ImportDetail>('/api/imports', form);
   }
 
@@ -111,10 +118,6 @@ export class ApiService {
 
   getImport(id: string) {
     return this.http.get<ImportDetail>(`/api/imports/${id}`);
-  }
-
-  setDuplicateStrategy(id: string, duplicateStrategy: DuplicateAction) {
-    return this.http.patch<ImportDetail>(`/api/imports/${id}`, { duplicateStrategy });
   }
 
   updateImportRow(id: string, rowId: string, body: Record<string, unknown>) {

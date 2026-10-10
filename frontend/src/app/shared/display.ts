@@ -34,7 +34,11 @@ export const BATCH_STATUS_LABELS: Record<string, string> = {
 
 export const ROW_RESULT_LABELS: Record<string, string> = {
   created: 'Creado',
-  updated: 'Actualizado',
-  skipped: 'Omitido',
   failed: 'Falló',
 };
+
+/** Fecha de hoy en formato AAAA-MM-DD (hora local). */
+export function today(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}

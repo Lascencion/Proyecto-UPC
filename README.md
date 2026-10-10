@@ -12,6 +12,8 @@ virtuales es el caso de estudio y aparece en los ejemplos de las plantillas.
 | Gestión de usuarios y matriz de permisos por rol y módulo | ✅ |
 | Catálogos de proyectos y módulos/flujos | ✅ |
 | Registro individual (formularios) de requerimientos, reglas de negocio, casos de prueba y defectos | ✅ |
+| Códigos automáticos por proyecto (REQ-001, RN-001, CP-001, DEF-001) | ✅ |
+| Selección de registros relacionados (varios) desde listas con buscador | ✅ |
 | Carga masiva desde Excel, Word y CSV con revisión, corrección y confirmación | ✅ |
 | Consulta, búsqueda, edición y eliminación de la información registrada | ✅ |
 | Generación de casos con LLM y aprobación/observación por el Líder QA | ⏳ próximas iteraciones |
@@ -88,14 +90,13 @@ puede cambiar en *Permisos por rol*. Valores iniciales:
 El formato de los archivos está descrito en [docs/formato-carga-masiva.md](docs/formato-carga-masiva.md).
 El flujo es el siguiente:
 
-1. El usuario elige el proyecto, el módulo predeterminado y qué hacer con los códigos que ya existen (omitir o actualizar).
+1. El usuario elige el proyecto y el módulo predeterminado.
 2. Adjunta uno o más archivos `.xlsx`, `.docx` o `.csv` (hasta 10 archivos de 10 MB por carga).
 3. El sistema crea un **lote en revisión** y valida cada fila: campos obligatorios, valores permitidos, fechas,
-   módulo, códigos repetidos en el lote, códigos ya existentes en el proyecto y referencias entre registros.
-4. El usuario revisa las filas, corrige las que tienen errores (en un formulario), excluye las que no quiera cargar
-   y elige omitir o actualizar los duplicados.
-5. Al confirmar, los registros se guardan en la base de conocimiento con su origen (archivo y lote). Las advertencias
-   no impiden guardar; los errores sí.
+   módulo, referencias temporales repetidas y relaciones entre registros.
+4. El usuario revisa las filas, corrige las que tienen errores (en un formulario) y excluye las que no quiera cargar.
+5. Al confirmar, el sistema asigna los códigos definitivos, traduce las referencias temporales a esos códigos y guarda
+   los registros con su origen (archivo y lote). Las advertencias no impiden guardar; los errores sí.
 
 ## Pruebas
 

@@ -12,8 +12,9 @@ import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ApiService } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
-import { FieldIssue, FlowModule, KnowledgeRecord, Project } from '../../core/models';
+import { EntityDefinition, EntityType, FlowModule, KnowledgeRecord, Project, RefOptions } from '../../core/models';
 import { fieldErrors, NotifyService } from '../../core/notify.service';
+import { today } from '../../shared/display';
 import { RecordFormComponent } from '../../shared/record-form/record-form.component';
 
 @Component({
@@ -50,14 +51,15 @@ export class KnowledgeFormComponent {
   readonly readonly = computed(() => !this.isNew() && !this.auth.can('KNOWLEDGE', 'EDIT'));
 
   readonly record = signal<KnowledgeRecord | null>(null);
-  /** Valor con el que se (re)construye el formulario; un objeto nuevo lo limpia. */
+  /** Valor con el que se construye el formulario. */
   readonly formSeed = signal<Record<string, unknown> | null>(null);
   readonly projects = signal<Project[]>([]);
   readonly modules = signal<FlowModule[]>([]);
+  readonly refOptions = signal<RefOptions>({});
+  readonly codePreview = signal<string | null>(null);
   readonly loading = signal(false);
   readonly saving = signal(false);
   readonly scopeErrors = signal<Record<string, string>>({});
-  readonly warnings = signal<FieldIssue[]>([]);
 
   project = '';
   module = '';
@@ -66,16 +68,17 @@ export class KnowledgeFormComponent {
     this.api.projects(true).subscribe({ next: (p) => this.projects.set(p), error: (e) => this.notify.error(e) });
     effect(() => {
       const id = this.id();
-      this.type();
-      untracked(() => (id ? this.load(id) : this.reset()));
+      const def = this.definition();
+      if (!def) return;
+      untracked(() => (id ? this.load(id) : this.startNew(def)));
     });
   }
 
-  private reset(): void {
+  /** Registro nuevo: las fechas se proponen con el día de hoy (editables). */
+  private startNew(def: EntityDefinition): void {
     this.record.set(null);
-    this.formSeed.set({});
-    this.warnings.set([]);
-    // Conserva proyecto y módulo para registrar varios seguidos.
+    this.formSeed.set(Object.fromEntries(def.fields.filter((f) => f.type === 'date').map((f) => [f.key, today()])));
+    if (this.project) this.loadProjectData();
   }
 
   private async load(id: string): Promise<void> {
@@ -84,9 +87,9 @@ export class KnowledgeFormComponent {
       const record = await firstValueFrom(this.api.getRecord(this.type(), id));
       this.project = record.project.id;
       this.module = record.module.id;
-      await this.loadModules();
       this.record.set(record);
       this.formSeed.set(record);
+      await this.loadProjectData();
     } catch (e) {
       this.notify.error(e);
       this.back();
@@ -99,20 +102,42 @@ export class KnowledgeFormComponent {
     return this.projects().some((p) => p.id === id);
   }
 
-  async loadModules(): Promise<void> {
-    this.modules.set(this.project ? await firstValueFrom(this.api.modules(this.project)) : []);
+  /** Módulos, registros relacionables y código sugerido del proyecto elegido. */
+  async loadProjectData(): Promise<void> {
+    const def = this.definition();
+    if (!this.project || !def) {
+      this.modules.set([]);
+      this.refOptions.set({});
+      this.codePreview.set(null);
+      return;
+    }
+    const project = this.project;
+    const refTypes = [...new Set(def.fields.filter((f) => f.refType).map((f) => f.refType!))];
+    try {
+      const [modules, options, next] = await Promise.all([
+        firstValueFrom(this.api.modules(project)),
+        Promise.all(refTypes.map((t) => firstValueFrom(this.api.recordOptions(t, project)))),
+        this.isNew() ? firstValueFrom(this.api.nextCode(def.type, project)) : Promise.resolve(null),
+      ]);
+      if (project !== this.project) return; // el usuario cambió de proyecto mientras cargaba
+      this.modules.set(modules);
+      this.refOptions.set(Object.fromEntries(refTypes.map((t, i) => [t, options[i]])) as Partial<Record<EntityType, never>>);
+      this.codePreview.set(next?.code ?? null);
+    } catch (e) {
+      this.notify.error(e);
+    }
   }
 
   async onProjectChange(): Promise<void> {
     this.module = '';
-    await this.loadModules();
+    await this.loadProjectData();
   }
 
   back(): void {
     this.router.navigate(['/conocimiento', this.type()]);
   }
 
-  async save(another = false): Promise<void> {
+  async save(): Promise<void> {
     const form = this.recordForm();
     if (!form) return;
     const scope: Record<string, string> = {};
@@ -132,26 +157,19 @@ export class KnowledgeFormComponent {
         id ? this.api.updateRecord(this.type(), id, body) : this.api.createRecord(this.type(), body),
       );
       const label = this.definition()!.label;
+      const action = id ? 'actualizado' : 'registrado';
       if (res.warnings.length) {
-        this.notify.warn(`${label} guardado con observaciones: ${res.warnings.map((w) => w.message).join(' ')}`);
+        this.notify.warn(`${label} ${res.record['code']} ${action} con observaciones: ${res.warnings.map((w) => w.message).join(' ')}`);
       } else {
-        this.notify.success(`${label} ${res.record['code']} guardado.`);
+        this.notify.success(`${label} ${res.record['code']} ${action}.`);
       }
-      if (another) {
-        this.formSeed.set({});
-        window.scrollTo({ top: 0 });
-      } else if (id) {
-        this.record.set(res.record);
-        this.formSeed.set(res.record);
-        this.warnings.set(res.warnings);
-      } else {
-        this.router.navigate(['/conocimiento', this.type(), res.record.id]);
-      }
+      this.back();
     } catch (e) {
       const errors = fieldErrors(e);
       form.applyServerErrors(errors);
-      const scopeErr = Object.fromEntries(errors.filter((x) => x.field === 'project' || x.field === 'module').map((x) => [x.field!, x.message]));
-      this.scopeErrors.set(scopeErr);
+      this.scopeErrors.set(
+        Object.fromEntries(errors.filter((x) => x.field === 'project' || x.field === 'module').map((x) => [x.field!, x.message])),
+      );
       this.notify.error(e);
     } finally {
       this.saving.set(false);

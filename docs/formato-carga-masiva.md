@@ -1,4 +1,4 @@
-# Formato de archivos para la carga masiva (propuesta v1)
+# Formato de archivos para la carga masiva (v2)
 
 Las plantillas con ejemplos se descargan desde **Carga masiva → Plantillas**. Este documento describe las reglas
 que sigue el sistema al leerlas.
@@ -8,10 +8,17 @@ que sigue el sistema al leerlas.
 - El **proyecto** se elige al cargar. La columna **Módulo** es opcional; si se deja vacía, se usa el módulo
   predeterminado del lote. Si indica un módulo que no existe en el catálogo, la fila queda con error hasta que se
   corrija.
-- Los **códigos** identifican cada registro y son únicos dentro del proyecto. Se guardan en mayúsculas y sin
-  espacios. Se sugieren los prefijos `REQ-`, `RN-`, `CP-` y `DEF-`.
-- Las **relaciones** se indican con códigos. Si son varios, se separan con `;` (por ejemplo, `REQ-001;REQ-002`). Si un
-  código no existe ni en el proyecto ni en el lote, se muestra una advertencia, pero el registro se puede guardar.
+- **Códigos:** los asigna el sistema al confirmar la carga, con un correlativo por proyecto y tipo: `REQ-001`,
+  `RN-001`, `CP-001`, `DEF-001`, etc. El usuario no los escribe.
+- **Referencia:** es una columna temporal (por ejemplo `REQ1`, `RN1`, `CP1`) que solo sirve para relacionar
+  registros del mismo lote. Es opcional, pero debe ser única por tipo dentro del lote. Hace falta si otro registro o un
+  paso apunta a ella. Se guarda en mayúsculas.
+- **Relaciones:** se indican con referencias del lote o con códigos de registros ya guardados en el proyecto
+  (por ejemplo `REQ1; REQ-003`). Si son varias, se separan con `;`. Al confirmar, las referencias se reemplazan por los
+  códigos asignados. Si un valor no está en el lote ni en el proyecto, se muestra una advertencia y ese valor se descarta
+  al guardar.
+- La carga masiva **solo crea registros nuevos**. Los registros ya guardados se corrigen desde su formulario.
+- **Fechas:** si una fecha se deja vacía, queda vacía. En la carga masiva no se completa con la fecha de hoy.
 - En las **listas** (criterios de aceptación) los valores se separan con `;` o con saltos de línea.
 - Las **fechas** se escriben como `AAAA-MM-DD` o `DD/MM/AAAA`. También se aceptan celdas de fecha de Excel.
 - Los **valores de lista cerrada** no distinguen mayúsculas ni tildes (`validacion` se reconoce como `Validación`).
@@ -25,11 +32,10 @@ que sigue el sistema al leerlas.
 ### Requerimientos (hoja `Requerimientos`)
 | Columna | Tipo | Valores |
 |---|---|---|
-| Código * | texto | p. ej. REQ-001 |
+| Referencia | texto | p. ej. REQ1 (temporal) |
 | Módulo | texto | nombre del módulo/flujo |
 | Título * | texto | |
 | Descripción * | texto largo | |
-| Tipo | lista | Funcional, No funcional |
 | Prioridad | lista | Alta, Media, Baja |
 | Criterios de aceptación | lista | separados por `;` |
 | Versión | texto | |
@@ -39,7 +45,7 @@ que sigue el sistema al leerlas.
 ### Reglas de negocio (hoja `ReglasNegocio`)
 | Columna | Tipo | Valores |
 |---|---|---|
-| Código * | texto | p. ej. RN-001 |
+| Referencia | texto | p. ej. RN1 (temporal) |
 | Módulo | texto | |
 | Nombre * | texto | |
 | Descripción * | texto largo | |
@@ -48,16 +54,16 @@ que sigue el sistema al leerlas.
 | Acción / Resultado | texto largo | "Entonces…" |
 | Excepciones | texto largo | |
 | Criticidad | lista | Alta, Media, Baja |
-| Requerimientos relacionados | códigos | REQ-001;REQ-002 |
+| Requerimientos relacionados | varios | REQ1; REQ-002 |
 
 ### Casos de prueba (hoja `CasosPrueba`)
 | Columna | Tipo | Valores |
 |---|---|---|
-| Código * | texto | p. ej. CP-001 |
+| Referencia | texto | p. ej. CP1 (temporal) |
 | Módulo | texto | |
 | Título * | texto | |
-| Requerimiento * | código | REQ-001 |
-| Reglas de negocio | códigos | RN-001;RN-003 |
+| Requerimientos | varios | REQ1; REQ2 |
+| Reglas de negocio | varios | RN1; RN-003 |
 | Tipo de escenario * | lista | Positivo, Negativo, Valor límite, Excepción |
 | Técnica de diseño | lista | Partición de equivalencia, Análisis de valores límite, Tabla de decisión, Transición de estados, Casos de uso, Conjetura de errores, Otra |
 | Prioridad | lista | Alta, Media, Baja |
@@ -68,29 +74,29 @@ que sigue el sistema al leerlas.
 | Estado de ejecución * | lista | Exitoso, Fallido, Bloqueado, No ejecutado |
 | Fecha de ejecución | fecha | |
 | Ejecutado por | texto | |
-| Defecto asociado | código | DEF-001 |
+| Defectos asociados | varios | DEF1 |
 
 **Pasos** (obligatorio, al menos uno). Van en la hoja `PasosCasoPrueba`:
 
-| Código caso * | N° paso * | Acción * | Resultado esperado * |
+| Referencia caso * | N° paso * | Acción * | Resultado esperado * |
 |---|---|---|---|
-| CP-001 | 1 | Ingresar a la tienda del juego | Se listan los paquetes de gemas |
+| CP1 | 1 | Ingresar a la tienda del juego | Se listan los paquetes de gemas |
 
-Los pasos se ordenan por su número y se enlazan con el caso por su código. El caso puede estar en otro archivo del
-mismo lote.
+Los pasos se ordenan por su número y se enlazan con el caso por su referencia. El caso puede estar en otro archivo
+del mismo lote.
 
 ### Defectos (hoja `Defectos`)
 | Columna | Tipo | Valores |
 |---|---|---|
-| Código * | texto | p. ej. DEF-001 |
+| Referencia | texto | p. ej. DEF1 (temporal) |
 | Módulo | texto | |
 | Título * | texto | |
 | Descripción * | texto largo | |
 | Pasos para reproducir | texto largo | |
 | Severidad * | lista | Crítica, Alta, Media, Baja |
 | Estado * | lista | Abierto, En progreso, Resuelto, Cerrado, Rechazado |
-| Caso de prueba | código | CP-002 |
-| Requerimiento | código | REQ-002 |
+| Casos de prueba | varios | CP2 |
+| Requerimientos | varios | REQ2 |
 | Fecha de reporte | fecha | |
 | Reportado por | texto | |
 
@@ -112,7 +118,7 @@ Cada registro es una **tabla de dos columnas** (*Campo | Valor*):
 
 | Tipo | Caso de prueba |
 |---|---|
-| Código * | CP-001 |
+| Referencia | CP1 |
 | Título * | Compra exitosa de paquete de 500 gemas |
 | … | … |
 

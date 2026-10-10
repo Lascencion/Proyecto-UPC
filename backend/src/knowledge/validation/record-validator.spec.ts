@@ -19,18 +19,19 @@ describe('validateRecord', () => {
   });
 
   it('reporta obligatorios y valores no permitidos', () => {
-    const r = validateRecord(TEST_CASE_DEFINITION, { code: 'CP-1', scenarioType: 'Feliz' });
-    const fields = r.errors.map((e) => e.field);
-    expect(fields).toEqual(
-      expect.arrayContaining(['title', 'requirement', 'scenarioType', 'steps', 'expectedResult', 'executionStatus']),
+    const r = validateRecord(TEST_CASE_DEFINITION, { scenarioType: 'Feliz', requirements: 'req1; REQ-002' });
+    expect(r.errors.map((e) => e.field).sort()).toEqual(
+      ['executionStatus', 'expectedResult', 'scenarioType', 'steps', 'title'].sort(),
     );
+    // El código lo asigna el sistema y los requerimientos son opcionales y múltiples.
+    expect(r.value.requirements).toEqual(['REQ1', 'REQ-002']);
   });
 
   it('valida y renumera pasos', () => {
     const r = validateRecord(TEST_CASE_DEFINITION, {
       code: 'CP-001',
       title: 't',
-      requirement: 'REQ-001',
+      requirements: ['REQ-001'],
       scenarioType: 'Positivo',
       expectedResult: 'ok',
       executionStatus: 'Exitoso',
@@ -47,11 +48,6 @@ describe('validateRecord', () => {
     ]);
   });
 
-  it('advierte si el código no usa el prefijo sugerido', () => {
-    const r = validateRecord(BUSINESS_RULE_DEFINITION, { code: 'X-1', name: 'n', description: 'd' });
-    expect(r.errors).toEqual([]);
-    expect(r.warnings[0].field).toBe('code');
-  });
 });
 
 describe('utilidades', () => {

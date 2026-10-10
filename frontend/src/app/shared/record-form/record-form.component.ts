@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -15,12 +15,27 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { EntityDefinition, FieldDefinition, FieldIssue, TestStep } from '../../core/models';
+import { NgTemplateOutlet } from '@angular/common';
+import { EntityDefinition, FieldDefinition, FieldIssue, RecordOption, RefOptions, TestStep } from '../../core/models';
 
 type StepGroup = FormGroup<{ action: FormControl<string>; expectedResult: FormControl<string> }>;
 
+/**
+ * - `manual`: registro individual. El código lo asigna el sistema (solo lectura) y
+ *   los registros relacionados se eligen de listas.
+ * - `bulk`: corrección de una fila de carga masiva. El código es la referencia
+ *   temporal del archivo y las relaciones se escriben como referencias o códigos.
+ */
+export type RecordFormMode = 'manual' | 'bulk';
+
 const atLeastOneStep = (control: AbstractControl): ValidationErrors | null =>
   (control as FormArray).length > 0 ? null : { required: true };
+
+const normalize = (text: string) =>
+  text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase();
 
 /**
  * Formulario dinámico generado desde la definición del tipo de información.
@@ -29,6 +44,7 @@ const atLeastOneStep = (control: AbstractControl): ValidationErrors | null =>
 @Component({
   selector: 'app-record-form',
   imports: [
+    NgTemplateOutlet,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -45,12 +61,20 @@ export class RecordFormComponent {
   readonly definition = input.required<EntityDefinition>();
   readonly value = input<Record<string, unknown> | null>(null);
   readonly readonly = input(false);
+  readonly mode = input<RecordFormMode>('manual');
+  /** Registros existentes del proyecto para las listas de selección. */
+  readonly refOptions = input<RefOptions>({});
+  /** Código a mostrar en un registro nuevo (el que asignará el sistema). */
+  readonly codePreview = input<string | null>(null);
 
   readonly fields = computed(() => this.definition().fields);
 
+  /** Texto de búsqueda de cada lista de selección. */
+  readonly filters = signal<Record<string, string>>({});
+
   /** El formulario se reconstruye cuando cambia la definición o el valor de entrada. */
   private readonly formState = computed(() => {
-    const form = this.build(this.definition(), this.value());
+    const form = this.build(this.definition(), this.value(), this.mode());
     if (this.readonly()) form.disable();
     return form;
   });
@@ -71,7 +95,49 @@ export class RecordFormComponent {
     return this.form.get(key) as FormArray<StepGroup>;
   }
 
-  private build(def: EntityDefinition, value: Record<string, unknown> | null): FormGroup<Record<string, AbstractControl>> {
+  codeText(): string {
+    const code = this.value()?.['code'];
+    if (code) return String(code);
+    return this.codePreview() ? `${this.codePreview()} (se asigna al guardar)` : 'Se asigna al guardar';
+  }
+
+  // ----- Listas de registros relacionados -----
+
+  options(field: FieldDefinition): RecordOption[] {
+    const available = this.refOptions()[field.refType!] ?? [];
+    // Conserva como opción los valores ya guardados que no están en la lista (p. ej. eliminados).
+    const selected = this.selectedCodes(field).filter((c) => !available.some((o) => o.code === c));
+    return [...available, ...selected.map((code) => ({ code, title: '(no registrado)' }))];
+  }
+
+  private selectedCodes(field: FieldDefinition): string[] {
+    const v = this.form.get(field.key)?.value;
+    return Array.isArray(v) ? v : v ? [v] : [];
+  }
+
+  matches(field: FieldDefinition, option: RecordOption): boolean {
+    const text = normalize(this.filters()[field.key] ?? '');
+    return !text || normalize(`${option.code} ${option.title}`).includes(text);
+  }
+
+  setFilter(key: string, text: string): void {
+    this.filters.update((f) => ({ ...f, [key]: text }));
+  }
+
+  /** Texto del campo cerrado: los códigos elegidos (o código y título si es uno solo). */
+  triggerText(field: FieldDefinition): string {
+    const codes = this.selectedCodes(field);
+    return codes.length === 1 ? this.optionLabel(field, codes[0]) : codes.join(', ');
+  }
+
+  optionLabel(field: FieldDefinition, code: string): string {
+    const option = this.options(field).find((o) => o.code === code);
+    return option ? `${option.code} · ${option.title}` : code;
+  }
+
+  // ----- Construcción y valores -----
+
+  private build(def: EntityDefinition, value: Record<string, unknown> | null, mode: RecordFormMode) {
     const controls: Record<string, AbstractControl> = {};
     for (const field of def.fields) {
       const raw = value?.[field.key];
@@ -83,7 +149,8 @@ export class RecordFormComponent {
         );
         continue;
       }
-      controls[field.key] = new FormControl(this.toControlValue(field, raw), field.required ? Validators.required : null);
+      if (field.type === 'code' && mode === 'manual') continue; // se muestra aparte, no se envía
+      controls[field.key] = new FormControl(this.toControlValue(field, raw, mode), field.required ? Validators.required : null);
     }
     return new FormGroup(controls);
   }
@@ -95,19 +162,21 @@ export class RecordFormComponent {
     });
   }
 
-  private toControlValue(field: FieldDefinition, raw: unknown): string {
-    if (raw === null || raw === undefined) return '';
+  private toControlValue(field: FieldDefinition, raw: unknown, mode: RecordFormMode): unknown {
+    const list = Array.isArray(raw) ? raw.map(String) : raw ? String(raw).split(/[;\n]+/).map((x) => x.trim()).filter(Boolean) : [];
     switch (field.type) {
       case 'list':
-        return Array.isArray(raw) ? raw.join('\n') : String(raw);
+        return list.join('\n');
       case 'refList':
-        return Array.isArray(raw) ? raw.join('; ') : String(raw);
+        return mode === 'manual' ? list : list.join('; ');
+      case 'ref':
+        return mode === 'manual' ? (list[0] ?? null) : (list[0] ?? '');
       case 'date': {
-        const m = /^(\d{4}-\d{2}-\d{2})/.exec(String(raw));
+        const m = /^(\d{4}-\d{2}-\d{2})/.exec(String(raw ?? ''));
         return m ? m[1] : ''; // fechas no válidas quedan vacías para volver a elegirlas
       }
       default:
-        return String(raw);
+        return raw === null || raw === undefined ? '' : String(raw);
     }
   }
 
@@ -143,6 +212,7 @@ export class RecordFormComponent {
     const raw = this.form.getRawValue() as Record<string, unknown>;
     const out: Record<string, unknown> = {};
     for (const field of this.definition().fields) {
+      if (!(field.key in raw)) continue;
       const v = raw[field.key];
       if (field.type === 'steps') {
         out[field.key] = ((v as TestStep[]) ?? []).map((s, i) => ({ ...s, number: i + 1 }));
@@ -151,8 +221,10 @@ export class RecordFormComponent {
           .split('\n')
           .map((x) => x.trim())
           .filter(Boolean);
+      } else if (Array.isArray(v)) {
+        out[field.key] = v;
       } else {
-        out[field.key] = typeof v === 'string' ? v.trim() || null : v;
+        out[field.key] = typeof v === 'string' ? v.trim() || null : (v ?? null);
       }
     }
     return out;

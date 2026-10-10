@@ -22,8 +22,8 @@
   @if (b.status === 'CONFIRMADO' && b.result) {
     <div class="success-box">
       Carga confirmada por {{ b.confirmedBy?.name }} el {{ b.confirmedAt | date: 'dd/MM/yyyy HH:mm' }}:
-      <strong>{{ b.result.created }}</strong> creados, <strong>{{ b.result.updated }}</strong> actualizados,
-      <strong>{{ b.result.skipped }}</strong> omitidos@if (b.result.failed) {, <strong class="error-text">{{ b.result.failed }} con falla</strong>}.
+      <strong>{{ b.result.created }}</strong> registros creados@if (b.result.failed) {, <strong class="error-text">{{ b.result.failed }} con falla</strong>}.
+      La columna "Código asignado" muestra el código definitivo de cada registro.
     </div>
   }
   @if (b.status === 'CANCELADO') {
@@ -47,7 +47,6 @@
       <button class="chip excluded" [class.selected]="statusFilter() === 'excluded'" (click)="setStatusFilter('excluded')">
         <span class="n">{{ b.summary['excluded'] }}</span> Excluidas
       </button>
-      <span class="chip static"><span class="n">{{ b.summary['duplicates'] }}</span> Códigos ya existentes</span>
     </section>
   }
 
@@ -77,16 +76,6 @@
           }
         </mat-select>
       </mat-form-field>
-      @if (editable() && b.summary['duplicates']) {
-        <div class="dup">
-          <span>Códigos existentes:</span>
-          <mat-button-toggle-group [value]="b.duplicateStrategy" (change)="setStrategy($event.value)" [disabled]="busy()"
-            hideSingleSelectionIndicator>
-            <mat-button-toggle value="skip">Omitir todos</mat-button-toggle>
-            <mat-button-toggle value="update">Actualizar todos</mat-button-toggle>
-          </mat-button-toggle-group>
-        </div>
-      }
     </section>
 
     <div class="table-wrapper">
@@ -102,9 +91,13 @@
           <th mat-header-cell *matHeaderCellDef>Tipo</th>
           <td mat-cell *matCellDef="let r" class="nowrap">{{ definitionOf(r.type)?.label }}</td>
         </ng-container>
-        <ng-container matColumnDef="code">
-          <th mat-header-cell *matHeaderCellDef>Código</th>
-          <td mat-cell *matCellDef="let r" class="code-cell">{{ r.data.code || '—' }}</td>
+        <ng-container matColumnDef="reference">
+          <th mat-header-cell *matHeaderCellDef matTooltip="Referencia temporal del archivo">Referencia</th>
+          <td mat-cell *matCellDef="let r" class="nowrap">{{ r.data.code || '—' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="finalCode">
+          <th mat-header-cell *matHeaderCellDef>Código asignado</th>
+          <td mat-cell *matCellDef="let r" class="code-cell">{{ r.finalCode || '—' }}</td>
         </ng-container>
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>Título / nombre</th>
@@ -112,7 +105,7 @@
         </ng-container>
         <ng-container matColumnDef="module">
           <th mat-header-cell *matHeaderCellDef>Módulo</th>
-          <td mat-cell *matCellDef="let r" [class.error-text]="!r.module && r.moduleName">{{ moduleLabel(r) }}</td>
+          <td mat-cell *matCellDef="let r" class="module-cell" [class.error-text]="!r.module && r.moduleName">{{ moduleLabel(r) }}</td>
         </ng-container>
         <ng-container matColumnDef="source">
           <th mat-header-cell *matHeaderCellDef>Ubicación</th>
@@ -136,18 +129,6 @@
             }
             @if (r.resultMessage) {
               <div class="error-text">• {{ r.resultMessage }}</div>
-            }
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="duplicate">
-          <th mat-header-cell *matHeaderCellDef>Si existe</th>
-          <td mat-cell *matCellDef="let r">
-            @if (r.duplicateOf && !r.excluded) {
-              <mat-select class="dup-select" [value]="r.duplicateAction" (selectionChange)="setRowDuplicate(r, $event.value)"
-                [disabled]="busy()" aria-label="Acción para código existente">
-                <mat-option value="skip">Omitir</mat-option>
-                <mat-option value="update">Actualizar</mat-option>
-              </mat-select>
             }
           </td>
         </ng-container>

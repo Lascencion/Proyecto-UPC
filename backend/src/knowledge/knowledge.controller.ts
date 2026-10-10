@@ -25,6 +25,18 @@ export class KnowledgeController {
     return this.knowledge.summary(project);
   }
 
+  @Get(':type/next-code')
+  @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
+  nextCode(@Param('type') type: string, @Query('project') project: string) {
+    return this.knowledge.nextCode(type, project);
+  }
+
+  @Get(':type/options')
+  @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
+  options(@Param('type') type: string, @Query('project') project: string) {
+    return this.knowledge.options(type, project);
+  }
+
   @Get(':type')
   @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
   list(@Param('type') type: string, @Query() query: ListQuery) {

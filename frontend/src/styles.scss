@@ -239,3 +239,8 @@ button.danger {
 .snack-error {
   --mat-snack-bar-container-color: #8c1d18;
 }
+
+/* Opciones ocultas por el buscador de las listas (se conservan para mostrar lo seleccionado) */
+.mat-mdc-option.hidden-option {
+  display: none;
+}

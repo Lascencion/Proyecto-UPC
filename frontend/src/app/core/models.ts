@@ -96,8 +96,14 @@ export interface FlowModule extends Project {
   project: string;
 }
 
+export interface RecordOption {
+  code: string;
+  title: string;
+}
+
+export type RefOptions = Partial<Record<EntityType, RecordOption[]>>;
+
 export type BatchStatus = 'EN_REVISION' | 'CONFIRMADO' | 'CANCELADO';
-export type DuplicateAction = 'skip' | 'update';
 export type RowStatus = 'valid' | 'warning' | 'error' | 'excluded';
 
 export interface ImportBatch {
@@ -106,10 +112,9 @@ export interface ImportBatch {
   defaultModule?: NamedRef;
   files: { name: string; size: number }[];
   status: BatchStatus;
-  duplicateStrategy: DuplicateAction;
   issues: FieldIssue[];
   summary: Record<string, number>;
-  result?: { created: number; updated: number; skipped: number; failed: number };
+  result?: { created: number; failed: number };
   createdBy: NamedRef;
   confirmedBy?: NamedRef;
   confirmedAt?: string;
@@ -128,9 +133,9 @@ export interface ImportRow {
   fieldErrors: FieldIssue[];
   fieldWarnings: FieldIssue[];
   excluded: boolean;
-  duplicateOf: string | null;
-  duplicateAction: DuplicateAction;
-  result?: 'created' | 'updated' | 'skipped' | 'failed';
+  /** Código definitivo asignado al confirmar el lote. */
+  finalCode?: string;
+  result?: 'created' | 'failed';
   resultMessage?: string;
 }
 

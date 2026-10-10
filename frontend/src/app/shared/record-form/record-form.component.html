@@ -93,11 +93,41 @@
             <mat-error>{{ errorText(field) }}</mat-error>
           </mat-form-field>
         }
+        @case ('code') {
+          @if (mode() === 'manual') {
+            <mat-form-field appearance="outline">
+              <mat-label>{{ field.label }}</mat-label>
+              <input matInput [value]="codeText()" readonly disabled class="code-input" />
+              <mat-icon matSuffix matTooltip="El código lo asigna el sistema">lock</mat-icon>
+            </mat-form-field>
+          } @else {
+            <mat-form-field appearance="outline">
+              <mat-label>Referencia en el archivo</mat-label>
+              <input matInput [formControl]="control(field.key)" class="uppercase" />
+              <mat-hint>Temporal; el sistema asigna el código definitivo al confirmar.</mat-hint>
+              <mat-error>{{ errorText(field) }}</mat-error>
+            </mat-form-field>
+          }
+        }
+        @case ('refList') {
+          @if (mode() === 'manual') {
+            <ng-container *ngTemplateOutlet="refSelect; context: { $implicit: field, multiple: true }" />
+          } @else {
+            <ng-container *ngTemplateOutlet="refText; context: { $implicit: field }" />
+          }
+        }
+        @case ('ref') {
+          @if (mode() === 'manual') {
+            <ng-container *ngTemplateOutlet="refSelect; context: { $implicit: field, multiple: false }" />
+          } @else {
+            <ng-container *ngTemplateOutlet="refText; context: { $implicit: field }" />
+          }
+        }
         @default {
           <mat-form-field appearance="outline">
             <mat-label>{{ field.label }}</mat-label>
             <input matInput [formControl]="control(field.key)" [required]="!!field.required"
-              [class.uppercase]="field.type === 'code' || field.type === 'ref' || field.type === 'refList'" />
+              />
             @if (field.help) {
               <mat-hint>{{ field.help }}</mat-hint>
             }
@@ -108,3 +138,45 @@
     </div>
   }
 </form>
+
+<!-- Lista de registros existentes del proyecto, con buscador -->
+<ng-template #refSelect let-field let-multiple="multiple">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ field.label }}</mat-label>
+    <mat-select [formControl]="control(field.key)" [multiple]="multiple" (openedChange)="!$event && setFilter(field.key, '')"
+      [placeholder]="options(field).length ? 'Seleccione' : 'No hay registros en el proyecto'">
+      <mat-select-trigger>
+        {{ triggerText(field) }}
+      </mat-select-trigger>
+      <div class="select-search">
+        <mat-icon>search</mat-icon>
+        <input placeholder="Buscar por código o título" [value]="filters()[field.key] || ''"
+          (input)="setFilter(field.key, $any($event.target).value)" (keydown)="$event.stopPropagation()" />
+      </div>
+      @if (!multiple) {
+        <mat-option [value]="null">— Ninguno —</mat-option>
+      }
+      @for (option of options(field); track option.code) {
+        <mat-option [value]="option.code" [class.hidden-option]="!matches(field, option)">
+          <strong>{{ option.code }}</strong> · {{ option.title }}
+        </mat-option>
+      } @empty {
+        <mat-option disabled>No hay registros en el proyecto.</mat-option>
+      }
+    </mat-select>
+    @if (field.help) {
+      <mat-hint>{{ field.help }} Opcional.</mat-hint>
+    }
+    <mat-error>{{ errorText(field) }}</mat-error>
+  </mat-form-field>
+</ng-template>
+
+<!-- En la carga masiva las relaciones son referencias del archivo o códigos registrados -->
+<ng-template #refText let-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ field.label }}</mat-label>
+    <input matInput [formControl]="control(field.key)" class="uppercase" />
+    <mat-hint>Referencias del archivo o códigos registrados, separados por ";".</mat-hint>
+    <mat-error>{{ errorText(field) }}</mat-error>
+  </mat-form-field>
+</ng-template>

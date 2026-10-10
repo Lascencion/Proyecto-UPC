@@ -3,7 +3,6 @@ import { Component, computed, effect, inject, input, signal, untracked } from '@
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -17,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ApiService } from '../../core/api.service';
-import { DuplicateAction, FlowModule, ImportBatch, ImportDetail, ImportRow, RowStatus } from '../../core/models';
+import { FlowModule, ImportBatch, ImportDetail, ImportRow, RowStatus } from '../../core/models';
 import { NotifyService } from '../../core/notify.service';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog.component';
 import { BATCH_STATUS_LABELS, ROW_RESULT_LABELS, ROW_STATUS_LABELS } from '../../shared/display';
@@ -31,7 +30,6 @@ import { RowEditDialogComponent, RowEditData } from './row-edit-dialog.component
     DatePipe,
     MatCardModule,
     MatButtonModule,
-    MatButtonToggleModule,
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
@@ -72,13 +70,14 @@ export class ImportReviewComponent {
   readonly columns = computed(() => [
     'index',
     'type',
-    'code',
+    'reference',
+    ...(this.editable() ? [] : ['finalCode']),
     'title',
     'module',
     'source',
     'status',
     'issues',
-    ...(this.editable() ? ['duplicate', 'actions'] : ['result']),
+    ...(this.editable() ? ['actions'] : ['result']),
   ]);
 
   readonly filteredRows = computed(() => {
@@ -181,27 +180,17 @@ export class ImportReviewComponent {
     this.run(() => firstValueFrom(this.api.updateImportRow(this.id(), row.id, { excluded: !row.excluded })));
   }
 
-  setRowDuplicate(row: ImportRow, action: DuplicateAction): void {
-    this.run(() => firstValueFrom(this.api.updateImportRow(this.id(), row.id, { duplicateAction: action })));
-  }
-
-  setStrategy(strategy: DuplicateAction): void {
-    this.run(() => firstValueFrom(this.api.setDuplicateStrategy(this.id(), strategy)), 'Acción aplicada a todos los duplicados.');
-  }
-
   async confirm(): Promise<void> {
     const detail = this.detail()!;
     const active = detail.rows.filter((r) => !r.excluded);
-    const updates = active.filter((r) => r.duplicateOf && r.duplicateAction === 'update').length;
-    const skips = active.filter((r) => r.duplicateOf && r.duplicateAction === 'skip').length;
-    const creates = active.length - updates - skips;
     const ok = await firstValueFrom(
       this.dialog
         .open(ConfirmDialogComponent, {
           data: {
             title: 'Confirmar carga',
             message:
-              `Se guardará en la base de conocimiento:\n• ${creates} registro(s) nuevo(s)\n• ${updates} registro(s) actualizado(s)\n• ${skips} omitido(s) por código existente` +
+              `Se registrarán ${active.length} registro(s) en la base de conocimiento. ` +
+              'El sistema asignará a cada uno su código definitivo y actualizará las relaciones entre ellos.' +
               (detail.batch.summary['excluded'] ? `\n• ${detail.batch.summary['excluded']} fila(s) excluida(s) no se guardarán` : ''),
             confirmText: 'Guardar',
           },

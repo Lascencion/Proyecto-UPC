@@ -34,13 +34,6 @@
         </mat-select>
         <mat-hint>Se usa en las filas que no indiquen la columna "Módulo".</mat-hint>
       </mat-form-field>
-      <div class="dup">
-        <label>Si un código ya existe en el proyecto:</label>
-        <mat-button-toggle-group [(ngModel)]="duplicateStrategy" hideSingleSelectionIndicator>
-          <mat-button-toggle value="skip">Omitir</mat-button-toggle>
-          <mat-button-toggle value="update">Actualizar</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
     </mat-card-content>
 
     <mat-card-header>
@@ -109,7 +102,8 @@
           <ul class="rules">
             <li>No cambie los nombres de hojas, archivos CSV ni encabezados.</li>
             <li>Los campos con * son obligatorios.</li>
-            <li>Relacione registros por código (p. ej. REQ-001). Varios códigos se separan con ";".</li>
+            <li>La columna "Referencia" es temporal (p. ej. REQ1): relaciona registros del mismo lote. El sistema asigna los códigos definitivos (REQ-001…) al confirmar.</li>
+            <li>Para relacionar con registros ya guardados use su código (p. ej. REQ-001). Varios valores se separan con ";".</li>
             <li>Los pasos de los casos van en la hoja/archivo "PasosCasoPrueba" (en Word, en una tabla bajo el caso).</li>
             <li>Fechas en formato AAAA-MM-DD o DD/MM/AAAA.</li>
             <li>Los CSV pueden usar ";" o "," como separador y deben estar en UTF-8.</li>
@@ -143,7 +137,7 @@
           <span class="tag" data-value="Fallido">{{ b.summary.error }} con error</span>
         }
         @if (b.result) {
-          <small class="muted">({{ b.result.created }} creados, {{ b.result.updated }} actualizados, {{ b.result.skipped }} omitidos)</small>
+          <small class="muted">({{ b.result.created }} creados)</small>
         }
       </td>
     </ng-container>

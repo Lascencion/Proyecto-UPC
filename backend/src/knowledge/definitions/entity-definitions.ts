@@ -7,7 +7,7 @@
 export type EntityType = 'requirements' | 'business-rules' | 'test-cases' | 'defects';
 
 export type FieldType =
-  | 'code' // código único dentro del proyecto (p. ej. REQ-001)
+  | 'code' // código único dentro del proyecto, asignado por el sistema (p. ej. REQ-001)
   | 'string' // texto corto
   | 'text' // texto largo
   | 'enum' // valor de una lista cerrada
@@ -60,10 +60,9 @@ export const REQUIREMENT_DEFINITION: EntityDefinition = {
   sheetName: 'Requerimientos',
   wordTypeLabel: 'Requerimiento',
   fields: [
-    { key: 'code', label: 'Código', type: 'code', required: true, help: 'Ej.: REQ-001', listColumn: true },
+    { key: 'code', label: 'Código', type: 'code', help: 'Lo asigna el sistema al guardar.', listColumn: true },
     { key: 'title', label: 'Título', type: 'string', required: true, listColumn: true },
     { key: 'description', label: 'Descripción', type: 'text', required: true, help: 'Qué debe hacer el sistema. Puede usar el formato "Como… quiero… para…".' },
-    { key: 'type', label: 'Tipo', type: 'enum', options: ['Funcional', 'No funcional'], listColumn: true },
     { key: 'priority', label: 'Prioridad', type: 'enum', options: PRIORITY, listColumn: true },
     { key: 'acceptanceCriteria', label: 'Criterios de aceptación', type: 'list', help: 'Uno por línea (en archivos, separados por ";").', aliases: ['Criterios'] },
     { key: 'version', label: 'Versión', type: 'string' },
@@ -83,7 +82,7 @@ export const BUSINESS_RULE_DEFINITION: EntityDefinition = {
   sheetName: 'ReglasNegocio',
   wordTypeLabel: 'Regla de negocio',
   fields: [
-    { key: 'code', label: 'Código', type: 'code', required: true, help: 'Ej.: RN-001', listColumn: true },
+    { key: 'code', label: 'Código', type: 'code', help: 'Lo asigna el sistema al guardar.', listColumn: true },
     { key: 'name', label: 'Nombre', type: 'string', required: true, listColumn: true },
     { key: 'description', label: 'Descripción', type: 'text', required: true },
     {
@@ -102,7 +101,7 @@ export const BUSINESS_RULE_DEFINITION: EntityDefinition = {
       label: 'Requerimientos relacionados',
       type: 'refList',
       refType: 'requirements',
-      help: 'Códigos separados por ";". Ej.: REQ-001;REQ-002',
+      help: 'Requerimientos a los que aplica la regla.',
       listColumn: true,
     },
   ],
@@ -119,16 +118,15 @@ export const TEST_CASE_DEFINITION: EntityDefinition = {
   sheetName: 'CasosPrueba',
   wordTypeLabel: 'Caso de prueba',
   fields: [
-    { key: 'code', label: 'Código', type: 'code', required: true, help: 'Ej.: CP-001', listColumn: true },
+    { key: 'code', label: 'Código', type: 'code', help: 'Lo asigna el sistema al guardar.', listColumn: true },
     { key: 'title', label: 'Título', type: 'string', required: true, listColumn: true },
     {
-      key: 'requirement',
-      label: 'Requerimiento',
-      type: 'ref',
+      key: 'requirements',
+      label: 'Requerimientos',
+      type: 'refList',
       refType: 'requirements',
-      required: true,
-      help: 'Código del requerimiento que valida. Ej.: REQ-001',
-      aliases: ['Requerimiento relacionado'],
+      help: 'Requerimientos que valida el caso.',
+      aliases: ['Requerimiento', 'Requerimiento relacionado', 'Requerimientos relacionados'],
       listColumn: true,
     },
     {
@@ -136,8 +134,8 @@ export const TEST_CASE_DEFINITION: EntityDefinition = {
       label: 'Reglas de negocio',
       type: 'refList',
       refType: 'business-rules',
-      help: 'Códigos separados por ";". Ej.: RN-001;RN-003',
-      aliases: ['Reglas relacionadas'],
+      help: 'Reglas de negocio que cubre el caso.',
+      aliases: ['Reglas relacionadas', 'Regla de negocio'],
     },
     {
       key: 'scenarioType',
@@ -179,12 +177,12 @@ export const TEST_CASE_DEFINITION: EntityDefinition = {
     { key: 'executionDate', label: 'Fecha de ejecución', type: 'date' },
     { key: 'executedBy', label: 'Ejecutado por', type: 'string' },
     {
-      key: 'defect',
-      label: 'Defecto asociado',
-      type: 'ref',
+      key: 'defects',
+      label: 'Defectos asociados',
+      type: 'refList',
       refType: 'defects',
-      help: 'Código del defecto, si la ejecución falló. Ej.: DEF-001',
-      aliases: ['Defecto'],
+      help: 'Defectos reportados en la ejecución, si falló.',
+      aliases: ['Defecto asociado', 'Defecto', 'Defectos'],
     },
   ],
 };
@@ -200,7 +198,7 @@ export const DEFECT_DEFINITION: EntityDefinition = {
   sheetName: 'Defectos',
   wordTypeLabel: 'Defecto',
   fields: [
-    { key: 'code', label: 'Código', type: 'code', required: true, help: 'Ej.: DEF-001', listColumn: true },
+    { key: 'code', label: 'Código', type: 'code', help: 'Lo asigna el sistema al guardar.', listColumn: true },
     { key: 'title', label: 'Título', type: 'string', required: true, listColumn: true },
     { key: 'description', label: 'Descripción', type: 'text', required: true },
     { key: 'stepsToReproduce', label: 'Pasos para reproducir', type: 'text' },
@@ -213,8 +211,23 @@ export const DEFECT_DEFINITION: EntityDefinition = {
       required: true,
       listColumn: true,
     },
-    { key: 'testCase', label: 'Caso de prueba', type: 'ref', refType: 'test-cases', help: 'Ej.: CP-002', listColumn: true },
-    { key: 'requirement', label: 'Requerimiento', type: 'ref', refType: 'requirements', help: 'Ej.: REQ-002' },
+    {
+      key: 'testCases',
+      label: 'Casos de prueba',
+      type: 'refList',
+      refType: 'test-cases',
+      help: 'Casos de prueba en los que se detectó.',
+      aliases: ['Caso de prueba'],
+      listColumn: true,
+    },
+    {
+      key: 'requirements',
+      label: 'Requerimientos',
+      type: 'refList',
+      refType: 'requirements',
+      help: 'Requerimientos afectados.',
+      aliases: ['Requerimiento'],
+    },
     { key: 'reportedDate', label: 'Fecha de reporte', type: 'date' },
     { key: 'reportedBy', label: 'Reportado por', type: 'string' },
   ],
@@ -229,9 +242,22 @@ export const ENTITY_DEFINITIONS: EntityDefinition[] = [
 
 export const ENTITY_TYPES = ENTITY_DEFINITIONS.map((d) => d.type);
 
+/** Número de dígitos del correlativo de los códigos (REQ-001). */
+export const CODE_DIGITS = 3;
+
+export function formatCode(def: EntityDefinition, n: number): string {
+  return `${def.codePrefix}-${String(n).padStart(CODE_DIGITS, '0')}`;
+}
+
 export function getDefinition(type: string): EntityDefinition | undefined {
   return ENTITY_DEFINITIONS.find((d) => d.type === type);
 }
+
+/**
+ * En la carga masiva la columna de código es una referencia temporal: solo sirve
+ * para relacionar registros del mismo lote. El sistema asigna el código definitivo.
+ */
+export const REFERENCE_COLUMN = { label: 'Referencia', aliases: ['Código', 'Ref', 'ID', 'Referencia en archivo'] };
 
 /** Columna "Módulo" común a todas las hojas/tablas de carga masiva. */
 export const MODULE_COLUMN = { key: 'module', label: 'Módulo', aliases: ['Módulo / Flujo', 'Flujo'] };
@@ -239,7 +265,11 @@ export const MODULE_COLUMN = { key: 'module', label: 'Módulo', aliases: ['Módu
 /** Columnas de la hoja de pasos de casos de prueba. */
 export const STEP_COLUMNS = {
   sheetName: 'PasosCasoPrueba',
-  testCaseCode: { key: 'testCaseCode', label: 'Código caso', aliases: ['Caso de prueba', 'Código del caso', 'Código'] },
+  testCaseCode: {
+    key: 'testCaseCode',
+    label: 'Referencia caso',
+    aliases: ['Código caso', 'Caso de prueba', 'Código del caso', 'Código', 'Referencia'],
+  },
   number: { key: 'number', label: 'N° paso', aliases: ['N°', 'Nro', 'Número', 'Paso', 'Nro paso'] },
   action: { key: 'action', label: 'Acción', aliases: ['Descripción'] },
   expectedResult: { key: 'expectedResult', label: 'Resultado esperado', aliases: ['Resultado'] },

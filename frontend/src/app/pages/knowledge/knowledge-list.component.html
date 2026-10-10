@@ -9,7 +9,7 @@
     }
     @if (auth.can('KNOWLEDGE', 'CREATE') && definition()) {
       <a mat-flat-button [routerLink]="['/conocimiento', type(), 'nuevo']">
-        <mat-icon>add</mat-icon> Nuevo {{ definition()!.label.toLowerCase() }}
+        <mat-icon>add</mat-icon> Registrar {{ definition()!.label.toLowerCase() }}
       </a>
     }
   </div>
