@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1080" viewBox="0 0 1500 1080" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
+<rect width="1500" height="1080" fill="#ffffff"/>
+<text x="750.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Modelo C4 – Nivel 2: Diagrama de contenedores</text>
+<text x="750.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Sistema QA Knowledge</text>
+<circle cx="750" cy="114" r="22" fill="#0b3d75"/>
+<rect x="620.0" y="134" width="260" height="86" rx="18" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.6"/>
+<text x="750.0" y="155.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Usuarios</text>
+<text x="750.0" y="171.75" font-size="12" font-weight="400" fill="#d6e4f5" text-anchor="middle" font-style="italic">[Persona]</text>
+<text x="750.0" y="189.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Analista QA · Líder QA</text>
+<text x="750.0" y="206.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Administrador</text>
+<rect x="60" y="270" width="1380" height="560" rx="12" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-dasharray="9 6"/>
+<text x="74" y="818" font-size="13" font-weight="700" fill="#1f5fbf" text-anchor="start">QA Knowledge [Sistema de software]</text>
+<rect x="110" y="300" width="340" height="150" rx="10" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.6"/>
+<text x="280.0" y="353.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Aplicación web (SPA)</text>
+<text x="280.0" y="369.75" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">[Contenedor: Angular 20, Material]</text>
+<text x="280.0" y="387.75" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Interfaz en español, formularios</text>
+<text x="280.0" y="404.25" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">dinámicos, guardas por permiso</text>
+<rect x="580" y="300" width="340" height="150" rx="10" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.6"/>
+<text x="750.0" y="353.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Servidor web</text>
+<text x="750.0" y="369.75" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">[Contenedor: nginx 1.27]</text>
+<text x="750.0" y="387.75" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Sirve la SPA y actúa como</text>
+<text x="750.0" y="404.25" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">proxy inverso de /api</text>
+<rect x="580" y="560" width="340" height="170" rx="10" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.6"/>
+<text x="750.0" y="615.5" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">API REST</text>
+<text x="750.0" y="631.5" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">[Contenedor: NestJS 11, Node.js 22]</text>
+<text x="750.0" y="649.5" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Autenticación JWT, permisos,</text>
+<text x="750.0" y="666.0" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">validación, base de conocimiento,</text>
+<text x="750.0" y="682.5" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">carga masiva, generación con LLM</text>
+<path d="M1050,572 L1050,718 A170.0,12 0 0 0 1390,718 L1390,572" fill="#0f766e" stroke="#0b5e58" stroke-width="1.6"/>
+<ellipse cx="1220.0" cy="572" rx="170.0" ry="12" fill="#14958b" stroke="#0b5e58" stroke-width="1.6"/>
+<text x="1220.0" y="621.5" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Base de datos</text>
+<text x="1220.0" y="637.5" font-size="12" font-weight="400" fill="#d5f2ee" text-anchor="middle" font-style="italic">[Contenedor: MongoDB 7]</text>
+<text x="1220.0" y="655.5" font-size="12.5" font-weight="400" fill="#d5f2ee" text-anchor="middle">Conocimiento, catálogos, lotes,</text>
+<text x="1220.0" y="672.0" font-size="12.5" font-weight="400" fill="#d5f2ee" text-anchor="middle">usuarios, permisos, contadores</text>
+<text x="1220.0" y="688.5" font-size="12.5" font-weight="400" fill="#d5f2ee" text-anchor="middle">y casos generados</text>
+<rect x="1050" y="300" width="340" height="150" rx="10" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.6"/>
+<text x="1220.0" y="353.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Documentación API</text>
+<text x="1220.0" y="369.75" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">[Contenedor: Swagger / OpenAPI]</text>
+<text x="1220.0" y="387.75" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Contrato de los endpoints</text>
+<text x="1220.0" y="404.25" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">en /api/docs</text>
+<rect x="580" y="880" width="340" height="100" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="750.0" y="917.0" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
+<text x="750.0" y="933.0" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">[Sistema externo]</text>
+<text x="750.0" y="951.0" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">API de modelo de lenguaje</text>
+<path d="M700,230 L700,300" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="625.7" y="259" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="700" y="270" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Visita la web [HTTPS]</text>
+<path d="M580,375 L450,375" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="457.2" y="332" width="115.6" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="515" y="343" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Entrega archivos</text>
+<rect x="447.3" y="347" width="135.39999999999998" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="515" y="358" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">estáticos (JS, CSS)</text>
+<path d="M280,450 L280,645 L580,645" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="315.6" y="599" width="128.8" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="380" y="610" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Llamadas REST/JSON</text>
+<rect x="305.7" y="614" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="380" y="625" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">con token JWT [HTTPS]</text>
+<path d="M800,450 L800,560" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="808.8" y="489" width="102.39999999999999" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="860" y="500" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Reenvía /api/*</text>
+<rect x="808.8" y="504" width="102.39999999999999" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="860" y="515" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">[HTTP interno]</text>
+<path d="M920,645 L1050,645" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="937.1" y="599" width="95.8" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="985" y="610" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Lee y escribe</text>
+<rect x="910.7" y="614" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="985" y="625" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">[Mongoose, TCP 27017]</text>
+<path d="M920,600 L1000,600 L1000,400 L1050,400" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="971.9" y="509" width="56.199999999999996" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="1000" y="520" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Publica</text>
+<path d="M750,730 L750,880" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<rect x="765.7" y="789" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="840" y="800" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Prompt con contexto /</text>
+<rect x="765.7" y="804" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="840" y="815" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">casos en JSON [HTTPS]</text>
+<rect x="40" y="1038" width="26" height="16" rx="4" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.4"/>
+<text x="74" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Persona</text>
+<rect x="148.3" y="1038" width="26" height="16" rx="4" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.4"/>
+<text x="182.3" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Contenedor</text>
+<rect x="277.3" y="1038" width="26" height="16" rx="4" fill="#0f766e" stroke="#0b5e58" stroke-width="1.4"/>
+<text x="311.3" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Almacén de datos</text>
+<rect x="447.70000000000005" y="1038" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4" stroke-dasharray="6 4"/>
+<text x="481.70000000000005" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Externo (próximas iteraciones)</text>
+</svg>

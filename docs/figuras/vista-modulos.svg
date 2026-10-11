@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="860" viewBox="0 0 1500 860" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
+<rect width="1500" height="860" fill="#ffffff"/>
+<text x="750.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Vista de módulos: descomposición y usos</text>
+<text x="750.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Estilo de descomposición (Views and Beyond) del código fuente</text>
+<rect x="40" y="95" width="640" height="640" rx="12" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-dasharray="9 6"/>
+<text x="54" y="723" font-size="13" font-weight="700" fill="#1f5fbf" text-anchor="start">frontend/src/app  (Angular)</text>
+<rect x="720" y="95" width="740" height="640" rx="12" fill="none" stroke="#0f766e" stroke-width="1.6" stroke-dasharray="9 6"/>
+<text x="734" y="723" font-size="13" font-weight="700" fill="#0f766e" text-anchor="start">backend/src  (NestJS)</text>
+<rect x="70" y="125" width="280" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="210.0" y="165.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">pages/</text>
+<text x="210.0" y="193.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">login · home · knowledge</text>
+<text x="210.0" y="210.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">imports · catalogs · admin</text>
+<rect x="370" y="125" width="280" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="510.0" y="165.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">pages/generation</text>
+<text x="510.0" y="193.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">generación, revisión</text>
+<text x="510.0" y="210.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">y aprobación</text>
+<rect x="70" y="285" width="280" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="210.0" y="325.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">shared/</text>
+<text x="210.0" y="353.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">record-form dinámico,</text>
+<text x="210.0" y="370.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">diálogos, paginador</text>
+<rect x="370" y="285" width="280" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="510.0" y="325.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">layout/</text>
+<text x="510.0" y="353.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">shell con menú por rol,</text>
+<text x="510.0" y="370.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">cambio de contraseña</text>
+<rect x="70" y="445" width="280" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="210.0" y="485.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">core/</text>
+<text x="210.0" y="513.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">AuthService · ApiService</text>
+<text x="210.0" y="530.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">interceptor JWT · guardas</text>
+<rect x="370" y="445" width="280" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="510.0" y="485.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">pages/reports</text>
+<text x="510.0" y="513.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">indicadores y</text>
+<text x="510.0" y="530.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">cobertura</text>
+<path d="M210,235 L210,285" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<path d="M210,395 L210,445" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<path d="M350,180 L360,180 L360,500 L350,500" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<text x="360" y="640" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">Las páginas usan shared/ y core/; core/ concentra</text>
+<text x="360" y="658" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">el acceso HTTP y la seguridad del cliente.</text>
+<rect x="750" y="125" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="855.0" y="174.0" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">auth/</text>
+<text x="855.0" y="202.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">login, JWT, perfil</text>
+<rect x="980" y="125" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="1085.0" y="174.0" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">users/ · permissions/</text>
+<text x="1085.0" y="202.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">usuarios, matriz de permisos</text>
+<rect x="1230" y="125" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="1335.0" y="174.0" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">catalogs/</text>
+<text x="1335.0" y="202.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">proyectos, módulos</text>
+<rect x="750" y="285" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="855.0" y="325.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">knowledge/</text>
+<text x="855.0" y="353.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">definitions/ · validation/</text>
+<text x="855.0" y="370.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">código automático</text>
+<rect x="980" y="285" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="1085.0" y="325.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">imports/</text>
+<text x="1085.0" y="353.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">parsers/ (xlsx, docx, csv)</text>
+<text x="1085.0" y="370.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">lotes y filas</text>
+<rect x="1230" y="285" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="1335.0" y="334.0" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">templates/</text>
+<text x="1335.0" y="362.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">plantillas descargables</text>
+<rect x="750" y="445" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="855.0" y="494.0" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">generation/</text>
+<text x="855.0" y="522.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">rag/ · prompt/ · llm/</text>
+<rect x="980" y="445" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="1085.0" y="494.0" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">reviews/ · reports/</text>
+<text x="1085.0" y="522.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">aprobación, indicadores</text>
+<rect x="1230" y="445" width="210" height="110" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
+<text x="1335.0" y="485.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">common/</text>
+<text x="1335.0" y="513.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">guards, decoradores,</text>
+<text x="1335.0" y="530.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">constantes de acceso</text>
+<path d="M980,340 L960,340" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<path d="M1335,285 L1335,262 L855,262 L855,285" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<path d="M855,445 L855,395" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<path d="M1085,445 L1085,395" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<path d="M980,500 L960,500" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<text x="1335" y="578" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">usado por todos los módulos</text>
+<text x="1090" y="640" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">Flecha = «usa». knowledge/definitions es la fuente única</text>
+<text x="1090" y="658" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">de los campos para esquemas, validación y plantillas.</text>
+<path d="M680,500 L720,500" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
+<rect x="681.8" y="459" width="36.4" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="700" y="470" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">HTTP</text>
+<rect x="681.8" y="474" width="36.4" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="700" y="485" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">REST</text>
+<rect x="480" y="788" width="26" height="16" rx="4" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.4"/>
+<text x="514" y="801" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Módulo implementado</text>
+<rect x="671.1" y="788" width="26" height="16" rx="4" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.4" stroke-dasharray="6 4"/>
+<text x="705.1" y="801" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Módulo de próximas iteraciones</text>
+</svg>

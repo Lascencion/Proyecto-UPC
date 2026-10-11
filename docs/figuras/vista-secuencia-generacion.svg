@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1170" viewBox="0 0 1600 1170" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
+<rect width="1600" height="1170" fill="#ffffff"/>
+<text x="800.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Vista dinámica: generación y aprobación de casos de prueba</text>
+<text x="800.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Escenario principal (HU-04 a HU-09) — próxima iteración</text>
+<rect x="20" y="100" width="160" height="46" rx="8" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.5"/>
+<text x="100" y="128" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Analista QA</text>
+<line x1="100" y1="146" x2="100" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="220" y="100" width="160" height="46" rx="8" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.5"/>
+<text x="300" y="128" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">SPA Angular</text>
+<line x1="300" y1="146" x2="300" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="420" y="100" width="160" height="46" rx="8" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.5"/>
+<text x="500" y="128" font-size="14" font-weight="700" fill="#1d2433" text-anchor="middle">API · Generación</text>
+<line x1="500" y1="146" x2="500" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="620" y="100" width="160" height="46" rx="8" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.5"/>
+<text x="700" y="128" font-size="14" font-weight="700" fill="#1d2433" text-anchor="middle">Recuperador (RAG)</text>
+<line x1="700" y1="146" x2="700" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="820" y="100" width="160" height="46" rx="8" fill="#0f766e" stroke="#0b5e58" stroke-width="1.5"/>
+<text x="900" y="128" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">MongoDB</text>
+<line x1="900" y1="146" x2="900" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="1020" y="100" width="160" height="46" rx="8" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.5"/>
+<text x="1100" y="128" font-size="14" font-weight="700" fill="#1d2433" text-anchor="middle">Cliente LLM</text>
+<line x1="1100" y1="146" x2="1100" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="1220" y="100" width="160" height="46" rx="8" fill="#7a8291" stroke="#5f6674" stroke-width="1.5"/>
+<text x="1300" y="128" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
+<line x1="1300" y1="146" x2="1300" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="1420" y="100" width="160" height="46" rx="8" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.5"/>
+<text x="1500" y="128" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Líder QA</text>
+<line x1="1500" y1="146" x2="1500" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="100" y1="190" x2="296" y2="190" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="32.849999999999994" y="170" width="334.3" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="200.0" y="182" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">1. Selecciona proyecto, módulo y registros base</text>
+<line x1="300" y1="238" x2="496" y2="238" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="308.75" y="218" width="182.5" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="400.0" y="230" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">2. POST /generation (JWT)</text>
+<path d="M500,286 L540,286 L540,306 L504,306" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="548" y="300" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">3. Verifica permiso GENERATION:CREATE</text>
+<line x1="500" y1="338" x2="696" y2="338" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="491.5" y="318" width="217.0" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="600.0" y="330" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">4. Obtener contexto del módulo</text>
+<line x1="700" y1="386" x2="896" y2="386" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="650.1" y="366" width="299.8" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="800.0" y="378" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">5. Consulta REQ, RN, CP y DEF relacionados</text>
+<line x1="900" y1="434" x2="704" y2="434" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<rect x="753.6" y="414" width="92.80000000000001" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="800.0" y="426" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">6. Registros</text>
+<line x1="700" y1="482" x2="504" y2="482" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<rect x="453.54999999999995" y="462" width="292.90000000000003" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="600.0" y="474" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">7. Contexto priorizado (límite de tokens)</text>
+<path d="M500,530 L540,530 L540,550 L504,550" fill="none" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="548" y="544" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">8. Construye prompt (plantilla + contexto + esquema JSON)</text>
+<line x1="500" y1="582" x2="1096" y2="582" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="732.9" y="562" width="134.2" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="800.0" y="574" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">9. generar(prompt)</text>
+<line x1="1100" y1="630" x2="1296" y2="630" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="1094.95" y="610" width="210.10000000000002" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="1200.0" y="622" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">10. Llamada HTTPS con API key</text>
+<line x1="1300" y1="678" x2="1104" y2="678" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<rect x="1126.0" y="658" width="148.0" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="1200.0" y="670" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">11. Respuesta (JSON)</text>
+<line x1="1100" y1="726" x2="504" y2="726" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<rect x="667.35" y="706" width="265.3" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="800.0" y="718" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">12. Casos validados contra el esquema</text>
+<line x1="500" y1="774" x2="896" y2="774" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="539.75" y="754" width="320.5" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="700.0" y="766" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">13. Guarda casos (versión 1, estado BORRADOR)</text>
+<line x1="500" y1="822" x2="304" y2="822" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<rect x="329.45" y="802" width="141.1" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="400.0" y="814" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">14. Casos generados</text>
+<line x1="40" y1="856" x2="1560" y2="856" stroke="#cbd5e1" stroke-width="1"/>
+<text x="1550" y="850" font-size="12" font-weight="700" fill="#5b6475" text-anchor="end">Revisión y aprobación</text>
+<line x1="100" y1="892" x2="296" y2="892" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="19.049999999999983" y="872" width="361.90000000000003" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="200.0" y="884" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">15. Revisa, edita u observa → regenera (pasos 2–14)</text>
+<line x1="300" y1="940" x2="496" y2="940" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="267.35" y="920" width="265.3" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="400.0" y="932" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">16. Enviar a aprobación (EN_REVISIÓN)</text>
+<line x1="1500" y1="988" x2="304" y2="988" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="757.0" y="968" width="286.0" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="900.0" y="980" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">17. Aprueba o devuelve con observaciones</text>
+<line x1="300" y1="1036" x2="496" y2="1036" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="263.9" y="1016" width="272.2" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="400.0" y="1028" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">18. PATCH estado (APROBADO / DEVUELTO)</text>
+<line x1="500" y1="1084" x2="896" y2="1084" stroke="#4a5262" stroke-width="1.6" marker-end="url(#arr)"/>
+<rect x="532.85" y="1064" width="334.3" height="15" fill="#ffffff" opacity="0.92"/>
+<text x="700.0" y="1076" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">19. Guarda estado, autor y fecha (trazabilidad)</text>
+<text x="800.0" y="1148" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">Las flechas punteadas son respuestas. Si el proveedor LLM falla o excede el tiempo límite, el Cliente LLM reintenta y la API informa el error sin perder la solicitud.</text>
+</svg>

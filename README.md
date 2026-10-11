@@ -26,6 +26,9 @@ backend/    NestJS 11 (Node.js 22, TypeScript) + Mongoose
 MongoDB 7   Base de datos (local con Docker; en la nube basta cambiar MONGODB_URI, p. ej. MongoDB Atlas)
 ```
 
+La arquitectura técnica (base y específica: atributos de calidad, vistas y modelos C4 y 4+1) está documentada en
+[docs/arquitectura-tecnica.md](docs/arquitectura-tecnica.md).
+
 Colecciones principales: `requirements`, `business_rules`, `test_cases`, `defects` (base de conocimiento),
 `projects`, `flow_modules` (catálogos), `import_batches`, `import_rows` (lotes de carga masiva en revisión),
 `users`, `role_permissions`.
