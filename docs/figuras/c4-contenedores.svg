@@ -39,7 +39,7 @@
 <text x="1220.0" y="369.75" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">[Contenedor: Swagger / OpenAPI]</text>
 <text x="1220.0" y="387.75" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Contrato de los endpoints</text>
 <text x="1220.0" y="404.25" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">en /api/docs</text>
-<rect x="580" y="880" width="340" height="100" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="580" y="880" width="340" height="100" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6"/>
 <text x="750.0" y="917.0" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
 <text x="750.0" y="933.0" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">[Sistema externo]</text>
 <text x="750.0" y="951.0" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">API de modelo de lenguaje</text>
@@ -69,7 +69,7 @@
 <path d="M920,600 L1000,600 L1000,400 L1050,400" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
 <rect x="971.9" y="509" width="56.199999999999996" height="15" fill="#ffffff" opacity="0.92"/>
 <text x="1000" y="520" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Publica</text>
-<path d="M750,730 L750,880" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<path d="M750,730 L750,880" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
 <rect x="765.7" y="789" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
 <text x="840" y="800" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Prompt con contexto /</text>
 <rect x="765.7" y="804" width="148.6" height="15" fill="#ffffff" opacity="0.92"/>
@@ -80,6 +80,6 @@
 <text x="182.3" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Contenedor</text>
 <rect x="277.3" y="1038" width="26" height="16" rx="4" fill="#0f766e" stroke="#0b5e58" stroke-width="1.4"/>
 <text x="311.3" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Almacén de datos</text>
-<rect x="447.70000000000005" y="1038" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4" stroke-dasharray="6 4"/>
-<text x="481.70000000000005" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Externo (próximas iteraciones)</text>
+<rect x="447.70000000000005" y="1038" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4"/>
+<text x="481.70000000000005" y="1051" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Sistema externo</text>
 </svg>

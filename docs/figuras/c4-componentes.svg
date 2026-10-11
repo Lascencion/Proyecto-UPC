@@ -70,27 +70,27 @@
 <text x="680.0" y="614.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[Componente]</text>
 <text x="680.0" y="632.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">contador atómico por</text>
 <text x="680.0" y="649.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">proyecto y tipo</text>
-<rect x="90" y="560" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="90" y="560" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
 <text x="200.0" y="598.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Generación de casos</text>
 <text x="200.0" y="614.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[Controller + Service]</text>
 <text x="200.0" y="632.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">solicitud, versiones,</text>
 <text x="200.0" y="649.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">estados de los casos</text>
-<rect x="330" y="560" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="330" y="560" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
 <text x="440.0" y="598.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Revisión y Reportes</text>
 <text x="440.0" y="614.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[Controller + Service]</text>
 <text x="440.0" y="632.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">observaciones, aprobación,</text>
 <text x="440.0" y="649.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">indicadores de cobertura</text>
-<rect x="90" y="750" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="90" y="750" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
 <text x="200.0" y="788.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Recuperador de contexto</text>
 <text x="200.0" y="804.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[Componente RAG]</text>
 <text x="200.0" y="822.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">selección de registros</text>
 <text x="200.0" y="839.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">pertinentes y similares</text>
-<rect x="330" y="750" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="330" y="750" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
 <text x="440.0" y="788.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Constructor de prompt</text>
 <text x="440.0" y="804.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[Componente]</text>
 <text x="440.0" y="822.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">plantilla, contexto y</text>
 <text x="440.0" y="839.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">esquema JSON de salida</text>
-<rect x="570" y="750" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="570" y="750" width="220" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
 <text x="680.0" y="788.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Cliente LLM</text>
 <text x="680.0" y="804.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[Adaptador / puerto]</text>
 <text x="680.0" y="822.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">proveedor intercambiable,</text>
@@ -113,11 +113,11 @@
 <path d="M920,680 L920,750" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
 <path d="M1160,680 L1160,750" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
 <path d="M680,680 L680,720 L850,720 L850,750" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="200" y="1020" width="360" height="100" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="200" y="1020" width="360" height="100" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6"/>
 <text x="380.0" y="1057.0" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
 <text x="380.0" y="1073.0" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">[Sistema externo]</text>
 <text x="380.0" y="1091.0" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">API HTTPS</text>
-<path d="M680,870 L680,990 L380,990 L380,1020" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<path d="M680,870 L680,990 L380,990 L380,1020" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
 <rect x="422.7" y="969" width="214.6" height="15" fill="#ffffff" opacity="0.92"/>
 <text x="530" y="980" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Prompt / respuesta JSON [HTTPS]</text>
 <path d="M1000,1032 L1000,1108 A180.0,12 0 0 0 1360,1108 L1360,1032" fill="#0f766e" stroke="#0b5e58" stroke-width="1.6"/>
@@ -130,11 +130,9 @@
 <rect x="60" y="1148" width="26" height="16" rx="4" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.4"/>
 <text x="94" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Contenedor</text>
 <rect x="189.0" y="1148" width="26" height="16" rx="4" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.4"/>
-<text x="223.0" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Componente implementado</text>
-<rect x="407.70000000000005" y="1148" width="26" height="16" rx="4" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.4" stroke-dasharray="6 4"/>
-<text x="441.70000000000005" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Componente de próximas iteraciones</text>
-<rect x="702.3000000000001" y="1148" width="26" height="16" rx="4" fill="#0f766e" stroke="#0b5e58" stroke-width="1.4"/>
-<text x="736.3000000000001" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Almacén de datos</text>
-<rect x="872.7" y="1148" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4" stroke-dasharray="6 4"/>
-<text x="906.7" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Sistema externo</text>
+<text x="223.0" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Componente</text>
+<rect x="318.0" y="1148" width="26" height="16" rx="4" fill="#0f766e" stroke="#0b5e58" stroke-width="1.4"/>
+<text x="352.0" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Almacén de datos</text>
+<rect x="488.4" y="1148" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4"/>
+<text x="522.4" y="1161" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Sistema externo</text>
 </svg>

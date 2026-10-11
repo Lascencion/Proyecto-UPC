@@ -2,7 +2,7 @@
 <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
 <rect width="1600" height="1170" fill="#ffffff"/>
 <text x="800.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Vista dinámica: generación y aprobación de casos de prueba</text>
-<text x="800.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Escenario principal (HU-04 a HU-09) — próxima iteración</text>
+<text x="800.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Escenario principal (HU-04 a HU-09)</text>
 <rect x="20" y="100" width="160" height="46" rx="8" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.5"/>
 <text x="100" y="128" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Analista QA</text>
 <line x1="100" y1="146" x2="100" y2="1110" stroke="#9aa3b2" stroke-width="1.2" stroke-dasharray="5 5"/>

@@ -24,23 +24,23 @@ conocimiento real del equipo de QA y no solo de su conocimiento general.
 
 ### Flujo conceptual de la solución
 
-| Paso | Etapa | Descripción | Estado |
-|---|---|---|---|
-| 1 | Ingesta | Registro individual con formularios y carga masiva desde Excel, Word y CSV, con un lote en revisión antes de guardar. | Implementado |
-| 2 | Base de conocimiento | Requerimientos (REQ), reglas de negocio (RN), casos de prueba (CP) y defectos (DEF) validados, con código automático, relaciones entre registros y origen (archivo y lote). | Implementado |
-| 3 | Recuperación de contexto | Selección de los registros del proyecto y módulo/flujo, más los relacionados y similares, hasta el límite de tokens del modelo. | Próxima iteración |
-| 4 | Construcción del *prompt* | Plantilla de instrucciones, contexto recuperado, técnicas de diseño pedidas (partición de equivalencia, valores límite, tabla de decisión, etc.) y esquema JSON de salida. | Próxima iteración |
-| 5 | Generación con LLM | Llamada HTTPS al proveedor del LLM. La respuesta se valida contra el esquema antes de mostrarla. | Próxima iteración |
-| 6 | Revisión | El Analista QA edita los casos, registra observaciones o pide una regeneración con esas observaciones. | Próxima iteración |
-| 7 | Aprobación | El Líder QA aprueba los casos o los devuelve con observaciones. Cada cambio de estado guarda su autor y fecha. | Próxima iteración |
-| 8 | Exportación y reportes | Exportación de los casos aprobados e indicadores de cobertura. Los casos aprobados vuelven a la base de conocimiento. | Próxima iteración |
+| Paso | Etapa | Descripción |
+|---|---|---|
+| 1 | Ingesta | Registro individual con formularios y carga masiva desde Excel, Word y CSV, con un lote en revisión antes de guardar. |
+| 2 | Base de conocimiento | Requerimientos (REQ), reglas de negocio (RN), casos de prueba (CP) y defectos (DEF) validados, con código automático, relaciones entre registros y origen (archivo y lote). |
+| 3 | Recuperación de contexto | Selección de los registros del proyecto y módulo/flujo, más los relacionados y similares, hasta el límite de tokens del modelo. |
+| 4 | Construcción del *prompt* | Plantilla de instrucciones, contexto recuperado, técnicas de diseño pedidas (partición de equivalencia, valores límite, tabla de decisión, etc.) y esquema JSON de salida. |
+| 5 | Generación con LLM | Llamada HTTPS al proveedor del LLM. La respuesta se valida contra el esquema antes de mostrarla. |
+| 6 | Revisión | El Analista QA edita los casos, registra observaciones o pide una regeneración con esas observaciones. |
+| 7 | Aprobación | El Líder QA aprueba los casos o los devuelve con observaciones. Cada cambio de estado guarda su autor y fecha. |
+| 8 | Exportación y reportes | Exportación de los casos aprobados e indicadores de cobertura. Los casos aprobados vuelven a la base de conocimiento. |
 
 ### Componentes de la solución
 
 | Elemento | Tecnología | Responsabilidad |
 |---|---|---|
 | Aplicación web (capa de presentación) | Angular 20 + Angular Material | Interfaz en español, menú según el rol, formularios dinámicos, carga de archivos y revisión de lotes. |
-| API REST (capas de servicios y negocio) | NestJS 11 sobre Node.js 22 (TypeScript) | Autenticación JWT, autorización por rol y módulo, validación, base de conocimiento, carga masiva, plantillas y, después, la generación con LLM. |
+| API REST (capas de servicios y negocio) | NestJS 11 sobre Node.js 22 (TypeScript) | Autenticación JWT, autorización por rol y módulo, validación, base de conocimiento, carga masiva, plantillas, generación con LLM, revisión, aprobación y reportes. |
 | Capa de integración | exceljs, mammoth, csv-parse; cliente HTTP del LLM | Lectura de archivos, recuperación de contexto y comunicación con el proveedor del LLM. |
 | Base de datos | MongoDB 7 (Mongoose como ODM) | Almacenamiento documental de la base de conocimiento, catálogos, lotes, usuarios, permisos y casos generados. |
 | Proveedor LLM | API externa por HTTPS (modelo intercambiable) | Generación del texto de los casos de prueba a partir del *prompt*. |
@@ -258,8 +258,8 @@ Views and Beyond*, 2.ª ed.). Ese enfoque agrupa las vistas en tres tipos según
 | `imports` | Lectura de archivos, lotes en revisión, corrección y confirmación | `knowledge`, `catalogs` |
 | `templates` | Generación de plantillas descargables con ejemplos | `knowledge` (definiciones) |
 | `common` | Guarda de seguridad, decoradores y constantes de acceso | — |
-| `generation` *(próxima)* | Recuperación de contexto (RAG), construcción del *prompt*, cliente LLM y versiones de los casos | `knowledge`, `catalogs` |
-| `reviews` / `reports` *(próxima)* | Observaciones, aprobación e indicadores de cobertura | `generation`, `knowledge` |
+| `generation` | Recuperación de contexto (RAG), construcción del *prompt*, cliente LLM y versiones de los casos | `knowledge`, `catalogs` |
+| `reviews` / `reports` | Observaciones, aprobación e indicadores de cobertura | `generation`, `knowledge` |
 
 #### B.2 Vista de módulos: capas
 
@@ -288,7 +288,7 @@ El sistema usa el estilo **por capas**: cada capa solo usa a la inmediatamente i
 | `counters` | Correlativo atómico por proyecto y tipo de registro | — |
 | `import_batches` / `import_rows` | Lote en revisión y sus filas con estado y errores | lote → filas; filas → registro creado |
 | `users` / `role_permissions` | Usuarios (hash de contraseña, rol, activo) y matriz de permisos | usuario → rol |
-| `generated_cases` / `reviews` *(próxima)* | Casos generados con versión, estado (BORRADOR, EN_REVISIÓN, APROBADO, DEVUELTO), contexto usado y observaciones | → registros de la base de conocimiento |
+| `generated_cases` / `reviews` | Casos generados con versión, estado (BORRADOR, EN_REVISIÓN, APROBADO, DEVUELTO), contexto usado y observaciones | → registros de la base de conocimiento |
 
 Todos los registros de la base de conocimiento guardan `project`, `module`, `code` (único por proyecto), `origin`
 (manual o archivo y lote), `createdBy` y marcas de tiempo.
@@ -365,7 +365,8 @@ Proyecto-UPC/
 │       ├── core/               servicios HTTP, autenticación, interceptor y guardas
 │       ├── layout/             estructura con menú por rol
 │       ├── shared/             formulario dinámico y componentes comunes
-│       └── pages/              login, home, knowledge, imports, catalogs, admin
+│       └── pages/              login, home, knowledge, imports, catalogs,
+│                               generation, reviews, reports, admin
 ├── backend/                    contenedor "API REST" (NestJS)
 │   └── src/
 │       ├── common/             guarda global, decoradores, constantes de acceso
@@ -373,7 +374,9 @@ Proyecto-UPC/
 │       ├── catalogs/
 │       ├── knowledge/          definitions/ (fuente única), validation/, códigos
 │       ├── imports/            parsers/ (excel, word, csv), lotes y filas
-│       └── templates/
+│       ├── templates/
+│       ├── generation/         rag/ (contexto), prompt/, llm/ (adaptador del proveedor)
+│       └── reviews/ reports/   revisión, aprobación e indicadores
 └── docs/                       documentación y figuras de arquitectura
 ```
 
@@ -402,18 +405,18 @@ Proyecto-UPC/
 
 #### C.3 Trazabilidad entre atributos de calidad y elementos de la arquitectura
 
-| Escenario | Elementos de la arquitectura que lo satisfacen | Estado |
-|---|---|---|
-| ESC-01 Seguridad | `AuthGuard`, módulo `permissions`, guardas de ruta Angular, bcrypt, JWT | Implementado |
-| ESC-02 Trazabilidad | `timestamps`, `createdBy`, `origin` en registros; lotes de carga | Implementado (versionado de casos: próxima) |
-| ESC-03 Integridad | `ValidationPipe`, `record-validator`, lotes en revisión (`import_batches`, `import_rows`) | Implementado |
-| ESC-04 Modificabilidad LLM | Cliente LLM como adaptador; configuración por variables de entorno | Diseñado |
-| ESC-05 Modificabilidad datos | `entity-definitions.ts` (fuente única) | Implementado |
-| ESC-06 Disponibilidad | Reintentos, tiempo límite, independencia de los módulos | Diseñado |
-| ESC-07 Rendimiento | Índices de MongoDB, paginación, carga diferida, límite de contexto | Implementado (límite de contexto: próxima) |
-| ESC-08 Usabilidad | Revisión de lotes, plantillas con ejemplos, códigos automáticos | Implementado |
-| ESC-09 Desplegabilidad | Dockerfiles, docker compose, configuración por entorno | Implementado |
-| ESC-10 Calidad de la salida | Validación por esquema JSON, verificación de referencias, revisión y aprobación | Diseñado |
+| Escenario | Elementos de la arquitectura que lo satisfacen |
+|---|---|
+| ESC-01 Seguridad | `AuthGuard`, módulo `permissions`, guardas de ruta Angular, bcrypt, JWT |
+| ESC-02 Trazabilidad | `timestamps`, `createdBy`, `origin` en registros; lotes de carga; versiones y estados de los casos generados |
+| ESC-03 Integridad | `ValidationPipe`, `record-validator`, lotes en revisión (`import_batches`, `import_rows`) |
+| ESC-04 Modificabilidad LLM | Cliente LLM como adaptador; configuración por variables de entorno |
+| ESC-05 Modificabilidad datos | `entity-definitions.ts` (fuente única) |
+| ESC-06 Disponibilidad | Reintentos, tiempo límite, independencia de los módulos |
+| ESC-07 Rendimiento | Índices de MongoDB, paginación, carga diferida, límite de contexto |
+| ESC-08 Usabilidad | Revisión de lotes, plantillas con ejemplos, códigos automáticos |
+| ESC-09 Desplegabilidad | Dockerfiles, docker compose, configuración por entorno |
+| ESC-10 Calidad de la salida | Validación por esquema JSON, verificación de referencias, revisión y aprobación |
 
 #### C.4 Registro de decisiones de arquitectura (ADR)
 
@@ -424,8 +427,8 @@ Proyecto-UPC/
 | ADR-03 | Autenticación con JWT y autorización con matriz configurable | Aceptada | API sin estado de sesión; el usuario se recarga en cada petición para aplicar cambios al instante |
 | ADR-04 | Definición única de entidades | Aceptada | Menos duplicación; los cambios de campos se hacen en un solo archivo |
 | ADR-05 | Carga masiva con área de preparación (lote en revisión) | Aceptada | Ningún dato inválido llega a la base de conocimiento; añade un paso de confirmación |
-| ADR-06 | Generación con RAG sobre un LLM externo detrás de un adaptador | Propuesta (iteración 2) | Sin entrenamiento propio; depende de la disponibilidad y el costo del proveedor; mitigado con reintentos y adaptador |
-| ADR-07 | Revisión y aprobación humana obligatoria | Propuesta (iteración 2) | Controla las alucinaciones del LLM; añade tiempo de revisión al proceso |
+| ADR-06 | Generación con RAG sobre un LLM externo detrás de un adaptador | Aceptada | Sin entrenamiento propio; depende de la disponibilidad y el costo del proveedor; mitigado con reintentos y adaptador |
+| ADR-07 | Revisión y aprobación humana obligatoria | Aceptada | Controla las alucinaciones del LLM; añade tiempo de revisión al proceso |
 | ADR-08 | Despliegue en contenedores Docker | Aceptada | Mismo artefacto en local y en la nube |
 
 ---

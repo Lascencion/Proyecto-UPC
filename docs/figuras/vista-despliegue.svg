@@ -51,18 +51,18 @@
 <text x="1130" y="240" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">TCP</text>
 <rect x="1105.2" y="244" width="49.599999999999994" height="15" fill="#ffffff" opacity="0.92"/>
 <text x="1130" y="255" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">:27017</text>
-<rect x="60" y="730" width="640" height="130" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="60" y="730" width="640" height="130" rx="10" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
 <text x="380.0" y="757.25" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Alternativa en la nube</text>
 <text x="380.0" y="773.25" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">[mismos contenedores, otra infraestructura]</text>
 <text x="380.0" y="791.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">frontend y backend en un servicio de contenedores</text>
 <text x="380.0" y="807.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">(p. ej. Azure Container Apps, AWS ECS, Google Cloud Run)</text>
 <text x="380.0" y="824.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">MongoDB Atlas en lugar del contenedor mongo:</text>
 <text x="380.0" y="840.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">solo cambia la variable MONGODB_URI</text>
-<rect x="770" y="760" width="380" height="110" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6" stroke-dasharray="7 5"/>
+<rect x="770" y="760" width="380" height="110" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6"/>
 <text x="960.0" y="802.0" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
 <text x="960.0" y="818.0" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">[Nodo externo: nube del proveedor]</text>
 <text x="960.0" y="836.0" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">API HTTPS del modelo</text>
-<path d="M960,340 L960,760" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" stroke-dasharray="6 4"/>
+<path d="M960,340 L960,760" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
 <rect x="966" y="459" width="76.0" height="15" fill="#ffffff" opacity="0.92"/>
 <text x="970" y="470" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">HTTPS :443</text>
 <rect x="966" y="474" width="122.19999999999999" height="15" fill="#ffffff" opacity="0.92"/>
@@ -73,6 +73,6 @@
 <text x="305.8" y="911" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Contenedor</text>
 <rect x="400.8" y="898" width="26" height="16" rx="4" fill="#0f766e" stroke="#0b5e58" stroke-width="1.4"/>
 <text x="434.8" y="911" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Base de datos</text>
-<rect x="550.5" y="898" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4" stroke-dasharray="6 4"/>
+<rect x="550.5" y="898" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4"/>
 <text x="584.5" y="911" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Externo</text>
 </svg>
