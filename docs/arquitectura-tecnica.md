@@ -343,7 +343,12 @@ salida (paso 12) y trazabilidad (pasos 13 y 19).
 
 ![Vista de despliegue](figuras/vista-despliegue.png)
 
-*Figura 3.x. Vista de despliegue con Docker (local) y alternativa en la nube.*
+*Figura 3.x. Diagrama de despliegue UML: nodos (equipos y entornos de ejecución) con los componentes que alojan y los protocolos de comunicación.*
+
+El diagrama sigue la notación UML de despliegue: cada **nodo** (cubo) es un equipo («device») o un entorno de
+ejecución («execution environment»); dentro de cada nodo están los **componentes** que se ejecutan en él, y las
+líneas entre nodos son las **rutas de comunicación** con su protocolo y puerto. Los servidores web, de aplicaciones y
+de base de datos corren como contenedores Docker en el mismo servidor anfitrión (docker compose).
 
 | Nodo / contenedor | Imagen | Puerto | Configuración |
 |---|---|---|---|
@@ -400,7 +405,7 @@ Proyecto-UPC/
 | Lógica | Usuarios finales, analistas | B.1 Descomposición, B.3 Modelo de datos, C4 nivel 3 |
 | De procesos | Integradores, desarrolladores | B.5 Contenedores, B.6 Componentes, B.7 Vista dinámica |
 | De desarrollo | Programadores | B.2 Capas, B.9 Implementación |
-| Física | Administradores de TI | B.8 Despliegue |
+| Física | Administradores de TI | B.8 Diagrama de despliegue (UML) |
 | Escenarios (+1) | Todos | B.7 Escenario de generación y aprobación; escenarios de calidad ESC-01 a ESC-10 |
 
 #### C.3 Trazabilidad entre atributos de calidad y elementos de la arquitectura
