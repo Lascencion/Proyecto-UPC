@@ -1,8 +1,7 @@
 # 3.3 Arquitectura técnica
 
-Este documento desarrolla los puntos 3.3.1 y 3.3.2 del informe para el sistema **QA Knowledge**: un sistema web
-basado en LLM para generar casos de prueba funcionales en el flujo de compra de monedas virtuales en videojuegos en
-línea. Las figuras están en [`docs/figuras/`](figuras/), en formato SVG (editable) y PNG (para insertar en el informe).
+Este documento desarrolla los puntos 3.3.1 y 3.3.2 del informe para el sistema web basado en LLM que genera casos de prueba funcionales en el flujo de compra de monedas virtuales en videojuegos en línea.
+Las figuras están en [`docs/figuras/`](figuras/), en formato SVG (editable) y PNG (para insertar en el informe).
 
 ---
 
@@ -20,7 +19,7 @@ conocimiento real del equipo de QA y no solo de su conocimiento general.
 
 ![Arquitectura técnica base](figuras/arquitectura-base.png)
 
-*Figura 3.x. Arquitectura técnica base: conceptualización del diseño de la solución.*
+*Figura 3.x. Arquitectura técnica base: conceptualización del diseño de la solución (notación UML).*
 
 ### Flujo conceptual de la solución
 
@@ -234,7 +233,13 @@ Prioridad expresada como (importancia para el negocio, dificultad técnica): A =
 ### B. Vistas de arquitectura de software
 
 La documentación sigue el enfoque *Views and Beyond* de Clements et al. (*Documenting Software Architectures:
-Views and Beyond*, 2.ª ed.). Ese enfoque agrupa las vistas en tres tipos según la clase de elementos que muestran:
+Views and Beyond*, 2.ª ed.). Ese enfoque agrupa las vistas en tres tipos según la clase de elementos que muestran.
+
+Todos los diagramas usan **notación UML**: los **nodos** (cubos en 3D) representan equipos, entornos de ejecución,
+contenedores o sistemas externos; los **componentes** (rectángulo con dos pestañas) son las piezas de software que
+contienen; los **actores** (figuras humanas) son los roles de usuario; los **paquetes** (carpetas) agrupan el código;
+las líneas continuas son rutas de comunicación con su protocolo y las líneas punteadas con flecha abierta son
+dependencias («use»). Los diagramas C4 (contexto, contenedores y componentes) se dibujan con esta misma notación.
 
 | Tipo de vista | Pregunta que responde | Vistas documentadas | Correspondencia 4+1 (Kruchten) | Nivel C4 |
 |---|---|---|---|---|
@@ -246,7 +251,7 @@ Views and Beyond*, 2.ª ed.). Ese enfoque agrupa las vistas en tres tipos según
 
 ![Vista de módulos](figuras/vista-modulos.png)
 
-*Figura 3.x. Vista de módulos: descomposición y relación «usa».*
+*Figura 3.x. Vista de módulos: diagrama de paquetes UML con la relación «use».*
 
 | Módulo | Responsabilidad | Usa a |
 |---|---|---|
@@ -297,7 +302,7 @@ Todos los registros de la base de conocimiento guardan `project`, `module`, `cod
 
 ![C4 contexto](figuras/c4-contexto.png)
 
-*Figura 3.x. Diagrama de contexto del sistema (modelo C4, nivel 1).*
+*Figura 3.x. Diagrama de contexto del sistema (modelo C4, nivel 1, en notación UML).*
 
 El sistema interactúa con tres tipos de usuario y dos sistemas externos: el **proveedor LLM**, que genera los casos,
 y las **fuentes documentales** (archivos exportados de las herramientas que ya usa el área de QA), que alimentan la
@@ -307,7 +312,7 @@ base de conocimiento con la carga masiva.
 
 ![C4 contenedores](figuras/c4-contenedores.png)
 
-*Figura 3.x. Diagrama de contenedores (modelo C4, nivel 2), estilo cliente-servidor.*
+*Figura 3.x. Diagrama de contenedores (modelo C4, nivel 2, en notación UML), estilo cliente-servidor.*
 
 | Contenedor | Tecnología | Conector |
 |---|---|---|
@@ -321,7 +326,7 @@ base de conocimiento con la carga masiva.
 
 ![C4 componentes](figuras/c4-componentes.png)
 
-*Figura 3.x. Diagrama de componentes del contenedor API REST (modelo C4, nivel 3).*
+*Figura 3.x. Diagrama de componentes UML del contenedor API REST (modelo C4, nivel 3).*
 
 Todas las peticiones pasan primero por la guarda global (`AuthGuard`), que verifica el JWT, recarga el usuario para
 aplicar cambios de rol o desactivaciones al instante y comprueba el permiso declarado en cada endpoint con
@@ -333,7 +338,7 @@ proveedor (ESC-04) y aislar las fallas del servicio externo (ESC-06).
 
 ![Secuencia de generación](figuras/vista-secuencia-generacion.png)
 
-*Figura 3.x. Diagrama de secuencia del escenario principal de generación y aprobación (HU-04 a HU-09).*
+*Figura 3.x. Diagrama de secuencia UML del escenario principal de generación y aprobación (HU-04 a HU-09).*
 
 Este escenario es el "+1" del modelo 4+1: une las vistas lógica, de procesos y física, y sirve para validar los
 atributos de seguridad (paso 3), rendimiento (paso 7), modificabilidad y disponibilidad (pasos 9–12), calidad de la

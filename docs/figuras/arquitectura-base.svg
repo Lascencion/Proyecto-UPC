@@ -1,130 +1,116 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
-<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker><marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="#4a5262" stroke-width="1.5"/></marker></defs>
 <rect width="1500" height="900" fill="#ffffff"/>
-<text x="750.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Arquitectura técnica base</text>
-<text x="750.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Conceptualización del diseño de la solución técnica</text>
-<rect x="40" y="110" width="200" height="300" rx="10" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.6"/>
-<text x="140.0" y="205.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Usuarios</text>
-<text x="140.0" y="221.75" font-size="12" font-weight="400" fill="#d6e4f5" text-anchor="middle" font-style="italic">navegador web</text>
-<text x="140.0" y="239.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle"></text>
-<text x="140.0" y="256.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Analista QA</text>
-<text x="140.0" y="272.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle"></text>
-<text x="140.0" y="289.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Líder QA</text>
-<text x="140.0" y="305.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle"></text>
-<text x="140.0" y="322.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Administrador</text>
-<rect x="280" y="95" width="1180" height="560" rx="12" fill="none" stroke="#1f5fbf" stroke-width="1.6" stroke-dasharray="9 6"/>
-<text x="294" y="643" font-size="13" font-weight="700" fill="#1f5fbf" text-anchor="start">Sistema QA Knowledge (aplicación web)</text>
-<rect x="310" y="115" width="250" height="120" rx="10" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.6"/>
-<text x="435.0" y="153.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Aplicación web (SPA)</text>
-<text x="435.0" y="169.75" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">Angular · Material</text>
-<text x="435.0" y="187.75" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Formularios, listas, carga</text>
-<text x="435.0" y="204.25" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">de archivos, revisión</text>
-<rect x="310" y="270" width="250" height="120" rx="10" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.6"/>
-<text x="435.0" y="308.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">API REST</text>
-<text x="435.0" y="324.75" font-size="12" font-weight="400" fill="#e3eefb" text-anchor="middle" font-style="italic">NestJS · JWT</text>
-<text x="435.0" y="342.75" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">Seguridad, validación</text>
-<text x="435.0" y="359.25" font-size="12.5" font-weight="400" fill="#e3eefb" text-anchor="middle">y lógica de negocio</text>
-<path d="M435,235 L435,270" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" marker-start="url(#arr)"/>
-<path d="M240,175 L310,175" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="253.5" y="154" width="43.0" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="275" y="165" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">HTTPS</text>
-<path d="M240,330 L310,330" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="253.5" y="309" width="43.0" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="275" y="320" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">HTTPS</text>
-<text x="1010" y="128" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Flujo conceptual de la generación de casos de prueba</text>
-<rect x="600" y="150" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="697.5" y="187.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">1. Ingesta</text>
-<text x="697.5" y="215.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">Registro individual</text>
-<text x="697.5" y="232.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">y carga masiva</text>
-<text x="697.5" y="248.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">(xlsx, docx, csv)</text>
-<rect x="820" y="150" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="917.5" y="187.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">2. Base de</text>
-<text x="917.5" y="215.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">conocimiento</text>
-<text x="917.5" y="232.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">REQ · RN · CP · DEF</text>
-<text x="917.5" y="248.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">validada y trazable</text>
-<path d="M795,210.0 L820,210.0" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="1040" y="150" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="1137.5" y="187.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">3. Recuperación</text>
-<text x="1137.5" y="215.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">de contexto (RAG)</text>
-<text x="1137.5" y="232.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">registros del módulo</text>
-<text x="1137.5" y="248.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">y similares</text>
-<path d="M1015,210.0 L1040,210.0" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="1260" y="150" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="1357.5" y="187.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">4. Construcción</text>
-<text x="1357.5" y="215.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">del prompt</text>
-<text x="1357.5" y="232.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">plantilla + contexto</text>
-<text x="1357.5" y="248.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">+ instrucciones</text>
-<path d="M1235,210.0 L1260,210.0" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="600" y="330" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="697.5" y="367.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">8. Exportación</text>
-<text x="697.5" y="395.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">casos aprobados</text>
-<text x="697.5" y="412.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">y reportes de</text>
-<text x="697.5" y="428.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">cobertura</text>
-<rect x="820" y="330" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="917.5" y="367.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">7. Aprobación</text>
-<text x="917.5" y="395.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">Líder QA aprueba</text>
-<text x="917.5" y="412.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">o devuelve con</text>
-<text x="917.5" y="428.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">observaciones</text>
-<path d="M820,390.0 L795,390.0" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="1040" y="330" width="195" height="120" rx="10" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.6"/>
-<text x="1137.5" y="367.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">6. Revisión</text>
-<text x="1137.5" y="395.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">Analista QA edita,</text>
-<text x="1137.5" y="412.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">observa o solicita</text>
-<text x="1137.5" y="428.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">regeneración</text>
-<path d="M1040,390.0 L1015,390.0" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="1260" y="330" width="195" height="120" rx="10" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.6"/>
-<text x="1357.5" y="367.5" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">5. Generación</text>
-<text x="1357.5" y="395.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">casos de prueba</text>
-<text x="1357.5" y="412.0" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">estructurados</text>
-<text x="1357.5" y="428.5" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">(JSON validado)</text>
-<path d="M1260,390.0 L1235,390.0" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<path d="M1357.5,270 L1357.5,330" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="1361.5" y="296" width="49.599999999999994" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="1365.5" y="307" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">prompt</text>
-<path d="M1137.5,450 L1137.5,480 L1357.5,480 L1357.5,450" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="1153.4" y="485" width="188.2" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="1247.5" y="496" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">regenerar con observaciones</text>
-<path d="M697.5,330 L697.5,270" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<text x="705.5" y="298.0" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="start">aprobados</text>
-<text x="705.5" y="313.0" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="start">realimentan</text>
-<path d="M560,330 L600,330" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<path d="M560,210 L600,210" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<path d="M330,532 L330,618 A115.0,12 0 0 0 560,618 L560,532" fill="#0f766e" stroke="#0b5e58" stroke-width="1.6"/>
-<ellipse cx="445.0" cy="532" rx="115.0" ry="12" fill="#14958b" stroke="#0b5e58" stroke-width="1.6"/>
-<text x="445.0" y="559.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">MongoDB</text>
-<text x="445.0" y="575.75" font-size="12" font-weight="400" fill="#d5f2ee" text-anchor="middle" font-style="italic">base de datos documental</text>
-<text x="445.0" y="593.75" font-size="12.5" font-weight="400" fill="#d5f2ee" text-anchor="middle">conocimiento, lotes,</text>
-<text x="445.0" y="610.25" font-size="12.5" font-weight="400" fill="#d5f2ee" text-anchor="middle">casos generados, usuarios</text>
-<path d="M435,390 L435,520" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" marker-start="url(#arr)"/>
-<rect x="441" y="449" width="102.39999999999999" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="445" y="460" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">Mongoose (ODM)</text>
-<rect x="1130" y="700" width="330" height="110" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6"/>
-<text x="1295.0" y="733.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
-<text x="1295.0" y="749.75" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">servicio externo (API HTTPS)</text>
-<text x="1295.0" y="767.75" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">modelo de lenguaje de gran</text>
-<text x="1295.0" y="784.25" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">tamaño intercambiable</text>
-<path d="M1417.5,450 L1417.5,700" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)" marker-start="url(#arr)"/>
-<rect x="1190.3" y="672" width="221.2" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="1407.5" y="683" font-size="12" font-weight="400" fill="#5b6475" text-anchor="end">HTTPS · API key · respuesta JSON</text>
-<rect x="330" y="700" width="360" height="110" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="1.6"/>
-<text x="510.0" y="733.75" font-size="15" font-weight="700" fill="#1d2433" text-anchor="middle">Infraestructura</text>
-<text x="510.0" y="749.75" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle" font-style="italic">contenedores Docker</text>
-<text x="510.0" y="767.75" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">local (docker compose) o nube</text>
-<text x="510.0" y="784.25" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="middle">(MongoDB Atlas, contenedores)</text>
-<text x="780" y="540" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Principios de diseño</text>
-<text x="780" y="566" font-size="13" font-weight="400" fill="#5b6475" text-anchor="start">• Arquitectura por capas y cliente-servidor (SPA + API REST).</text>
-<text x="780" y="587" font-size="13" font-weight="400" fill="#5b6475" text-anchor="start">• Generación aumentada por recuperación (RAG): el LLM recibe solo</text>
-<text x="792" y="608" font-size="13" font-weight="400" fill="#5b6475" text-anchor="start">el contexto histórico pertinente al módulo/flujo.</text>
-<text x="780" y="629" font-size="13" font-weight="400" fill="#5b6475" text-anchor="start">• Humano en el ciclo: ningún caso se usa sin revisión y aprobación.</text>
-<text x="780" y="650" font-size="13" font-weight="400" fill="#5b6475" text-anchor="start">• Definición única de entidades: esquema, validación y plantillas.</text>
-<rect x="40" y="858" width="26" height="16" rx="4" fill="#3b82d6" stroke="#2a6bb8" stroke-width="1.4"/>
-<text x="74" y="871" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Contenedor</text>
-<rect x="169.0" y="858" width="26" height="16" rx="4" fill="#cfe2fb" stroke="#3b82d6" stroke-width="1.4"/>
-<text x="203.0" y="871" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Etapa del flujo</text>
-<rect x="332.5" y="858" width="26" height="16" rx="4" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.4"/>
-<text x="366.5" y="871" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Uso del LLM</text>
-<rect x="468.4" y="858" width="26" height="16" rx="4" fill="#0f766e" stroke="#0b5e58" stroke-width="1.4"/>
-<text x="502.4" y="871" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Datos</text>
-<rect x="562.9" y="858" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4"/>
-<text x="596.9" y="871" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Sistema externo</text>
+<text x="750.0" y="40" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Arquitectura técnica base</text>
+<text x="750.0" y="66" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Conceptualización del diseño de la solución técnica (UML)</text>
+<circle cx="70" cy="201" r="11" fill="#ffffff" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<path d="M70,212 L70,236 M53,220 L87,220 M70,236 L56,256 M70,236 L84,256" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<text x="70" y="274" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Analista QA</text>
+<path d="M92,220 L160,335" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<circle cx="70" cy="316" r="11" fill="#ffffff" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<path d="M70,327 L70,351 M53,335 L87,335 M70,351 L56,371 M70,351 L84,371" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<text x="70" y="389" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Líder QA</text>
+<path d="M92,335 L160,335" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<circle cx="70" cy="431" r="11" fill="#ffffff" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<path d="M70,442 L70,466 M53,450 L87,450 M70,466 L56,486 M70,466 L84,486" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<text x="70" y="504" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Administrador</text>
+<path d="M92,450 L160,335" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<polygon points="160,210 186,184 426,184 400,210" fill="#e4e6e9" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="400,210 426,184 426,434 400,460" fill="#a3a7ae" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="160" y="210" width="240" height="250" fill="#d4d6da" stroke="#4a5262" stroke-width="1.3"/>
+<text x="172" y="231" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«device» navegador web</text>
+<text x="172" y="250" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Equipo del usuario</text>
+<rect x="186" y="300" width="200" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="177" y="315.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="177" y="335.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="292.0" y="326.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Aplicación web</text>
+<text x="292.0" y="344.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">SPA Angular · Material</text>
+<polygon points="540,150 566,124 1486,124 1460,150" fill="#e0f0d1" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="1460,150 1486,124 1486,564 1460,590" fill="#9fc583" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="540" y="150" width="920" height="440" fill="#cfe8b8" stroke="#4a5262" stroke-width="1.3"/>
+<text x="552" y="171" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«execution environment» Node.js · NestJS</text>
+<text x="552" y="190" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Servidor de aplicaciones</text>
+<path d="M426,330 L540,330" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="483.0" y="320" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">HTTPS</text>
+<rect x="576" y="205" width="856" height="50" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="567" y="215.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="567" y="235.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1010.0" y="226.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">API REST</text>
+<text x="1010.0" y="244.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">seguridad JWT · permisos por rol · validación de datos</text>
+<rect x="576" y="300" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="567" y="315.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="567" y="335.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="680.0" y="326.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">1. Ingesta</text>
+<text x="680.0" y="344.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">formularios y carga masiva</text>
+<rect x="796" y="300" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="787" y="315.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="787" y="335.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="900.0" y="326.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">2. Conocimiento</text>
+<text x="900.0" y="344.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">REQ · RN · CP · DEF</text>
+<path d="M772,330.0 L786,330.0" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="1016" y="300" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1007" y="315.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1007" y="335.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1120.0" y="326.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">3. Recuperación</text>
+<text x="1120.0" y="344.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">contexto del módulo (RAG)</text>
+<path d="M992,330.0 L1006,330.0" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="1236" y="300" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1227" y="315.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1227" y="335.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1340.0" y="326.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">4. Prompt</text>
+<text x="1340.0" y="344.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">plantilla + contexto + esquema</text>
+<path d="M1212,330.0 L1226,330.0" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="576" y="430" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="567" y="445.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="567" y="465.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="680.0" y="456.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">8. Exportación</text>
+<text x="680.0" y="474.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">casos aprobados y reportes</text>
+<rect x="796" y="430" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="787" y="445.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="787" y="465.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="900.0" y="456.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">7. Aprobación</text>
+<text x="900.0" y="474.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">Líder QA aprueba o devuelve</text>
+<path d="M796,460.0 L774,460.0" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="1016" y="430" width="196" height="60" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1007" y="445.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1007" y="465.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1120.0" y="456.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">6. Revisión</text>
+<text x="1120.0" y="474.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">Analista QA edita u observa</text>
+<path d="M1016,460.0 L994,460.0" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="1236" y="430" width="196" height="60" rx="3" fill="#f3ecfd" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1227" y="445.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1227" y="465.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1340.0" y="456.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">5. Generación</text>
+<text x="1340.0" y="474.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">casos en JSON validado</text>
+<path d="M1236,460.0 L1214,460.0" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<path d="M674.0,255 L674.0,300" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<path d="M1334.0,360 L1334.0,430" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<path d="M616,430 L616,360" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="626" y="400" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">aprobados realimentan la base</text>
+<path d="M1114.0,490 L1114.0,520 L1334.0,520 L1334.0,492" fill="none" stroke="#4a5262" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="1224.0" y="538" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="middle">regenerar con observaciones</text>
+<polygon points="540,690 566,664 966,664 940,690" fill="#fae3ec" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="940,690 966,664 966,824 940,850" fill="#d9a3b8" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="540" y="690" width="400" height="160" fill="#f6d3e0" stroke="#4a5262" stroke-width="1.3"/>
+<text x="552" y="711" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«execution environment» MongoDB 7</text>
+<text x="552" y="730" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Servidor de base de datos</text>
+<rect x="610" y="760" width="270" height="56" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="773.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="793.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="751.0" y="784.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Base de datos documental</text>
+<text x="751.0" y="802.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">conocimiento, lotes, casos y usuarios</text>
+<polygon points="1060,690 1086,664 1486,664 1460,690" fill="#efe8fa" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="1460,690 1486,664 1486,824 1460,850" fill="#b9a3dd" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1060" y="690" width="400" height="160" fill="#e3d7f5" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1072" y="711" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«device» servicio externo en la nube</text>
+<text x="1072" y="730" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Proveedor LLM</text>
+<rect x="1130" y="760" width="270" height="56" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1121" y="773.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1121" y="793.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1271.0" y="784.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Modelo de lenguaje (API)</text>
+<text x="1271.0" y="802.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">generación de casos de prueba</text>
+<path d="M740,590 L740,677.0" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="750" y="640" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="start">Mongoose · TCP 27017</text>
+<path d="M1260,590 L1260,677.0" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="1270" y="640" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="start">HTTPS · JSON</text>
 </svg>

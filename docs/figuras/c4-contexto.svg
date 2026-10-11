@@ -1,70 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="860" viewBox="0 0 1400 860" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
-<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker></defs>
-<rect width="1400" height="860" fill="#ffffff"/>
-<text x="700.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Modelo C4 – Nivel 1: Diagrama de contexto</text>
-<text x="700.0" y="68" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Sistema QA Knowledge y su entorno</text>
-<circle cx="260" cy="124" r="22" fill="#0b3d75"/>
-<rect x="155.0" y="144" width="210" height="86" rx="18" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.6"/>
-<text x="260.0" y="165.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Analista QA</text>
-<text x="260.0" y="181.75" font-size="12" font-weight="400" fill="#d6e4f5" text-anchor="middle" font-style="italic">[Persona]</text>
-<text x="260.0" y="199.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Registra el conocimiento</text>
-<text x="260.0" y="216.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">y genera casos</text>
-<circle cx="700" cy="124" r="22" fill="#0b3d75"/>
-<rect x="595.0" y="144" width="210" height="86" rx="18" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.6"/>
-<text x="700.0" y="165.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Líder QA</text>
-<text x="700.0" y="181.75" font-size="12" font-weight="400" fill="#d6e4f5" text-anchor="middle" font-style="italic">[Persona]</text>
-<text x="700.0" y="199.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Revisa, aprueba y</text>
-<text x="700.0" y="216.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">consulta reportes</text>
-<circle cx="1140" cy="124" r="22" fill="#0b3d75"/>
-<rect x="1035.0" y="144" width="210" height="86" rx="18" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.6"/>
-<text x="1140.0" y="165.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Administrador</text>
-<text x="1140.0" y="181.75" font-size="12" font-weight="400" fill="#d6e4f5" text-anchor="middle" font-style="italic">[Persona]</text>
-<text x="1140.0" y="199.75" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">Gestiona usuarios</text>
-<text x="1140.0" y="216.25" font-size="12.5" font-weight="400" fill="#d6e4f5" text-anchor="middle">y permisos</text>
-<rect x="450" y="400" width="500" height="150" rx="10" fill="#1f5fbf" stroke="#174a95" stroke-width="1.6"/>
-<text x="700.0" y="454.8" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">QA Knowledge</text>
-<text x="700.0" y="470.8" font-size="12" font-weight="400" fill="#dbe7fb" text-anchor="middle" font-style="italic">[Sistema de software]</text>
-<text x="700.0" y="488.8" font-size="12.5" font-weight="400" fill="#dbe7fb" text-anchor="middle">Gestiona la base de conocimiento de QA y genera</text>
-<text x="700.0" y="505.3" font-size="12.5" font-weight="400" fill="#dbe7fb" text-anchor="middle">casos de prueba funcionales con un LLM</text>
-<path d="M260,230 L260,330 L560,330 L560,400" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="229.3" y="289" width="201.39999999999998" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="330" y="300" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Registra y carga información;</text>
-<rect x="229.3" y="304" width="201.39999999999998" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="330" y="315" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">genera y revisa casos [HTTPS]</text>
-<path d="M700,230 L700,400" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="612.5" y="289" width="175.0" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="700" y="300" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Aprueba o devuelve casos;</text>
-<rect x="612.5" y="304" width="175.0" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="700" y="315" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">consulta reportes [HTTPS]</text>
-<path d="M1140,230 L1140,330 L840,330 L840,400" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="999.0" y="289" width="142.0" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="1070" y="300" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Administra usuarios,</text>
-<rect x="985.8" y="304" width="168.39999999999998" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="1070" y="315" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">roles y permisos [HTTPS]</text>
-<rect x="150" y="660" width="380" height="120" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6"/>
-<text x="340.0" y="698.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Proveedor LLM</text>
-<text x="340.0" y="714.75" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">[Sistema externo]</text>
-<text x="340.0" y="732.75" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">API de modelo de lenguaje</text>
-<text x="340.0" y="749.25" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">(p. ej. Claude, GPT, Gemini)</text>
-<rect x="870" y="660" width="380" height="120" rx="10" fill="#7a8291" stroke="#5f6674" stroke-width="1.6"/>
-<text x="1060.0" y="698.75" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Fuentes documentales</text>
-<text x="1060.0" y="714.75" font-size="12" font-weight="400" fill="#eceef2" text-anchor="middle" font-style="italic">[Sistema externo]</text>
-<text x="1060.0" y="732.75" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">Archivos Excel, Word y CSV con</text>
-<text x="1060.0" y="749.25" font-size="12.5" font-weight="400" fill="#eceef2" text-anchor="middle">requerimientos, casos y defectos</text>
-<path d="M560,550 L560,610 L340,610 L340,660" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="325.9" y="589" width="188.2" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="420" y="600" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Envía prompt con contexto y</text>
-<rect x="306.1" y="604" width="227.79999999999998" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="420" y="615" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">recibe casos en JSON [HTTPS/REST]</text>
-<path d="M1060,660 L1060,610 L840,610 L840,550" fill="none" stroke="#4a5262" stroke-width="1.7" marker-end="url(#arr)"/>
-<rect x="889.2" y="589" width="181.6" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="980" y="600" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">Archivos exportados que se</text>
-<rect x="862.8" y="604" width="234.39999999999998" height="15" fill="#ffffff" opacity="0.92"/>
-<text x="980" y="615" font-size="12" font-weight="400" fill="#5b6475" text-anchor="middle">cargan masivamente [xlsx/docx/csv]</text>
-<rect x="430" y="818" width="26" height="16" rx="4" fill="#0b3d75" stroke="#0b3d75" stroke-width="1.4"/>
-<text x="464" y="831" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Persona</text>
-<rect x="538.3" y="818" width="26" height="16" rx="4" fill="#1f5fbf" stroke="#174a95" stroke-width="1.4"/>
-<text x="572.3" y="831" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Sistema en alcance</text>
-<rect x="722.5" y="818" width="26" height="16" rx="4" fill="#7a8291" stroke="#5f6674" stroke-width="1.4"/>
-<text x="756.5" y="831" font-size="12.5" font-weight="400" fill="#5b6475" text-anchor="start">Sistema externo</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="740" viewBox="0 0 1560 740" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4a5262"/></marker><marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="#4a5262" stroke-width="1.5"/></marker></defs>
+<rect width="1560" height="740" fill="#ffffff"/>
+<text x="780.0" y="40" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Diagrama de contexto</text>
+<text x="780.0" y="66" font-size="15" font-weight="400" fill="#5b6475" text-anchor="middle">Modelo C4 – nivel 1 (notación UML)</text>
+<circle cx="110" cy="226" r="11" fill="#ffffff" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<path d="M110,237 L110,261 M93,245 L127,245 M110,261 L96,281 M110,261 L124,281" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<text x="110" y="299" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Analista QA</text>
+<path d="M135,245 L520,245" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="337.5" y="221" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">registra y carga información,</text>
+<text x="337.5" y="236" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">genera y revisa casos</text>
+<circle cx="110" cy="351" r="11" fill="#ffffff" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<path d="M110,362 L110,386 M93,370 L127,370 M110,386 L96,406 M110,386 L124,406" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<text x="110" y="424" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Líder QA</text>
+<path d="M135,370 L520,370" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="337.5" y="346" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">aprueba o devuelve casos,</text>
+<text x="337.5" y="361" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">consulta reportes</text>
+<circle cx="110" cy="476" r="11" fill="#ffffff" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<path d="M110,487 L110,511 M93,495 L127,495 M110,511 L96,531 M110,511 L124,531" stroke="#4a5262" stroke-width="1.8" fill="none"/>
+<text x="110" y="549" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Administrador</text>
+<path d="M135,495 L520,495" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="337.5" y="471" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">gestiona usuarios,</text>
+<text x="337.5" y="486" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">roles y permisos</text>
+<polygon points="520,200 546,174 1046,174 1020,200" fill="#e2ecfa" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="1020,200 1046,174 1046,554 1020,580" fill="#93b4e0" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="520" y="200" width="500" height="380" fill="#cfe0f7" stroke="#4a5262" stroke-width="1.3"/>
+<text x="532" y="221" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«system»</text>
+<text x="532" y="240" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Sistema web de generación de casos de prueba</text>
+<rect x="610" y="270" width="320" height="54" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="282.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="302.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="776.0" y="293.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Base de conocimiento</text>
+<text x="776.0" y="311.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">REQ · RN · CP · DEF, carga masiva</text>
+<rect x="610" y="344" width="320" height="54" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="356.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="376.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="776.0" y="367.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Generación con LLM</text>
+<text x="776.0" y="385.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">contexto histórico (RAG)</text>
+<rect x="610" y="418" width="320" height="54" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="430.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="450.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="776.0" y="441.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Revisión y aprobación</text>
+<text x="776.0" y="459.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">observaciones y versiones</text>
+<rect x="610" y="492" width="320" height="54" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="504.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="601" y="524.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="776.0" y="515.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">Reportes</text>
+<text x="776.0" y="533.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">indicadores y cobertura</text>
+<polygon points="1190,170 1216,144 1526,144 1500,170" fill="#efe8fa" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="1500,170 1526,144 1526,304 1500,330" fill="#b9a3dd" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1190" y="170" width="310" height="160" fill="#e3d7f5" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1202" y="191" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«external system»</text>
+<text x="1202" y="210" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Proveedor LLM</text>
+<rect x="1230" y="240" width="230" height="56" rx="3" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1221" y="253.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1221" y="273.0" width="18" height="10" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1351.0" y="264.625" font-size="13.5" font-weight="700" fill="#1d2433" text-anchor="middle">API del modelo</text>
+<text x="1351.0" y="282.85" font-size="11.5" font-weight="400" fill="#5b6475" text-anchor="middle">generación de texto</text>
+<path d="M1046,280 L1190,280" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="1118.0" y="252" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">prompt / casos</text>
+<text x="1118.0" y="267" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">HTTPS · JSON</text>
+<polygon points="1190,420 1216,394 1526,394 1500,420" fill="#e4e6e9" stroke="#4a5262" stroke-width="1.3"/>
+<polygon points="1500,420 1526,394 1526,624 1500,650" fill="#a3a7ae" stroke="#4a5262" stroke-width="1.3"/>
+<rect x="1190" y="420" width="310" height="230" fill="#d4d6da" stroke="#4a5262" stroke-width="1.3"/>
+<text x="1202" y="441" font-size="12" font-weight="400" fill="#5b6475" text-anchor="start">«external system»</text>
+<text x="1202" y="460" font-size="15" font-weight="700" fill="#1d2433" text-anchor="start">Fuentes documentales</text>
+<path d="M1240,480 L1440,480 L1450,490 L1450,518 L1240,518 Z" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<path d="M1250,491.0 L1258,491.0 L1262,495.0 L1262,507.0 L1250,507.0 Z M1258,491.0 L1258,495.0 L1262,495.0" fill="none" stroke="#4a5262" stroke-width="1.1"/>
+<text x="1353.0" y="504.0" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">Excel (.xlsx)</text>
+<path d="M1240,532 L1440,532 L1450,542 L1450,570 L1240,570 Z" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<path d="M1250,543.0 L1258,543.0 L1262,547.0 L1262,559.0 L1250,559.0 Z M1258,543.0 L1258,547.0 L1262,547.0" fill="none" stroke="#4a5262" stroke-width="1.1"/>
+<text x="1353.0" y="556.0" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">Word (.docx)</text>
+<path d="M1240,584 L1440,584 L1450,594 L1450,622 L1240,622 Z" fill="#ffffff" stroke="#4a5262" stroke-width="1.3"/>
+<path d="M1250,595.0 L1258,595.0 L1262,599.0 L1262,611.0 L1250,611.0 Z M1258,595.0 L1258,599.0 L1262,599.0" fill="none" stroke="#4a5262" stroke-width="1.1"/>
+<text x="1353.0" y="608.0" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">CSV (.csv)</text>
+<path d="M1046,500 L1190,500" fill="none" stroke="#4a5262" stroke-width="1.5"/>
+<text x="1118.0" y="472" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">importación</text>
+<text x="1118.0" y="487" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="middle">masiva</text>
 </svg>
