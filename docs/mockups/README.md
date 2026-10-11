@@ -1,8 +1,10 @@
 # Mockups de pantallas (Balsamiq)
 
-Mockups de las pantallas implementadas en la iteración 1 (Módulo 1: base de conocimiento).
+Mockups de todas las pantallas del sistema: las implementadas en la iteración 1 (01–18, base de conocimiento y
+administración) y las de los flujos de las próximas iteraciones (19–31: generación con LLM, revisión, aprobación,
+exportación y reportes; historias HU-04 a HU-12).
 
-- **`QA-Knowledge.bmpr`**: proyecto de Balsamiq Wireframes con las 18 pantallas. Se abre con
+- **`QA-Knowledge.bmpr`**: proyecto de Balsamiq Wireframes con las 31 pantallas. Se abre con
   *Balsamiq Wireframes 4* (Archivo → Abrir) o se importa en *Balsamiq Cloud* (Import → Balsamiq project).
   Todos los elementos son controles nativos y se pueden editar.
 - **`png/`**: vista previa de cada pantalla para insertar en los documentos de la tesis.
@@ -27,6 +29,24 @@ Mockups de las pantallas implementadas en la iteración 1 (Módulo 1: base de co
 | 16 | Usuarios | `/admin/usuarios` |
 | 17 | Editar usuario | diálogo |
 | 18 | Permisos por rol | `/admin/permisos` |
+
+**Próximas iteraciones** (menú según el rol: Analista QA o Líder QA)
+
+| N.° | Pantalla | Historia | Rol |
+|---|---|---|---|
+| 19 | Mis generaciones (solicitudes y su estado) | HU-05 | Analista QA |
+| 20 | Generar casos: requerimiento, información histórica relacionada y parámetros | HU-04, HU-05 | Analista QA |
+| 21 | Generación en curso | HU-05 | Analista QA |
+| 22 | Casos generados (versión, estado de revisión por caso) | HU-05, HU-06 | Analista QA |
+| 23 | Revisar caso generado (edición, trazabilidad y observaciones) | HU-06 | Analista QA |
+| 24 | Regenerar con observaciones (nueva versión) | HU-07 | Analista QA |
+| 25 | Enviar a aprobación | HU-08 | Analista QA |
+| 26 | Bandeja de aprobaciones | HU-09 | Líder QA |
+| 27 | Aprobación de casos (aprobar u observar cada caso) | HU-09 | Líder QA |
+| 28 | Devolver con observaciones | HU-09 | Líder QA |
+| 29 | Exportar casos aprobados y registrarlos en la base de conocimiento | HU-10 | Analista QA |
+| 30 | Reportes del proceso | HU-11 | Líder QA |
+| 31 | Reporte de cobertura (manual frente a LLM) | HU-12 | Líder QA |
 
 Los datos de ejemplo usan el caso de estudio (compra de monedas virtuales en la tienda de un videojuego).
 

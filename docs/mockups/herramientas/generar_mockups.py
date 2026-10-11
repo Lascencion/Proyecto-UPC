@@ -137,7 +137,7 @@ NAV = [
 ]
 
 
-def shell(url, active, h=800, window_title='QA Knowledge'):
+def shell(url, active, h=800, window_title='QA Knowledge', nav=None, user=USER, role=ROLE):
     out = [c('BrowserWindow', 0, 0, W, h, text=f'{window_title}\nhttp://localhost:8080/{url}')]
     out.append(box(1, 72, 240, h - 73, color=SURFACE, border=SURFACE))
     out += [
@@ -146,7 +146,7 @@ def shell(url, active, h=800, window_title='QA Knowledge'):
         label(56, 108, 'Generación de casos de prueba', w=180, size=11, color=MUTED),
     ]
     y = 150
-    for kind, key, ico, text in NAV:
+    for kind, key, ico, text, *badge in nav or NAV:
         if kind == 'header':
             y += 6
             out.append(label(16, y, text, w=210, size=12, color=MUTED, bold=True))
@@ -158,6 +158,8 @@ def shell(url, active, h=800, window_title='QA Knowledge'):
         out.append(icon(22, y + 6, ico, size=18, color='#aaaaaa' if disabled else '#444444'))
         out.append(label(52, y + 4, text, w=180, size=14, color='#aaaaaa' if disabled else '#222222',
                          bold=key == active))
+        if badge:
+            out += tag(196, y + 4, badge[0], WHITE, RED, w=28)
         if disabled:
             out.append(label(52, y + 24, 'Próximamente', w=180, size=11, color='#aaaaaa'))
             y += 14
@@ -165,8 +167,8 @@ def shell(url, active, h=800, window_title='QA Knowledge'):
     # Barra superior con el menú de usuario
     out.append(c('HRule', 242, 128, W - 244, 2))
     out.append(icon(1004, 89, 'user-circle', size=24, color='#444444'))
-    out.append(label(1034, 90, USER, w=110, size=14))
-    out += tag(1146, 90, ROLE, PRIMARY, PRIMARY_LIGHT, w=110)
+    out.append(label(1034, 90, user, w=110, size=14))
+    out += tag(1146, 90, role, PRIMARY, PRIMARY_LIGHT, w=110)
     out.append(icon(1260, 94, 'caret-down', size=14, color=MUTED))
     return out
 
@@ -763,6 +765,607 @@ def permissions():
     return h, out
 
 
+# ---------------------------------------------------------------------------------------------------------------------
+# Próximas iteraciones: generación con LLM, revisión, aprobación, exportación y reportes (HU-04 a HU-12)
+# ---------------------------------------------------------------------------------------------------------------------
+
+ANALYST = ('Lucía Ramos', 'Analista QA')
+LEAD = ('Carlos Díaz', 'Líder QA')
+
+_NAV_BASE = [
+    ('item', 'inicio', 'home', 'Inicio'),
+    ('header', None, None, 'Base de conocimiento'),
+    ('item', 'requirements', 'file-text-o', 'Requerimientos'),
+    ('item', 'business-rules', 'gavel', 'Reglas de negocio'),
+    ('item', 'test-cases', 'check-square-o', 'Casos de prueba'),
+    ('item', 'defects', 'bug', 'Defectos'),
+    ('item', 'carga', 'upload', 'Carga masiva'),
+    ('header', None, None, 'Generación'),
+    ('item', 'generar', 'magic', 'Generar casos'),
+    ('item', 'generaciones', 'history', 'Mis generaciones'),
+]
+_NAV_END = [
+    ('header', None, None, 'Reportes'),
+    ('item', 'rep-proceso', 'bar-chart', 'Reportes del proceso'),
+    ('item', 'rep-cobertura', 'pie-chart', 'Cobertura'),
+    ('header', None, None, 'Configuración'),
+    ('item', 'catalogos', 'sitemap', 'Proyectos y módulos'),
+]
+NAV_ANALYST = _NAV_BASE + _NAV_END
+NAV_LEAD = _NAV_BASE + [('item', 'aprobaciones', 'check-circle', 'Aprobaciones', '3')] + _NAV_END
+
+
+def analyst_shell(url, active, h):
+    return shell(url, active, h, nav=NAV_ANALYST, user=ANALYST[0], role=ANALYST[1])
+
+
+def lead_shell(url, active, h):
+    return shell(url, active, h, nav=NAV_LEAD, user=LEAD[0], role=LEAD[1])
+
+
+def radio(x, y, w, text, selected=False, size=14):
+    return c('RadioButton', x, y, w, 24, text=text, size=size, state='selected' if selected else 'up')
+
+
+def check(x, y, w, text, checked=True, size=14):
+    return c('CheckBox', x, y, w, 24, text=text, size=size, state='selected' if checked else 'up')
+
+
+def card(x, y, w, h, heading=None, sub=None):
+    out = [box(x, y, w, h, radius=12)]
+    if heading:
+        out.append(label(x + 24, y + 20, heading, w=w - 48, size=16, bold=True))
+    if sub:
+        out.append(label(x + 24, y + 46, sub, w=w - 48, size=12, color=MUTED))
+    return out
+
+
+def crop(controls, h):
+    """Misma pantalla acortada a h px: la ventana y los fondos se recortan; lo que no entra se omite."""
+    out = []
+    for ctrl in controls:
+        if ctrl['t'] in ('BrowserWindow', 'Canvas') and ctrl['y'] < h - 30:
+            out.append(dict(ctrl, h=min(ctrl['h'], h - ctrl['y'] - (0 if ctrl['t'] == 'BrowserWindow' else 1))))
+        elif ctrl['y'] + ctrl['h'] <= h - 2:
+            out.append(ctrl)
+    return out
+
+
+def cell(x, w, widths, col, y0, row, row_h=44):
+    """Esquina superior izquierda de una celda de la tabla (row 0 = encabezado)."""
+    return column_x(x, w, widths, col), y0 + row_h * row
+
+
+def kpi(x, y, w, value, text, note=None, note_color=MUTED, h=120):
+    out = [box(x, y, w, h, color=SURFACE, border=SURFACE, radius=12),
+           label(x + 20, y + 14, text, w=w - 40, size=13, color=MUTED),
+           label(x + 20, y + 38, value, w=w - 40, size=32, bold=True)]
+    if note:
+        out.append(label(x + 20, y + 86, note, w=w - 40, size=12, color=note_color))
+    return out
+
+
+def pbar(x, y, w, pct, color=PRIMARY, h=10):
+    out = [box(x, y, w, h, color='#e6e6e6', border='#e6e6e6', radius=h // 2)]
+    if pct:
+        out.append(box(x, y, max(h, int(w * pct / 100)), h, color=color, border=color, radius=h // 2))
+    return out
+
+
+def hbars(x, y, w, data, max_value):
+    out = []
+    bar_w = w - 190
+    for i, (name, value, color) in enumerate(data):
+        ry = y + i * 44
+        bw = max(6, int(bar_w * value / max_value))
+        out.append(label(x, ry + 3, name, w=120, size=13))
+        out.append(box(x + 130, ry, bw, 26, color=color, border=color, radius=4))
+        out.append(label(x + 138 + bw, ry + 3, str(value), w=50, size=13, bold=True))
+    return out
+
+
+def vbars(x, y, w, h, categories, series, max_value, show_values=True):
+    """Columnas agrupadas. series = [(nombre, color, valores)]."""
+    out = []
+    base = y + h - 26
+    plot_h = h - (80 if len(series) > 1 else 50)  # deja lugar para la leyenda
+    group_w = w / len(categories)
+    bar_w = min(34, (group_w - 16) / len(series))
+    out.append(c('HRule', x, base, w, 2))
+    for i, cat in enumerate(categories):
+        gx = x + i * group_w + (group_w - bar_w * len(series)) / 2
+        for k, (_, color, values) in enumerate(series):
+            bh = max(2, int(plot_h * values[i] / max_value))
+            bx = int(gx + k * bar_w)
+            out.append(box(bx, base - bh, int(bar_w) - 4, bh, color=color, border=color))
+            if show_values:
+                out.append(label(bx - 10, base - bh - 20, str(values[i]), w=int(bar_w) + 16, size=11, align='center',
+                                 color=MUTED))
+        out.append(label(int(x + i * group_w), base + 6, cat, w=int(group_w), size=12, align='center'))
+    if len(series) > 1:
+        lx = x
+        for name, color, _ in series:
+            out.append(box(lx, y, 14, 14, color=color, border=color))
+            out.append(label(lx + 20, y - 3, name, w=150, size=12))
+            lx += 170
+    return out
+
+
+def footer_bar(h, text, buttons):
+    fy = h - 80
+    out = [box(242, fy - 12, W - 244, 80, color=WHITE, border='#dddddd'),
+           label(CX, fy + 8, text, w=520, size=14, color=MUTED)]
+    bx = CX + CW
+    for b in reversed(buttons):
+        bx -= b['w']
+        out.append(dict(b, x=bx, y=fy))
+        bx -= 16
+    return out
+
+
+STATUS = {
+    'Aceptado': (GREEN, GREEN_LIGHT), 'Aprobado': (GREEN, GREEN_LIGHT), 'Observado': (AMBER, AMBER_LIGHT),
+    'En revisión': (AMBER, AMBER_LIGHT), 'Enviado': (PRIMARY, PRIMARY_LIGHT), 'Devuelto': (RED, RED_LIGHT),
+    'Descartado': (MUTED, SURFACE), 'Exportado': (MUTED, SURFACE),
+}
+
+CONTEXT_ROWS = [
+    ('RN-007', 'Regla de negocio', 'Vigencia de cupones de descuento', '94 %', True),
+    ('RN-004', 'Regla de negocio', 'Monto máximo por transacción', '81 %', True),
+    ('REQ-001', 'Requerimiento', 'Compra de paquete de monedas', '78 %', True),
+    ('CP-031', 'Caso de prueba', 'Compra con cupón de otra campaña', '75 %', True),
+    ('DEF-012', 'Defecto', 'Descuento aplicado dos veces', '71 %', True),
+    ('CP-044', 'Caso de prueba', 'Compra sin saldo en la tarjeta', '52 %', False),
+]
+
+
+def generate_form():
+    h = 1470
+    out = analyst_shell('generacion/nueva', 'generar', h)
+    out += page_header('Generar casos de prueba',
+                       'Elija el requerimiento a validar y revise la información histórica que se enviará al LLM como '
+                       'contexto para generar los casos.')
+    x, y = CX, 252
+    out += card(x, y, CW, 330, '1. Requerimiento a validar')
+    out += field(x + 24, y + 54, 450, 'Proyecto *', PROJECT, kind='ComboBox')
+    out += field(x + 498, y + 54, 458, 'Módulo / flujo *', 'Compra de monedas virtuales', kind='ComboBox')
+    out.append(radio(x + 24, y + 130, 230, 'Requerimiento registrado', selected=True))
+    out.append(radio(x + 270, y + 130, 320, 'Nuevo requerimiento (texto libre)'))
+    out += field(x + 24, y + 164, CW - 48, 'Requerimiento *', 'REQ-049 · Compra de monedas con cupón de descuento',
+                 kind='ComboBox')
+    out.append(box(x + 24, y + 232, CW - 48, 76, color=SURFACE, border=SURFACE, radius=6))
+    out.append(para(x + 38, y + 240, CW - 76, 64,
+                    'Como jugador quiero aplicar un cupón de descuento al comprar monedas para pagar un precio menor. '
+                    'Criterios: el cupón debe estar vigente; un solo cupón por compra; el descuento no supera el 50 %.',
+                    size=13))
+    y = 600
+    out += card(x, y, CW, 480, '2. Información histórica relacionada',
+                'Recuperada automáticamente por similitud con el requerimiento. Desmarque lo que no deba usarse como contexto.')
+    out.append(c('SearchBox', x + 24, y + 76, 380, 36, text='Agregar registro por código o título', size=14))
+    out.append(button(x + CW - 224, y + 76, 200, 'Recuperar de nuevo', icon_name='refresh'))
+    widths = [6, 12, 18, 50, 14]
+    gw = CW - 48
+    rows = [['', 'Código', 'Tipo', 'Título / nombre', 'Similitud']]
+    rows += [['', code, kind, text, sim] for code, kind, text, sim, _ in CONTEXT_ROWS]
+    gy = y + 126
+    out.append(grid(x + 24, gy, gw, rows, widths))
+    for i, row in enumerate(CONTEXT_ROWS):
+        cx, cy = cell(x + 24, gw, widths, 0, gy, i + 1)
+        out.append(check(cx + 14, cy + 10, 24, '', checked=row[4]))
+    out.append(label(x + 24, y + 444, '5 de 6 registros seleccionados como contexto', w=400, size=12, color=MUTED))
+    y = 1098
+    out += card(x, y, CW, 290, '3. Parámetros de generación')
+    out.append(label(x + 24, y + 54, 'Tipos de escenario', w=200, size=12, color=MUTED))
+    for i, text in enumerate(['Positivo', 'Negativo', 'Valor límite', 'Excepción']):
+        out.append(check(x + 24 + i * 150, y + 76, 140, text))
+    out += field(x + 24, y + 116, 450, 'Técnicas de diseño', 'Partición de equivalencia, Análisis de valores límite',
+                 kind='ComboBox')
+    out += field(x + 498, y + 116, 200, 'Cantidad máxima de casos', '10')
+    out += field(x + 24, y + 190, CW - 48, 'Indicaciones adicionales (opcional)',
+                 'Priorizar escenarios de cupones combinados y montos en el límite.', kind='TextArea', h=50)
+    out.append(button(CX + CW - 330, h - 64, 110, 'Cancelar'))
+    out.append(button(CX + CW - 204, h - 64, 204, 'Generar casos', primary=True, icon_name='magic'))
+    return h, out
+
+
+def generating():
+    _, full = generate_form()
+    h = 800
+    out = crop(full, h)
+    out += overlay(h)
+    x, y, w = 400, 220, 480
+    out += dialog(x, y, w, 330, 'Generando casos de prueba')
+    steps = [('check-circle', GREEN, 'Contexto recuperado: 5 registros seleccionados'),
+             ('check-circle', GREEN, 'Instrucción para el LLM (prompt) construida'),
+             ('circle-o-notch', PRIMARY, 'Esperando la respuesta del LLM…')]
+    for i, (ico, color, text) in enumerate(steps):
+        out.append(icon(x + 24, y + 62 + i * 36, ico, size=18, color=color))
+        out.append(label(x + 54, y + 60 + i * 36, text, w=w - 80, size=14))
+    out.append(c('ProgressBar', x + 24, y + 186, w - 48, 16, value=65))
+    out.append(para(x + 24, y + 214, w - 48, 40, 'Puede tardar hasta un minuto. Los casos quedarán en revisión cuando '
+                                                  'termine la generación.', size=12, color=MUTED))
+    out.append(button(x + w - 134, y + 274, 110, 'Cancelar'))
+    return h, out
+
+
+GEN_CASES = [
+    ('1', 'Compra con cupón vigente', 'Positivo', 'Partición de equivalencia', 'Alta', 'RN-007 · REQ-049', 'Aceptado'),
+    ('2', 'Cupón con 50 % de descuento (máximo)', 'Valor límite', 'Análisis de valores límite', 'Alta', 'RN-007', 'Aceptado'),
+    ('3', 'Compra con cupón vencido', 'Negativo', 'Partición de equivalencia', 'Alta', 'RN-007 · CP-031', 'Observado'),
+    ('4', 'Cupón de otra campaña', 'Negativo', 'Partición de equivalencia', 'Media', 'CP-031', 'Aceptado'),
+    ('5', 'Dos cupones en la misma compra', 'Negativo', 'Tabla de decisión', 'Media', 'RN-007 · DEF-012', 'Aceptado'),
+    ('6', 'Descuento aplicado dos veces', 'Excepción', 'Tabla de decisión', 'Alta', 'DEF-012', 'Observado'),
+    ('7', 'Compra que supera el monto máximo', 'Valor límite', 'Análisis de valores límite', 'Media', 'RN-004', 'Aceptado'),
+    ('8', 'Cupón escrito con espacios', 'Negativo', 'Conjetura de errores', 'Baja', '—', 'Descartado'),
+]
+
+
+def generation_result():
+    h = 900
+    out = analyst_shell('generacion/GEN-012', 'generaciones', h)
+    out += page_header('GEN-012 · Casos generados', back='Mis generaciones')
+    out.append(para(CX, 226, CW, 24, f'REQ-049 Compra de monedas con cupón de descuento · {PROJECT} / Compra de monedas '
+                                      'virtuales · Generado por Lucía Ramos el 11/10/2026 10:05', size=13, color=MUTED))
+    out += tag(CX + CW - 120, 186, 'En revisión', AMBER, AMBER_LIGHT, w=120)
+    out.append(c('ComboBox', CX, 266, 220, 36, text='Versión 2 (actual)', size=14))
+    chips = [('8  Generados', SURFACE, '#222222'), ('5  Aceptados', GREEN_LIGHT, GREEN),
+             ('2  Con observación', AMBER_LIGHT, AMBER), ('1  Descartado', SURFACE, MUTED)]
+    cx = CX + CW
+    for text, bg, fg in reversed(chips):
+        w = len(text) * 8 + 30
+        cx -= w
+        out.append(c('Button', cx, 266, w, 34, text=text, size=13, color=bg, textColor=fg, borderColor=bg))
+        cx -= 10
+    widths = [4, 30, 11, 19, 9, 13, 10, 4]
+    rows = [['#', 'Título', 'Escenario', 'Técnica', 'Prioridad', 'Fuentes', 'Revisión', '']]
+    rows += [list(r[:6]) + ['', ''] for r in GEN_CASES]
+    gy = 324
+    out.append(grid(CX, gy, CW, rows, widths))
+    for i, r in enumerate(GEN_CASES):
+        sx, sy = cell(CX, CW, widths, 6, gy, i + 1)
+        out += tag(sx + 4, sy + 10, r[6], *STATUS[r[6]], w=90)
+        ax, _ = cell(CX, CW, widths, 7, gy, i + 1)
+        out.append(icon(ax + 10, sy + 13, 'chevron-right', size=16, color=MUTED))
+    out.append(label(CX, gy + 44 * 9 + 12, 'Escenarios: 1 positivo · 4 negativos · 2 de valor límite · 1 de excepción',
+                     w=600, size=13, color=MUTED))
+    out += footer_bar(h, 'Los casos descartados no se envían a aprobación.', [
+        button(0, 0, 270, 'Regenerar con observaciones', icon_name='refresh'),
+        button(0, 0, 220, 'Enviar a aprobación', primary=True, icon_name='paper-plane'),
+    ])
+    return h, out
+
+
+def case_review():
+    h = 1100
+    out = analyst_shell('generacion/GEN-012/casos/3', 'generaciones', h)
+    out += page_header('Caso 3 · Compra con cupón vencido', back='GEN-012 · Casos generados')
+    out.append(label(CX, 228, 'Versión 2 · Generado por el LLM · Editado por Lucía Ramos', w=600, size=13, color=MUTED))
+    out.append(button(CX + CW - 256, 180, 120, '‹ Anterior'))
+    out.append(button(CX + CW - 124, 180, 124, 'Siguiente ›'))
+    x, y, w = CX, 262, 620
+    out += card(x, y, w, 800)
+    fx, fw = x + 24, w - 48
+    y0 = y + 24
+    out += field(fx, y0, fw, 'Título *', 'Compra con cupón vencido')
+    out += field(fx, y0 + 80, 278, 'Tipo de escenario', 'Negativo', kind='ComboBox')
+    out += field(fx + 294, y0 + 80, 278, 'Técnica de diseño', 'Partición de equivalencia', kind='ComboBox')
+    out += field(fx, y0 + 160, 278, 'Prioridad', 'Alta', kind='ComboBox')
+    out += field(fx, y0 + 240, fw, 'Precondiciones', 'Jugador con sesión iniciada; cupón NAVIDAD25 vencido el 31/12/2025.',
+                 kind='TextArea', h=56)
+    out += field(fx, y0 + 336, fw, 'Datos de prueba', 'Paquete de 1 000 monedas (S/ 19.90) · Cupón NAVIDAD25',
+                 kind='TextArea', h=56)
+    out.append(label(fx, y0 + 432, 'Pasos *', w=200, size=13, bold=True))
+    steps = [('Elegir el paquete de 1 000 monedas', 'Se muestra el resumen de compra'),
+             ('Ingresar el cupón NAVIDAD25', 'Se valida el cupón'),
+             ('Confirmar la compra', 'Mensaje "El cupón no está vigente"')]
+    for i, (a, e) in enumerate(steps):
+        sy = y0 + 458 + i * 44
+        out.append(label(fx, sy + 8, str(i + 1), w=20, size=13, bold=True, color=PRIMARY))
+        out.append(c('TextInput', fx + 24, sy, 262, 36, text=a, size=13))
+        out.append(c('TextInput', fx + 298, sy, 274, 36, text=e, size=13))
+    out += field(fx, y0 + 600, fw, 'Resultado esperado *', 'Se muestra "El cupón no está vigente", el precio se mantiene '
+                 'en S/ 19.90 y no se registra la compra con descuento.', kind='TextArea', h=70)
+    out.append(button(x + w - 204, y + 800 - 60, 180, 'Guardar cambios', primary=True, icon_name='floppy-o'))
+    # Columna derecha: trazabilidad y revisión
+    rx, rw = CX + 640, CW - 640
+    out += card(rx, y, rw, 250, 'Trazabilidad', 'Información histórica usada por el LLM')
+    sources = [('file-text-o', 'REQ-049 · Compra con cupón de descuento'), ('gavel', 'RN-007 · Vigencia de cupones'),
+               ('check-square-o', 'CP-031 · Cupón de otra campaña'), ('bug', 'DEF-012 · Descuento aplicado dos veces')]
+    for i, (ico, text) in enumerate(sources):
+        out.append(icon(rx + 24, y + 86 + i * 38, ico, size=16, color=MUTED))
+        out.append(c('Link', rx + 50, y + 84 + i * 38, rw - 70, 22, text=text, size=13))
+    ry = y + 270
+    out += card(rx, ry, rw, 530, 'Revisión')
+    out += tag(rx + rw - 150, ry + 20, 'Con observación', AMBER, AMBER_LIGHT, w=126)
+    out.append(button(rx + 24, ry + 60, 140, 'Aceptar', icon_name='check'))
+    out.append(button(rx + 176, ry + 60, 140, 'Descartar', icon_name='trash'))
+    out.append(label(rx + 24, ry + 116, 'Observaciones (1)', w=200, size=14, bold=True))
+    out.append(box(rx + 24, ry + 146, rw - 48, 100, color=SURFACE, border=SURFACE, radius=6))
+    out.append(label(rx + 36, ry + 154, 'Lucía Ramos · 11/10/2026 10:20', w=rw - 72, size=11, color=MUTED))
+    out.append(para(rx + 36, ry + 176, rw - 72, 64, 'El resultado esperado debe indicar que no se descuenta el saldo de '
+                                                    'la tarjeta.', size=13))
+    out.append(c('TextArea', rx + 24, ry + 262, rw - 48, 90, text='Escriba una observación para la regeneración…',
+                 size=13, color=MUTED))
+    out.append(button(rx + 24, ry + 366, rw - 48, 'Registrar observación', icon_name='comment'))
+    out.append(para(rx + 24, ry + 420, rw - 48, 60, 'Las observaciones se envían al LLM cuando se regeneran los casos.',
+                    size=12, color=MUTED))
+    return h, out
+
+
+def regenerate_dialog():
+    h, out = generation_result()
+    out += overlay(h)
+    x, y, w = 390, 150, 500
+    out += dialog(x, y, w, 560, 'Regenerar casos con observaciones')
+    out.append(para(x + 24, y + 56, w - 48, 44, 'Se creará la versión 3 con las observaciones registradas. La versión 2 '
+                                                'queda en el historial.', size=13))
+    out.append(label(x + 24, y + 112, 'Alcance', w=200, size=12, color=MUTED))
+    out.append(radio(x + 24, y + 136, w - 48, 'Solo los casos con observaciones (2)', selected=True))
+    out.append(radio(x + 24, y + 168, w - 48, 'Todo el conjunto (los casos aceptados se conservan)'))
+    out.append(label(x + 24, y + 214, 'Casos a regenerar', w=200, size=12, color=MUTED))
+    out.append(check(x + 24, y + 238, w - 48, 'Caso 3 · Compra con cupón vencido'))
+    out.append(check(x + 24, y + 270, w - 48, 'Caso 6 · Descuento aplicado dos veces'))
+    out += field(x + 24, y + 312, w - 48, 'Indicaciones generales para el LLM (opcional)',
+                 'Indicar en el resultado esperado el estado del saldo y de la transacción.', kind='TextArea', h=70)
+    out.append(c('HRule', x + 1, y + 490, w - 2, 2))
+    out.append(button(x + w - 280, y + 506, 110, 'Cancelar'))
+    out.append(button(x + w - 158, y + 506, 134, 'Regenerar', primary=True, icon_name='refresh'))
+    return h, out
+
+
+GENERATIONS = [
+    ('GEN-012', 'REQ-049 Compra con cupón de descuento', 'Compra de monedas virtuales', 'v2', '8', 'En revisión', '11/10 10:20'),
+    ('GEN-011', 'REQ-045 Pago con billetera digital', 'Pasarela de pago', 'v1', '6', 'Enviado', '10/10 17:40'),
+    ('GEN-010', 'REQ-043 Reembolso de monedas', 'Historial de compras', 'v3', '7', 'Devuelto', '10/10 12:05'),
+    ('GEN-009', 'REQ-040 Paquete de bienvenida', 'Compra de monedas virtuales', 'v1', '9', 'Aprobado', '09/10 16:30'),
+    ('GEN-008', 'REQ-038 Límite de compras para menores', 'Compra de monedas virtuales', 'v2', '10', 'Exportado', '08/10 11:15'),
+]
+
+
+def my_generations():
+    h = 800
+    out = analyst_shell('generacion', 'generaciones', h)
+    out += page_header('Mis generaciones', 'Solicitudes de generación de casos de prueba y su estado de revisión y '
+                                           'aprobación.')
+    out.append(button(CX + CW - 210, 150, 210, 'Nueva generación', primary=True, icon_name='magic'))
+    out.append(c('SearchBox', CX, 274, 320, 36, text='Buscar por código o requerimiento', size=14))
+    out += field(CX + 336, 256, 240, 'Proyecto', PROJECT, kind='ComboBox')
+    out += field(CX + 592, 256, 200, 'Estado', 'Todos', kind='ComboBox')
+    widths = [9, 30, 21, 7, 6, 13, 10, 4]
+    rows = [['Código', 'Requerimiento', 'Módulo', 'Versión', 'Casos', 'Estado', 'Actualizado', '']]
+    rows += [list(g[:5]) + ['', g[6], ''] for g in GENERATIONS]
+    gy = 330
+    out.append(grid(CX, gy, CW, rows, widths))
+    for i, g in enumerate(GENERATIONS):
+        sx, sy = cell(CX, CW, widths, 5, gy, i + 1)
+        out += tag(sx + 4, sy + 10, g[5], *STATUS[g[5]], w=104)
+        ax, _ = cell(CX, CW, widths, 7, gy, i + 1)
+        out.append(icon(ax + 10, sy + 13, 'chevron-right', size=16, color=MUTED))
+    out.append(para(CX, gy + 44 * 6 + 16, CW, 44, 'En revisión: el analista revisa y regenera · Enviado: espera la decisión '
+                                                  'del Líder QA · Devuelto: tiene observaciones del líder · Aprobado: listo '
+                                                  'para exportar.', size=12, color=MUTED))
+    return h, out
+
+
+def send_dialog():
+    h, out = generation_result()
+    out += overlay(h)
+    x, y, w = 400, 180, 480
+    out += dialog(x, y, w, 470, 'Enviar a aprobación')
+    out.append(para(x + 24, y + 56, w - 48, 44, 'Se enviarán 7 casos de GEN-012 (versión 2). El caso descartado no se '
+                                                'incluye.', size=13))
+    out.append(box(x + 24, y + 108, w - 48, 58, color=AMBER_LIGHT, border=AMBER_LIGHT, radius=6))
+    out.append(para(x + 38, y + 114, w - 76, 48, 'Hay 2 casos con observaciones que aún no se regeneraron. Puede '
+                                                 'enviarlos así o regenerarlos primero.', size=12, color=AMBER))
+    out += field(x + 24, y + 182, w - 48, 'Líder QA *', 'Carlos Díaz', kind='ComboBox')
+    out += field(x + 24, y + 254, w - 48, 'Comentario para el revisor', 'Casos del nuevo flujo de cupones; revisar los de '
+                 'valor límite.', kind='TextArea', h=70)
+    out.append(c('HRule', x + 1, y + 400, w - 2, 2))
+    out.append(button(x + w - 270, y + 416, 110, 'Cancelar'))
+    out.append(button(x + w - 148, y + 416, 124, 'Enviar', primary=True, icon_name='paper-plane'))
+    return h, out
+
+
+def approvals_inbox():
+    h = 800
+    out = lead_shell('aprobaciones', 'aprobaciones', h)
+    out += page_header('Aprobaciones', 'Casos de prueba enviados por los analistas para su aprobación.')
+    out.append(c('TabBar', CX, 248, CW, 40, text='Pendientes (3), Devueltas (2), Aprobadas (14)', selectedIndex=0, size=14))
+    out.append(c('SearchBox', CX, 316, 320, 36, text='Buscar por código o requerimiento', size=14))
+    out += field(CX + 336, 298, 240, 'Proyecto', PROJECT, kind='ComboBox')
+    out += field(CX + 592, 298, 200, 'Analista', 'Todos', kind='ComboBox')
+    widths = [9, 33, 15, 7, 6, 12, 9, 9]
+    rows = [['Código', 'Requerimiento', 'Analista', 'Versión', 'Casos', 'Enviado', 'En espera', ''],
+            ['GEN-012', 'REQ-049 Compra con cupón de descuento', 'Lucía Ramos', 'v2', '7', '11/10 11:30', '2 h', ''],
+            ['GEN-011', 'REQ-045 Pago con billetera digital', 'Ana Quispe', 'v1', '6', '10/10 17:40', '1 día', ''],
+            ['GEN-007', 'REQ-036 Bonificación por primera compra', 'Jorge Salas', 'v2', '5', '09/10 09:10', '2 días', '']]
+    gy = 372
+    out.append(grid(CX, gy, CW, rows, widths))
+    for i in range(3):
+        ax, ay = cell(CX, CW, widths, 7, gy, i + 1)
+        out.append(c('Link', ax + 14, ay + 12, 70, 22, text='Revisar', size=14))
+    return h, out
+
+
+APPROVAL_ROWS = [r for r in GEN_CASES if r[6] != 'Descartado']
+
+
+def approval_review():
+    h = 1000
+    out = lead_shell('aprobaciones/GEN-012', 'aprobaciones', h)
+    out += page_header('GEN-012 · Aprobación de casos', back='Aprobaciones')
+    out.append(para(CX, 226, CW, 24, 'REQ-049 Compra de monedas con cupón de descuento · Versión 2 · Enviado por Lucía '
+                                      'Ramos el 11/10/2026 11:30', size=13, color=MUTED))
+    out += tag(CX + CW - 190, 186, 'Pendiente de aprobación', PRIMARY, PRIMARY_LIGHT, w=190)
+    out.append(box(CX, 260, CW, 44, color=SURFACE, border=SURFACE, radius=6))
+    out.append(icon(CX + 14, 273, 'comment', size=16, color=MUTED))
+    out.append(label(CX + 42, 270, 'Comentario del analista: "Casos del nuevo flujo de cupones; revisar los de valor '
+                                   'límite."', w=CW - 60, size=13))
+    widths = [4, 34, 12, 20, 10, 20]
+    rows = [['#', 'Título', 'Escenario', 'Técnica', 'Prioridad', 'Decisión']]
+    rows += [list(r[:5]) + [''] for r in APPROVAL_ROWS]
+    gy = 320
+    out.append(grid(CX, gy, CW, rows, widths))
+    for i, r in enumerate(APPROVAL_ROWS):
+        dx, dy = cell(CX, CW, widths, 5, gy, i + 1)
+        observed = r[0] == '7'
+        out.append(c('Button', dx + 8, dy + 8, 86, 28, text='Aprobar', size=12,
+                     color=WHITE if observed else GREEN_LIGHT, textColor=MUTED if observed else GREEN,
+                     borderColor='#cccccc' if observed else GREEN))
+        out.append(c('Button', dx + 100, dy + 8, 86, 28, text='Observar', size=12,
+                     color=AMBER_LIGHT if observed else WHITE, textColor=AMBER if observed else MUTED,
+                     borderColor=AMBER if observed else '#cccccc'))
+    cy = gy + 44 * 8 + 18
+    out += card(CX, cy, CW, 200)
+    out.append(label(CX + 24, cy + 16, 'Caso 7 · Compra que supera el monto máximo', w=560, size=15, bold=True))
+    out.append(para(CX + 24, cy + 48, 540, 130,
+                    'Pasos: 1. Elegir un paquete de S/ 520.00 · 2. Aplicar un cupón de 10 % · 3. Confirmar la compra.\n'
+                    'Resultado esperado: se rechaza la compra por superar el monto máximo por transacción.\n'
+                    'Fuentes: RN-004 Monto máximo por transacción.', size=13))
+    out += field(CX + 590, cy + 16, CW - 614, 'Observación del líder *',
+                 'Falta el caso con el monto exacto del límite (S/ 500.00).', kind='TextArea', h=80)
+    out += footer_bar(h, 'Aprobados: 6 · Con observación: 1', [
+        button(0, 0, 270, 'Devolver con observaciones', icon_name='undo'),
+        button(0, 0, 200, 'Aprobar casos', primary=True, icon_name='check', state='disabled'),
+    ])
+    return h, out
+
+
+def return_dialog():
+    h, out = approval_review()
+    out += overlay(h)
+    x, y, w = 400, 250, 480
+    out += dialog(x, y, w, 420, 'Devolver con observaciones')
+    out.append(para(x + 24, y + 56, w - 48, 44, 'GEN-012 volverá a Lucía Ramos con las observaciones registradas para que '
+                                                'regenere o ajuste los casos.', size=13))
+    out.append(box(x + 24, y + 108, w - 48, 54, color=AMBER_LIGHT, border=AMBER_LIGHT, radius=6))
+    out.append(para(x + 38, y + 114, w - 76, 44, 'Caso 7 · Falta el caso con el monto exacto del límite (S/ 500.00).',
+                    size=12, color=AMBER))
+    out += field(x + 24, y + 178, w - 48, 'Comentario general', 'Agregar el caso en el límite exacto y revisar el mensaje '
+                 'de error mostrado al jugador.', kind='TextArea', h=80)
+    out.append(c('HRule', x + 1, y + 350, w - 2, 2))
+    out.append(button(x + w - 270, y + 366, 110, 'Cancelar'))
+    out.append(button(x + w - 148, y + 366, 124, 'Devolver', primary=True, icon_name='undo'))
+    return h, out
+
+
+def export_dialog():
+    h, out = my_generations()
+    out += overlay(h)
+    x, y, w = 400, 130, 480
+    out += dialog(x, y, w, 520, 'Exportar casos aprobados · GEN-009')
+    out.append(para(x + 24, y + 56, w - 48, 24, '9 casos aprobados por Carlos Díaz el 10/10/2026.', size=13))
+    out.append(label(x + 24, y + 92, 'Formato', w=200, size=12, color=MUTED))
+    for i, text in enumerate(['Excel (.xlsx)', 'Word (.docx)', 'CSV']):
+        out.append(radio(x + 24 + i * 145, y + 116, 140, text, selected=i == 0))
+    out.append(label(x + 24, y + 160, 'Contenido', w=200, size=12, color=MUTED))
+    for i, text in enumerate(['Pasos y resultados esperados', 'Trazabilidad (información histórica usada)',
+                              'Observaciones y aprobación']):
+        out.append(check(x + 24, y + 184 + i * 32, w - 48, text))
+    out.append(c('HRule', x + 24, y + 290, w - 48, 2))
+    out.append(check(x + 24, y + 306, w - 48, 'Registrar los casos en la base de conocimiento'))
+    out.append(para(x + 56, y + 334, w - 80, 44, 'Se crearán como CP-128 a CP-136 con origen "Generación GEN-009" y '
+                                                 'servirán como historial para futuras generaciones.', size=12, color=MUTED))
+    out.append(c('HRule', x + 1, y + 450, w - 2, 2))
+    out.append(button(x + w - 270, y + 466, 110, 'Cancelar'))
+    out.append(button(x + w - 148, y + 466, 124, 'Exportar', primary=True, icon_name='download'))
+    return h, out
+
+
+def report_filters(y):
+    out = field(CX, y, 260, 'Proyecto', PROJECT, kind='ComboBox')
+    out += field(CX + 276, y, 240, 'Módulo / flujo', 'Todos', kind='ComboBox')
+    out += field(CX + 532, y, 260, 'Periodo', '01/09/2026 – 11/10/2026', suffix='calendar')
+    return out
+
+
+def process_report():
+    h = 1000
+    out = lead_shell('reportes/proceso', 'rep-proceso', h)
+    out += page_header('Reportes del proceso', 'Indicadores de generación, revisión y aprobación de los casos de prueba.')
+    out.append(button(CX + CW - 140, 150, 140, 'Exportar', icon_name='download'))
+    out += report_filters(250)
+    kpis = [('24', 'Solicitudes de generación', None, MUTED), ('186', 'Casos generados', None, MUTED),
+            ('83 %', 'Aprobados sin observaciones', 'Meta: ≥ 80 %', GREEN),
+            ('18 min', 'Tiempo promedio de diseño', '−62 % frente al proceso manual', GREEN)]
+    for i, (value, text, note, color) in enumerate(kpis):
+        out += kpi(CX + i * 250, 330, 230, value, text, note, color)
+    cy = 470
+    out += card(CX, cy, 480, 270, 'Casos por estado')
+    out += hbars(CX + 24, cy + 66, 432, [('Aprobados', 132, GREEN), ('En revisión', 28, AMBER), ('Devueltos', 14, RED),
+                                         ('Descartados', 12, '#9e9e9e')], 132)
+    out += card(CX + 500, cy, 480, 270, 'Casos generados por semana')
+    out += vbars(CX + 524, cy + 60, 432, 196, ['S36', 'S37', 'S38', 'S39', 'S40', 'S41'],
+                 [('Casos', PRIMARY, [18, 26, 31, 35, 38, 38])], 40)
+    out.append(label(CX, 762, 'Por analista', w=300, size=18, bold=True))
+    rows = [['Analista', 'Solicitudes', 'Casos generados', 'Aprobados en 1.ª revisión', 'Tiempo promedio'],
+            ['Lucía Ramos', '10', '78', '85 %', '16 min'], ['Ana Quispe', '8', '61', '82 %', '19 min'],
+            ['Jorge Salas', '6', '47', '80 %', '21 min']]
+    out.append(grid(CX, 796, CW, rows, [28, 16, 18, 22, 16]))
+    return h, out
+
+
+COVERAGE = [('REQ-049', 'Compra con cupón de descuento', [1, 1, 1, 1], '8', '100 %'),
+            ('REQ-045', 'Pago con billetera digital', [1, 1, 0, 1], '6', '75 %'),
+            ('REQ-043', 'Reembolso de monedas', [1, 1, 0, 0], '4', '50 %'),
+            ('REQ-001', 'Compra de paquete de monedas', [1, 1, 1, 1], '12', '100 %')]
+
+
+def coverage_report():
+    h = 1060
+    out = lead_shell('reportes/cobertura', 'rep-cobertura', h)
+    out += page_header('Reporte de cobertura', 'Escenarios de prueba cubiertos por requerimiento: diseño manual frente a '
+                                               'generación con LLM.')
+    out.append(button(CX + CW - 140, 150, 140, 'Exportar', icon_name='download'))
+    out += report_filters(250)
+    kpis = [('58 %', 'Cobertura con el proceso manual', None, MUTED),
+            ('81 %', 'Cobertura con generación LLM', '+23 puntos (meta: +20 %)', GREEN),
+            ('34 de 48', 'Requerimientos con cobertura completa', None, MUTED)]
+    for i, (value, text, note, color) in enumerate(kpis):
+        out += kpi(CX + i * 333, 330, 313, value, text, note, color)
+    cy = 470
+    out += card(CX, cy, 560, 280, 'Cobertura por tipo de escenario (%)')
+    out += vbars(CX + 24, cy + 64, 512, 200, ['Positivo', 'Negativo', 'Valor límite', 'Excepción'],
+                 [('Proceso manual', '#9e9e9e', [95, 52, 38, 21]), ('Generación LLM', PRIMARY, [100, 84, 76, 64])], 100)
+    rx, rw = CX + 580, CW - 580
+    out += card(rx, cy, rw, 280, 'Menor cobertura')
+    low = [('REQ-043 Reembolso de monedas', 50), ('REQ-036 Bonificación primera compra', 50),
+           ('REQ-045 Pago con billetera digital', 75), ('REQ-021 Cambio de moneda local', 75)]
+    for i, (text, pct) in enumerate(low):
+        ly = cy + 62 + i * 52
+        out.append(label(rx + 24, ly, text, w=rw - 110, size=13))
+        out.append(label(rx + rw - 84, ly, f'{pct} %', w=60, size=13, bold=True, align='right'))
+        out += pbar(rx + 24, ly + 26, rw - 48, pct, AMBER if pct < 100 else GREEN)
+    out.append(label(CX, 772, 'Detalle por requerimiento', w=400, size=18, bold=True))
+    widths = [9, 31, 10, 10, 11, 10, 8, 11]
+    rows = [['Código', 'Requerimiento', 'Positivo', 'Negativo', 'Valor límite', 'Excepción', 'Casos', 'Cobertura']]
+    rows += [[code, text, '', '', '', '', n, pct] for code, text, _, n, pct in COVERAGE]
+    gy = 806
+    out.append(grid(CX, gy, CW, rows, widths))
+    for i, (_, _, marks, _, _) in enumerate(COVERAGE):
+        for j, ok in enumerate(marks):
+            mx, my = cell(CX, CW, widths, 2 + j, gy, i + 1)
+            out.append(icon(mx + 14, my + 13, 'check' if ok else 'times', size=18, color=GREEN if ok else RED))
+    return h, out
+
+
+NEXT_SCREENS = [
+    ('19', 'Mis generaciones', my_generations),
+    ('20', 'Generar casos de prueba', generate_form),
+    ('21', 'Generación en curso', generating),
+    ('22', 'Casos generados', generation_result),
+    ('23', 'Revisar caso generado', case_review),
+    ('24', 'Regenerar con observaciones', regenerate_dialog),
+    ('25', 'Enviar a aprobación', send_dialog),
+    ('26', 'Bandeja de aprobaciones', approvals_inbox),
+    ('27', 'Aprobación de casos', approval_review),
+    ('28', 'Devolver con observaciones', return_dialog),
+    ('29', 'Exportar casos aprobados', export_dialog),
+    ('30', 'Reportes del proceso', process_report),
+    ('31', 'Reporte de cobertura', coverage_report),
+]
+
+
 SCREENS = [
     ('01', 'Inicio de sesión', login),
     ('02', 'Inicio', home),
@@ -782,7 +1385,7 @@ SCREENS = [
     ('16', 'Usuarios', users),
     ('17', 'Editar usuario', user_dialog),
     ('18', 'Permisos por rol', permissions),
-]
+] + NEXT_SCREENS
 
 
 def slug(number, name):
@@ -798,12 +1401,14 @@ def slug(number, name):
 TYPE_IDS = {
     'BrowserWindow', 'Canvas', 'Label', 'Paragraph', 'Title', 'Icon', 'Button', 'TextInput', 'TextArea', 'ComboBox',
     'DataGrid', 'TabBar', 'SearchBox', 'CheckBox', 'Switch', 'HRule', 'Link', 'TitleWindow', 'Tooltip',
+    'RadioButton', 'ProgressBar',
 }
 
 # Equivalencias de los íconos usados con la biblioteca de íconos de Balsamiq.
 ICON_IDS = {'file-text-o': 'file-text', 'check-square-o': 'check-square', 'pencil-square-o': 'pencil-square',
             'floppy-o': 'save', 'file-word-o': 'file-word', 'sign-out': 'sign-out-alt', 'user-circle': 'user-circle',
-            'trash': 'trash-alt', 'pencil': 'pencil-alt', 'table': 'table', 'magic': 'magic'}
+            'trash': 'trash-alt', 'pencil': 'pencil-alt', 'table': 'table', 'magic': 'magic',
+            'bar-chart': 'chart-bar', 'pie-chart': 'chart-pie', 'refresh': 'sync', 'circle-o-notch': 'circle-notch'}
 
 
 def color_int(value):
@@ -844,6 +1449,8 @@ def to_balsamiq(ctrl, index):
         props['backgroundAlpha'] = str(p.pop('backgroundAlpha'))
     if p.get('state'):
         props['state'] = p.pop('state')
+    if 'value' in p:
+        props['value'] = str(p.pop('value'))
     if 'selectedIndex' in p:
         props['selectedIndex'] = str(p.pop('selectedIndex'))
     if kind == 'DataGrid':
@@ -981,7 +1588,7 @@ def render_control(ctrl, assets):
     if t in ('TextInput', 'ComboBox', 'SearchBox', 'TextArea'):
         cls = 'ta' if t == 'TextArea' else 'inp'
         bg = '#f0f0f0' if disabled else WHITE
-        fg = '#777' if disabled or t == 'SearchBox' or text in ('Seleccione', 'dd/mm/aaaa') else '#222'
+        fg = '#777' if color or disabled or t == 'SearchBox' or text in ('Seleccione', 'dd/mm/aaaa') else '#222'
         pre = fa('search', assets, 15, '#777') + '&nbsp; ' if t == 'SearchBox' else ''
         caret = f'<span class="caret">{fa("caret-down", assets, 16, "#444")}</span>' if t == 'ComboBox' else ''
         return f'<div class="c {cls}" style="{pos}{font}background:{bg};color:{fg}">{pre}{esc(text)}{caret}</div>'
@@ -1002,6 +1609,14 @@ def render_control(ctrl, assets):
         bc = PRIMARY if state == 'selected' else ('#ccc' if state == 'disabled' else '#444')
         return (f'<div class="c cb" style="{pos}{font}"><span class="box" style="background:{bg};border-color:{bc}">'
                 f'{mark}</span>{esc(text)}</div>')
+    if t == 'RadioButton':
+        on = p.get('state') == 'selected'
+        dot = f'<span style="width:10px;height:10px;border-radius:50%;background:{PRIMARY}"></span>' if on else ''
+        return (f'<div class="c cb" style="{pos}{font}"><span class="box" style="border-radius:50%;'
+                f'border-color:{PRIMARY if on else "#444"}">{dot}</span>{esc(text)}</div>')
+    if t == 'ProgressBar':
+        return (f'<div class="c" style="{pos}border:2px solid #555;border-radius:8px;overflow:hidden">'
+                f'<div style="width:{p.get("value", 50)}%;height:100%;background:{PRIMARY}"></div></div>')
     if t == 'Switch':
         return (f'<div class="c sw" style="{pos}background:{PRIMARY_LIGHT if p.get("state") == "selected" else "#ddd"}">'
                 f'<span style="background:{color or "#888"}"></span></div>')
