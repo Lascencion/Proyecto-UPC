@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_ASIS" name="Proceso actual (AS-IS)" targetNamespace="http://upc.edu.pe/qa-knowledge/bpmn" exporter="generar_bpmn.py" exporterVersion="1.0">
+  <collaboration id="Collaboration_ASIS">
+    <participant id="Participant_ASIS" name="Proceso actual (AS-IS): generación de casos de prueba funcionales para la compra de monedas virtuales" processRef="Process_ASIS" />
+  </collaboration>
+  <process id="Process_ASIS" name="Proceso actual (AS-IS): generación de casos de prueba funcionales para la compra de monedas virtuales" isExecutable="false">
+    <laneSet id="LaneSet_ASIS">
+      <lane id="Lane_ASIS_Producto" name="Equipo de Producto">
+        <flowNodeRef>Start_ASIS</flowNodeRef>
+        <flowNodeRef>Task_ASIS_1</flowNodeRef>
+      </lane>
+      <lane id="Lane_ASIS_Analista" name="Analista QA">
+        <flowNodeRef>Task_ASIS_2</flowNodeRef>
+        <flowNodeRef>Task_ASIS_3</flowNodeRef>
+        <flowNodeRef>Task_ASIS_4</flowNodeRef>
+        <flowNodeRef>Task_ASIS_5</flowNodeRef>
+        <flowNodeRef>Task_ASIS_6</flowNodeRef>
+        <flowNodeRef>Task_ASIS_Corregir</flowNodeRef>
+      </lane>
+      <lane id="Lane_ASIS_Lider" name="Líder QA">
+        <flowNodeRef>Task_ASIS_7</flowNodeRef>
+        <flowNodeRef>Gw_ASIS_Obs</flowNodeRef>
+        <flowNodeRef>Task_ASIS_9</flowNodeRef>
+        <flowNodeRef>End_ASIS</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="Start_ASIS" name="Inicio">
+      <outgoing>Flow_ASIS_1</outgoing>
+    </startEvent>
+    <manualTask id="Task_ASIS_1" name="Definir requerimiento funcional">
+      <documentation>Se definen requerimientos, historias de usuario, criterios de aceptación y reglas de negocio.</documentation>
+      <incoming>Flow_ASIS_1</incoming>
+      <outgoing>Flow_ASIS_2</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_2" name="Revisar requerimiento manualmente">
+      <documentation>El analista interpreta la funcionalidad y las condiciones que deben validarse.</documentation>
+      <incoming>Flow_ASIS_2</incoming>
+      <outgoing>Flow_ASIS_3</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_3" name="Identificar variables manualmente">
+      <documentation>Métodos de pago, paquetes de monedas, promociones, monedas de cobro, estados de transacción y restricciones.</documentation>
+      <incoming>Flow_ASIS_3</incoming>
+      <outgoing>Flow_ASIS_4</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_4" name="Identificar escenarios manualmente">
+      <documentation>Se determinan escenarios principales, alternativos, negativos y excepcionales según el criterio del analista.</documentation>
+      <incoming>Flow_ASIS_4</incoming>
+      <outgoing>Flow_ASIS_5</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_5" name="Consultar información adicional">
+      <documentation>Se revisan reglas de negocio, documentación funcional y casos de prueba históricos.</documentation>
+      <incoming>Flow_ASIS_5</incoming>
+      <outgoing>Flow_ASIS_6</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_6" name="Elaborar casos de prueba manualmente">
+      <documentation>Se redactan precondiciones, datos de entrada, pasos de ejecución y resultados esperados.</documentation>
+      <incoming>Flow_ASIS_6</incoming>
+      <outgoing>Flow_ASIS_7</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_7" name="Revisar casos de prueba">
+      <documentation>Se verifica la alineación de los casos con los requerimientos y reglas de negocio.</documentation>
+      <incoming>Flow_ASIS_7</incoming>
+      <incoming>Flow_ASIS_10</incoming>
+      <outgoing>Flow_ASIS_8</outgoing>
+    </manualTask>
+    <exclusiveGateway id="Gw_ASIS_Obs" name="¿Existen observaciones?">
+      <incoming>Flow_ASIS_8</incoming>
+      <outgoing>Flow_ASIS_9</outgoing>
+      <outgoing>Flow_ASIS_11</outgoing>
+    </exclusiveGateway>
+    <manualTask id="Task_ASIS_Corregir" name="Corregir casos de prueba">
+      <documentation>El Analista QA corrige los casos según las observaciones del Líder QA y los vuelve a enviar a revisión.</documentation>
+      <incoming>Flow_ASIS_9</incoming>
+      <outgoing>Flow_ASIS_10</outgoing>
+    </manualTask>
+    <manualTask id="Task_ASIS_9" name="Aprobar casos de prueba">
+      <documentation>Los casos quedan disponibles para su posterior ejecución y reutilización.</documentation>
+      <incoming>Flow_ASIS_11</incoming>
+      <outgoing>Flow_ASIS_12</outgoing>
+    </manualTask>
+    <endEvent id="End_ASIS" name="Casos de prueba aprobados">
+      <incoming>Flow_ASIS_12</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_ASIS_1" sourceRef="Start_ASIS" targetRef="Task_ASIS_1" />
+    <sequenceFlow id="Flow_ASIS_2" sourceRef="Task_ASIS_1" targetRef="Task_ASIS_2" />
+    <sequenceFlow id="Flow_ASIS_3" sourceRef="Task_ASIS_2" targetRef="Task_ASIS_3" />
+    <sequenceFlow id="Flow_ASIS_4" sourceRef="Task_ASIS_3" targetRef="Task_ASIS_4" />
+    <sequenceFlow id="Flow_ASIS_5" sourceRef="Task_ASIS_4" targetRef="Task_ASIS_5" />
+    <sequenceFlow id="Flow_ASIS_6" sourceRef="Task_ASIS_5" targetRef="Task_ASIS_6" />
+    <sequenceFlow id="Flow_ASIS_7" sourceRef="Task_ASIS_6" targetRef="Task_ASIS_7" />
+    <sequenceFlow id="Flow_ASIS_8" sourceRef="Task_ASIS_7" targetRef="Gw_ASIS_Obs" />
+    <sequenceFlow id="Flow_ASIS_9" name="Sí" sourceRef="Gw_ASIS_Obs" targetRef="Task_ASIS_Corregir" />
+    <sequenceFlow id="Flow_ASIS_10" name="Volver a revisión" sourceRef="Task_ASIS_Corregir" targetRef="Task_ASIS_7" />
+    <sequenceFlow id="Flow_ASIS_11" name="No" sourceRef="Gw_ASIS_Obs" targetRef="Task_ASIS_9" />
+    <sequenceFlow id="Flow_ASIS_12" sourceRef="Task_ASIS_9" targetRef="End_ASIS" />
+    <textAnnotation id="Annotation_ASIS_Critico"><text>Punto crítico del AS-IS: la identificación de variables, escenarios y elaboración de casos de prueba depende principalmente del análisis manual y de la experiencia del Analista QA, lo que puede generar omisiones frente a una alta variabilidad de condiciones funcionales.</text></textAnnotation>
+    <association id="Assoc_Annotation_ASIS_Critico" sourceRef="Task_ASIS_4" targetRef="Annotation_ASIS_Critico" />
+  </process>
+  <bpmndi:BPMNDiagram id="Diagram_ASIS" name="Proceso actual (AS-IS)">
+    <bpmndi:BPMNPlane id="Plane_ASIS" bpmnElement="Collaboration_ASIS">
+      <bpmndi:BPMNShape id="Participant_ASIS_di" bpmnElement="Participant_ASIS" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="1870" height="510" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ASIS_Producto_di" bpmnElement="Lane_ASIS_Producto" isHorizontal="true">
+        <dc:Bounds x="70" y="40" width="1840" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ASIS_Analista_di" bpmnElement="Lane_ASIS_Analista" isHorizontal="true">
+        <dc:Bounds x="70" y="210" width="1840" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ASIS_Lider_di" bpmnElement="Lane_ASIS_Lider" isHorizontal="true">
+        <dc:Bounds x="70" y="380" width="1840" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_ASIS_di" bpmnElement="Start_ASIS">
+        <dc:Bounds x="174" y="107" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="138" y="148" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_1_di" bpmnElement="Task_ASIS_1">
+        <dc:Bounds x="295" y="90" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_2_di" bpmnElement="Task_ASIS_2">
+        <dc:Bounds x="460" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_3_di" bpmnElement="Task_ASIS_3">
+        <dc:Bounds x="625" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_4_di" bpmnElement="Task_ASIS_4">
+        <dc:Bounds x="790" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_5_di" bpmnElement="Task_ASIS_5">
+        <dc:Bounds x="955" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_6_di" bpmnElement="Task_ASIS_6">
+        <dc:Bounds x="1120" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_7_di" bpmnElement="Task_ASIS_7">
+        <dc:Bounds x="1285" y="430" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gw_ASIS_Obs_di" bpmnElement="Gw_ASIS_Obs" isMarkerVisible="true">
+        <dc:Bounds x="1488" y="440" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1458" y="495" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_Corregir_di" bpmnElement="Task_ASIS_Corregir">
+        <dc:Bounds x="1450" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ASIS_9_di" bpmnElement="Task_ASIS_9">
+        <dc:Bounds x="1615" y="430" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ASIS_di" bpmnElement="End_ASIS">
+        <dc:Bounds x="1824" y="447" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1788" y="488" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annotation_ASIS_Critico_di" bpmnElement="Annotation_ASIS_Critico">
+        <dc:Bounds x="625" y="55" width="455" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Assoc_Annotation_ASIS_Critico_di" bpmnElement="Assoc_Annotation_ASIS_Critico">
+        <di:waypoint x="852" y="260" />
+        <di:waypoint x="852" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_1_di" bpmnElement="Flow_ASIS_1">
+        <di:waypoint x="210" y="125" />
+        <di:waypoint x="295" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_2_di" bpmnElement="Flow_ASIS_2">
+        <di:waypoint x="420" y="125" />
+        <di:waypoint x="440" y="125" />
+        <di:waypoint x="440" y="295" />
+        <di:waypoint x="460" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_3_di" bpmnElement="Flow_ASIS_3">
+        <di:waypoint x="585" y="295" />
+        <di:waypoint x="625" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_4_di" bpmnElement="Flow_ASIS_4">
+        <di:waypoint x="750" y="295" />
+        <di:waypoint x="790" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_5_di" bpmnElement="Flow_ASIS_5">
+        <di:waypoint x="915" y="295" />
+        <di:waypoint x="955" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_6_di" bpmnElement="Flow_ASIS_6">
+        <di:waypoint x="1080" y="295" />
+        <di:waypoint x="1120" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_7_di" bpmnElement="Flow_ASIS_7">
+        <di:waypoint x="1245" y="295" />
+        <di:waypoint x="1265" y="295" />
+        <di:waypoint x="1265" y="465" />
+        <di:waypoint x="1285" y="465" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_8_di" bpmnElement="Flow_ASIS_8">
+        <di:waypoint x="1410" y="465" />
+        <di:waypoint x="1488" y="465" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_9_di" bpmnElement="Flow_ASIS_9">
+        <di:waypoint x="1512" y="440" />
+        <di:waypoint x="1512" y="330" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1520" y="410" width="30" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_10_di" bpmnElement="Flow_ASIS_10">
+        <di:waypoint x="1450" y="295" />
+        <di:waypoint x="1348" y="295" />
+        <di:waypoint x="1348" y="430" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1354" y="273" width="90" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_11_di" bpmnElement="Flow_ASIS_11">
+        <di:waypoint x="1538" y="465" />
+        <di:waypoint x="1615" y="465" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1546" y="443" width="120" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ASIS_12_di" bpmnElement="Flow_ASIS_12">
+        <di:waypoint x="1740" y="465" />
+        <di:waypoint x="1824" y="465" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

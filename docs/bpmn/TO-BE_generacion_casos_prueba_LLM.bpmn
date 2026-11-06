@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_TOBE" name="Proceso propuesto (TO-BE)" targetNamespace="http://upc.edu.pe/qa-knowledge/bpmn" exporter="generar_bpmn.py" exporterVersion="1.0">
+  <collaboration id="Collaboration_TOBE">
+    <participant id="Participant_TOBE" name="Proceso propuesto (TO-BE): generación de casos de prueba funcionales con LLM" processRef="Process_TOBE" />
+  </collaboration>
+  <process id="Process_TOBE" name="Proceso propuesto (TO-BE): generación de casos de prueba funcionales con LLM" isExecutable="false">
+    <laneSet id="LaneSet_TOBE">
+      <lane id="Lane_TOBE_Analista" name="Analista QA">
+        <flowNodeRef>Start_TOBE</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Login</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Registrar</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Ingresar</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Revisar</flowNodeRef>
+        <flowNodeRef>Gw_TOBE_Correctos</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Enviar</flowNodeRef>
+      </lane>
+      <lane id="Lane_TOBE_Sistema" name="Sistema (LLM)">
+        <flowNodeRef>Task_TOBE_Validar</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Almacenar</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Recuperar</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Generar</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Reportes</flowNodeRef>
+        <flowNodeRef>End_TOBE</flowNodeRef>
+      </lane>
+      <lane id="Lane_TOBE_Lider" name="Líder QA">
+        <flowNodeRef>Task_TOBE_RevisarLider</flowNodeRef>
+        <flowNodeRef>Gw_TOBE_Aprueba</flowNodeRef>
+        <flowNodeRef>Task_TOBE_Devolver</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="Start_TOBE" name="Inicio">
+      <outgoing>Flow_TOBE_1</outgoing>
+    </startEvent>
+    <userTask id="Task_TOBE_Login" name="Iniciar sesión">
+      <incoming>Flow_TOBE_1</incoming>
+      <outgoing>Flow_TOBE_2</outgoing>
+    </userTask>
+    <serviceTask id="Task_TOBE_Validar" name="Validar credenciales y mostrar el menú según el rol">
+      <incoming>Flow_TOBE_2</incoming>
+      <outgoing>Flow_TOBE_3</outgoing>
+    </serviceTask>
+    <userTask id="Task_TOBE_Registrar" name="Registrar información histórica (individual o masiva)">
+      <documentation>Requerimientos, reglas de negocio, casos de prueba y defectos, por formulario o carga masiva (Excel, Word, CSV).</documentation>
+      <incoming>Flow_TOBE_3</incoming>
+      <outgoing>Flow_TOBE_4</outgoing>
+    </userTask>
+    <serviceTask id="Task_TOBE_Almacenar" name="Validar y almacenar en la base de conocimiento">
+      <incoming>Flow_TOBE_4</incoming>
+      <outgoing>Flow_TOBE_5</outgoing>
+    </serviceTask>
+    <userTask id="Task_TOBE_Ingresar" name="Ingresar el requerimiento a validar">
+      <incoming>Flow_TOBE_5</incoming>
+      <outgoing>Flow_TOBE_6</outgoing>
+    </userTask>
+    <serviceTask id="Task_TOBE_Recuperar" name="Recuperar reglas, requerimientos y casos históricos similares">
+      <incoming>Flow_TOBE_6</incoming>
+      <outgoing>Flow_TOBE_7</outgoing>
+    </serviceTask>
+    <serviceTask id="Task_TOBE_Generar" name="Generar los casos de prueba funcionales (LLM)">
+      <incoming>Flow_TOBE_7</incoming>
+      <incoming>Flow_TOBE_10</incoming>
+      <outgoing>Flow_TOBE_8</outgoing>
+    </serviceTask>
+    <userTask id="Task_TOBE_Revisar" name="Revisar los casos generados">
+      <incoming>Flow_TOBE_8</incoming>
+      <incoming>Flow_TOBE_17</incoming>
+      <outgoing>Flow_TOBE_9</outgoing>
+    </userTask>
+    <exclusiveGateway id="Gw_TOBE_Correctos" name="¿Son correctos?">
+      <incoming>Flow_TOBE_9</incoming>
+      <outgoing>Flow_TOBE_10</outgoing>
+      <outgoing>Flow_TOBE_11</outgoing>
+    </exclusiveGateway>
+    <userTask id="Task_TOBE_Enviar" name="Enviar los casos a aprobación">
+      <incoming>Flow_TOBE_11</incoming>
+      <outgoing>Flow_TOBE_12</outgoing>
+    </userTask>
+    <userTask id="Task_TOBE_RevisarLider" name="Revisar los casos de prueba">
+      <incoming>Flow_TOBE_12</incoming>
+      <outgoing>Flow_TOBE_13</outgoing>
+    </userTask>
+    <exclusiveGateway id="Gw_TOBE_Aprueba" name="¿Aprueba?">
+      <incoming>Flow_TOBE_13</incoming>
+      <outgoing>Flow_TOBE_14</outgoing>
+      <outgoing>Flow_TOBE_15</outgoing>
+    </exclusiveGateway>
+    <userTask id="Task_TOBE_Devolver" name="Devolver con observaciones">
+      <incoming>Flow_TOBE_15</incoming>
+      <outgoing>Flow_TOBE_17</outgoing>
+    </userTask>
+    <serviceTask id="Task_TOBE_Reportes" name="Registrar los casos aprobados y generar reportes">
+      <incoming>Flow_TOBE_14</incoming>
+      <outgoing>Flow_TOBE_16</outgoing>
+    </serviceTask>
+    <endEvent id="End_TOBE" name="Casos de prueba aprobados">
+      <incoming>Flow_TOBE_16</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_TOBE_1" sourceRef="Start_TOBE" targetRef="Task_TOBE_Login" />
+    <sequenceFlow id="Flow_TOBE_2" sourceRef="Task_TOBE_Login" targetRef="Task_TOBE_Validar" />
+    <sequenceFlow id="Flow_TOBE_3" sourceRef="Task_TOBE_Validar" targetRef="Task_TOBE_Registrar" />
+    <sequenceFlow id="Flow_TOBE_4" sourceRef="Task_TOBE_Registrar" targetRef="Task_TOBE_Almacenar" />
+    <sequenceFlow id="Flow_TOBE_5" sourceRef="Task_TOBE_Almacenar" targetRef="Task_TOBE_Ingresar" />
+    <sequenceFlow id="Flow_TOBE_6" sourceRef="Task_TOBE_Ingresar" targetRef="Task_TOBE_Recuperar" />
+    <sequenceFlow id="Flow_TOBE_7" sourceRef="Task_TOBE_Recuperar" targetRef="Task_TOBE_Generar" />
+    <sequenceFlow id="Flow_TOBE_8" sourceRef="Task_TOBE_Generar" targetRef="Task_TOBE_Revisar" />
+    <sequenceFlow id="Flow_TOBE_9" sourceRef="Task_TOBE_Revisar" targetRef="Gw_TOBE_Correctos" />
+    <sequenceFlow id="Flow_TOBE_10" name="No: solicita nueva generación" sourceRef="Gw_TOBE_Correctos" targetRef="Task_TOBE_Generar" />
+    <sequenceFlow id="Flow_TOBE_11" name="Sí" sourceRef="Gw_TOBE_Correctos" targetRef="Task_TOBE_Enviar" />
+    <sequenceFlow id="Flow_TOBE_12" sourceRef="Task_TOBE_Enviar" targetRef="Task_TOBE_RevisarLider" />
+    <sequenceFlow id="Flow_TOBE_13" sourceRef="Task_TOBE_RevisarLider" targetRef="Gw_TOBE_Aprueba" />
+    <sequenceFlow id="Flow_TOBE_14" name="Sí" sourceRef="Gw_TOBE_Aprueba" targetRef="Task_TOBE_Reportes" />
+    <sequenceFlow id="Flow_TOBE_15" name="No" sourceRef="Gw_TOBE_Aprueba" targetRef="Task_TOBE_Devolver" />
+    <sequenceFlow id="Flow_TOBE_16" sourceRef="Task_TOBE_Reportes" targetRef="End_TOBE" />
+    <sequenceFlow id="Flow_TOBE_17" name="El Analista QA ajusta y vuelve a revisar" sourceRef="Task_TOBE_Devolver" targetRef="Task_TOBE_Revisar" />
+  </process>
+  <bpmndi:BPMNDiagram id="Diagram_TOBE" name="Proceso propuesto (TO-BE)">
+    <bpmndi:BPMNPlane id="Plane_TOBE" bpmnElement="Collaboration_TOBE">
+      <bpmndi:BPMNShape id="Participant_TOBE_di" bpmnElement="Participant_TOBE" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2530" height="510" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_TOBE_Analista_di" bpmnElement="Lane_TOBE_Analista" isHorizontal="true">
+        <dc:Bounds x="70" y="40" width="2500" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_TOBE_Sistema_di" bpmnElement="Lane_TOBE_Sistema" isHorizontal="true">
+        <dc:Bounds x="70" y="210" width="2500" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_TOBE_Lider_di" bpmnElement="Lane_TOBE_Lider" isHorizontal="true">
+        <dc:Bounds x="70" y="380" width="2500" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_TOBE_di" bpmnElement="Start_TOBE">
+        <dc:Bounds x="174" y="107" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="138" y="148" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Login_di" bpmnElement="Task_TOBE_Login">
+        <dc:Bounds x="295" y="90" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Validar_di" bpmnElement="Task_TOBE_Validar">
+        <dc:Bounds x="460" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Registrar_di" bpmnElement="Task_TOBE_Registrar">
+        <dc:Bounds x="625" y="90" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Almacenar_di" bpmnElement="Task_TOBE_Almacenar">
+        <dc:Bounds x="790" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Ingresar_di" bpmnElement="Task_TOBE_Ingresar">
+        <dc:Bounds x="955" y="90" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Recuperar_di" bpmnElement="Task_TOBE_Recuperar">
+        <dc:Bounds x="1120" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Generar_di" bpmnElement="Task_TOBE_Generar">
+        <dc:Bounds x="1285" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Revisar_di" bpmnElement="Task_TOBE_Revisar">
+        <dc:Bounds x="1450" y="90" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gw_TOBE_Correctos_di" bpmnElement="Gw_TOBE_Correctos" isMarkerVisible="true">
+        <dc:Bounds x="1652" y="100" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1622" y="155" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Enviar_di" bpmnElement="Task_TOBE_Enviar">
+        <dc:Bounds x="1780" y="90" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_RevisarLider_di" bpmnElement="Task_TOBE_RevisarLider">
+        <dc:Bounds x="1945" y="430" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gw_TOBE_Aprueba_di" bpmnElement="Gw_TOBE_Aprueba" isMarkerVisible="true">
+        <dc:Bounds x="2148" y="440" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2118" y="495" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Devolver_di" bpmnElement="Task_TOBE_Devolver">
+        <dc:Bounds x="2275" y="430" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_TOBE_Reportes_di" bpmnElement="Task_TOBE_Reportes">
+        <dc:Bounds x="2275" y="260" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_TOBE_di" bpmnElement="End_TOBE">
+        <dc:Bounds x="2484" y="277" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2448" y="318" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_TOBE_1_di" bpmnElement="Flow_TOBE_1">
+        <di:waypoint x="210" y="125" />
+        <di:waypoint x="295" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_2_di" bpmnElement="Flow_TOBE_2">
+        <di:waypoint x="420" y="125" />
+        <di:waypoint x="440" y="125" />
+        <di:waypoint x="440" y="295" />
+        <di:waypoint x="460" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_3_di" bpmnElement="Flow_TOBE_3">
+        <di:waypoint x="585" y="295" />
+        <di:waypoint x="605" y="295" />
+        <di:waypoint x="605" y="125" />
+        <di:waypoint x="625" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_4_di" bpmnElement="Flow_TOBE_4">
+        <di:waypoint x="750" y="125" />
+        <di:waypoint x="770" y="125" />
+        <di:waypoint x="770" y="295" />
+        <di:waypoint x="790" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_5_di" bpmnElement="Flow_TOBE_5">
+        <di:waypoint x="915" y="295" />
+        <di:waypoint x="935" y="295" />
+        <di:waypoint x="935" y="125" />
+        <di:waypoint x="955" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_6_di" bpmnElement="Flow_TOBE_6">
+        <di:waypoint x="1080" y="125" />
+        <di:waypoint x="1100" y="125" />
+        <di:waypoint x="1100" y="295" />
+        <di:waypoint x="1120" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_7_di" bpmnElement="Flow_TOBE_7">
+        <di:waypoint x="1245" y="295" />
+        <di:waypoint x="1285" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_8_di" bpmnElement="Flow_TOBE_8">
+        <di:waypoint x="1348" y="260" />
+        <di:waypoint x="1348" y="125" />
+        <di:waypoint x="1450" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_9_di" bpmnElement="Flow_TOBE_9">
+        <di:waypoint x="1575" y="125" />
+        <di:waypoint x="1652" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_10_di" bpmnElement="Flow_TOBE_10">
+        <di:waypoint x="1678" y="150" />
+        <di:waypoint x="1678" y="295" />
+        <di:waypoint x="1410" y="295" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1686" y="190" width="170" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_11_di" bpmnElement="Flow_TOBE_11">
+        <di:waypoint x="1702" y="125" />
+        <di:waypoint x="1780" y="125" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1710" y="103" width="120" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_12_di" bpmnElement="Flow_TOBE_12">
+        <di:waypoint x="1905" y="125" />
+        <di:waypoint x="1925" y="125" />
+        <di:waypoint x="1925" y="465" />
+        <di:waypoint x="1945" y="465" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_13_di" bpmnElement="Flow_TOBE_13">
+        <di:waypoint x="2070" y="465" />
+        <di:waypoint x="2148" y="465" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_14_di" bpmnElement="Flow_TOBE_14">
+        <di:waypoint x="2172" y="440" />
+        <di:waypoint x="2172" y="295" />
+        <di:waypoint x="2275" y="295" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2180" y="410" width="30" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_15_di" bpmnElement="Flow_TOBE_15">
+        <di:waypoint x="2198" y="465" />
+        <di:waypoint x="2275" y="465" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2206" y="443" width="120" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_16_di" bpmnElement="Flow_TOBE_16">
+        <di:waypoint x="2400" y="295" />
+        <di:waypoint x="2484" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_TOBE_17_di" bpmnElement="Flow_TOBE_17">
+        <di:waypoint x="2338" y="500" />
+        <di:waypoint x="2338" y="535" />
+        <di:waypoint x="1482" y="535" />
+        <di:waypoint x="1482" y="160" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1552" y="490" width="260" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
