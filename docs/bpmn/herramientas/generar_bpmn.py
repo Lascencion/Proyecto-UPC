@@ -16,21 +16,21 @@ X0 = POOL_X + POOL_LABEL + LANE_LABEL + 30   # x de la primera columna
 
 
 class Diagram:
-    def __init__(self, key, name, pool, lanes):
-        self.key, self.name, self.pool = key, name, pool
+    def __init__(self, key, name, pool, lanes, lane_h=LANE_H):
+        self.key, self.name, self.pool, self.lane_h = key, name, pool, lane_h
         self.lanes = lanes                     # [(id, nombre)]
         self.nodes, self.flows, self.annotations = {}, [], []
 
     def lane_y(self, lane):
         i = [l[0] for l in self.lanes].index(lane)
-        return POOL_Y + i * LANE_H
+        return POOL_Y + i * self.lane_h
 
-    def node(self, nid, kind, name, lane, col, doc='', dy=0):
+    def node(self, nid, kind, name, lane, col, doc='', dy=0, label_at=None):
         w, h = {'start': (EVT, EVT), 'end': (EVT, EVT), 'gateway': (GW, GW)}.get(kind, (TASK_W, TASK_H))
         cx = X0 + col * COL_W + TASK_W / 2
-        cy = self.lane_y(lane) + LANE_H / 2 + dy
+        cy = self.lane_y(lane) + self.lane_h / 2 + dy
         self.nodes[nid] = dict(id=nid, kind=kind, name=name, lane=lane, doc=doc,
-                               x=cx - w / 2, y=cy - h / 2, w=w, h=h, cx=cx, cy=cy)
+                               x=cx - w / 2, y=cy - h / 2, w=w, h=h, cx=cx, cy=cy, label_at=label_at)
 
     # puntos de conexión
     def R(self, n): n = self.nodes[n]; return (n['x'] + n['w'], n['cy'])
@@ -52,7 +52,7 @@ class Diagram:
     def annotation(self, aid, text, lane, col, width_cols, target):
         x = X0 + col * COL_W
         y = self.lane_y(lane) + 15
-        self.annotations.append(dict(id=aid, text=text, x=x, y=y, w=width_cols * COL_W - 40, h=LANE_H - 30, target=target))
+        self.annotations.append(dict(id=aid, text=text, x=x, y=y, w=width_cols * COL_W - 40, h=self.lane_h - 30, target=target))
 
     @property
     def width(self):
@@ -100,7 +100,7 @@ class Diagram:
         # Diagrama
         fmt = lambda v: f'{v:.0f}'
         bounds = lambda x, y, w, h: f'<dc:Bounds x="{fmt(x)}" y="{fmt(y)}" width="{fmt(w)}" height="{fmt(h)}" />'
-        pool_h = LANE_H * len(self.lanes)
+        pool_h = self.lane_h * len(self.lanes)
         out += [f'  <bpmndi:BPMNDiagram id="Diagram_{self.key}" name="{escape(self.name)}">',
                 f'    <bpmndi:BPMNPlane id="Plane_{self.key}" bpmnElement="Collaboration_{self.key}">',
                 f'      <bpmndi:BPMNShape id="Participant_{self.key}_di" bpmnElement="Participant_{self.key}" isHorizontal="true">',
@@ -108,15 +108,15 @@ class Diagram:
                 '      </bpmndi:BPMNShape>']
         for lid, _ in self.lanes:
             out += [f'      <bpmndi:BPMNShape id="{lid}_di" bpmnElement="{lid}" isHorizontal="true">',
-                    f'        {bounds(POOL_X + POOL_LABEL, self.lane_y(lid), self.width - POOL_LABEL, LANE_H)}',
+                    f'        {bounds(POOL_X + POOL_LABEL, self.lane_y(lid), self.width - POOL_LABEL, self.lane_h)}',
                     '      </bpmndi:BPMNShape>']
         for n in self.nodes.values():
             extra = ' isMarkerVisible="true"' if n['kind'] == 'gateway' else ''
             out += [f'      <bpmndi:BPMNShape id="{n["id"]}_di" bpmnElement="{n["id"]}"{extra}>',
                     f'        {bounds(n["x"], n["y"], n["w"], n["h"])}']
             if n['kind'] in ('start', 'end', 'gateway'):
-                ly = n['y'] + n['h'] + 5
-                out.append(f'        <bpmndi:BPMNLabel>{bounds(n["cx"] - 55, ly, 110, 30)}</bpmndi:BPMNLabel>')
+                lx, ly = n['label_at'] or (n['cx'] - 55, n['y'] + n['h'] + 5)
+                out.append(f'        <bpmndi:BPMNLabel>{bounds(lx, ly, 110, 30)}</bpmndi:BPMNLabel>')
             out.append('      </bpmndi:BPMNShape>')
         for a in self.annotations:
             out += [f'      <bpmndi:BPMNShape id="{a["id"]}_di" bpmnElement="{a["id"]}">',
@@ -229,7 +229,7 @@ def to_be():
     d.flow('Gw_TOBE_Aprueba', 'Task_TOBE_Devolver', 'No')
     d.flow('Task_TOBE_Reportes', 'End_TOBE')
     # Devolver (Líder) -> Revisar (Analista): por la parte baja del carril del Líder QA
-    low = d.lane_y(L) + LANE_H - 15
+    low = d.lane_y(L) + d.lane_h - 15
     dv, rv = d.nodes['Task_TOBE_Devolver'], d.nodes['Task_TOBE_Revisar']
     d.flow('Task_TOBE_Devolver', 'Task_TOBE_Revisar', 'El Analista QA ajusta y vuelve a revisar',
            [d.B('Task_TOBE_Devolver'), (dv['cx'], low), (rv['cx'] - 30, low), (rv['cx'] - 30, rv['y'] + rv['h'])],
@@ -237,9 +237,50 @@ def to_be():
     return d
 
 
+def compra():
+    d = Diagram('COMPRA', 'Flujo de compra de monedas virtuales',
+                'Flujo de compra de monedas virtuales en el videojuego',
+                [('Lane_COMPRA_Jugador', 'Jugador'), ('Lane_COMPRA_Sistema', 'Sistema (videojuego)')], lane_h=230)
+    J, S = (l[0] for l in d.lanes)
+    d.node('Start_COMPRA', 'start', 'Inicio', J, 0)
+    d.node('Task_COMPRA_Tienda', 'user', 'Ingresar a la tienda del videojuego', J, 1)
+    d.node('Task_COMPRA_Paquete', 'user', 'Seleccionar paquete de monedas virtuales', J, 2)
+    d.node('Task_COMPRA_Promocion', 'service', 'Validar promoción y calcular monto final', S, 3,
+           'Aplica la promoción o el cupón vigente y calcula el monto final a cobrar.')
+    d.node('Task_COMPRA_Pago', 'user', 'Seleccionar moneda de cobro y método de pago', J, 4)
+    d.node('Task_COMPRA_Confirmar', 'user', 'Confirmar la compra', J, 5)
+    d.node('Gw_COMPRA_Valida', 'gateway', '¿La compra es válida?', S, 6,
+           'Se valida el pago, la vigencia de la promoción y las restricciones de la cuenta.',
+           label_at=(X0 + 6 * COL_W + TASK_W / 2 - 140, 40 + 230 + 115 - 55))
+    d.node('Task_COMPRA_Registrar', 'service', 'Registrar transacción aprobada', S, 7, dy=-55)
+    d.node('Task_COMPRA_Acreditar', 'service', 'Acreditar monedas virtuales', S, 8, dy=-55)
+    d.node('Task_COMPRA_Saldo', 'service', 'Actualizar saldo y mostrar confirmación', S, 9, dy=-55)
+    d.node('Task_COMPRA_Rechazo', 'service', 'Mostrar rechazo, cancelación o error', S, 7, dy=55)
+    d.node('End_COMPRA', 'end', 'Fin', S, 10, label_at=(X0 + 10 * COL_W + TASK_W / 2 - 18, 40 + 230 + 115 - 8))
+
+    d.flow('Start_COMPRA', 'Task_COMPRA_Tienda')
+    seq = ['Task_COMPRA_Tienda', 'Task_COMPRA_Paquete', 'Task_COMPRA_Promocion', 'Task_COMPRA_Pago', 'Task_COMPRA_Confirmar', 'Gw_COMPRA_Valida']
+    for a, b in zip(seq, seq[1:]):
+        d.flow(a, b)
+    gw = d.nodes['Gw_COMPRA_Valida']
+    d.flow('Gw_COMPRA_Valida', 'Task_COMPRA_Registrar', 'Sí',
+           [d.T('Gw_COMPRA_Valida'), (gw['cx'], d.L('Task_COMPRA_Registrar')[1]), d.L('Task_COMPRA_Registrar')],
+           label_at=(gw['cx'] + 8, d.T('Gw_COMPRA_Valida')[1] - 30), label_w=30)
+    d.flow('Gw_COMPRA_Valida', 'Task_COMPRA_Rechazo', 'No',
+           [d.B('Gw_COMPRA_Valida'), (gw['cx'], d.L('Task_COMPRA_Rechazo')[1]), d.L('Task_COMPRA_Rechazo')],
+           label_at=(gw['cx'] + 8, d.B('Gw_COMPRA_Valida')[1] + 10), label_w=30)
+    d.flow('Task_COMPRA_Registrar', 'Task_COMPRA_Acreditar')
+    d.flow('Task_COMPRA_Acreditar', 'Task_COMPRA_Saldo')
+    end = d.nodes['End_COMPRA']
+    d.flow('Task_COMPRA_Saldo', 'End_COMPRA', points=[d.R('Task_COMPRA_Saldo'), (end['cx'], d.R('Task_COMPRA_Saldo')[1]), d.T('End_COMPRA')])
+    d.flow('Task_COMPRA_Rechazo', 'End_COMPRA', points=[d.R('Task_COMPRA_Rechazo'), (end['cx'], d.R('Task_COMPRA_Rechazo')[1]), d.B('End_COMPRA')])
+    return d
+
+
 if __name__ == '__main__':
     out = sys.argv[1]
-    for d, fname in [(as_is(), 'AS-IS_generacion_casos_prueba.bpmn'), (to_be(), 'TO-BE_generacion_casos_prueba_LLM.bpmn')]:
+    for d, fname in [(as_is(), 'AS-IS_generacion_casos_prueba.bpmn'), (to_be(), 'TO-BE_generacion_casos_prueba_LLM.bpmn'),
+                     (compra(), 'Flujo_compra_monedas_virtuales.bpmn')]:
         with open(f'{out}/{fname}', 'w', encoding='utf-8') as fh:
             fh.write(d.xml())
         print(fname, len(d.nodes), 'nodos', len(d.flows), 'flujos')

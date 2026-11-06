@@ -1,9 +1,10 @@
-# Diagramas BPMN 2.0 (AS-IS y TO-BE)
+# Diagramas BPMN 2.0
 
 | Archivo | Proceso | Carriles |
 |---|---|---|
 | `AS-IS_generacion_casos_prueba.bpmn` | Proceso actual: generación manual de casos de prueba para la compra de monedas virtuales | Equipo de Producto, Analista QA, Líder QA |
 | `TO-BE_generacion_casos_prueba_LLM.bpmn` | Proceso propuesto: generación de casos de prueba con LLM | Analista QA, Sistema (LLM), Líder QA |
+| `Flujo_compra_monedas_virtuales.bpmn` | Flujo de compra de monedas virtuales en el videojuego (caso de estudio) | Jugador, Sistema (videojuego) |
 
 Archivos BPMN 2.0 estándar (modelo + diagrama BPMNDI), con un pool y un carril por rol.
 

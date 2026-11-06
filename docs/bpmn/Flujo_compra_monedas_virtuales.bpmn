@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_COMPRA" name="Flujo de compra de monedas virtuales" targetNamespace="http://upc.edu.pe/qa-knowledge/bpmn" exporter="generar_bpmn.py" exporterVersion="1.0">
+  <collaboration id="Collaboration_COMPRA">
+    <participant id="Participant_COMPRA" name="Flujo de compra de monedas virtuales en el videojuego" processRef="Process_COMPRA" />
+  </collaboration>
+  <process id="Process_COMPRA" name="Flujo de compra de monedas virtuales en el videojuego" isExecutable="false">
+    <laneSet id="LaneSet_COMPRA">
+      <lane id="Lane_COMPRA_Jugador" name="Jugador">
+        <flowNodeRef>Start_COMPRA</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Tienda</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Paquete</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Pago</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Confirmar</flowNodeRef>
+      </lane>
+      <lane id="Lane_COMPRA_Sistema" name="Sistema (videojuego)">
+        <flowNodeRef>Task_COMPRA_Promocion</flowNodeRef>
+        <flowNodeRef>Gw_COMPRA_Valida</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Registrar</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Acreditar</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Saldo</flowNodeRef>
+        <flowNodeRef>Task_COMPRA_Rechazo</flowNodeRef>
+        <flowNodeRef>End_COMPRA</flowNodeRef>
+      </lane>
+    </laneSet>
+    <startEvent id="Start_COMPRA" name="Inicio">
+      <outgoing>Flow_COMPRA_1</outgoing>
+    </startEvent>
+    <userTask id="Task_COMPRA_Tienda" name="Ingresar a la tienda del videojuego">
+      <incoming>Flow_COMPRA_1</incoming>
+      <outgoing>Flow_COMPRA_2</outgoing>
+    </userTask>
+    <userTask id="Task_COMPRA_Paquete" name="Seleccionar paquete de monedas virtuales">
+      <incoming>Flow_COMPRA_2</incoming>
+      <outgoing>Flow_COMPRA_3</outgoing>
+    </userTask>
+    <serviceTask id="Task_COMPRA_Promocion" name="Validar promoción y calcular monto final">
+      <documentation>Aplica la promoción o el cupón vigente y calcula el monto final a cobrar.</documentation>
+      <incoming>Flow_COMPRA_3</incoming>
+      <outgoing>Flow_COMPRA_4</outgoing>
+    </serviceTask>
+    <userTask id="Task_COMPRA_Pago" name="Seleccionar moneda de cobro y método de pago">
+      <incoming>Flow_COMPRA_4</incoming>
+      <outgoing>Flow_COMPRA_5</outgoing>
+    </userTask>
+    <userTask id="Task_COMPRA_Confirmar" name="Confirmar la compra">
+      <incoming>Flow_COMPRA_5</incoming>
+      <outgoing>Flow_COMPRA_6</outgoing>
+    </userTask>
+    <exclusiveGateway id="Gw_COMPRA_Valida" name="¿La compra es válida?">
+      <documentation>Se valida el pago, la vigencia de la promoción y las restricciones de la cuenta.</documentation>
+      <incoming>Flow_COMPRA_6</incoming>
+      <outgoing>Flow_COMPRA_7</outgoing>
+      <outgoing>Flow_COMPRA_8</outgoing>
+    </exclusiveGateway>
+    <serviceTask id="Task_COMPRA_Registrar" name="Registrar transacción aprobada">
+      <incoming>Flow_COMPRA_7</incoming>
+      <outgoing>Flow_COMPRA_9</outgoing>
+    </serviceTask>
+    <serviceTask id="Task_COMPRA_Acreditar" name="Acreditar monedas virtuales">
+      <incoming>Flow_COMPRA_9</incoming>
+      <outgoing>Flow_COMPRA_10</outgoing>
+    </serviceTask>
+    <serviceTask id="Task_COMPRA_Saldo" name="Actualizar saldo y mostrar confirmación">
+      <incoming>Flow_COMPRA_10</incoming>
+      <outgoing>Flow_COMPRA_11</outgoing>
+    </serviceTask>
+    <serviceTask id="Task_COMPRA_Rechazo" name="Mostrar rechazo, cancelación o error">
+      <incoming>Flow_COMPRA_8</incoming>
+      <outgoing>Flow_COMPRA_12</outgoing>
+    </serviceTask>
+    <endEvent id="End_COMPRA" name="Fin">
+      <incoming>Flow_COMPRA_11</incoming>
+      <incoming>Flow_COMPRA_12</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_COMPRA_1" sourceRef="Start_COMPRA" targetRef="Task_COMPRA_Tienda" />
+    <sequenceFlow id="Flow_COMPRA_2" sourceRef="Task_COMPRA_Tienda" targetRef="Task_COMPRA_Paquete" />
+    <sequenceFlow id="Flow_COMPRA_3" sourceRef="Task_COMPRA_Paquete" targetRef="Task_COMPRA_Promocion" />
+    <sequenceFlow id="Flow_COMPRA_4" sourceRef="Task_COMPRA_Promocion" targetRef="Task_COMPRA_Pago" />
+    <sequenceFlow id="Flow_COMPRA_5" sourceRef="Task_COMPRA_Pago" targetRef="Task_COMPRA_Confirmar" />
+    <sequenceFlow id="Flow_COMPRA_6" sourceRef="Task_COMPRA_Confirmar" targetRef="Gw_COMPRA_Valida" />
+    <sequenceFlow id="Flow_COMPRA_7" name="Sí" sourceRef="Gw_COMPRA_Valida" targetRef="Task_COMPRA_Registrar" />
+    <sequenceFlow id="Flow_COMPRA_8" name="No" sourceRef="Gw_COMPRA_Valida" targetRef="Task_COMPRA_Rechazo" />
+    <sequenceFlow id="Flow_COMPRA_9" sourceRef="Task_COMPRA_Registrar" targetRef="Task_COMPRA_Acreditar" />
+    <sequenceFlow id="Flow_COMPRA_10" sourceRef="Task_COMPRA_Acreditar" targetRef="Task_COMPRA_Saldo" />
+    <sequenceFlow id="Flow_COMPRA_11" sourceRef="Task_COMPRA_Saldo" targetRef="End_COMPRA" />
+    <sequenceFlow id="Flow_COMPRA_12" sourceRef="Task_COMPRA_Rechazo" targetRef="End_COMPRA" />
+  </process>
+  <bpmndi:BPMNDiagram id="Diagram_COMPRA" name="Flujo de compra de monedas virtuales">
+    <bpmndi:BPMNPlane id="Plane_COMPRA" bpmnElement="Collaboration_COMPRA">
+      <bpmndi:BPMNShape id="Participant_COMPRA_di" bpmnElement="Participant_COMPRA" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="1870" height="460" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_COMPRA_Jugador_di" bpmnElement="Lane_COMPRA_Jugador" isHorizontal="true">
+        <dc:Bounds x="70" y="40" width="1840" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_COMPRA_Sistema_di" bpmnElement="Lane_COMPRA_Sistema" isHorizontal="true">
+        <dc:Bounds x="70" y="270" width="1840" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_COMPRA_di" bpmnElement="Start_COMPRA">
+        <dc:Bounds x="174" y="137" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="138" y="178" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Tienda_di" bpmnElement="Task_COMPRA_Tienda">
+        <dc:Bounds x="295" y="120" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Paquete_di" bpmnElement="Task_COMPRA_Paquete">
+        <dc:Bounds x="460" y="120" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Promocion_di" bpmnElement="Task_COMPRA_Promocion">
+        <dc:Bounds x="625" y="350" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Pago_di" bpmnElement="Task_COMPRA_Pago">
+        <dc:Bounds x="790" y="120" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Confirmar_di" bpmnElement="Task_COMPRA_Confirmar">
+        <dc:Bounds x="955" y="120" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gw_COMPRA_Valida_di" bpmnElement="Gw_COMPRA_Valida" isMarkerVisible="true">
+        <dc:Bounds x="1158" y="360" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1042" y="330" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Registrar_di" bpmnElement="Task_COMPRA_Registrar">
+        <dc:Bounds x="1285" y="295" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Acreditar_di" bpmnElement="Task_COMPRA_Acreditar">
+        <dc:Bounds x="1450" y="295" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Saldo_di" bpmnElement="Task_COMPRA_Saldo">
+        <dc:Bounds x="1615" y="295" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_COMPRA_Rechazo_di" bpmnElement="Task_COMPRA_Rechazo">
+        <dc:Bounds x="1285" y="405" width="125" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_COMPRA_di" bpmnElement="End_COMPRA">
+        <dc:Bounds x="1824" y="367" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1824" y="377" width="110" height="30" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_1_di" bpmnElement="Flow_COMPRA_1">
+        <di:waypoint x="210" y="155" />
+        <di:waypoint x="295" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_2_di" bpmnElement="Flow_COMPRA_2">
+        <di:waypoint x="420" y="155" />
+        <di:waypoint x="460" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_3_di" bpmnElement="Flow_COMPRA_3">
+        <di:waypoint x="585" y="155" />
+        <di:waypoint x="605" y="155" />
+        <di:waypoint x="605" y="385" />
+        <di:waypoint x="625" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_4_di" bpmnElement="Flow_COMPRA_4">
+        <di:waypoint x="750" y="385" />
+        <di:waypoint x="770" y="385" />
+        <di:waypoint x="770" y="155" />
+        <di:waypoint x="790" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_5_di" bpmnElement="Flow_COMPRA_5">
+        <di:waypoint x="915" y="155" />
+        <di:waypoint x="955" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_6_di" bpmnElement="Flow_COMPRA_6">
+        <di:waypoint x="1080" y="155" />
+        <di:waypoint x="1119" y="155" />
+        <di:waypoint x="1119" y="385" />
+        <di:waypoint x="1158" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_7_di" bpmnElement="Flow_COMPRA_7">
+        <di:waypoint x="1182" y="360" />
+        <di:waypoint x="1182" y="330" />
+        <di:waypoint x="1285" y="330" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1190" y="330" width="30" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_8_di" bpmnElement="Flow_COMPRA_8">
+        <di:waypoint x="1182" y="410" />
+        <di:waypoint x="1182" y="440" />
+        <di:waypoint x="1285" y="440" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1190" y="420" width="30" height="20" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_9_di" bpmnElement="Flow_COMPRA_9">
+        <di:waypoint x="1410" y="330" />
+        <di:waypoint x="1450" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_10_di" bpmnElement="Flow_COMPRA_10">
+        <di:waypoint x="1575" y="330" />
+        <di:waypoint x="1615" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_11_di" bpmnElement="Flow_COMPRA_11">
+        <di:waypoint x="1740" y="330" />
+        <di:waypoint x="1842" y="330" />
+        <di:waypoint x="1842" y="367" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_COMPRA_12_di" bpmnElement="Flow_COMPRA_12">
+        <di:waypoint x="1410" y="440" />
+        <di:waypoint x="1842" y="440" />
+        <di:waypoint x="1842" y="403" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
