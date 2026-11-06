@@ -21,5 +21,5 @@ También se abren en bpmn.io, Camunda Modeler y otras herramientas BPMN 2.0.
   "Identificar escenarios manualmente". "Corregir casos de prueba" está en el carril del Analista QA, que es quien corrige.
 - **TO-BE**: tareas de usuario para el Analista QA y el Líder QA, y tareas de servicio para el sistema.
   Cada tarea lleva su descripción en *Documentación*.
-- `png/`: vista previa de cada diagrama.
+- `png/`: vista previa de cada diagrama, con los colores por defecto de Bizagi (inicio verde, fin rojo, tareas celestes y compuertas amarillas).
 - `herramientas/generar_bpmn.py`: genera los archivos (`python3 herramientas/generar_bpmn.py .` desde esta carpeta).
