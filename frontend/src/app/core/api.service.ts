@@ -58,8 +58,8 @@ export class ApiService {
     return this.http.get<{ code: string }>(`/api/knowledge/${type}/next-code`, { params: params({ project }) });
   }
 
-  recordOptions(type: string, project: string) {
-    return this.http.get<RecordOption[]>(`/api/knowledge/${type}/options`, { params: params({ project }) });
+  recordOptions(type: string, project: string, module?: string) {
+    return this.http.get<RecordOption[]>(`/api/knowledge/${type}/options`, { params: params({ project, module }) });
   }
 
   getRecord(type: string, id: string) {

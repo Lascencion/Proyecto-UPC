@@ -104,16 +104,34 @@ export class GenerationNewComponent implements OnInit {
 
   async onProjectChange(): Promise<void> {
     this.module = '';
+    this.modules.set([]);
+    this.resetRequirement();
+    if (!this.project) return;
+    try {
+      this.modules.set(await firstValueFrom(this.api.modules(this.project, true)));
+    } catch (e) {
+      this.notify.error(e);
+    }
+  }
+
+  /** Al elegir el módulo solo se listan los requerimientos registrados en él. */
+  async onModuleChange(): Promise<void> {
+    this.resetRequirement();
+    if (!this.project || !this.module) return;
+    try {
+      this.requirements.set(await firstValueFrom(this.api.recordOptions('requirements', this.project, this.module)));
+    } catch (e) {
+      this.notify.error(e);
+    }
+  }
+
+  private resetRequirement(): void {
+    this.requirements.set([]);
     this.requirementCode = '';
     this.requirement.set(null);
     this.candidates.set([]);
-    if (!this.project) return;
-    const [modules, requirements] = await Promise.all([
-      firstValueFrom(this.api.modules(this.project, true)),
-      firstValueFrom(this.api.recordOptions('requirements', this.project)),
-    ]);
-    this.modules.set(modules);
-    this.requirements.set(requirements);
+    this.searchResults.set([]);
+    this.searched.set(false);
   }
 
   onSourceChange(): void {

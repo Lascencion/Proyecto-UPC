@@ -29,7 +29,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Módulo / flujo</mat-label>
-        <mat-select [(ngModel)]="module" [disabled]="!project" required>
+        <mat-select [(ngModel)]="module" (selectionChange)="onModuleChange()" [disabled]="!project" required>
           @for (m of modules(); track m.id) {
             <mat-option [value]="m.id">{{ m.name }}</mat-option>
           }
@@ -45,13 +45,16 @@
     @if (source === 'registrado') {
       <mat-form-field class="full">
         <mat-label>Requerimiento</mat-label>
-        <mat-select [(ngModel)]="requirementCode" (selectionChange)="loadContext()" [disabled]="!project" required>
+        <mat-select [(ngModel)]="requirementCode" (selectionChange)="loadContext()" [disabled]="!module" required>
           @for (r of requirements(); track r.code) {
             <mat-option [value]="r.code"><strong>{{ r.code }}</strong> · {{ r.title }}</mat-option>
           } @empty {
-            <mat-option disabled>No hay requerimientos registrados en el proyecto.</mat-option>
+            <mat-option disabled>No hay requerimientos registrados en este módulo; puede ingresar uno nuevo en texto libre.</mat-option>
           }
         </mat-select>
+        @if (!module) {
+          <mat-hint>Seleccione primero el módulo para ver sus requerimientos.</mat-hint>
+        }
       </mat-form-field>
       @if (requirement(); as r) {
         <div class="req-preview">

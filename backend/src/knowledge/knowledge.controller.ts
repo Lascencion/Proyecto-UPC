@@ -33,8 +33,8 @@ export class KnowledgeController {
 
   @Get(':type/options')
   @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
-  options(@Param('type') type: string, @Query('project') project: string) {
-    return this.knowledge.options(type, project);
+  options(@Param('type') type: string, @Query('project') project: string, @Query('module') module?: string) {
+    return this.knowledge.options(type, project, module);
   }
 
   @Get(':type')

@@ -152,10 +152,13 @@ export class KnowledgeService {
   }
 
   /** Registros del proyecto para las listas de selección (código y título). */
-  async options(type: string, projectId: string) {
+  /** Lista código y título de los registros del proyecto; opcionalmente, solo los de un módulo. */
+  async options(type: string, projectId: string, moduleId?: string) {
     const def = this.definition(type);
+    const filter: Record<string, unknown> = { project: toObjectId(projectId, 'proyecto') };
+    if (moduleId) filter.module = toObjectId(moduleId, 'módulo');
     const docs = await this.model(def)
-      .find({ project: toObjectId(projectId, 'proyecto') }, { code: 1, [def.titleField]: 1 })
+      .find(filter, { code: 1, [def.titleField]: 1 })
       .sort({ code: 1 })
       .lean();
     return docs.map((d) => ({ code: d.code as string, title: (d[def.titleField] as string) ?? '' }));
