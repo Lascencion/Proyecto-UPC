@@ -61,6 +61,19 @@
         </mat-card-actions>
       </mat-card>
     }
+    @if (auth.can('GENERATION', 'CREATE')) {
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>auto_awesome</mat-icon>
+          <mat-card-title>Generar casos de prueba</mat-card-title>
+          <mat-card-subtitle>A partir de un requerimiento y del conocimiento histórico</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <a mat-flat-button routerLink="/generacion/nueva">Generar casos</a>
+          <a mat-button routerLink="/generacion">Mis generaciones</a>
+        </mat-card-actions>
+      </mat-card>
+    }
     <mat-card appearance="outlined">
       <mat-card-header>
         <mat-icon mat-card-avatar>download</mat-icon>

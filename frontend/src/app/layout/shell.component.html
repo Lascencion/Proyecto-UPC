@@ -29,12 +29,19 @@
         }
       }
 
-      <div mat-subheader>Generación</div>
-      <a mat-list-item disabled matTooltip="Disponible en la próxima iteración">
-        <mat-icon matListItemIcon>auto_awesome</mat-icon>
-        <span matListItemTitle>Generar casos de prueba</span>
-        <span matListItemLine class="soon">Próximamente</span>
-      </a>
+      @if (auth.can('GENERATION', 'VIEW')) {
+        <div mat-subheader>Generación</div>
+        @if (auth.can('GENERATION', 'CREATE')) {
+          <a mat-list-item routerLink="/generacion/nueva" routerLinkActive="active">
+            <mat-icon matListItemIcon>auto_awesome</mat-icon>
+            <span matListItemTitle>Generar casos</span>
+          </a>
+        }
+        <a mat-list-item routerLink="/generacion" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon matListItemIcon>history</mat-icon>
+          <span matListItemTitle>Mis generaciones</span>
+        </a>
+      }
 
       @if (auth.can('CATALOGS', 'VIEW') || auth.can('ADMIN', 'VIEW')) {
         <div mat-subheader>Configuración</div>

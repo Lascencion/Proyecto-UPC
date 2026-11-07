@@ -40,6 +40,21 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/imports/import-review.component').then((m) => m.ImportReviewComponent),
       },
       {
+        path: 'generacion',
+        canActivate: [permissionGuard('GENERATION', 'VIEW')],
+        loadComponent: () => import('./pages/generation/generation-list.component').then((m) => m.GenerationListComponent),
+      },
+      {
+        path: 'generacion/nueva',
+        canActivate: [permissionGuard('GENERATION', 'CREATE')],
+        loadComponent: () => import('./pages/generation/generation-new.component').then((m) => m.GenerationNewComponent),
+      },
+      {
+        path: 'generacion/:id',
+        canActivate: [permissionGuard('GENERATION', 'VIEW')],
+        loadComponent: () => import('./pages/generation/generation-detail.component').then((m) => m.GenerationDetailComponent),
+      },
+      {
         path: 'catalogos',
         canActivate: [permissionGuard('CATALOGS', 'VIEW')],
         loadComponent: () => import('./pages/catalogs/catalogs.component').then((m) => m.CatalogsComponent),

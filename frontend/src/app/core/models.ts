@@ -158,3 +158,79 @@ export interface PermissionMatrix {
   actions: { action: ActionKey; label: string }[];
   permissions: Record<Role, PermissionMap>;
 }
+
+// ----- Generación de casos de prueba -----
+
+export const SCENARIO_TYPES = ['Positivo', 'Negativo', 'Valor límite', 'Excepción'];
+export const TECHNIQUES = [
+  'Partición de equivalencia',
+  'Análisis de valores límite',
+  'Tabla de decisión',
+  'Transición de estados',
+  'Casos de uso',
+  'Conjetura de errores',
+];
+
+export type GenerationStatus = 'GENERANDO' | 'GENERADO' | 'ERROR';
+export type GenerationStep = 'contexto' | 'instruccion' | 'respuesta' | 'completado';
+
+export interface RequirementInput {
+  code?: string;
+  title: string;
+  description: string;
+  acceptanceCriteria: string[];
+}
+
+export interface ContextCandidate {
+  type: EntityType;
+  code: string;
+  title: string;
+  score: number | null;
+  relation: 'directa' | 'similitud' | 'manual';
+  selected: boolean;
+}
+
+export interface GenerationRequest {
+  id: string;
+  code: string;
+  project: NamedRef;
+  module: NamedRef;
+  requirement: RequirementInput & { source: 'registrado' | 'nuevo' };
+  context: (Omit<ContextCandidate, 'selected'> & { content: string })[];
+  params: { scenarioTypes: string[]; techniques: string[]; maxCases: number; instructions: string };
+  status: GenerationStatus;
+  step: GenerationStep;
+  version: number;
+  provider?: string;
+  model?: string;
+  durationMs?: number;
+  usage?: { inputTokens: number; outputTokens: number; cacheReadTokens: number };
+  observations: string;
+  missingScenarioTypes: string[];
+  caseCount: number;
+  error?: string;
+  createdBy: NamedRef;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GeneratedCase {
+  id: string;
+  number: number;
+  title: string;
+  objective: string;
+  scenarioType: string;
+  technique: string;
+  priority: string;
+  preconditions: string;
+  testData: string;
+  steps: TestStep[];
+  expectedResult: string;
+  sources: string[];
+  status: string;
+}
+
+export interface GenerationDetail {
+  request: GenerationRequest;
+  cases: GeneratedCase[];
+}

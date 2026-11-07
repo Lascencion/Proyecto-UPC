@@ -56,9 +56,9 @@ export const MODULES: ModuleDescriptor[] = [
   {
     module: AppModule.GENERATION,
     label: 'Generación de casos de prueba',
-    description: 'Generación de casos de prueba funcionales con LLM (próxima iteración).',
+    description: 'Generación de casos de prueba funcionales con LLM a partir del conocimiento histórico.',
     actions: [Action.VIEW, Action.CREATE, Action.EDIT, Action.DELETE],
-    available: false,
+    available: true,
   },
   {
     module: AppModule.ADMIN,

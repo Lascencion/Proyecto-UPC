@@ -1,0 +1,123 @@
+@if (detail(); as d) {
+  <header class="page-header">
+    <div>
+      <a mat-button routerLink="/generacion" class="back"><mat-icon>arrow_back</mat-icon> Mis generaciones</a>
+      <h1>{{ d.request.code }} · Casos generados</h1>
+      <p class="muted meta">
+        {{ d.request.requirement.code ? d.request.requirement.code + ' · ' : '' }}{{ d.request.requirement.title }} ·
+        {{ d.request.project.name }} / {{ d.request.module.name }} · Generado por {{ d.request.createdBy.name }},
+        {{ d.request.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+      </p>
+    </div>
+    <span class="gen-status gen-{{ d.request.status }}">{{ statusLabels[d.request.status] }}</span>
+  </header>
+
+  @if (d.request.status === 'GENERANDO') {
+    <p class="info-box">Los casos se están generando. Esta página se actualizará automáticamente.</p>
+    <mat-progress-bar mode="indeterminate" />
+  }
+  @if (d.request.status === 'ERROR') {
+    <div class="error-box">
+      {{ d.request.error }}
+      <div><a mat-button routerLink="/generacion/nueva">Nueva generación</a></div>
+    </div>
+  }
+
+  @if (d.request.status === 'GENERADO') {
+    <section class="facts">
+      <div><span class="label">Casos</span><strong>{{ d.cases.length }}</strong></div>
+      <div><span class="label">Modelo</span><strong>{{ d.request.provider === 'simulado' ? 'Modo simulado' : d.request.model }}</strong></div>
+      <div><span class="label">Tiempo de generación</span><strong>{{ seconds(d.request.durationMs) }} s</strong></div>
+      @if (d.request.usage?.inputTokens) {
+        <div>
+          <span class="label">Tokens (entrada / salida)</span>
+          <strong>{{ d.request.usage!.inputTokens | number }} / {{ d.request.usage!.outputTokens | number }}</strong>
+        </div>
+      }
+    </section>
+
+    <section class="chips">
+      @for (s of byScenario(); track s.type) {
+        <span class="chip" [class.missing]="!s.count">{{ s.type }}: <strong>{{ s.count }}</strong></span>
+      }
+    </section>
+
+    @if (d.request.missingScenarioTypes.length) {
+      <p class="warning-box">
+        No se generaron casos de: {{ d.request.missingScenarioTypes.join(', ') }}. Puede registrarlo como observación en la
+        revisión.
+      </p>
+    }
+    @if (d.request.observations) {
+      <p class="info-box"><strong>Observaciones del modelo:</strong> {{ d.request.observations }}</p>
+    }
+
+    <mat-accordion multi class="cases">
+      @for (c of d.cases; track c.id) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="num">{{ c.number }}</span> {{ c.title }}
+            </mat-panel-title>
+            <mat-panel-description>
+              <span class="tag" [attr.data-value]="c.scenarioType">{{ c.scenarioType }}</span>
+              <span class="tag" [attr.data-value]="c.priority">{{ c.priority }}</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <dl class="case">
+            @if (c.objective) {
+              <dt>Objetivo</dt><dd>{{ c.objective }}</dd>
+            }
+            @if (c.technique) {
+              <dt>Técnica de diseño</dt><dd>{{ c.technique }}</dd>
+            }
+            @if (c.preconditions) {
+              <dt>Precondiciones</dt><dd>{{ c.preconditions }}</dd>
+            }
+            @if (c.testData) {
+              <dt>Datos de prueba</dt><dd>{{ c.testData }}</dd>
+            }
+            <dt>Pasos</dt>
+            <dd>
+              <table class="steps">
+                <tr><th>N°</th><th>Acción</th><th>Resultado esperado</th></tr>
+                @for (s of c.steps; track s.number) {
+                  <tr><td>{{ s.number }}</td><td>{{ s.action }}</td><td>{{ s.expectedResult }}</td></tr>
+                }
+              </table>
+            </dd>
+            <dt>Resultado esperado</dt><dd>{{ c.expectedResult }}</dd>
+            <dt>Fuentes</dt><dd>{{ c.sources.length ? c.sources.join(', ') : '—' }}</dd>
+          </dl>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+    <p class="muted small">La revisión, las observaciones y la aprobación de los casos se habilitarán en el siguiente sprint.</p>
+  }
+
+  <h2>Información utilizada</h2>
+  <div class="context">
+    <div class="requirement">
+      <strong>{{ d.request.requirement.code || 'Requerimiento nuevo' }}</strong> · {{ d.request.requirement.title }}
+      <p>{{ d.request.requirement.description }}</p>
+    </div>
+    <ul>
+      @for (c of d.request.context; track c.code) {
+        <li [matTooltip]="c.content" matTooltipClass="pre-tooltip">
+          <strong>{{ c.code }}</strong> · {{ c.title }}
+          <span class="muted">({{ typeLabels[c.type] }} · {{ c.relation === 'directa' ? 'relación directa' : c.relation === 'manual' ? 'agregado' : c.score + ' %' }})</span>
+        </li>
+      } @empty {
+        <li class="muted">No se usó información histórica.</li>
+      }
+    </ul>
+    <p class="muted small">
+      Escenarios solicitados: {{ d.request.params.scenarioTypes.join(', ') }} · Máximo {{ d.request.params.maxCases }} casos
+      @if (d.request.params.instructions) {
+        · Indicaciones: {{ d.request.params.instructions }}
+      }
+    </p>
+  </div>
+} @else {
+  <mat-progress-bar mode="indeterminate" />
+}

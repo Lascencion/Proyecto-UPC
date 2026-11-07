@@ -4,7 +4,7 @@ Sistema web de apoyo a la tesis *"Sistema usando LLM para la generación de caso
 de compra de monedas virtuales en videojuegos en línea"*. El sistema es genérico: el flujo de compra de monedas
 virtuales es el caso de estudio y aparece en los ejemplos de las plantillas.
 
-## Estado: iteración 1 — Módulo 1 (Base de conocimiento)
+## Estado: Sprint 1 (base de conocimiento) y Sprint 2 (generación con LLM)
 
 | Funcionalidad | Estado |
 |---|---|
@@ -16,7 +16,9 @@ virtuales es el caso de estudio y aparece en los ejemplos de las plantillas.
 | Selección de registros relacionados (varios) desde listas con buscador | ✅ |
 | Carga masiva desde Excel, Word y CSV con revisión, corrección y confirmación | ✅ |
 | Consulta, búsqueda, edición y eliminación de la información registrada | ✅ |
-| Generación de casos con LLM y aprobación/observación por el Líder QA | ⏳ próximas iteraciones |
+| Selección de información histórica relacionada con un requerimiento (HU09) | ✅ |
+| Generación de casos de prueba funcionales con LLM (HU10) | ✅ |
+| Revisión, regeneración, aprobación, exportación y reportes (HU11 – HU17) | ⏳ Sprints 3 y 4 |
 
 ## Arquitectura
 
@@ -73,6 +75,25 @@ Al iniciar por primera vez se crea el administrador definido en `.env`:
 Primeros pasos: cree un **proyecto** y sus **módulos/flujos** en *Proyectos y módulos*. Luego registre información
 de forma individual o descargue una plantilla en *Carga masiva*.
 
+## Generación de casos de prueba con LLM
+
+1. El Analista QA elige un requerimiento registrado (o escribe uno nuevo).
+2. El sistema sugiere la información histórica relacionada: primero los registros vinculados directamente al
+   requerimiento y luego los más parecidos por texto (TF-IDF con similitud del coseno, calculada en el propio sistema).
+   El Analista puede quitar o agregar registros (máximo 15).
+3. Se eligen los tipos de escenario, las técnicas, la cantidad de casos (1 a 20) e indicaciones opcionales.
+4. El sistema arma la instrucción, la envía al LLM con salida estructurada (JSON Schema), valida la respuesta y guarda
+   la solicitud (GEN-###) con sus casos, el contexto usado, el modelo, el tiempo y los tokens consumidos.
+
+Configuración en `backend/.env`:
+
+| Variable | Valor |
+|---|---|
+| `ANTHROPIC_API_KEY` | Clave de la API de Anthropic. Sin ella el sistema funciona en **modo simulado** (casos de ejemplo, sin costo). |
+| `LLM_PROVIDER` | `claude` o `simulado`. Si se omite, se usa Claude cuando hay clave. |
+| `LLM_MODEL` | Modelo de Claude (por defecto `claude-opus-5-5`). |
+| `LLM_EFFORT` | Esfuerzo de razonamiento: `low`, `medium` (por defecto), `high`, `xhigh` o `max`. |
+
 ## Roles y permisos
 
 Los permisos se asignan por rol y por módulo (Ver, Crear, Editar, Eliminar, Carga masiva) y el administrador los
@@ -82,7 +103,7 @@ puede cambiar en *Permisos por rol*. Valores iniciales:
 |---|---|---|---|
 | Base de conocimiento | Ver, crear, editar, carga masiva | Todo | Todo |
 | Catálogos (proyectos/módulos) | Ver | Todo | Todo |
-| Generación de casos *(próximamente)* | Ver, crear | Todo | Todo |
+| Generación de casos | Ver, crear | Todo | Todo |
 | Administración (usuarios y permisos) | — | — | Todo (no se puede quitar) |
 
 ## Carga masiva

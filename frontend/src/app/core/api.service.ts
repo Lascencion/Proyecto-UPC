@@ -2,7 +2,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom, map, Observable, shareReplay } from 'rxjs';
 import {
+  ContextCandidate,
   EntityDefinition,
+  GenerationDetail,
+  GenerationRequest,
+  RequirementInput,
   FlowModule,
   ImportBatch,
   ImportDetail,
@@ -145,6 +149,31 @@ export class ApiService {
     a.download = fileName;
     a.click();
     URL.revokeObjectURL(url);
+  }
+
+  // ----- Generación de casos de prueba -----
+  generationConfig() {
+    return this.http.get<{ provider: string; simulated: boolean }>('/api/generation/config');
+  }
+
+  generationContext(body: { project: string; module?: string; requirementCode?: string; requirement?: Partial<RequirementInput> }) {
+    return this.http.post<{ requirement: RequirementInput; candidates: ContextCandidate[] }>('/api/generation/context', body);
+  }
+
+  searchGenerationRecords(project: string, q: string) {
+    return this.http.get<ContextCandidate[]>('/api/generation/records', { params: params({ project, q }) });
+  }
+
+  createGeneration(body: Record<string, unknown>) {
+    return this.http.post<GenerationDetail>('/api/generation', body);
+  }
+
+  generations(query: Record<string, unknown>) {
+    return this.http.get<GenerationRequest[]>('/api/generation', { params: params(query) });
+  }
+
+  getGeneration(id: string) {
+    return this.http.get<GenerationDetail>(`/api/generation/${id}`);
   }
 
   // ----- Administración -----

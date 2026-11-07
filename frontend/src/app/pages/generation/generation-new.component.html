@@ -1,0 +1,208 @@
+<header class="page-header">
+  <div>
+    <h1>Generar casos de prueba</h1>
+    <p class="muted">
+      Elija el requerimiento a validar y revise la información histórica que se enviará al LLM como contexto para generar
+      los casos.
+    </p>
+  </div>
+</header>
+
+@if (simulated()) {
+  <p class="info-box">
+    <strong>Modo simulado:</strong> no hay un LLM configurado, así que los casos se generarán con plantillas de ejemplo,
+    sin costo. Configure la clave de API de Anthropic para generar con Claude.
+  </p>
+}
+
+<mat-card appearance="outlined" class="block">
+  <mat-card-content>
+    <h3>1. Requerimiento a validar</h3>
+    <div class="grid-2">
+      <mat-form-field>
+        <mat-label>Proyecto</mat-label>
+        <mat-select [(ngModel)]="project" (selectionChange)="onProjectChange()" required>
+          @for (p of projects(); track p.id) {
+            <mat-option [value]="p.id">{{ p.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Módulo / flujo</mat-label>
+        <mat-select [(ngModel)]="module" [disabled]="!project" required>
+          @for (m of modules(); track m.id) {
+            <mat-option [value]="m.id">{{ m.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-radio-group [(ngModel)]="source" (change)="onSourceChange()" class="source">
+      <mat-radio-button value="registrado">Requerimiento registrado</mat-radio-button>
+      <mat-radio-button value="nuevo">Nuevo requerimiento (texto libre)</mat-radio-button>
+    </mat-radio-group>
+
+    @if (source === 'registrado') {
+      <mat-form-field class="full">
+        <mat-label>Requerimiento</mat-label>
+        <mat-select [(ngModel)]="requirementCode" (selectionChange)="loadContext()" [disabled]="!project" required>
+          @for (r of requirements(); track r.code) {
+            <mat-option [value]="r.code"><strong>{{ r.code }}</strong> · {{ r.title }}</mat-option>
+          } @empty {
+            <mat-option disabled>No hay requerimientos registrados en el proyecto.</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if (requirement(); as r) {
+        <div class="req-preview">
+          <p>{{ r.description }}</p>
+          @if (r.acceptanceCriteria.length) {
+            <p class="muted">Criterios: {{ r.acceptanceCriteria.join(' · ') }}</p>
+          }
+        </div>
+      }
+    } @else {
+      <mat-form-field class="full">
+        <mat-label>Título</mat-label>
+        <input matInput [(ngModel)]="newTitle" required />
+      </mat-form-field>
+      <mat-form-field class="full">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="newDescription" required></textarea>
+      </mat-form-field>
+      <mat-form-field class="full">
+        <mat-label>Criterios de aceptación</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="newCriteria"></textarea>
+        <mat-hint>Uno por línea. Opcional.</mat-hint>
+      </mat-form-field>
+      <button mat-stroked-button (click)="loadContext()" [disabled]="!project"><mat-icon>travel_explore</mat-icon> Recuperar información relacionada</button>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined" class="block">
+  <mat-card-content>
+    <div class="section-head">
+      <div>
+        <h3>2. Información histórica relacionada</h3>
+        <p class="muted small">
+          Se recupera automáticamente por relación directa con el requerimiento y por similitud de texto. Desmarque lo que no
+          deba usarse como contexto.
+        </p>
+      </div>
+      <button mat-stroked-button (click)="loadContext()" [disabled]="!requirement() || loadingContext()">
+        <mat-icon>refresh</mat-icon> Recuperar de nuevo
+      </button>
+    </div>
+    @if (loadingContext()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    @if (requirement()) {
+      <div class="add-record">
+        <mat-form-field class="full" subscriptSizing="dynamic">
+          <mat-label>Agregar registro por código o título</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput [(ngModel)]="search" (ngModelChange)="onSearch($event)" />
+        </mat-form-field>
+        @if (searchResults().length) {
+          <ul class="results">
+            @for (r of searchResults(); track r.type + r.code) {
+              <li>
+                <span><strong>{{ r.code }}</strong> · {{ r.title }} <span class="muted">({{ typeLabels[r.type] }})</span></span>
+                <button mat-button (click)="addRecord(r)"><mat-icon>add</mat-icon> Agregar</button>
+              </li>
+            }
+          </ul>
+        } @else if (search.trim() && searched()) {
+          <p class="muted small">No hay registros adicionales que coincidan con la búsqueda.</p>
+        }
+      </div>
+
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="candidates()">
+          <ng-container matColumnDef="selected">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let c">
+              <mat-checkbox [checked]="c.selected" (change)="toggle(c, $event.checked)" [attr.aria-label]="'Usar ' + c.code" />
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Código</th>
+            <td mat-cell *matCellDef="let c" class="code-cell">{{ c.code }}</td>
+          </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let c">{{ typeLabels[c.type] }}</td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Título / nombre</th>
+            <td mat-cell *matCellDef="let c">{{ c.title }}</td>
+          </ng-container>
+          <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef>Similitud</th>
+            <td mat-cell *matCellDef="let c" class="nowrap">
+              @if (c.relation === 'directa') {
+                <span class="tag" matTooltip="Vinculado directamente al requerimiento">Relación directa</span>
+              } @else if (c.relation === 'manual') {
+                <span class="tag">Agregado</span>
+              } @else {
+                {{ c.score }} %
+              }
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columns"></tr>
+          <tr mat-row *matRowDef="let c; columns: columns" [class.unselected]="!c.selected"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell empty" [attr.colspan]="columns.length">
+              No se encontró información histórica relacionada. Puede agregar registros manualmente o generar solo con el
+              requerimiento.
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p class="muted small counter">{{ selectedCount() }} de {{ candidates().length }} registros seleccionados como contexto (máximo {{ maxContext }}).</p>
+    } @else {
+      <p class="muted">Seleccione o ingrese un requerimiento para recuperar la información relacionada.</p>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined" class="block">
+  <mat-card-content>
+    <h3>3. Parámetros de generación</h3>
+    <p class="label">Tipos de escenario</p>
+    <div class="checks">
+      @for (t of scenarioOptions; track t) {
+        <mat-checkbox [checked]="scenarioTypes.has(t)" (change)="toggleScenario(t, $event.checked)">{{ t }}</mat-checkbox>
+      }
+    </div>
+    <div class="grid-2">
+      <mat-form-field>
+        <mat-label>Técnicas de diseño</mat-label>
+        <mat-select [(ngModel)]="techniques" multiple>
+          @for (t of techniqueOptions; track t) {
+            <mat-option [value]="t">{{ t }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint>Opcional.</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cantidad máxima de casos</mat-label>
+        <input matInput type="number" min="1" max="20" [(ngModel)]="maxCases" required />
+        <mat-hint>Entre 1 y 20.</mat-hint>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="full">
+      <mat-label>Indicaciones adicionales</mat-label>
+      <textarea matInput rows="2" [(ngModel)]="instructions"></textarea>
+      <mat-hint>Opcional. Por ejemplo: priorizar montos en el límite.</mat-hint>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="cancel()">Cancelar</button>
+    <button mat-flat-button (click)="generate()" [disabled]="submitting() || !canGenerate()">
+      <mat-icon>auto_awesome</mat-icon> Generar casos
+    </button>
+  </mat-card-actions>
+</mat-card>

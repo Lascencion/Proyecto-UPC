@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { CatalogsModule } from './catalogs/catalogs.module';
+import { GenerationModule } from './generation/generation.module';
 import { ImportsModule } from './imports/imports.module';
 import { KnowledgeModule } from './knowledge/knowledge.module';
 import { PermissionsModule } from './permissions/permissions.module';
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     CatalogsModule,
     KnowledgeModule,
     ImportsModule,
+    GenerationModule,
     TemplatesModule,
   ],
 })

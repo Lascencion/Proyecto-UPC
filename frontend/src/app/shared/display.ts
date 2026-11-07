@@ -32,6 +32,19 @@ export const BATCH_STATUS_LABELS: Record<string, string> = {
   CANCELADO: 'Cancelado',
 };
 
+export const GENERATION_STATUS_LABELS: Record<string, string> = {
+  GENERANDO: 'Generando',
+  GENERADO: 'Generado',
+  ERROR: 'Error',
+};
+
+export const ENTITY_TYPE_LABELS: Record<string, string> = {
+  requirements: 'Requerimiento',
+  'business-rules': 'Regla de negocio',
+  'test-cases': 'Caso de prueba',
+  defects: 'Defecto',
+};
+
 export const ROW_RESULT_LABELS: Record<string, string> = {
   created: 'Creado',
   failed: 'Falló',
