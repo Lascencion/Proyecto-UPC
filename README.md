@@ -91,7 +91,7 @@ Configuración en `backend/.env`:
 |---|---|
 | `ANTHROPIC_API_KEY` | Clave de la API de Anthropic. Sin ella el sistema funciona en **modo simulado** (casos de ejemplo, sin costo). |
 | `LLM_PROVIDER` | `claude` o `simulado`. Si se omite, se usa Claude cuando hay clave. |
-| `LLM_MODEL` | Modelo de Claude (por defecto `claude-opus-5-5`). |
+| `LLM_MODEL` | Modelo de Claude (por defecto `claude-sonnet-5-5`). |
 | `LLM_EFFORT` | Esfuerzo de razonamiento: `low`, `medium` (por defecto), `high`, `xhigh` o `max`. |
 
 ## Roles y permisos

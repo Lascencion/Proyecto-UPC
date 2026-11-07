@@ -25,10 +25,10 @@ function providerFactory(config: ConfigService): LlmProvider {
       logger.warn('LLM_PROVIDER=claude sin ANTHROPIC_API_KEY: se usará el modo simulado.');
       return new SimulatedProvider();
     }
-    const model = config.get<string>('LLM_MODEL', 'claude-opus-5-5');
+    const model = config.get<string>('LLM_MODEL', 'claude-sonnet-5-5');
     const effort = config.get<string>('LLM_EFFORT', 'medium') as 'low' | 'medium' | 'high' | 'xhigh' | 'max';
     logger.log(`Generación con Claude (${model}, esfuerzo ${effort}).`);
-    return new ClaudeProvider(key, model, effort);
+    return new ClaudeProvider(key, model, effort, config.get<string>('LLM_BASE_URL') || undefined);
   }
   logger.log('Generación en modo simulado (sin LLM).');
   return new SimulatedProvider();

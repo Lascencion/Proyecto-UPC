@@ -27,7 +27,7 @@ services:
       CORS_ORIGIN: http://localhost:8080
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       LLM_PROVIDER: ${LLM_PROVIDER:-}
-      LLM_MODEL: ${LLM_MODEL:-claude-opus-5-5}
+      LLM_MODEL: ${LLM_MODEL:-claude-sonnet-5-5}
       LLM_EFFORT: ${LLM_EFFORT:-medium}
     ports:
       - "3000:3000"

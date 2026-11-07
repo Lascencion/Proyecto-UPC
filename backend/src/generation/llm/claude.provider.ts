@@ -16,8 +16,10 @@ export class ClaudeProvider implements LlmProvider {
     apiKey: string,
     private readonly model: string,
     private readonly effort: Effort,
+    baseURL = 'https://api.anthropic.com',
   ) {
-    this.client = new Anthropic({ apiKey, timeout: 5 * 60 * 1000, maxRetries: 2 });
+    // La URL se fija explícitamente para no heredar otra configurada en el entorno.
+    this.client = new Anthropic({ apiKey, baseURL, timeout: 5 * 60 * 1000, maxRetries: 2 });
   }
 
   async generate(input: GenerationInput): Promise<GenerationOutput> {
