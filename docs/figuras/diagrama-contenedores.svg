@@ -2,7 +2,7 @@
 <text x="880.0" y="40" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Diagrama de contenedores</text>
 <text x="880.0" y="64" font-size="13" font-weight="400" fill="#6b7280" text-anchor="middle">Modelo C4 – nivel 2 (notación UML)</text>
 <g stroke="#333" stroke-width="1.6" fill="none"><circle cx="75" cy="265" r="10"/><line x1="75" y1="275" x2="75" y2="301"/><line x1="60" y1="284" x2="90" y2="284"/><line x1="75" y1="301" x2="62" y2="319"/><line x1="75" y1="301" x2="88" y2="319"/></g>
-<text x="75" y="337" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Usuario</text>
+<text x="75" y="337" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Usuario</text><text x="75" y="353.0" font-size="10.5" font-weight="400" fill="#555" text-anchor="middle">Analista, Líder,</text><text x="75" y="366.0" font-size="10.5" font-weight="400" fill="#555" text-anchor="middle">Administrador</text>
 <polygon points="160,130 178,112 468,112 450,130" fill="#cbcdd3" stroke="#8d929c"/>
 <polygon points="450,130 468,112 468,492 450,510" fill="#b6b9c1" stroke="#8d929c"/>
 <rect x="160" y="130" width="290" height="380" fill="#dcdde1" stroke="#8d929c"/>
@@ -49,7 +49,7 @@
 <rect x="985" y="347" width="220" height="52" rx="6" fill="#fff" stroke="#7d8696"/>
 <rect x="978" y="357" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="978" y="371" width="14" height="8" fill="#fff" stroke="#7d8696"/>
 <text x="1095.0" y="368" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Cliente LLM</text>
-<text x="1095.0" y="385" font-size="11" font-weight="400" fill="#555" text-anchor="middle">adaptador del proveedor · salida JSON</text>
+<text x="1095.0" y="385" font-size="11" font-weight="400" fill="#555" text-anchor="middle">proveedor Claude o simulado · salida JSON</text>
 <rect x="985" y="423" width="220" height="52" rx="6" fill="#fff" stroke="#7d8696"/>
 <rect x="978" y="433" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="978" y="447" width="14" height="8" fill="#fff" stroke="#7d8696"/>
 <text x="1095.0" y="444" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Documentación</text>
