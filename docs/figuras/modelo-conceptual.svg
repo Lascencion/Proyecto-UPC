@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="1600" height="1050" fill="#fff"/>
+<text x="800.0" y="42" font-size="24" font-weight="800" fill="#1d2433" text-anchor="middle">Modelo conceptual del sistema propuesto</text>
+<text x="800.0" y="66" font-size="13.5" font-weight="400" fill="#5b6573" text-anchor="middle">Generación de casos de prueba funcionales con LLM en el flujo de compra de monedas virtuales</text>
+<rect x="30" y="90" width="1540" height="170" fill="#f5f7fa" stroke="#c3c9d2"/>
+<rect x="30" y="90" width="34" height="170" fill="#1f3a5f"/>
+<text transform="translate(52 175.0) rotate(-90)" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">PROCESO ACTUAL</text>
+<rect x="30" y="275" width="1540" height="480" fill="#eef2f7" stroke="#c3c9d2"/>
+<rect x="30" y="275" width="34" height="480" fill="#1f3a5f"/>
+<text transform="translate(52 515.0) rotate(-90)" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">SISTEMA BASADO EN LLM</text>
+<rect x="30" y="770" width="1540" height="250" fill="#f5f7fa" stroke="#c3c9d2"/>
+<rect x="30" y="770" width="34" height="250" fill="#1f3a5f"/>
+<text transform="translate(52 895.0) rotate(-90)" font-size="13" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">RESULTADO</text>
+<rect x="110" y="125" width="300" height="105" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="110" y="125" width="300" height="30" fill="#1f3a5f"/>
+<text x="260.0" y="145" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Equipo de producto</text>
+<text x="124" y="177" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Actualiza el flujo de compra de</text>
+<text x="124" y="195" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">monedas y define requerimientos</text>
+<text x="124" y="213" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">e historias de usuario.</text>
+<rect x="640" y="125" width="300" height="105" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="640" y="125" width="300" height="30" fill="#1f3a5f"/>
+<text x="790.0" y="145" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Equipo de desarrollo</text>
+<text x="654" y="177" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Implementa la funcionalidad del</text>
+<text x="654" y="195" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">requerimiento.</text>
+<rect x="1170" y="125" width="370" height="105" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="1170" y="125" width="370" height="30" fill="#1f3a5f"/>
+<text x="1355.0" y="145" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Equipo de QA (Analista QA)</text>
+<text x="1184" y="177" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Ingresa el requerimiento o la historia de</text>
+<text x="1184" y="195" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">usuario a validar y los parámetros de</text>
+<text x="1184" y="213" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">generación.</text>
+<path d="M410 185 L640 185" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="640.0,185.0 629.9,189.3 629.9,180.7" fill="#5b6573"/>
+<text x="525" y="163" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">requerimientos e</text>
+<text x="525" y="178" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">historias de usuario</text>
+<path d="M940 185 L1170 185" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="1170.0,185.0 1159.9,189.3 1159.9,180.7" fill="#5b6573"/>
+<text x="1055" y="163" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">funcionalidad</text>
+<text x="1055" y="178" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">implementada</text>
+<rect x="110" y="310" width="228" height="125" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="110" y="310" width="228" height="30" fill="#1f3a5f"/>
+<text x="232.0" y="330" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Recuperador de contexto</text>
+<circle cx="126" cy="325" r="10" fill="#fff"/>
+<text x="126" y="329.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">1</text>
+<text x="124" y="362" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Relaciones directas</text>
+<text x="124" y="380" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">(trazabilidad)</text>
+<text x="124" y="398" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Similitud de texto (TF-IDF)</text>
+<text x="124" y="416" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Prioriza hasta 15 registros</text>
+<rect x="430" y="310" width="228" height="125" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="430" y="310" width="228" height="30" fill="#1f3a5f"/>
+<text x="552.0" y="330" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Selección del contexto</text>
+<circle cx="446" cy="325" r="10" fill="#fff"/>
+<text x="446" y="329.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">2</text>
+<text x="444" y="362" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">El Analista QA revisa,</text>
+<text x="444" y="380" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">agrega o quita los</text>
+<text x="444" y="398" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">registros sugeridos.</text>
+<rect x="750" y="310" width="228" height="125" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="750" y="310" width="228" height="30" fill="#1f3a5f"/>
+<text x="872.0" y="330" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Constructor de prompt</text>
+<circle cx="766" cy="325" r="10" fill="#fff"/>
+<text x="766" y="329.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">3</text>
+<text x="764" y="362" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Instrucciones de diseño</text>
+<text x="764" y="380" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Requerimiento + contexto</text>
+<text x="764" y="398" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Parámetros + esquema JSON</text>
+<rect x="1070" y="310" width="228" height="125" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="1070" y="310" width="228" height="30" fill="#1f3a5f"/>
+<text x="1192.0" y="330" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Modelo de lenguaje (LLM)</text>
+<circle cx="1086" cy="325" r="10" fill="#fff"/>
+<text x="1086" y="329.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">4</text>
+<text x="1084" y="362" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Diseña los casos de prueba</text>
+<text x="1084" y="380" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">aplicando las técnicas</text>
+<text x="1084" y="398" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">indicadas</text>
+<rect x="1340" y="465" width="200" height="95" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="1340" y="465" width="200" height="30" fill="#1f3a5f"/>
+<text x="1448.0" y="485" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Validador</text>
+<circle cx="1356" cy="480" r="10" fill="#fff"/>
+<text x="1356" y="484.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">5</text>
+<text x="1354" y="517" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Verifica la respuesta</text>
+<text x="1354" y="535" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">contra el esquema JSON</text>
+<path d="M1355.0 230 L1355.0 285 L224.0 285 L224.0 310" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="224.0,310.0 219.7,299.9 228.3,299.9" fill="#5b6573"/>
+<text x="780" y="280" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">requerimiento / historia + parámetros</text>
+<path d="M338 390 L430 390" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="430.0,390.0 419.9,394.3 419.9,385.7" fill="#5b6573"/>
+<text x="384.0" y="368" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">contexto</text>
+<text x="384.0" y="383" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">sugerido</text>
+<path d="M658 390 L750 390" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="750.0,390.0 739.9,394.3 739.9,385.7" fill="#5b6573"/>
+<text x="704.0" y="368" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">contexto</text>
+<text x="704.0" y="383" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">seleccionado</text>
+<path d="M978 390 L1070 390" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="1070.0,390.0 1059.9,394.3 1059.9,385.7" fill="#5b6573"/>
+<text x="1024.0" y="368" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">prompt</text>
+<text x="1024.0" y="383" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">estructurado</text>
+<path d="M1298 390 L1440.0 390 L1440.0 465" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="1440.0,465.0 1435.7,454.9 1444.3,454.9" fill="#5b6573"/>
+<text x="1450.0" y="422" font-size="11.5" font-weight="400" fill="#444" text-anchor="start" font-style="italic">respuesta</text>
+<text x="1450.0" y="437" font-size="11.5" font-weight="400" fill="#444" text-anchor="start" font-style="italic">JSON</text>
+<path d="M110 527 V698 A290.0 22 0 0 0 690 698 V527" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<ellipse cx="400.0" cy="527" rx="290.0" ry="22" fill="#dbe4f0" stroke="#1f3a5f" stroke-width="1.4"/>
+<text x="400.0" y="533" font-size="14" font-weight="700" fill="#1f3a5f" text-anchor="middle">Repositorio de conocimiento histórico</text>
+<rect x="150" y="563" width="44" height="19" rx="3" fill="#1f3a5f"/>
+<text x="172" y="577" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">REQ</text>
+<text x="206" y="577" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">Requerimientos funcionales</text>
+<rect x="150" y="587" width="44" height="19" rx="3" fill="#1f3a5f"/>
+<text x="172" y="601" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">HU</text>
+<text x="206" y="601" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">Historias de usuario</text>
+<rect x="150" y="611" width="44" height="19" rx="3" fill="#1f3a5f"/>
+<text x="172" y="625" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">RN</text>
+<text x="206" y="625" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">Reglas de negocio</text>
+<rect x="150" y="635" width="44" height="19" rx="3" fill="#1f3a5f"/>
+<text x="172" y="649" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">CP</text>
+<text x="206" y="649" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">Casos de prueba ejecutados</text>
+<rect x="150" y="659" width="44" height="19" rx="3" fill="#1f3a5f"/>
+<text x="172" y="673" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">DEF</text>
+<text x="206" y="673" font-size="12.5" font-weight="400" fill="#1d2433" text-anchor="start">Defectos</text>
+<text x="440" y="577" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="start">Relacionados entre sí</text>
+<text x="440" y="597" font-size="12" font-weight="400" fill="#1d2433" text-anchor="start">(trazabilidad REQ ↔ HU ↔ RN ↔</text>
+<text x="440" y="615" font-size="12" font-weight="400" fill="#1d2433" text-anchor="start">CP ↔ DEF)</text>
+<text x="440" y="645" font-size="12.5" font-weight="700" fill="#1d2433" text-anchor="start">Organizados por proyecto</text>
+<text x="440" y="663" font-size="12" font-weight="400" fill="#1d2433" text-anchor="start">y módulo del flujo de compra</text>
+<path d="M224.0 505 L224.0 435" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="224.0,435.0 228.3,445.1 219.7,445.1" fill="#5b6573"/>
+<text x="234.0" y="480" font-size="11.5" font-weight="400" fill="#444" text-anchor="start" font-style="italic">consulta</text>
+<rect x="800" y="560" width="330" height="110" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="800" y="560" width="330" height="30" fill="#1f3a5f"/>
+<text x="965.0" y="580" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Registro de información histórica</text>
+<text x="814" y="612" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Registro individual (formularios)</text>
+<text x="814" y="630" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Carga masiva: Excel, Word o CSV</text>
+<text x="814" y="648" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">con revisión y corrección</text>
+<path d="M800 615 L690 615" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="690.0,615.0 700.1,610.7 700.1,619.3" fill="#5b6573"/>
+<text x="745" y="605" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">alimenta</text>
+<rect x="1170" y="800" width="370" height="200" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="1170" y="800" width="370" height="30" fill="#1f3a5f"/>
+<text x="1363.0" y="820" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Casos de prueba funcionales</text>
+<circle cx="1186" cy="815" r="10" fill="#fff"/>
+<text x="1186" y="819.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">6</text>
+<text x="1184" y="852" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">• Objetivo y tipo de escenario:</text>
+<text x="1184" y="870" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">   positivo, negativo, alternativo o</text>
+<text x="1184" y="888" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">   excepción</text>
+<text x="1184" y="906" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">• Técnica de diseño y prioridad</text>
+<text x="1184" y="924" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">• Precondiciones y datos de prueba</text>
+<text x="1184" y="942" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">• Pasos y resultado esperado</text>
+<text x="1184" y="960" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">• Fuentes del contexto utilizadas</text>
+<rect x="640" y="830" width="300" height="130" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="640" y="830" width="300" height="30" fill="#1f3a5f"/>
+<text x="798.0" y="850" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Revisión y aprobación</text>
+<circle cx="656" cy="845" r="10" fill="#fff"/>
+<text x="656" y="849.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">7</text>
+<text x="654" y="882" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">El Analista QA revisa, observa y</text>
+<text x="654" y="900" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">regenera; el Líder QA aprueba o</text>
+<text x="654" y="918" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">devuelve los casos.</text>
+<rect x="110" y="830" width="300" height="130" fill="#fff" stroke="#1f3a5f" stroke-width="1.4"/>
+<rect x="110" y="830" width="300" height="30" fill="#1f3a5f"/>
+<text x="268.0" y="850" font-size="13.5" font-weight="700" fill="#fff" text-anchor="middle">Uso de los casos aprobados</text>
+<circle cx="126" cy="845" r="10" fill="#fff"/>
+<text x="126" y="849.5" font-size="12" font-weight="700" fill="#1f3a5f" text-anchor="middle">8</text>
+<text x="124" y="882" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">Exportación a Excel para la</text>
+<text x="124" y="900" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">ejecución de pruebas y reportes</text>
+<text x="124" y="918" font-size="12.5" font-weight="400" fill="#222" text-anchor="start">de cobertura.</text>
+<path d="M1440.0 560 L1440.0 800" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="1440.0,800.0 1435.7,789.9 1444.3,789.9" fill="#5b6573"/>
+<text x="1450.0" y="585" font-size="11.5" font-weight="400" fill="#444" text-anchor="start" font-style="italic">casos validados</text>
+<path d="M1170 895 L940 895" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="940.0,895.0 950.1,890.7 950.1,899.3" fill="#5b6573"/>
+<text x="1055" y="873" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">casos</text>
+<text x="1055" y="888" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">generados</text>
+<path d="M640 895 L410 895" fill="none" stroke="#5b6573" stroke-width="1.5"/>
+<polygon points="410.0,895.0 420.1,890.7 420.1,899.3" fill="#5b6573"/>
+<text x="525" y="873" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">casos</text>
+<text x="525" y="888" font-size="11.5" font-weight="400" fill="#444" text-anchor="middle" font-style="italic">aprobados</text>
+</svg>
