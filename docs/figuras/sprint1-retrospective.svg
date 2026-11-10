@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="1400" height="980" fill="#fff" stroke="#333"/>
+<text x="700.0" y="62" font-size="20" font-weight="700" fill="#222" text-anchor="middle">SPRINT RETROSPECTIVE – SPRINT 1</text>
+<rect x="60" y="110" width="610" height="390" fill="#b4ecc8" stroke="#8fd6a8" stroke-width="1.5"/>
+<text x="90" y="162" font-size="26" font-weight="700" fill="#1e7f3b" text-anchor="start">START — Empezar</text>
+<circle cx="112" cy="216" r="3" fill="#333"/>
+<text x="128" y="222" font-size="18" font-weight="400" fill="#222" text-anchor="start">Definir los criterios de validación de datos antes</text>
+<text x="128" y="248" font-size="18" font-weight="400" fill="#222" text-anchor="start">de implementar cada funcionalidad.</text>
+<circle cx="112" cy="286" r="3" fill="#333"/>
+<text x="128" y="292" font-size="18" font-weight="400" fill="#222" text-anchor="start">Preparar datos de prueba relacionados</text>
+<text x="128" y="318" font-size="18" font-weight="400" fill="#222" text-anchor="start">(requerimientos, historias, reglas, casos y</text>
+<text x="128" y="344" font-size="18" font-weight="400" fill="#222" text-anchor="start">defectos) desde el inicio.</text>
+<circle cx="112" cy="382" r="3" fill="#333"/>
+<text x="128" y="388" font-size="18" font-weight="400" fill="#222" text-anchor="start">Presentar avances al PO y a la asesora a mitad del</text>
+<text x="128" y="414" font-size="18" font-weight="400" fill="#222" text-anchor="start">sprint.</text>
+<rect x="730" y="110" width="610" height="390" fill="#f8c7c7" stroke="#e8a3a3" stroke-width="1.5"/>
+<text x="760" y="162" font-size="26" font-weight="700" fill="#c0141c" text-anchor="start">STOP — Dejar de hacer</text>
+<circle cx="782" cy="216" r="3" fill="#333"/>
+<text x="798" y="222" font-size="18" font-weight="400" fill="#222" text-anchor="start">Dejar las pruebas para los últimos días del sprint.</text>
+<circle cx="782" cy="260" r="3" fill="#333"/>
+<text x="798" y="266" font-size="18" font-weight="400" fill="#222" text-anchor="start">Acumular tareas sin actualizar su estado en Jira.</text>
+<circle cx="782" cy="304" r="3" fill="#333"/>
+<text x="798" y="310" font-size="18" font-weight="400" fill="#222" text-anchor="start">Esperar a la Sprint Review para recibir</text>
+<text x="798" y="336" font-size="18" font-weight="400" fill="#222" text-anchor="start">observaciones.</text>
+<rect x="60" y="530" width="610" height="390" fill="#c9daf9" stroke="#a5c0ee" stroke-width="1.5"/>
+<text x="90" y="582" font-size="26" font-weight="700" fill="#2f5fbf" text-anchor="start">CONTINUE — Mantener</text>
+<circle cx="112" cy="636" r="3" fill="#333"/>
+<text x="128" y="642" font-size="18" font-weight="400" fill="#222" text-anchor="start">Realizar reuniones diarias de seguimiento.</text>
+<circle cx="112" cy="680" r="3" fill="#333"/>
+<text x="128" y="686" font-size="18" font-weight="400" fill="#222" text-anchor="start">Utilizar Jira para visualizar las actividades y sus</text>
+<text x="128" y="712" font-size="18" font-weight="400" fill="#222" text-anchor="start">responsables.</text>
+<circle cx="112" cy="750" r="3" fill="#333"/>
+<text x="128" y="756" font-size="18" font-weight="400" fill="#222" text-anchor="start">Validar los prototipos con el PO antes de</text>
+<text x="128" y="782" font-size="18" font-weight="400" fill="#222" text-anchor="start">desarrollar.</text>
+<rect x="730" y="530" width="610" height="390" fill="#dcd6fb" stroke="#bdb3f2" stroke-width="1.5"/>
+<text x="760" y="582" font-size="26" font-weight="700" fill="#6a3fd1" text-anchor="start">LEARN — Aprendizajes</text>
+<circle cx="782" cy="636" r="3" fill="#333"/>
+<text x="798" y="642" font-size="18" font-weight="400" fill="#222" text-anchor="start">La calidad y la trazabilidad de los datos históricos</text>
+<text x="798" y="668" font-size="18" font-weight="400" fill="#222" text-anchor="start">son clave para la generación.</text>
+<circle cx="782" cy="706" r="3" fill="#333"/>
+<text x="798" y="712" font-size="18" font-weight="400" fill="#222" text-anchor="start">La validación temprana identifica errores antes del</text>
+<text x="798" y="738" font-size="18" font-weight="400" fill="#222" text-anchor="start">cierre del sprint.</text>
+<circle cx="782" cy="776" r="3" fill="#333"/>
+<text x="798" y="782" font-size="18" font-weight="400" fill="#222" text-anchor="start">Las observaciones tempranas, como la de las</text>
+<text x="798" y="808" font-size="18" font-weight="400" fill="#222" text-anchor="start">historias de usuario, cuestan menos de incorporar.</text>
+</svg>
