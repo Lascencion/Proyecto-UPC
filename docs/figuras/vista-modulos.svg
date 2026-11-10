@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="880" viewBox="0 0 1720 880" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="1720" height="880" fill="#fff"/><rect x="6" y="6" width="1708" height="868" fill="none" stroke="#c9ced8"/>
+<text x="860.0" y="42" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Vista de módulos: descomposición y usos</text>
+<text x="860.0" y="66" font-size="14" font-weight="400" fill="#6b7280" text-anchor="middle">Diagrama de paquetes UML del código fuente</text>
+<rect x="40" y="108" width="167.6" height="22" fill="#e3ecfa" stroke="#6f88b8" stroke-width="1.5"/>
+<rect x="40" y="130" width="760" height="700" fill="#e3ecfa" stroke="#6f88b8" stroke-width="1.5"/>
+<text x="50" y="124" font-size="13" font-weight="700" fill="#222" text-anchor="start">frontend (Angular)</text>
+<rect x="90" y="174" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="90" y="190" width="660" height="110" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="420.0" y="218" font-size="14" font-weight="700" fill="#222" text-anchor="middle">pages</text>
+<text x="420.0" y="238" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">login · home · knowledge · imports · catalogs</text>
+<text x="420.0" y="255" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">generation · reviews · reports · admin</text>
+<rect x="90" y="404" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="90" y="420" width="290" height="110" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="235.0" y="448" font-size="14" font-weight="700" fill="#222" text-anchor="middle">layout</text>
+<text x="235.0" y="468" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">menú según el rol,</text>
+<text x="235.0" y="485" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">cambio de contraseña</text>
+<rect x="460" y="404" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="460" y="420" width="290" height="110" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="605.0" y="448" font-size="14" font-weight="700" fill="#222" text-anchor="middle">shared</text>
+<text x="605.0" y="468" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">formulario dinámico,</text>
+<text x="605.0" y="485" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">diálogos, paginador</text>
+<rect x="90" y="634" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="90" y="650" width="660" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="420.0" y="678" font-size="14" font-weight="700" fill="#222" text-anchor="middle">core</text>
+<text x="420.0" y="698" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">AuthService · ApiService</text>
+<text x="420.0" y="715" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">interceptor JWT · guardas de ruta</text>
+<path d="M235 300 L235 420" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="230.7,411.0 235,420 239.3,411.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<text x="270" y="365" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">«use»</text>
+<path d="M605 300 L605 420" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="600.7,411.0 605,420 609.3,411.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<text x="640" y="365" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">«use»</text>
+<path d="M420 300 L420 650" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="415.7,641.0 420,650 424.3,641.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<text x="455" y="630" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">«use»</text>
+<path d="M235 530 L235 650" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="230.7,641.0 235,650 239.3,641.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<path d="M605 530 L605 650" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="600.7,641.0 605,650 609.3,641.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<rect x="900" y="108" width="151.2" height="22" fill="#e3f2d9" stroke="#7aa865" stroke-width="1.5"/>
+<rect x="900" y="130" width="780" height="700" fill="#e3f2d9" stroke="#7aa865" stroke-width="1.5"/>
+<text x="910" y="124" font-size="13" font-weight="700" fill="#222" text-anchor="start">backend (NestJS)</text>
+<rect x="940" y="174" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="940" y="190" width="200" height="110" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1040.0" y="218" font-size="14" font-weight="700" fill="#222" text-anchor="middle">auth</text>
+<text x="1040.0" y="238" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">login, JWT, perfil</text>
+<rect x="1200" y="174" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="1200" y="190" width="200" height="110" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1300.0" y="218" font-size="14" font-weight="700" fill="#222" text-anchor="middle">users · permissions</text>
+<text x="1300.0" y="238" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">usuarios y matriz</text>
+<text x="1300.0" y="255" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">de permisos</text>
+<rect x="1460" y="174" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="1460" y="190" width="200" height="110" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1560.0" y="218" font-size="14" font-weight="700" fill="#222" text-anchor="middle">catalogs</text>
+<text x="1560.0" y="238" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">proyectos, módulos</text>
+<rect x="940" y="404" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="940" y="420" width="200" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1040.0" y="448" font-size="14" font-weight="700" fill="#222" text-anchor="middle">knowledge</text>
+<text x="1040.0" y="468" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">definitions · validation</text>
+<text x="1040.0" y="485" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">códigos automáticos</text>
+<text x="1040.0" y="502" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">REQ · HU · RN · CP · DEF</text>
+<rect x="1200" y="404" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="1200" y="420" width="200" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1300.0" y="448" font-size="14" font-weight="700" fill="#222" text-anchor="middle">imports</text>
+<text x="1300.0" y="468" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">parsers (xlsx, docx, csv)</text>
+<text x="1300.0" y="485" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">lotes y filas</text>
+<rect x="1460" y="404" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="1460" y="420" width="200" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1560.0" y="448" font-size="14" font-weight="700" fill="#222" text-anchor="middle">templates</text>
+<text x="1560.0" y="468" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">plantillas</text>
+<text x="1560.0" y="485" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">descargables</text>
+<rect x="940" y="634" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="940" y="650" width="200" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1040.0" y="678" font-size="14" font-weight="700" fill="#222" text-anchor="middle">generation</text>
+<text x="1040.0" y="698" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">contexto · prompt · llm</text>
+<text x="1040.0" y="715" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">vínculos y similitud TF-IDF</text>
+<text x="1040.0" y="732" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">proveedor Claude o simulado</text>
+<rect x="1200" y="634" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="1200" y="650" width="200" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1300.0" y="678" font-size="14" font-weight="700" fill="#222" text-anchor="middle">reviews · reports</text>
+<text x="1300.0" y="698" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">aprobación,</text>
+<text x="1300.0" y="715" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">indicadores</text>
+<rect x="1460" y="634" width="70" height="16" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<rect x="1460" y="650" width="200" height="120" fill="#fff" stroke="#6b7280" stroke-width="1.3"/>
+<text x="1560.0" y="678" font-size="14" font-weight="700" fill="#222" text-anchor="middle">common</text>
+<text x="1560.0" y="698" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">guards, decoradores;</text>
+<text x="1560.0" y="715" font-size="12" font-weight="400" fill="#4b5563" text-anchor="middle">usado por todos</text>
+<path d="M1140 245 L1200 245" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="1191.0,249.3 1200,245 1191.0,240.7" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<path d="M1200 480 L1140 480" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="1149.0,475.7 1140,480 1149.0,484.3" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<path d="M1560.0 420 L1560.0 385 L1040.0 385 L1040.0 420" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="1035.7,411.0 1040.0,420 1044.3,411.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<path d="M1040.0 650 L1040.0 540" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="1044.3,549.0 1040.0,540 1035.7,549.0" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<path d="M1200 710 L1140 710" fill="none" stroke="#6b7280" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="1149.0,705.7 1140,710 1149.0,714.3" fill="none" stroke="#6b7280" stroke-width="1.4"/>
+<line x1="750" y1="710" x2="900" y2="710" stroke="#4b5563" stroke-width="1.6"/>
+<text x="825" y="700" font-size="12" font-weight="700" fill="#374151" text-anchor="middle">REST/JSON</text>
+</svg>
