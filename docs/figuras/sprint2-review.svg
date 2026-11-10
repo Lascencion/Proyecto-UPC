@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1060" viewBox="0 0 1400 1060" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="1400" height="1060" fill="#fff" stroke="#999"/>
+<text x="700.0" y="58" font-size="26" font-weight="700" fill="#222" text-anchor="middle">SPRINT REVIEW – SPRINT 2</text>
+<text x="700.0" y="92" font-size="22" font-weight="700" fill="#222" text-anchor="middle">Generación de casos de prueba con LLM</text>
+<rect x="40" y="120" width="642" height="450" fill="#f6cfa8" stroke="#e0a26a" stroke-width="1.5"/>
+<text x="66" y="164" font-size="22" font-weight="700" fill="#222" text-anchor="start">01. Historias de usuario</text>
+<circle cx="74" cy="206" r="3.5" fill="#222"/>
+<text x="88" y="212" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">HU10 · Consulta y selección de información histórica</text>
+<text x="100" y="236" font-size="15" font-weight="400" fill="#222" text-anchor="start">Recuperación por vínculo directo y por similitud,</text>
+<text x="100" y="257" font-size="15" font-weight="400" fill="#222" text-anchor="start">selección del contexto y filtro por módulo.</text>
+<text x="100" y="282" font-size="15" font-weight="700" fill="#2f5fbf" text-anchor="start" font-style="italic">Estado: Completado</text>
+<circle cx="74" cy="346" r="3.5" fill="#222"/>
+<text x="88" y="352" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">HU11 · Generación de casos de prueba mediante LLM</text>
+<text x="100" y="376" font-size="15" font-weight="400" fill="#222" text-anchor="start">Escenarios positivos, negativos, alternativos y de</text>
+<text x="100" y="397" font-size="15" font-weight="400" fill="#222" text-anchor="start">excepción, con salida JSON validada.</text>
+<text x="100" y="422" font-size="15" font-weight="700" fill="#2f5fbf" text-anchor="start" font-style="italic">Estado: Completado</text>
+<text x="656" y="548" font-size="15" font-weight="700" fill="#222" text-anchor="end">2 de 2 historias completadas · 18 SP</text>
+<rect x="718" y="120" width="642" height="450" fill="#f7c5c5" stroke="#e29a9a" stroke-width="1.5"/>
+<text x="744" y="164" font-size="22" font-weight="700" fill="#222" text-anchor="start">02. Problemas identificados</text>
+<text x="744" y="208" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Contexto poco relacionado</text>
+<text x="744" y="231" font-size="15"><tspan fill="#c0392b">Problema: </tspan><tspan fill="#222">registros sugeridos con poca relación al requerimiento.</tspan></text>
+<text x="744" y="253" font-size="15"><tspan fill="#2f5fbf">Acción: </tspan><tspan fill="#222">priorizar vínculos directos (100 %) y puntaje mínimo.</tspan></text>
+<text x="744" y="296" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Requerimientos de otros módulos</text>
+<text x="744" y="319" font-size="15"><tspan fill="#c0392b">Problema: </tspan><tspan fill="#222">la lista mostraba todo el proyecto.</tspan></text>
+<text x="744" y="341" font-size="15"><tspan fill="#2f5fbf">Acción: </tspan><tspan fill="#222">filtrar requerimientos e historias por módulo.</tspan></text>
+<text x="744" y="384" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Respuesta del LLM variable</text>
+<text x="744" y="407" font-size="15"><tspan fill="#c0392b">Problema: </tspan><tspan fill="#222">estructura incompleta o distinta en los casos.</tspan></text>
+<text x="744" y="429" font-size="15"><tspan fill="#2f5fbf">Acción: </tspan><tspan fill="#222">salida estructurada con esquema JSON validado.</tspan></text>
+<text x="744" y="472" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Tipo «Valor límite» redundante</text>
+<text x="744" y="495" font-size="15"><tspan fill="#c0392b">Problema: </tspan><tspan fill="#222">se superponía con la técnica de valores límite.</tspan></text>
+<text x="744" y="517" font-size="15"><tspan fill="#2f5fbf">Acción: </tspan><tspan fill="#222">reemplazarlo por el escenario «Alternativo».</tspan></text>
+<rect x="40" y="590" width="642" height="450" fill="#fbefa6" stroke="#e2cf6a" stroke-width="1.5"/>
+<text x="66" y="634" font-size="22" font-weight="700" fill="#222" text-anchor="start">03. Feedback del PO</text>
+<text x="66" y="678" font-size="15.5" font-weight="700" fill="#c0651b" text-anchor="start">HU10 — Selección de contexto</text>
+<text x="66" y="701" font-size="15" font-weight="400" fill="#222" text-anchor="start">Mostrar tipo, código y puntaje de cada registro, y permitir</text>
+<text x="66" y="722" font-size="15" font-weight="400" fill="#222" text-anchor="start">agregar o quitar registros antes de generar.</text>
+<text x="66" y="768" font-size="15.5" font-weight="700" fill="#c0651b" text-anchor="start">HU10 — Selección del requerimiento</text>
+<text x="66" y="791" font-size="15" font-weight="400" fill="#222" text-anchor="start">Listar solo los requerimientos e historias del módulo</text>
+<text x="66" y="812" font-size="15" font-weight="400" fill="#222" text-anchor="start">seleccionado.</text>
+<text x="66" y="858" font-size="15.5" font-weight="700" fill="#c0651b" text-anchor="start">HU11 — Casos generados</text>
+<text x="66" y="881" font-size="15" font-weight="400" fill="#222" text-anchor="start">Estructura uniforme con todos los campos necesarios</text>
+<text x="66" y="902" font-size="15" font-weight="400" fill="#222" text-anchor="start">para la revisión del Analista QA.</text>
+<text x="66" y="948" font-size="15.5" font-weight="700" fill="#c0651b" text-anchor="start">HU11 — Tipos de escenario</text>
+<text x="66" y="971" font-size="15" font-weight="400" fill="#222" text-anchor="start">Positivo, Negativo, Alternativo y Excepción; el valor</text>
+<text x="66" y="992" font-size="15" font-weight="400" fill="#222" text-anchor="start">límite se mantiene como técnica (asesora).</text>
+<rect x="718" y="590" width="642" height="450" fill="#c9daf5" stroke="#8fb0e3" stroke-width="1.5"/>
+<text x="744" y="634" font-size="22" font-weight="700" fill="#222" text-anchor="start">04. Acuerdos y próximos pasos</text>
+<text x="744" y="678" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Seguimiento de observaciones</text>
+<text x="744" y="701" font-size="15" font-weight="400" fill="#222" text-anchor="start">El filtro por módulo y los nuevos tipos de escenario</text>
+<text x="744" y="722" font-size="15" font-weight="400" fill="#222" text-anchor="start">se aplicaron antes de cerrar el Sprint 2.</text>
+<text x="744" y="780" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Preparación del Sprint 3</text>
+<text x="744" y="803" font-size="15" font-weight="400" fill="#222" text-anchor="start">HU12: Revisión de casos generados y observaciones.</text>
+<text x="744" y="824" font-size="15" font-weight="400" fill="#222" text-anchor="start">HU13: Regeneración de casos según observaciones.</text>
+<text x="744" y="845" font-size="15" font-weight="400" fill="#222" text-anchor="start">HU14: Envío de casos revisados para aprobación.</text>
+<text x="744" y="903" font-size="15.5" font-weight="700" fill="#222" text-anchor="start">Registro de acuerdos</text>
+<text x="744" y="926" font-size="15" font-weight="400" fill="#222" text-anchor="start">Documentar responsables y compromisos en el acta de</text>
+<text x="744" y="947" font-size="15" font-weight="400" fill="#222" text-anchor="start">la Sprint Review.</text>
+</svg>
