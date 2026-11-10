@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1244" height="1380" viewBox="0 0 1244 1380" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
-<rect width="1244" height="1380" fill="#f4f4f4"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1244" height="1498" viewBox="0 0 1244 1498" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<rect width="1244" height="1498" fill="#f4f4f4"/>
 <rect x="130" y="30" width="314" height="70" fill="#fafafa" stroke="#d0d0d0"/>
 <text x="287.0" y="60.8" font-size="14" fill="#333" text-anchor="middle">1</text>
 <text x="287.0" y="79.0" font-size="14" fill="#333" text-anchor="middle">Preparar información</text>
@@ -22,96 +22,100 @@
 <rect x="130" y="146" width="150" height="104" fill="#a9c8f5" stroke="none"/>
 <text x="205.0" y="177.2" font-size="13" fill="#333" text-anchor="middle">HU01: Registro</text>
 <text x="205.0" y="194.1" font-size="13" fill="#333" text-anchor="middle">individual de</text>
-<text x="205.0" y="211.0" font-size="13" fill="#333" text-anchor="middle">requerimientos</text>
-<text x="205.0" y="227.9" font-size="13" fill="#333" text-anchor="middle">históricos</text>
+<text x="205.0" y="210.9" font-size="13" fill="#333" text-anchor="middle">requerimientos</text>
+<text x="205.0" y="227.8" font-size="13" fill="#333" text-anchor="middle">históricos</text>
 <rect x="297" y="150" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="294" y="146" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="369.0" y="185.7" font-size="13" fill="#333" text-anchor="middle">HU02: Registro</text>
-<text x="369.0" y="202.6" font-size="13" fill="#333" text-anchor="middle">individual de reglas</text>
-<text x="369.0" y="219.5" font-size="13" fill="#333" text-anchor="middle">de negocio</text>
+<text x="369.0" y="185.6" font-size="13" fill="#333" text-anchor="middle">HU02: Registro</text>
+<text x="369.0" y="202.5" font-size="13" fill="#333" text-anchor="middle">individual de</text>
+<text x="369.0" y="219.4" font-size="13" fill="#333" text-anchor="middle">historias de usuario</text>
 <rect x="133" y="268" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="130" y="264" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="205.0" y="303.7" font-size="13" fill="#333" text-anchor="middle">HU03: Registro</text>
-<text x="205.0" y="320.6" font-size="13" fill="#333" text-anchor="middle">individual de casos</text>
-<text x="205.0" y="337.5" font-size="13" fill="#333" text-anchor="middle">de prueba ejecutados</text>
+<text x="205.0" y="303.6" font-size="13" fill="#333" text-anchor="middle">HU03: Registro</text>
+<text x="205.0" y="320.5" font-size="13" fill="#333" text-anchor="middle">individual de reglas</text>
+<text x="205.0" y="337.4" font-size="13" fill="#333" text-anchor="middle">de negocio</text>
 <rect x="297" y="268" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="294" y="264" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="369.0" y="303.7" font-size="13" fill="#333" text-anchor="middle">HU04: Registro</text>
-<text x="369.0" y="320.6" font-size="13" fill="#333" text-anchor="middle">individual de</text>
-<text x="369.0" y="337.5" font-size="13" fill="#333" text-anchor="middle">defectos</text>
+<text x="369.0" y="303.6" font-size="13" fill="#333" text-anchor="middle">HU04: Registro</text>
+<text x="369.0" y="320.5" font-size="13" fill="#333" text-anchor="middle">individual de casos</text>
+<text x="369.0" y="337.4" font-size="13" fill="#333" text-anchor="middle">de prueba ejecutados</text>
 <rect x="133" y="386" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="130" y="382" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="205.0" y="421.7" font-size="13" fill="#333" text-anchor="middle">HU05: Carga masiva y</text>
-<text x="205.0" y="438.6" font-size="13" fill="#333" text-anchor="middle">validación de</text>
-<text x="205.0" y="455.5" font-size="13" fill="#333" text-anchor="middle">archivos</text>
+<text x="205.0" y="421.6" font-size="13" fill="#333" text-anchor="middle">HU05: Registro</text>
+<text x="205.0" y="438.5" font-size="13" fill="#333" text-anchor="middle">individual de</text>
+<text x="205.0" y="455.4" font-size="13" fill="#333" text-anchor="middle">defectos</text>
 <rect x="297" y="386" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="294" y="382" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="369.0" y="413.2" font-size="13" fill="#333" text-anchor="middle">HU06: Revisión,</text>
-<text x="369.0" y="430.1" font-size="13" fill="#333" text-anchor="middle">corrección y</text>
-<text x="369.0" y="447.0" font-size="13" fill="#333" text-anchor="middle">confirmación de la</text>
-<text x="369.0" y="463.9" font-size="13" fill="#333" text-anchor="middle">carga</text>
+<text x="369.0" y="421.6" font-size="13" fill="#333" text-anchor="middle">HU06: Carga masiva y</text>
+<text x="369.0" y="438.5" font-size="13" fill="#333" text-anchor="middle">validación de</text>
+<text x="369.0" y="455.4" font-size="13" fill="#333" text-anchor="middle">archivos</text>
 <rect x="133" y="504" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="130" y="500" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="205.0" y="539.6" font-size="13" fill="#333" text-anchor="middle">HU07: Consulta y</text>
-<text x="205.0" y="556.5" font-size="13" fill="#333" text-anchor="middle">búsqueda de</text>
-<text x="205.0" y="573.4" font-size="13" fill="#333" text-anchor="middle">registros históricos</text>
+<text x="205.0" y="531.1" font-size="13" fill="#333" text-anchor="middle">HU07: Revisión,</text>
+<text x="205.0" y="548.0" font-size="13" fill="#333" text-anchor="middle">corrección y</text>
+<text x="205.0" y="564.9" font-size="13" fill="#333" text-anchor="middle">confirmación de la</text>
+<text x="205.0" y="581.9" font-size="13" fill="#333" text-anchor="middle">carga</text>
 <rect x="297" y="504" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="294" y="500" width="150" height="104" fill="#a9c8f5" stroke="none"/>
-<text x="369.0" y="539.6" font-size="13" fill="#333" text-anchor="middle">HU08: Edición y</text>
-<text x="369.0" y="556.5" font-size="13" fill="#333" text-anchor="middle">eliminación de</text>
-<text x="369.0" y="573.4" font-size="13" fill="#333" text-anchor="middle">registros históricos</text>
-<text x="20" y="646" font-size="15" font-weight="700" fill="#222">SPRINT 2</text>
-<line x1="110" y1="642" x2="1224" y2="642" stroke="#555" stroke-width="1.6"/>
-<rect x="133" y="668" width="150" height="104" fill="#000" opacity="0.12"/>
-<rect x="130" y="664" width="150" height="104" fill="#f9ae74" stroke="none"/>
-<text x="205.0" y="686.8" font-size="13" fill="#333" text-anchor="middle">HU09: Consulta y</text>
-<text x="205.0" y="703.6" font-size="13" fill="#333" text-anchor="middle">selección de</text>
-<text x="205.0" y="720.5" font-size="13" fill="#333" text-anchor="middle">información</text>
-<text x="205.0" y="737.5" font-size="13" fill="#333" text-anchor="middle">histórica</text>
-<text x="205.0" y="754.4" font-size="13" fill="#333" text-anchor="middle">relacionada</text>
-<rect x="487" y="668" width="150" height="104" fill="#000" opacity="0.12"/>
-<rect x="484" y="664" width="150" height="104" fill="#f9ae74" stroke="none"/>
-<text x="559.0" y="695.2" font-size="13" fill="#333" text-anchor="middle">HU10: Generación de</text>
-<text x="559.0" y="712.1" font-size="13" fill="#333" text-anchor="middle">casos de prueba</text>
-<text x="559.0" y="729.0" font-size="13" fill="#333" text-anchor="middle">funcionales mediante</text>
-<text x="559.0" y="745.9" font-size="13" fill="#333" text-anchor="middle">LLM</text>
-<text x="20" y="810" font-size="15" font-weight="700" fill="#222">SPRINT 3</text>
-<line x1="110" y1="806" x2="1224" y2="806" stroke="#555" stroke-width="1.6"/>
-<rect x="677" y="832" width="150" height="104" fill="#000" opacity="0.12"/>
-<rect x="674" y="828" width="150" height="104" fill="#cdeb9b" stroke="none"/>
-<text x="749.0" y="859.2" font-size="13" fill="#333" text-anchor="middle">HU11: Revisión de</text>
-<text x="749.0" y="876.1" font-size="13" fill="#333" text-anchor="middle">casos generados y</text>
-<text x="749.0" y="893.0" font-size="13" fill="#333" text-anchor="middle">registro de</text>
-<text x="749.0" y="909.9" font-size="13" fill="#333" text-anchor="middle">observaciones</text>
+<text x="369.0" y="539.6" font-size="13" fill="#333" text-anchor="middle">HU08: Consulta y</text>
+<text x="369.0" y="556.5" font-size="13" fill="#333" text-anchor="middle">búsqueda de registros</text>
+<text x="369.0" y="573.4" font-size="13" fill="#333" text-anchor="middle">históricos</text>
+<rect x="133" y="622" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="130" y="618" width="150" height="104" fill="#a9c8f5" stroke="none"/>
+<text x="205.0" y="657.6" font-size="13" fill="#333" text-anchor="middle">HU09: Edición y</text>
+<text x="205.0" y="674.5" font-size="13" fill="#333" text-anchor="middle">eliminación de</text>
+<text x="205.0" y="691.4" font-size="13" fill="#333" text-anchor="middle">registros históricos</text>
+<text x="20" y="764" font-size="15" font-weight="700" fill="#222">SPRINT 2</text>
+<line x1="110" y1="760" x2="1224" y2="760" stroke="#555" stroke-width="1.6"/>
+<rect x="133" y="786" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="130" y="782" width="150" height="104" fill="#f9ae74" stroke="none"/>
+<text x="205.0" y="813.1" font-size="13" fill="#333" text-anchor="middle">HU10: Consulta y</text>
+<text x="205.0" y="830.0" font-size="13" fill="#333" text-anchor="middle">selección de</text>
+<text x="205.0" y="846.9" font-size="13" fill="#333" text-anchor="middle">información histórica</text>
+<text x="205.0" y="863.9" font-size="13" fill="#333" text-anchor="middle">relacionada</text>
+<rect x="487" y="786" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="484" y="782" width="150" height="104" fill="#f9ae74" stroke="none"/>
+<text x="559.0" y="813.1" font-size="13" fill="#333" text-anchor="middle">HU11: Generación de</text>
+<text x="559.0" y="830.0" font-size="13" fill="#333" text-anchor="middle">casos de prueba</text>
+<text x="559.0" y="846.9" font-size="13" fill="#333" text-anchor="middle">funcionales mediante</text>
+<text x="559.0" y="863.9" font-size="13" fill="#333" text-anchor="middle">LLM</text>
+<text x="20" y="928" font-size="15" font-weight="700" fill="#222">SPRINT 3</text>
+<line x1="110" y1="924" x2="1224" y2="924" stroke="#555" stroke-width="1.6"/>
 <rect x="677" y="950" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="674" y="946" width="150" height="104" fill="#cdeb9b" stroke="none"/>
-<text x="749.0" y="985.6" font-size="13" fill="#333" text-anchor="middle">HU12: Regeneración</text>
-<text x="749.0" y="1002.5" font-size="13" fill="#333" text-anchor="middle">de casos según</text>
-<text x="749.0" y="1019.4" font-size="13" fill="#333" text-anchor="middle">observaciones</text>
-<rect x="867" y="832" width="150" height="104" fill="#000" opacity="0.12"/>
-<rect x="864" y="828" width="150" height="104" fill="#cdeb9b" stroke="none"/>
-<text x="939.0" y="867.6" font-size="13" fill="#333" text-anchor="middle">HU13: Envío de casos</text>
-<text x="939.0" y="884.5" font-size="13" fill="#333" text-anchor="middle">revisados para</text>
-<text x="939.0" y="901.4" font-size="13" fill="#333" text-anchor="middle">aprobación</text>
-<text x="20" y="1092" font-size="15" font-weight="700" fill="#222">SPRINT 4</text>
-<line x1="110" y1="1088" x2="1224" y2="1088" stroke="#555" stroke-width="1.6"/>
-<rect x="867" y="1114" width="150" height="104" fill="#000" opacity="0.12"/>
-<rect x="864" y="1110" width="150" height="104" fill="#f8c3ea" stroke="none"/>
-<text x="939.0" y="1158.1" font-size="13" fill="#333" text-anchor="middle">HU14: Aprobación o</text>
-<text x="939.0" y="1175.0" font-size="13" fill="#333" text-anchor="middle">devolución de casos</text>
+<text x="749.0" y="977.1" font-size="13" fill="#333" text-anchor="middle">HU12: Revisión de</text>
+<text x="749.0" y="994.0" font-size="13" fill="#333" text-anchor="middle">casos generados y</text>
+<text x="749.0" y="1010.9" font-size="13" fill="#333" text-anchor="middle">registro de</text>
+<text x="749.0" y="1027.8" font-size="13" fill="#333" text-anchor="middle">observaciones</text>
+<rect x="867" y="950" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="864" y="946" width="150" height="104" fill="#cdeb9b" stroke="none"/>
+<text x="939.0" y="985.6" font-size="13" fill="#333" text-anchor="middle">HU14: Envío de casos</text>
+<text x="939.0" y="1002.5" font-size="13" fill="#333" text-anchor="middle">revisados para</text>
+<text x="939.0" y="1019.4" font-size="13" fill="#333" text-anchor="middle">aprobación</text>
+<rect x="677" y="1068" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="674" y="1064" width="150" height="104" fill="#cdeb9b" stroke="none"/>
+<text x="749.0" y="1103.6" font-size="13" fill="#333" text-anchor="middle">HU13: Regeneración de</text>
+<text x="749.0" y="1120.5" font-size="13" fill="#333" text-anchor="middle">casos según</text>
+<text x="749.0" y="1137.4" font-size="13" fill="#333" text-anchor="middle">observaciones</text>
+<text x="20" y="1210" font-size="15" font-weight="700" fill="#222">SPRINT 4</text>
+<line x1="110" y1="1206" x2="1224" y2="1206" stroke="#555" stroke-width="1.6"/>
 <rect x="867" y="1232" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="864" y="1228" width="150" height="104" fill="#f8c3ea" stroke="none"/>
-<text x="939.0" y="1267.6" font-size="13" fill="#333" text-anchor="middle">HU15: Exportación de</text>
-<text x="939.0" y="1284.5" font-size="13" fill="#333" text-anchor="middle">casos aprobados a</text>
-<text x="939.0" y="1301.4" font-size="13" fill="#333" text-anchor="middle">Excel</text>
-<rect x="1057" y="1114" width="150" height="104" fill="#000" opacity="0.12"/>
-<rect x="1054" y="1110" width="150" height="104" fill="#f8c3ea" stroke="none"/>
-<text x="1129.0" y="1149.6" font-size="13" fill="#333" text-anchor="middle">HU16: Consulta de</text>
-<text x="1129.0" y="1166.5" font-size="13" fill="#333" text-anchor="middle">reportes del proceso</text>
-<text x="1129.0" y="1183.4" font-size="13" fill="#333" text-anchor="middle">QA</text>
+<text x="939.0" y="1276.0" font-size="13" fill="#333" text-anchor="middle">HU15: Aprobación o</text>
+<text x="939.0" y="1293.0" font-size="13" fill="#333" text-anchor="middle">devolución de casos</text>
+<rect x="867" y="1350" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="864" y="1346" width="150" height="104" fill="#f8c3ea" stroke="none"/>
+<text x="939.0" y="1385.6" font-size="13" fill="#333" text-anchor="middle">HU16: Exportación de</text>
+<text x="939.0" y="1402.5" font-size="13" fill="#333" text-anchor="middle">casos aprobados a</text>
+<text x="939.0" y="1419.4" font-size="13" fill="#333" text-anchor="middle">Excel</text>
 <rect x="1057" y="1232" width="150" height="104" fill="#000" opacity="0.12"/>
 <rect x="1054" y="1228" width="150" height="104" fill="#f8c3ea" stroke="none"/>
 <text x="1129.0" y="1267.6" font-size="13" fill="#333" text-anchor="middle">HU17: Consulta de</text>
-<text x="1129.0" y="1284.5" font-size="13" fill="#333" text-anchor="middle">reporte de cobertura</text>
-<text x="1129.0" y="1301.4" font-size="13" fill="#333" text-anchor="middle">de escenarios</text>
+<text x="1129.0" y="1284.5" font-size="13" fill="#333" text-anchor="middle">reportes del proceso</text>
+<text x="1129.0" y="1301.4" font-size="13" fill="#333" text-anchor="middle">QA</text>
+<rect x="1057" y="1350" width="150" height="104" fill="#000" opacity="0.12"/>
+<rect x="1054" y="1346" width="150" height="104" fill="#f8c3ea" stroke="none"/>
+<text x="1129.0" y="1385.6" font-size="13" fill="#333" text-anchor="middle">HU18: Consulta de</text>
+<text x="1129.0" y="1402.5" font-size="13" fill="#333" text-anchor="middle">reporte de cobertura</text>
+<text x="1129.0" y="1419.4" font-size="13" fill="#333" text-anchor="middle">de escenarios</text>
 </svg>
