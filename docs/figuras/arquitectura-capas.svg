@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1740" height="1110" viewBox="0 0 1740 1110" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="1740" height="1110" fill="#fff"/><rect x="6" y="6" width="1728" height="1098" fill="none" stroke="#c9ced8"/>
+<text x="690.0" y="40" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Arquitectura de componentes por capas</text>
+<text x="690.0" y="64" font-size="14" font-weight="400" fill="#6b7280" text-anchor="middle">Diagrama de componentes UML agrupados por capa</text>
+<g stroke="#333" stroke-width="1.6" fill="none"><circle cx="450" cy="90" r="10"/><line x1="450" y1="100" x2="450" y2="126"/><line x1="435" y1="109" x2="465" y2="109"/><line x1="450" y1="126" x2="437" y2="144"/><line x1="450" y1="126" x2="463" y2="144"/></g>
+<text x="450" y="164" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Analista QA</text>
+<line x1="450" y1="170" x2="700" y2="196" stroke="#55607a" stroke-width="1.2"/>
+<g stroke="#333" stroke-width="1.6" fill="none"><circle cx="700" cy="90" r="10"/><line x1="700" y1="100" x2="700" y2="126"/><line x1="685" y1="109" x2="715" y2="109"/><line x1="700" y1="126" x2="687" y2="144"/><line x1="700" y1="126" x2="713" y2="144"/></g>
+<text x="700" y="164" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Líder QA</text>
+<line x1="700" y1="170" x2="700" y2="196" stroke="#55607a" stroke-width="1.2"/>
+<g stroke="#333" stroke-width="1.6" fill="none"><circle cx="950" cy="90" r="10"/><line x1="950" y1="100" x2="950" y2="126"/><line x1="935" y1="109" x2="965" y2="109"/><line x1="950" y1="126" x2="937" y2="144"/><line x1="950" y1="126" x2="963" y2="144"/></g>
+<text x="950" y="164" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Administrador</text>
+<line x1="950" y1="170" x2="700" y2="196" stroke="#55607a" stroke-width="1.2"/>
+<rect x="40" y="178" width="335.59999999999997" height="22" fill="#e3ecfa" stroke="#6f88b8" stroke-width="1.5"/>
+<rect x="40" y="200" width="1340" height="150" fill="#e3ecfa" stroke="#6f88b8" stroke-width="1.5"/>
+<text x="52" y="194" font-size="13" font-weight="700" fill="#222" text-anchor="start">Capa de presentación (Angular · Material)</text>
+<rect x="80.0" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="160.42857142857144" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Autenticación</text>
+<text x="160.42857142857144" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">inicio de sesión</text>
+<rect x="264.8571428571429" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="257.8571428571429" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="257.8571428571429" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="345.28571428571433" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Conocimiento</text>
+<text x="345.28571428571433" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">registros e historias</text>
+<rect x="449.7142857142857" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="442.7142857142857" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="442.7142857142857" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="530.1428571428571" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Carga masiva</text>
+<text x="530.1428571428571" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">revisión de lotes</text>
+<rect x="634.5714285714286" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="627.5714285714286" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="627.5714285714286" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="715.0" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Generación</text>
+<text x="715.0" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">de casos</text>
+<rect x="819.4285714285714" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="812.4285714285714" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="812.4285714285714" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="899.8571428571429" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Revisión</text>
+<text x="899.8571428571429" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">y aprobación</text>
+<rect x="1004.2857142857143" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="997.2857142857143" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="997.2857142857143" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1084.7142857142858" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Reportes</text>
+<text x="1084.7142857142858" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">indicadores</text>
+<rect x="1189.142857142857" y="216" width="160.85714285714286" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1182.142857142857" y="225" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1182.142857142857" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1269.5714285714284" y="237.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Administración</text>
+<text x="1269.5714285714284" y="254.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">usuarios y permisos</text>
+<rect x="80.0" y="284" width="623.0" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="293" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="307" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="391.5" y="305.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Servicios del cliente</text>
+<text x="391.5" y="322.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">AuthService · ApiService</text>
+<rect x="727.0" y="284" width="623.0" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="720.0" y="293" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="720.0" y="307" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1038.5" y="305.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Seguridad del cliente</text>
+<text x="1038.5" y="322.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">interceptor JWT · guardas de ruta</text>
+<line x1="700" y1="350" x2="700" y2="400" stroke="#55607a" stroke-width="1.4" stroke-dasharray="5 4"/>
+<polyline points="694,392 700,400 706,392" fill="none" stroke="#55607a" stroke-width="1.4"/>
+<text x="712" y="380.0" font-size="12" font-weight="400" fill="#333" text-anchor="start">HTTPS · REST/JSON · token JWT</text>
+<rect x="40" y="378" width="305.2" height="22" fill="#e1f2d8" stroke="#7aa865" stroke-width="1.5"/>
+<rect x="40" y="400" width="1340" height="150" fill="#e1f2d8" stroke="#7aa865" stroke-width="1.5"/>
+<text x="52" y="394" font-size="13" font-weight="700" fill="#222" text-anchor="start">Capa de servicios – API REST (NestJS)</text>
+<rect x="80.0" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="148.875" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/auth</text>
+<rect x="241.75" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="234.75" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="234.75" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="310.625" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/knowledge</text>
+<rect x="403.5" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="396.5" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="396.5" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="472.375" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/imports</text>
+<rect x="565.25" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="558.25" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="558.25" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="634.125" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/templates</text>
+<rect x="727.0" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="720.0" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="720.0" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="795.875" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/catalogs</text>
+<rect x="888.75" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="881.75" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="881.75" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="957.625" y="437.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/users</text>
+<text x="957.625" y="454.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">/permissions</text>
+<rect x="1050.5" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1043.5" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1043.5" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1119.375" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/generation</text>
+<rect x="1212.25" y="416" width="137.75" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1205.25" y="425" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1205.25" y="439" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1281.125" y="445.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">/reports</text>
+<rect x="80.0" y="484" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="493" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="507" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="283.66666666666663" y="505.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Guarda de seguridad</text>
+<text x="283.66666666666663" y="522.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">JWT y permisos por rol</text>
+<rect x="511.3333333333333" y="484" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="504.3333333333333" y="493" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="504.3333333333333" y="507" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="715.0" y="505.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Validación de entrada</text>
+<text x="715.0" y="522.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">DTO y pipes</text>
+<rect x="942.6666666666666" y="484" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="935.6666666666666" y="493" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="935.6666666666666" y="507" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1146.3333333333333" y="505.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Documentación</text>
+<text x="1146.3333333333333" y="522.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">Swagger / OpenAPI</text>
+<line x1="700" y1="550" x2="700" y2="600" stroke="#55607a" stroke-width="1.4" stroke-dasharray="5 4"/>
+<polyline points="694,592 700,600 706,592" fill="none" stroke="#55607a" stroke-width="1.4"/>
+<rect x="40" y="578" width="358.4" height="22" fill="#ece6f8" stroke="#9b84c6" stroke-width="1.5"/>
+<rect x="40" y="600" width="1340" height="150" fill="#ece6f8" stroke="#9b84c6" stroke-width="1.5"/>
+<text x="52" y="594" font-size="13" font-weight="700" fill="#222" text-anchor="start">Capa de lógica de negocio (servicios NestJS)</text>
+<rect x="80.0" y="616" width="299.5" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="625" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="639" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="229.75" y="637.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Autenticación</text>
+<text x="229.75" y="654.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">usuarios, roles, permisos</text>
+<rect x="403.5" y="616" width="299.5" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="396.5" y="625" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="396.5" y="639" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="553.25" y="637.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Base de conocimiento</text>
+<text x="553.25" y="654.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">REQ · HU · RN · CP · DEF, códigos</text>
+<rect x="727.0" y="616" width="299.5" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="720.0" y="625" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="720.0" y="639" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="876.75" y="637.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Carga masiva</text>
+<text x="876.75" y="654.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">validación de lotes</text>
+<rect x="1050.5" y="616" width="299.5" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1043.5" y="625" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1043.5" y="639" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1200.25" y="637.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Plantillas</text>
+<text x="1200.25" y="654.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">Excel, Word, CSV</text>
+<rect x="80.0" y="684" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="693" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="707" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="283.66666666666663" y="705.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Generación de casos</text>
+<text x="283.66666666666663" y="722.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">contexto, prompt y validación JSON</text>
+<rect x="511.3333333333333" y="684" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="504.3333333333333" y="693" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="504.3333333333333" y="707" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="715.0" y="705.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Revisión y aprobación</text>
+<text x="715.0" y="722.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">estados, observaciones, versiones</text>
+<rect x="942.6666666666666" y="684" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="935.6666666666666" y="693" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="935.6666666666666" y="707" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1146.3333333333333" y="705.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Reportería</text>
+<text x="1146.3333333333333" y="722.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">indicadores de proceso y cobertura</text>
+<line x1="700" y1="750" x2="700" y2="800" stroke="#55607a" stroke-width="1.4" stroke-dasharray="5 4"/>
+<polyline points="694,792 700,800 706,792" fill="none" stroke="#55607a" stroke-width="1.4"/>
+<rect x="40" y="778" width="274.79999999999995" height="22" fill="#e9eaee" stroke="#8d929c" stroke-width="1.5"/>
+<rect x="40" y="800" width="1340" height="84" fill="#e9eaee" stroke="#8d929c" stroke-width="1.5"/>
+<text x="52" y="794" font-size="13" font-weight="700" fill="#222" text-anchor="start">Capa de integración (adaptadores)</text>
+<rect x="80.0" y="818" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="827" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="841" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="283.66666666666663" y="839.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Lectores de archivos</text>
+<text x="283.66666666666663" y="856.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">exceljs · mammoth · csv-parse</text>
+<rect x="511.3333333333333" y="818" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="504.3333333333333" y="827" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="504.3333333333333" y="841" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="715.0" y="839.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Recuperación de contexto</text>
+<text x="715.0" y="856.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">vínculos directos y similitud TF-IDF</text>
+<rect x="942.6666666666666" y="818" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="935.6666666666666" y="827" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="935.6666666666666" y="841" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1146.3333333333333" y="839.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Cliente LLM</text>
+<text x="1146.3333333333333" y="856.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">envío del prompt y respuesta estructurada</text>
+<line x1="700" y1="884" x2="700" y2="934" stroke="#55607a" stroke-width="1.4" stroke-dasharray="5 4"/>
+<polyline points="694,926 700,934 706,926" fill="none" stroke="#55607a" stroke-width="1.4"/>
+<text x="712" y="914.0" font-size="12" font-weight="400" fill="#333" text-anchor="start">Mongoose (ODM)</text>
+<rect x="40" y="912" width="198.79999999999998" height="22" fill="#f9dde8" stroke="#c37f9c" stroke-width="1.5"/>
+<rect x="40" y="934" width="1340" height="150" fill="#f9dde8" stroke="#c37f9c" stroke-width="1.5"/>
+<text x="52" y="928" font-size="13" font-weight="700" fill="#222" text-anchor="start">Capa de datos (MongoDB)</text>
+<rect x="80.0" y="950" width="623.0" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="959" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="973" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="391.5" y="971.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Conocimiento</text>
+<text x="391.5" y="988.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">requirements · user_stories · business_rules · test_cases · defects</text>
+<rect x="727.0" y="950" width="623.0" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="720.0" y="959" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="720.0" y="973" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1038.5" y="971.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Catálogos</text>
+<text x="1038.5" y="988.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">projects · flow_modules · counters</text>
+<rect x="80.0" y="1018" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73.0" y="1027" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73.0" y="1041" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="283.66666666666663" y="1039.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Carga masiva</text>
+<text x="283.66666666666663" y="1056.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">import_batches · import_rows</text>
+<rect x="511.3333333333333" y="1018" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="504.3333333333333" y="1027" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="504.3333333333333" y="1041" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="715.0" y="1039.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Seguridad</text>
+<text x="715.0" y="1056.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">users · role_permissions</text>
+<rect x="942.6666666666666" y="1018" width="407.3333333333333" height="48" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="935.6666666666666" y="1027" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="935.6666666666666" y="1041" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1146.3333333333333" y="1039.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Generaciones</text>
+<text x="1146.3333333333333" y="1056.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">generation_requests · generated_cases</text>
+<polygon points="1450,790 1466,774 1716,774 1700,790" fill="#dfd0f6" stroke="#9b84c6"/><polygon points="1700,790 1716,774 1716,914 1700,930" fill="#cbb6ef" stroke="#9b84c6"/><rect x="1450" y="790" width="250" height="140" fill="#ece2fb" stroke="#9b84c6"/>
+<text x="1462" y="809" font-size="11.5" font-weight="400" fill="#55607a" text-anchor="start">«external system»</text>
+<text x="1462" y="827" font-size="14" font-weight="700" fill="#222" text-anchor="start">Proveedor LLM</text>
+<rect x="1480" y="852" width="195" height="52" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1473" y="861" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1473" y="875" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1577.5" y="875.0" font-size="13" font-weight="700" fill="#222" text-anchor="middle">API del modelo</text>
+<text x="1577.5" y="892.0" font-size="11" font-weight="400" fill="#555" text-anchor="middle">Claude (Anthropic) · JSON</text>
+<line x1="1380" y1="842" x2="1450" y2="842" stroke="#55607a" stroke-width="1.5"/>
+<text x="1415" y="834" font-size="11.5" font-weight="700" fill="#222" text-anchor="middle">HTTPS</text>
+</svg>
