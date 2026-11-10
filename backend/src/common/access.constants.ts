@@ -42,7 +42,7 @@ export const MODULES: ModuleDescriptor[] = [
   {
     module: AppModule.KNOWLEDGE,
     label: 'Base de conocimiento',
-    description: 'Registro individual y masivo de requerimientos, reglas de negocio, casos de prueba y defectos históricos.',
+    description: 'Registro individual y masivo de requerimientos, historias de usuario, reglas de negocio, casos de prueba y defectos históricos.',
     actions: [Action.VIEW, Action.CREATE, Action.EDIT, Action.DELETE, Action.BULK_UPLOAD],
     available: true,
   },
