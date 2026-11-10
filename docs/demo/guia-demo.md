@@ -1,8 +1,13 @@
-# Guía de demostración – Generación de casos de prueba
+# Guía de demostración y pruebas
 
-## 1. Catálogos a registrar (Administración › Catálogos)
+Archivos:
 
-**Proyecto:** `Tienda Galaxia Online`, el juego en línea de Nexa Games Studios con una tienda de gemas.
+- `demo-historico-tienda-galaxia.xlsx`: información histórica válida (46 registros).
+- `demo-carga-con-errores.xlsx`: 7 registros, 5 de ellos con errores intencionales.
+
+## 1. Catálogos a registrar (Configuración › Proyectos y módulos)
+
+**Proyecto:** `Tienda Galaxia Online`
 
 | Módulo / flujo | Descripción |
 |---|---|
@@ -11,49 +16,58 @@
 | Promociones y bonificaciones | Bonificaciones y beneficios asociados a las compras |
 | Control parental | Límites de compra para cuentas de menores de edad |
 
-Los nombres deben escribirse exactamente así, porque la columna **Módulo** del Excel se compara con ellos.
+Los nombres deben escribirse exactamente así: la columna **Módulo** del Excel se compara con ellos.
 
-## 2. Carga del histórico
+## 2. Carga masiva del histórico
 
-1. Ir a **Carga masiva** y elegir el proyecto *Tienda Galaxia Online* con el módulo por defecto *Compra de monedas virtuales*.
-2. Subir `demo-historico-tienda-galaxia.xlsx`. El resultado esperado son **46 registros válidos, 0 errores**:
-   - 8 requerimientos
-   - 9 historias de usuario (HU1–HU9, vinculadas a requerimientos, reglas, casos y defectos)
-   - 12 reglas de negocio
-   - 12 casos ejecutados con sus pasos (5 fallidos)
-   - 5 defectos
-3. Confirmar. Las referencias REQ1, HU1, RN1… se convierten en códigos REQ-001, HU-001, RN-001…
+1. **Carga masiva** › proyecto *Tienda Galaxia Online*, módulo por defecto *Compra de monedas virtuales*.
+2. Subir `demo-historico-tienda-galaxia.xlsx`. Resultado esperado: **46 válidos, 0 errores**.
 
-En una base con registros previos, los códigos continúan la numeración existente. En ese caso, busque los registros por título.
+   | Hoja | Registros | Códigos tras confirmar |
+   |---|---|---|
+   | Requerimientos | 8 | REQ-001 a REQ-008 |
+   | HistoriasUsuario | 9 | HU-001 a HU-009 |
+   | ReglasNegocio | 12 | RN-001 a RN-012 |
+   | CasosPrueba (+ PasosCasoPrueba) | 12 (5 fallidos) | CP-001 a CP-012 |
+   | Defectos | 5 | DEF-001 a DEF-005 |
 
-**Opcional, para mostrar la corrección (HU05/HU06):** subir `demo-carga-con-errores.xlsx`. Muestra 3 filas con error:
+3. Confirmar. En una base con registros previos, los códigos continúan la numeración existente.
 
-| Error | Corrección |
-|---|---|
-| Prioridad "Urgente" | Corregirla a Alta |
-| Módulo "Tienda de regalos", que no existe | Elegir otro módulo |
-| Regla sin nombre | Escribir un nombre |
+## 3. Carga con errores (revisión y corrección)
 
-Después de corregir las filas se puede confirmar, o cancelar el lote.
+Subir `demo-carga-con-errores.xlsx`. Resultado esperado: **2 válidas, 5 con errores**. El botón Confirmar queda
+deshabilitado hasta corregirlas o excluirlas.
 
-## 3. Escenarios de generación (Generar casos)
+| Fila | Error | Corrección |
+|---|---|---|
+| REQ2 | Prioridad "Urgente" | Alta |
+| RN1 | Módulo "Tienda de regalos" no existe | Elegir *Compra de monedas virtuales* |
+| RN2 | Regla sin nombre | Escribir "Historial de 90 días" |
+| HU2 | Sin rol y puntos de historia "4" | Rol "Jugador" y puntos 5 |
+| CP1 | Tipo de escenario "Valor límite" (ya no existe) | Positivo (la técnica sigue siendo Análisis de valores límite) |
 
-| # | Requerimiento | Parámetros | Qué mostrar |
+Corregir una o dos filas para mostrar el cambio de estado y **cancelar el lote**, para no mezclar estos registros con
+la demo.
+
+## 4. Base de conocimiento
+
+- **Historias de usuario › HU-006**: ver su requerimiento (REQ-005) y su regla (RN-005).
+- **Casos de prueba › CP-008**: está vinculado a REQ-005, HU-006, RN-005 y DEF-001 (trazabilidad completa).
+- Buscar por texto (p. ej. "límite") y filtrar por módulo.
+- Registrar una historia nueva por formulario y comprobar que recibe el código HU-010.
+
+## 5. Generación de casos de prueba
+
+| # | Punto de partida | Parámetros | Qué mostrar |
 |---|---|---|---|
-| 1 | REQ-001 *Compra de paquete de gemas con tarjeta* (módulo Compra de monedas virtuales) | Todos los tipos de escenario, 8 casos | Contexto recuperado: relacionados directos al 100 % (RN-001, RN-002, RN-006, RN-012, CP-001 a CP-003, DEF-002) más similares por texto. Los casos cubren pago duplicado (DEF-002), montos límite (RN-006) y bloqueo por intentos (RN-012). |
-| 2 | Nuevo requerimiento (texto libre): *Compra de gemas con cupón de descuento*. Descripción: "El jugador puede aplicar un cupón de descuento vigente al comprar un paquete de gemas." | Por defecto | La recuperación funciona por similitud aun sin relaciones registradas. En **Observaciones**, el modelo indica que no hay reglas de cupones en la base. |
-| 3 | REQ-005 *Límite diario de compra para menores de edad* (módulo Control parental) | Solo *Positivo* y *Negativo*, técnica *Análisis de valores límite*, 5 casos | Casos de borde (límite exacto, aceptado; superado por centavos, rechazado) influenciados por DEF-001 y CP-008. |
+| 1 | Módulo *Compra de monedas virtuales* › **Requerimiento registrado** REQ-001 | Los 4 tipos de escenario, 8 casos | Contexto directo al 100 %: HU-001, HU-002, RN-001, RN-002, RN-006, RN-012, CP-001 a CP-003 y DEF-002. Casos sobre pago duplicado (DEF-002), montos mínimo y máximo (RN-006) y bloqueo por intentos (RN-012). |
+| 2 | Módulo *Control parental* › **Historia de usuario registrada** HU-006 | Positivo y Negativo, técnica *Análisis de valores límite*, 5 casos | Trazabilidad requerimiento → historia → regla → caso → defecto: entran REQ-005, RN-005, CP-008, CP-009 y DEF-001. Casos de borde: 50.00 USD aceptado (positivo) y 50.01 USD rechazado (negativo). |
+| 3 | Módulo *Pasarela de pago* › REQ-003 *Pago con billetera digital* | Solo Alternativo y Excepción, 4 casos | Los parámetros cambian el resultado: caminos válidos distintos al principal y fallas del entorno (servicio que no responde, notificación duplicada). |
+| 4 | **Nuevo requerimiento (texto libre)**: "Compra de gemas con cupón de descuento". Descripción: "El jugador puede aplicar un cupón de descuento vigente al comprar un paquete de gemas." | Por defecto | La recuperación por similitud funciona sin relaciones registradas. En **Observaciones**, el modelo indica que faltan reglas sobre cupones. |
 
 En cada escenario conviene enseñar:
 
-- la tabla de contexto, donde se puede quitar o agregar un registro con el buscador;
+- la tabla de contexto (quitar un registro y agregar otro con el buscador);
 - el diálogo de progreso;
-- el detalle de la generación (casos con pasos, trazabilidad hacia el contexto usado, tokens y tiempo);
+- el detalle: casos con pasos, tipo de escenario, técnica, fuentes, contexto usado, tokens y tiempo;
 - la lista **Mis generaciones**.
-
-### Escenario adicional: generación desde una historia de usuario
-
-En **Generar casos**, elegir el módulo *Control parental*, marcar **Historia de usuario registrada** y seleccionar
-**HU-006** *Limitar las compras diarias de un menor*. El contexto incluye como relación directa (100 %) su
-requerimiento REQ-005, la regla RN-005, los casos CP-008 y CP-009 y el defecto DEF-001. Esto muestra la trazabilidad
-requerimiento → historia → regla → caso → defecto.
