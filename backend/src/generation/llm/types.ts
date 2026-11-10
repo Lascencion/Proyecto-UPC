@@ -1,6 +1,6 @@
 /** Contrato entre el módulo de generación y el proveedor del LLM. */
 
-export const SCENARIO_TYPES = ['Positivo', 'Negativo', 'Valor límite', 'Excepción'] as const;
+export const SCENARIO_TYPES = ['Positivo', 'Negativo', 'Alternativo', 'Excepción'] as const;
 export const TECHNIQUES = [
   'Partición de equivalencia',
   'Análisis de valores límite',

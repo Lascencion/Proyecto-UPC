@@ -6,7 +6,7 @@ import { GenerationError, GenerationInput } from './types';
 const input: GenerationInput = {
   requirement: { code: 'REQ-049', title: 'Compra con cupón', description: 'Aplicar cupón al comprar monedas', acceptanceCriteria: ['Cupón vigente'] },
   context: [{ type: 'business-rules', code: 'RN-007', title: 'Vigencia de cupones', content: 'Un cupón vencido no se aplica.' }],
-  scenarioTypes: ['Positivo', 'Negativo', 'Valor límite'],
+  scenarioTypes: ['Positivo', 'Negativo', 'Alternativo'],
   techniques: [],
   maxCases: 2,
   instructions: 'Priorizar cupones vencidos',
@@ -60,7 +60,7 @@ describe('validateResponse', () => {
 describe('SimulatedProvider', () => {
   it('genera casos de los tipos solicitados sin superar el máximo', async () => {
     const out = await new SimulatedProvider(0).generate({ ...input, maxCases: 4 });
-    expect(out.cases.map((c) => c.scenarioType)).toEqual(['Positivo', 'Negativo', 'Valor límite', 'Positivo']);
+    expect(out.cases.map((c) => c.scenarioType)).toEqual(['Positivo', 'Negativo', 'Alternativo', 'Positivo']);
     expect(out.cases[0].sources).toEqual(['RN-007']);
     expect(() => validateResponse(out, { ...input, maxCases: 4 })).not.toThrow();
   });

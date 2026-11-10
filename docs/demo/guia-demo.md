@@ -42,7 +42,7 @@ Después de corregir las filas se puede confirmar, o cancelar el lote.
 |---|---|---|---|
 | 1 | REQ-001 *Compra de paquete de gemas con tarjeta* (módulo Compra de monedas virtuales) | Todos los tipos de escenario, 8 casos | Contexto recuperado: relacionados directos al 100 % (RN-001, RN-002, RN-006, RN-012, CP-001 a CP-003, DEF-002) más similares por texto. Los casos cubren pago duplicado (DEF-002), montos límite (RN-006) y bloqueo por intentos (RN-012). |
 | 2 | Nuevo requerimiento (texto libre): *Compra de gemas con cupón de descuento*. Descripción: "El jugador puede aplicar un cupón de descuento vigente al comprar un paquete de gemas." | Por defecto | La recuperación funciona por similitud aun sin relaciones registradas. En **Observaciones**, el modelo indica que no hay reglas de cupones en la base. |
-| 3 | REQ-005 *Límite diario de compra para menores de edad* (módulo Control parental) | Solo *Valor límite* y *Negativo*, 5 casos | Casos de borde (límite exacto y superado por centavos) influenciados por DEF-001 y CP-008. |
+| 3 | REQ-005 *Límite diario de compra para menores de edad* (módulo Control parental) | Solo *Positivo* y *Negativo*, técnica *Análisis de valores límite*, 5 casos | Casos de borde (límite exacto, aceptado; superado por centavos, rechazado) influenciados por DEF-001 y CP-008. |
 
 En cada escenario conviene enseñar:
 

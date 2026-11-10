@@ -17,11 +17,11 @@ const PLAN: Record<string, { technique: string; title: (r: string) => string; ac
     result: 'El sistema rechaza la operación y muestra un mensaje claro',
     priority: 'Alta',
   },
-  'Valor límite': {
-    technique: 'Análisis de valores límite',
-    title: (r) => `${r}: valor en el límite permitido`,
-    action: 'Ejecutar la operación con el valor exacto del límite',
-    result: 'El sistema aplica la regla correspondiente al valor límite',
+  Alternativo: {
+    technique: 'Casos de uso',
+    title: (r) => `${r}: flujo alternativo válido`,
+    action: 'Completar la operación por un camino alternativo válido (otra opción o secuencia de pasos)',
+    result: 'La operación se completa correctamente por el camino alternativo',
     priority: 'Media',
   },
   Excepción: {

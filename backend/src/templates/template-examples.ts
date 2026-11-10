@@ -143,7 +143,7 @@ export const TEMPLATE_EXAMPLES: Record<EntityType, Record<string, unknown>[]> = 
       requirements: ['REQ2'],
       userStories: ['HU2'],
       relatedRules: ['RN2'],
-      scenarioType: 'Valor límite',
+      scenarioType: 'Negativo',
       designTechnique: 'Análisis de valores límite',
       priority: 'Alta',
       preconditions: 'Jugador autenticado de 15 años con 49.99 USD comprados en el día',

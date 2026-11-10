@@ -161,7 +161,7 @@ export interface PermissionMatrix {
 
 // ----- Generación de casos de prueba -----
 
-export const SCENARIO_TYPES = ['Positivo', 'Negativo', 'Valor límite', 'Excepción'];
+export const SCENARIO_TYPES = ['Positivo', 'Negativo', 'Alternativo', 'Excepción'];
 export const TECHNIQUES = [
   'Partición de equivalencia',
   'Análisis de valores límite',

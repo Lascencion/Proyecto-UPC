@@ -82,7 +82,7 @@ que sigue el sistema al leerlas.
 | Requerimientos | varios | REQ1; REQ2 |
 | Historias de usuario | varios | HU1 |
 | Reglas de negocio | varios | RN1; RN-003 |
-| Tipo de escenario * | lista | Positivo, Negativo, Valor límite, Excepción |
+| Tipo de escenario * | lista | Positivo, Negativo, Alternativo, Excepción |
 | Técnica de diseño | lista | Partición de equivalencia, Análisis de valores límite, Tabla de decisión, Transición de estados, Casos de uso, Conjetura de errores, Otra |
 | Prioridad | lista | Alta, Media, Baja |
 | Precondiciones | texto largo | |

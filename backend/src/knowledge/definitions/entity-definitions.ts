@@ -192,7 +192,7 @@ export const TEST_CASE_DEFINITION: EntityDefinition = {
       key: 'scenarioType',
       label: 'Tipo de escenario',
       type: 'enum',
-      options: ['Positivo', 'Negativo', 'Valor límite', 'Excepción'],
+      options: ['Positivo', 'Negativo', 'Alternativo', 'Excepción'],
       required: true,
       listColumn: true,
     },
