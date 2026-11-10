@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3130" height="850" viewBox="0 0 3130 850" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="3130" height="850" fill="#fff"/>
+<rect x="30" y="70" width="3080" height="700" fill="#fff" stroke="#2b2b2b" stroke-width="1.5"/>
+<rect x="30" y="70" width="60" height="700" fill="#e8edf4" stroke="#2b2b2b" stroke-width="1.5"/>
+<text transform="translate(65.0 420.0) rotate(-90)" font-size="15" font-weight="700" text-anchor="middle" fill="#1f3a5f">Nexa Games Studios S.A.C. – Proceso TO-BE</text>
+<rect x="90" y="70" width="3020" height="140" fill="#ffffff" stroke="#2b2b2b" stroke-width="1"/>
+<rect x="90" y="70" width="120" height="140" fill="#f1f4f8" stroke="#2b2b2b" stroke-width="1"/>
+<text x="150.0" y="137.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">Equipo de</text>
+<text x="150.0" y="153.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">producto</text>
+<rect x="90" y="210" width="3020" height="140" fill="#fbfcfe" stroke="#2b2b2b" stroke-width="1"/>
+<rect x="90" y="210" width="120" height="140" fill="#f1f4f8" stroke="#2b2b2b" stroke-width="1"/>
+<text x="150.0" y="277.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">Equipo de</text>
+<text x="150.0" y="293.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">desarrollo</text>
+<rect x="90" y="350" width="3020" height="140" fill="#ffffff" stroke="#2b2b2b" stroke-width="1"/>
+<rect x="90" y="350" width="120" height="140" fill="#f1f4f8" stroke="#2b2b2b" stroke-width="1"/>
+<text x="150.0" y="425.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">Analista QA</text>
+<rect x="90" y="490" width="3020" height="140" fill="#fbfcfe" stroke="#2b2b2b" stroke-width="1"/>
+<rect x="90" y="490" width="120" height="140" fill="#f1f4f8" stroke="#2b2b2b" stroke-width="1"/>
+<text x="150.0" y="557.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">Sistema basado</text>
+<text x="150.0" y="573.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">en LLM</text>
+<rect x="90" y="630" width="3020" height="140" fill="#ffffff" stroke="#2b2b2b" stroke-width="1"/>
+<rect x="90" y="630" width="120" height="140" fill="#f1f4f8" stroke="#2b2b2b" stroke-width="1"/>
+<text x="150.0" y="705.0" font-size="13" font-weight="700" fill="#1f3a5f" text-anchor="middle">Líder QA</text>
+<circle cx="255" cy="140.0" r="17" fill="#fff" stroke="#2b2b2b" stroke-width="1.6"/>
+<text x="255" y="174.0" font-size="11.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Actualización del</text>
+<text x="255" y="188.0" font-size="11.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">flujo de compra</text>
+<rect x="325.0" y="105.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="400" y="129.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Definir</text>
+<text x="400" y="144.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">requerimientos e</text>
+<text x="400" y="159.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">historias de usuario</text>
+<rect x="515.0" y="245.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="590" y="276.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Implementar la</text>
+<text x="590" y="291.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">funcionalidad</text>
+<rect x="705.0" y="385.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="780" y="401.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Seleccionar</text>
+<text x="780" y="416.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">requerimiento o</text>
+<text x="780" y="431.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">historia y</text>
+<text x="780" y="446.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">parámetros</text>
+<rect x="895.0" y="525.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="970" y="541.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Recuperar</text>
+<text x="970" y="556.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">información</text>
+<text x="970" y="571.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">histórica</text>
+<text x="970" y="586.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">relacionada</text>
+<rect x="1085.0" y="385.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="1160" y="416.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Revisar y ajustar el</text>
+<text x="1160" y="431.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">contexto sugerido</text>
+<rect x="1275.0" y="525.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="1350" y="556.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Generar casos de</text>
+<text x="1350" y="571.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">prueba con el LLM</text>
+<polygon points="1510,536.0 1534,560.0 1510,584.0 1486,560.0" fill="#fff" stroke="#2b2b2b" stroke-width="1.6"/>
+<path d="M1502 552.0 L1518 568.0 M1518 552.0 L1502 568.0" stroke="#2b2b2b" stroke-width="2.4"/>
+<text x="1510" y="604.0" font-size="11.5" font-weight="600" fill="#1d1d1d" text-anchor="middle">¿Respuesta válida?</text>
+<rect x="1435.0" y="385.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="1510" y="409.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Revisar el error y</text>
+<text x="1510" y="424.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">reintentar la</text>
+<text x="1510" y="439.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">generación</text>
+<rect x="1595.0" y="525.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="1670" y="556.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Registrar casos</text>
+<text x="1670" y="571.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">generados</text>
+<rect x="1785.0" y="385.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="1860" y="416.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Revisar casos</text>
+<text x="1860" y="431.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">generados</text>
+<polygon points="2020,396.0 2044,420.0 2020,444.0 1996,420.0" fill="#fff" stroke="#2b2b2b" stroke-width="1.6"/>
+<path d="M2012 412.0 L2028 428.0 M2028 412.0 L2012 428.0" stroke="#2b2b2b" stroke-width="2.4"/>
+<text x="2020" y="386.0" font-size="11.5" font-weight="600" fill="#1d1d1d" text-anchor="middle">¿Requiere ajustes?</text>
+<rect x="1945.0" y="525.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="2020" y="556.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Regenerar casos con</text>
+<text x="2020" y="571.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">observaciones</text>
+<rect x="2115.0" y="385.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="2190" y="416.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Enviar casos a</text>
+<text x="2190" y="431.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">aprobación</text>
+<rect x="2295.0" y="665.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="2370" y="696.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Revisar casos</text>
+<text x="2370" y="711.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">enviados</text>
+<polygon points="2530,676.0 2554,700.0 2530,724.0 2506,700.0" fill="#fff" stroke="#2b2b2b" stroke-width="1.6"/>
+<path d="M2522 692.0 L2538 708.0 M2538 692.0 L2522 708.0" stroke="#2b2b2b" stroke-width="2.4"/>
+<text x="2530" y="666.0" font-size="11.5" font-weight="600" fill="#1d1d1d" text-anchor="middle">¿Aprueba?</text>
+<rect x="2615.0" y="665.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="2690" y="704.0" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Aprobar casos</text>
+<rect x="2795.0" y="385.0" width="150" height="70" rx="10" fill="#ffffff" stroke="#1f3a5f" stroke-width="1.6"/>
+<text x="2870" y="416.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Exportar casos</text>
+<text x="2870" y="431.5" font-size="12.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">aprobados a Excel</text>
+<circle cx="3020" cy="420.0" r="17" fill="#fff" stroke="#2b2b2b" stroke-width="4"/>
+<text x="3020" y="454.0" font-size="11.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Casos listos para</text>
+<text x="3020" y="468.0" font-size="11.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">ejecución</text>
+<path d="M740 536.0 v48 a40 9 0 0 0 80 0 v-48" fill="#fff" stroke="#2b2b2b" stroke-width="1.4"/><ellipse cx="780" cy="536.0" rx="40" ry="9" fill="#e8edf4" stroke="#2b2b2b" stroke-width="1.4"/>
+<text x="780" y="602.0" font-size="10.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">Base de conocimiento</text>
+<text x="780" y="615.0" font-size="10.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">histórico (REQ, HU,</text>
+<text x="780" y="628.0" font-size="10.5" font-weight="400" fill="#1d1d1d" text-anchor="middle">RN, CP, DEF)</text>
+<path d="M822.0 560.0 L895.0 560.0" fill="none" stroke="#2b2b2b" stroke-width="1.4" stroke-dasharray="4 4"/>
+<polygon points="895.0,560.0 885.8,563.9 885.8,556.1" fill="#fff" stroke="#2b2b2b"/>
+<path d="M272.0 140.0 L325.0 140.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="325.0,140.0 315.8,143.9 315.8,136.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M475.0 140.0 L590.0 140.0 L590.0 245.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="590.0,245.0 586.1,235.8 593.9,235.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M665.0 280.0 L780.0 280.0 L780.0 385.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="780.0,385.0 776.1,375.8 783.9,375.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M855.0 420.0 L970.0 420.0 L970.0 525.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="970.0,525.0 966.1,515.8 973.9,515.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M1045.0 560.0 L1160.0 560.0 L1160.0 455.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1160.0,455.0 1163.9,464.2 1156.1,464.2" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M1235.0 420.0 L1350.0 420.0 L1350.0 525.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1350.0,525.0 1346.1,515.8 1353.9,515.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M1425.0 560.0 L1486.0 560.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1486.0,560.0 1476.8,563.9 1476.8,556.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M1534.0 560.0 L1595.0 560.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1595.0,560.0 1585.8,563.9 1585.8,556.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="1560" y="552.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="middle">Sí</text>
+<path d="M1510.0 536.0 L1510.0 455.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1510.0,455.0 1513.9,464.2 1506.1,464.2" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="1524" y="520.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="middle">No</text>
+<path d="M1435.0 420.0 L1385.0 420.0 L1385.0 525.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1385.0,525.0 1381.1,515.8 1388.9,515.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M1745.0 560.0 L1860.0 560.0 L1860.0 455.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1860.0,455.0 1863.9,464.2 1856.1,464.2" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M1935.0 420.0 L1996.0 420.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1996.0,420.0 1986.8,423.9 1986.8,416.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M2020.0 444.0 L2020.0 525.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="2020.0,525.0 2016.1,515.8 2023.9,515.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="2036" y="468.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="middle">Sí</text>
+<path d="M1945.0 578.0 L1885.0 578.0 L1885.0 455.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1885.0,455.0 1888.9,464.2 1881.1,464.2" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M2044.0 420.0 L2115.0 420.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="2115.0,420.0 2105.8,423.9 2105.8,416.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="2070" y="412.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="middle">No</text>
+<path d="M2265.0 420.0 L2370.0 420.0 L2370.0 665.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="2370.0,665.0 2366.1,655.8 2373.9,655.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M2445.0 700.0 L2506.0 700.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="2506.0,700.0 2496.8,703.9 2496.8,696.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M2554.0 700.0 L2615.0 700.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="2615.0,700.0 2605.8,703.9 2605.8,696.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="2580" y="692.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="middle">Sí</text>
+<path d="M2530.0 676.0 L2530.0 364.0 L1860.0 364.0 L1860.0 385.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="1860.0,385.0 1856.1,375.8 1863.9,375.8" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="2540" y="550.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="start">No: devolver con</text>
+<text x="2540" y="565.0" font-size="11.5" font-weight="600" fill="#333" text-anchor="start">observaciones</text>
+<path d="M2765.0 700.0 L2870.0 700.0 L2870.0 455.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="2870.0,455.0 2873.9,464.2 2866.1,464.2" fill="#2b2b2b" stroke="#2b2b2b"/>
+<path d="M2945.0 420.0 L3003.0 420.0" fill="none" stroke="#2b2b2b" stroke-width="1.4"/>
+<polygon points="3003.0,420.0 2993.8,423.9 2993.8,416.1" fill="#2b2b2b" stroke="#2b2b2b"/>
+<text x="210" y="810" font-size="12" font-weight="400" fill="#444" text-anchor="start">Notación BPMN 2.0: ○ evento de inicio · ◉ evento de fin · ◇ compuerta exclusiva · rectángulo redondeado = tarea · línea punteada = asociación con almacén de datos.</text>
+</svg>
