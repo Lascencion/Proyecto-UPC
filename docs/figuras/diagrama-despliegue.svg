@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1740" height="860" viewBox="0 0 1740 860" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif"><rect width="1740" height="860" fill="#fff"/><rect x="6" y="6" width="1728" height="848" fill="none" stroke="#c9ced8"/>
+<text x="870.0" y="40" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Diagrama de despliegue</text>
+<text x="870.0" y="64" font-size="14" font-weight="400" fill="#6b7280" text-anchor="middle">Vista física del sistema (UML)</text>
+<rect x="440" y="110" width="1270" height="420" rx="12" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text x="460" y="515" font-size="12.5" font-weight="700" fill="#222" text-anchor="start">«docker compose» Servidor anfitrión (red Docker interna)</text>
+<polygon points="40,170 58,152 358,152 340,170" fill="#cbcdd3" stroke="#8d929c"/>
+<polygon points="340,170 358,152 358,452 340,470" fill="#b6b9c1" stroke="#8d929c"/>
+<rect x="40" y="170" width="300" height="300" fill="#dcdde1" stroke="#8d929c"/>
+<text x="52" y="189" font-size="11.5" font-weight="400" fill="#55607a" text-anchor="start">«device» PC / laptop</text>
+<text x="52" y="207" font-size="14" font-weight="700" fill="#222" text-anchor="start">Equipo del usuario</text>
+<rect x="80" y="240" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73" y="249" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73" y="263" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="190.0" y="261" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Navegador web</text>
+<text x="190.0" y="278" font-size="11" font-weight="400" fill="#555" text-anchor="middle">Chrome · Edge · Firefox</text>
+<rect x="80" y="315" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="73" y="324" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="73" y="338" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="190.0" y="336" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Interfaz web</text>
+<text x="190.0" y="353" font-size="11" font-weight="400" fill="#555" text-anchor="middle">SPA Angular 20</text>
+<polygon points="480,170 498,152 798,152 780,170" fill="#c1d4f3" stroke="#6f88b8"/>
+<polygon points="780,170 798,152 798,452 780,470" fill="#a9c1ea" stroke="#6f88b8"/>
+<rect x="480" y="170" width="300" height="300" fill="#d6e4fa" stroke="#6f88b8"/>
+<text x="492" y="189" font-size="11.5" font-weight="400" fill="#55607a" text-anchor="start">«execution environment» nginx 1.27</text>
+<text x="492" y="207" font-size="14" font-weight="700" fill="#222" text-anchor="start">Servidor web</text>
+<rect x="520" y="240" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="513" y="249" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="513" y="263" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="630.0" y="261" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Archivos estáticos</text>
+<text x="630.0" y="278" font-size="11" font-weight="400" fill="#555" text-anchor="middle">SPA compilada</text>
+<rect x="520" y="315" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="513" y="324" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="513" y="338" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="630.0" y="336" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Proxy inverso</text>
+<text x="630.0" y="353" font-size="11" font-weight="400" fill="#555" text-anchor="middle">/api → :3000</text>
+<polygon points="900,170 918,152 1218,152 1200,170" fill="#c4e6b2" stroke="#7aa865"/>
+<polygon points="1200,170 1218,152 1218,452 1200,470" fill="#a9d68f" stroke="#7aa865"/>
+<rect x="900" y="170" width="300" height="300" fill="#d5efc8" stroke="#7aa865"/>
+<text x="912" y="189" font-size="11.5" font-weight="400" fill="#55607a" text-anchor="start">«execution environment» Node.js 22</text>
+<text x="912" y="207" font-size="14" font-weight="700" fill="#222" text-anchor="start">Servidor de aplicaciones</text>
+<rect x="940" y="230" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="933" y="239" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="933" y="253" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1050.0" y="251" font-size="13" font-weight="700" fill="#222" text-anchor="middle">API REST</text>
+<text x="1050.0" y="268" font-size="11" font-weight="400" fill="#555" text-anchor="middle">NestJS 11 · JWT</text>
+<rect x="940" y="295" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="933" y="304" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="933" y="318" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1050.0" y="316" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Generación de casos</text>
+<text x="1050.0" y="333" font-size="11" font-weight="400" fill="#555" text-anchor="middle">contexto (vínculos + TF-IDF) + prompt</text>
+<rect x="940" y="360" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="933" y="369" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="933" y="383" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1050.0" y="381" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Cliente LLM</text>
+<text x="1050.0" y="398" font-size="11" font-weight="400" fill="#555" text-anchor="middle">proveedor configurable · salida JSON</text>
+<polygon points="1340,170 1358,152 1658,152 1640,170" fill="#f3c6d8" stroke="#c37f9c"/>
+<polygon points="1640,170 1658,152 1658,452 1640,470" fill="#e8adc5" stroke="#c37f9c"/>
+<rect x="1340" y="170" width="300" height="300" fill="#f9d9e6" stroke="#c37f9c"/>
+<text x="1352" y="189" font-size="11.5" font-weight="400" fill="#55607a" text-anchor="start">«execution environment» MongoDB 7</text>
+<text x="1352" y="207" font-size="14" font-weight="700" fill="#222" text-anchor="start">Servidor de base de datos</text>
+<rect x="1380" y="240" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1373" y="249" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1373" y="263" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1490.0" y="261" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Base de datos</text>
+<text x="1490.0" y="278" font-size="11" font-weight="400" fill="#555" text-anchor="middle">colecciones del sistema</text>
+<rect x="1380" y="315" width="220" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="1373" y="324" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1373" y="338" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1490.0" y="336" font-size="13" font-weight="700" fill="#222" text-anchor="middle">Volumen mongo-data</text>
+<text x="1490.0" y="353" font-size="11" font-weight="400" fill="#555" text-anchor="middle">persistencia</text>
+<line x1="358" y1="320.0" x2="480" y2="320.0" stroke="#4b5563" stroke-width="1.6"/>
+<text x="395" y="312" font-size="12" font-weight="700" fill="#222" text-anchor="middle">HTTPS :8080</text>
+<line x1="798" y1="320.0" x2="900" y2="320.0" stroke="#4b5563" stroke-width="1.6"/>
+<text x="849.0" y="312.0" font-size="12" font-weight="700" fill="#222" text-anchor="middle">HTTP :3000</text>
+<line x1="1218" y1="320.0" x2="1340" y2="320.0" stroke="#4b5563" stroke-width="1.6"/>
+<text x="1279.0" y="312.0" font-size="12" font-weight="700" fill="#222" text-anchor="middle">TCP :27017</text>
+<line x1="1050.0" y1="470" x2="1050.0" y2="602" stroke="#4b5563" stroke-width="1.6"/>
+<text x="1062.0" y="549.0" font-size="12" font-weight="700" fill="#222" text-anchor="start">HTTPS :443 · JSON</text>
+<polygon points="820,620 838,602 1298,602 1280,620" fill="#dfd0f6" stroke="#9b84c6"/>
+<polygon points="1280,620 1298,602 1298,792 1280,810" fill="#cbb6ef" stroke="#9b84c6"/>
+<rect x="820" y="620" width="460" height="190" fill="#ece2fb" stroke="#9b84c6"/>
+<text x="832" y="639" font-size="11.5" font-weight="400" fill="#55607a" text-anchor="start">«device» nube del proveedor</text>
+<text x="832" y="657" font-size="14" font-weight="700" fill="#222" text-anchor="start">Proveedor LLM</text>
+<rect x="910" y="700" width="280" height="50" rx="5" fill="#fff" stroke="#7d8696"/>
+<rect x="903" y="709" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="903" y="723" width="14" height="8" fill="#fff" stroke="#7d8696"/>
+<text x="1050.0" y="721" font-size="13" font-weight="700" fill="#222" text-anchor="middle">API del modelo LLM</text>
+<text x="1050.0" y="738" font-size="11" font-weight="400" fill="#555" text-anchor="middle">Claude (Anthropic) · salida JSON</text>
+<text x="40" y="740" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start">En la nube se usan las mismas imágenes en un servicio de</text>
+<text x="40" y="758" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start">contenedores, y MongoDB Atlas reemplaza al servidor de base de</text>
+<text x="40" y="776" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start">datos cambiando solo la variable MONGODB_URI.</text>
+</svg>
