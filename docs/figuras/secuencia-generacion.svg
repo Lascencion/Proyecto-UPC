@@ -22,7 +22,7 @@
 <text x="1160" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Cliente LLM</text>
 <line x1="1370" y1="160" x2="1370" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
 <rect x="1278" y="110" width="184" height="46" rx="3" fill="#e3d7f7" stroke="#8a8f99"/>
-<text x="1370" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Proveedor LLM</text>
+<text x="1370" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Proveedor LLM (Claude)</text>
 <line x1="1600" y1="160" x2="1600" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
 <circle cx="1600" cy="90" r="10" fill="none" stroke="#333" stroke-width="1.6"/><line x1="1600" y1="100" x2="1600" y2="126" stroke="#333" stroke-width="1.6"/><line x1="1585" y1="109" x2="1615" y2="109" stroke="#333" stroke-width="1.6"/><line x1="1600" y1="126" x2="1587" y2="144" stroke="#333" stroke-width="1.6"/><line x1="1600" y1="126" x2="1613" y2="144" stroke="#333" stroke-width="1.6"/>
 <text x="1600" y="164" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Líder QA</text>
@@ -64,7 +64,7 @@
 <text x="568" y="688" font-size="13" fill="#222" text-anchor="start" font-weight="400">13. Construye prompt (instrucciones + requerimiento + contexto + esquema JSON)</text>
 <line x1="530" y1="728" x2="1158" y2="728" stroke="#333" stroke-width="1.4"/>
 <polygon points="1149,723 1160,728 1149,733" fill="#333"/>
-<text x="845.0" y="721" font-size="13" fill="#222" text-anchor="middle" font-weight="400">14. generar(prompt)</text>
+<text x="845.0" y="721" font-size="13" fill="#222" text-anchor="middle" font-weight="400">14. generar(prompt, esquema JSON)</text>
 <line x1="1160" y1="764" x2="1368" y2="764" stroke="#333" stroke-width="1.4"/>
 <polygon points="1359,759 1370,764 1359,769" fill="#333"/>
 <text x="1170" y="757" font-size="13" fill="#222" text-anchor="start" font-weight="400">15. Llamada HTTPS con API key</text>
@@ -84,7 +84,7 @@
 <polyline points="330,939 320,944 330,949" fill="none" stroke="#333" stroke-width="1.4"/>
 <text x="334" y="937" font-size="13" fill="#222" text-anchor="start" font-weight="400">20. Casos generados y contexto usado</text>
 <line x1="20" y1="980" x2="1680" y2="980" stroke="#c9ced8" stroke-width="1.2"/>
-<text x="1670" y="974" font-size="12.5" fill="#444" text-anchor="end" font-weight="600">Revisión y aprobación</text>
+<text x="1670" y="974" font-size="12.5" fill="#444" text-anchor="end" font-weight="600">Revisión y aprobación (HU12 a HU15 · Sprints 3 y 4)</text>
 <line x1="95" y1="1014" x2="318" y2="1014" stroke="#333" stroke-width="1.4"/>
 <polygon points="309,1009 320,1014 309,1019" fill="#333"/>
 <text x="107" y="1007" font-size="13" fill="#222" text-anchor="start" font-weight="400">21. Revisa, observa y regenera (pasos 11–20)</text>
