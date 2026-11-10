@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="990" viewBox="0 0 1600 990" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
-<rect width="1600" height="990" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<rect width="1600" height="1040" fill="#ffffff"/>
 <text x="30" y="52" font-size="30" font-weight="800" fill="#1d2433" letter-spacing="1">PRODUCT CANVAS</text>
 <text x="335" y="52" font-size="18" fill="#6b7280">Diseño preliminar de la solución</text>
 <rect x="30" y="80" width="513.3333333333334" height="250" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
@@ -8,9 +8,9 @@
 <text x="114" y="122" font-size="21" font-weight="800" fill="#1d2433" letter-spacing="0.5">NOMBRE</text>
 <text x="114" y="142" font-size="12.5" font-weight="400" fill="#6b7280">Nombre del producto.</text>
 <rect x="50" y="180" width="473.33333333333337" height="130" rx="6" fill="#eef1f6"/>
-<text x="66" y="208" font-size="15" font-weight="400" fill="#1d2433">QA Knowledge: sistema web basado en LLM para la generación</text>
-<text x="66" y="228.25" font-size="15" font-weight="400" fill="#1d2433">de casos de prueba funcionales en el flujo de compra de</text>
-<text x="66" y="248.5" font-size="15" font-weight="400" fill="#1d2433">monedas virtuales en videojuegos en línea.</text>
+<text x="66" y="208" font-size="15" font-weight="400" fill="#1d2433">Sistema web basado en LLM para la generación de casos de</text>
+<text x="66" y="228.25" font-size="15" font-weight="400" fill="#1d2433">prueba funcionales en el flujo de compra de monedas</text>
+<text x="66" y="248.5" font-size="15" font-weight="400" fill="#1d2433">virtuales en videojuegos en línea.</text>
 <rect x="543.3333333333334" y="80" width="513.3333333333334" height="250" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
 <circle cx="587.3333333333334" cy="124" r="26" fill="#3b4a63"/>
 <circle cx="587.3333333333334" cy="124" r="14" fill="#ffffff"/>
@@ -21,8 +21,8 @@
 <rect x="563.3333333333334" y="180" width="473.33333333333337" height="130" rx="6" fill="#eef1f6"/>
 <text x="579.3333333333334" y="208" font-size="15" font-weight="400" fill="#1d2433">Aumentar en al menos 20 % la cobertura de escenarios de</text>
 <text x="579.3333333333334" y="228.25" font-size="15" font-weight="400" fill="#1d2433">prueba funcionales, generando casos a partir de</text>
-<text x="579.3333333333334" y="248.5" font-size="15" font-weight="400" fill="#1d2433">requerimientos, reglas de negocio y casos de prueba</text>
-<text x="579.3333333333334" y="268.75" font-size="15" font-weight="400" fill="#1d2433">históricos.</text>
+<text x="579.3333333333334" y="248.5" font-size="15" font-weight="400" fill="#1d2433">requerimientos, historias de usuario, reglas de negocio y</text>
+<text x="579.3333333333334" y="268.75" font-size="15" font-weight="400" fill="#1d2433">casos de prueba históricos.</text>
 <rect x="1056.6666666666667" y="80" width="513.3333333333334" height="250" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
 <circle cx="1100.6666666666667" cy="124" r="26" fill="#3b4a63"/>
 <rect x="1087.6666666666667" y="126" width="7" height="10" fill="#ffffff"/>
@@ -34,7 +34,7 @@
 <text x="1092.6666666666667" y="208" font-size="14.5" font-weight="400" fill="#1d2433">• Cobertura de escenarios: +20 % respecto al proceso manual.</text>
 <text x="1092.6666666666667" y="229.575" font-size="14.5" font-weight="400" fill="#1d2433">• Casos aprobados por el Líder QA sin observaciones: ≥ 80 %.</text>
 <text x="1092.6666666666667" y="251.14999999999998" font-size="14.5" font-weight="400" fill="#1d2433">• Tiempo de diseño de casos: reducción ≥ 50 %.</text>
-<rect x="30" y="330" width="462.0" height="610" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
+<rect x="30" y="330" width="462.0" height="660" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
 <circle cx="74" cy="374" r="26" fill="#3b4a63"/>
 <circle cx="65" cy="369.2" r="4.0" fill="#ffffff"/>
 <path d="M58.6,385 a6.4,6.4 0 0 1 12.8,0 z" fill="#ffffff"/>
@@ -44,7 +44,7 @@
 <path d="M66,385 a8,8 0 0 1 16,0 z" fill="#ffffff"/>
 <text x="114" y="372" font-size="21" font-weight="800" fill="#1d2433" letter-spacing="0.5">GRUPO OBJETIVO</text>
 <text x="114" y="392" font-size="12.5" font-weight="400" fill="#6b7280">Usuarios y sus necesidades.</text>
-<rect x="50" y="430" width="422.0" height="490" rx="6" fill="#eef1f6"/>
+<rect x="50" y="430" width="422.0" height="540" rx="6" fill="#eef1f6"/>
 <text x="66" y="460" font-size="15" font-weight="700" fill="#1d2433">Analista QA:</text>
 <text x="66" y="482.25" font-size="14.5" font-weight="400" fill="#1d2433">- Diseñar casos de prueba en menos tiempo.</text>
 <text x="66" y="501.825" font-size="14.5" font-weight="400" fill="#1d2433">- Cubrir escenarios alternativos, negativos y</text>
@@ -59,54 +59,61 @@
 <text x="66" y="719.3500000000003" font-size="15" font-weight="700" fill="#1d2433">Equipo de producto:</text>
 <text x="66" y="741.6000000000003" font-size="14.5" font-weight="400" fill="#1d2433">- Lanzamientos de calidad y protección de los</text>
 <text x="66" y="761.1750000000003" font-size="14.5" font-weight="400" fill="#1d2433">ingresos por microtransacciones.</text>
-<rect x="492.0" y="330" width="554.4" height="610" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
+<rect x="492.0" y="330" width="554.4" height="660" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
 <circle cx="536.0" cy="374" r="26" fill="#3b4a63"/>
 <rect x="522.0" y="363" width="28" height="22" rx="2" fill="#ffffff"/>
 <path d="M525.0,382 l8,-10 l6,7 l4,-4 l6,7 z" fill="#3b4a63"/><circle cx="542.0" cy="369" r="2.5" fill="#3b4a63"/>
 <text x="576.0" y="372" font-size="21" font-weight="800" fill="#1d2433" letter-spacing="0.5">VISIÓN GENERAL</text>
 <text x="576.0" y="392" font-size="12.5" font-weight="400" fill="#6b7280">Experiencia de usuario, funcionalidad, diseño visual y propiedades no</text>
 <text x="576.0" y="408.875" font-size="12.5" font-weight="400" fill="#6b7280">funcionales.</text>
-<rect x="512.0" y="430" width="514.4" height="490" rx="6" fill="#eef1f6"/>
+<rect x="512.0" y="430" width="514.4" height="540" rx="6" fill="#eef1f6"/>
 <text x="528.0" y="460" font-size="15" font-weight="700" fill="#1d2433">Experiencia de usuario:</text>
 <text x="528.0" y="482.25" font-size="14.5" font-weight="400" fill="#1d2433">Aplicación web en español, con menú según el rol del usuario y</text>
 <text x="528.0" y="501.825" font-size="14.5" font-weight="400" fill="#1d2433">formularios guiados que asignan códigos automáticamente y permiten</text>
 <text x="528.0" y="521.4" font-size="14.5" font-weight="400" fill="#1d2433">elegir registros relacionados desde listas.</text>
 <text x="528.0" y="552.975" font-size="15" font-weight="700" fill="#1d2433">Funcionalidad:</text>
-<text x="528.0" y="575.225" font-size="14.5" font-weight="400" fill="#1d2433">Registro individual y carga masiva (Excel, Word, CSV) de la</text>
-<text x="528.0" y="594.8000000000001" font-size="14.5" font-weight="400" fill="#1d2433">información histórica; generación de casos con LLM a partir del</text>
-<text x="528.0" y="614.3750000000001" font-size="14.5" font-weight="400" fill="#1d2433">contexto recuperado; revisión, aprobación y reportes.</text>
-<text x="528.0" y="645.9500000000002" font-size="15" font-weight="700" fill="#1d2433">Diseño visual:</text>
-<text x="528.0" y="668.2000000000002" font-size="14.5" font-weight="400" fill="#1d2433">Interfaz limpia basada en Material Design, con estados de</text>
-<text x="528.0" y="687.7750000000002" font-size="14.5" font-weight="400" fill="#1d2433">validación por colores y mensajes claros de error y advertencia.</text>
-<text x="528.0" y="719.3500000000003" font-size="15" font-weight="700" fill="#1d2433">Propiedades no funcionales:</text>
-<text x="528.0" y="741.6000000000003" font-size="14.5" font-weight="400" fill="#1d2433">Control de acceso por roles, validación de datos antes de</text>
-<text x="528.0" y="761.1750000000003" font-size="14.5" font-weight="400" fill="#1d2433">almacenarlos, trazabilidad del origen de cada registro y</text>
-<text x="528.0" y="780.7500000000003" font-size="14.5" font-weight="400" fill="#1d2433">despliegue local o en la nube.</text>
-<text x="528.0" y="816.3250000000004" font-size="14.5" font-weight="400" fill="#6b7280">Los prototipos de las pantallas se muestran en las figuras</text>
-<text x="528.0" y="835.9000000000004" font-size="14.5" font-weight="400" fill="#6b7280">siguientes.</text>
-<rect x="1046.4" y="330" width="523.6" height="610" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
+<text x="528.0" y="575.225" font-size="14.5" font-weight="400" fill="#1d2433">Registro individual y carga masiva (Excel, Word, CSV) de</text>
+<text x="528.0" y="594.8000000000001" font-size="14.5" font-weight="400" fill="#1d2433">requerimientos, historias de usuario, reglas, casos y defectos;</text>
+<text x="528.0" y="614.3750000000001" font-size="14.5" font-weight="400" fill="#1d2433">generación de casos con LLM a partir del contexto recuperado;</text>
+<text x="528.0" y="633.95" font-size="14.5" font-weight="400" fill="#1d2433">revisión, aprobación y reportes.</text>
+<text x="528.0" y="665.525" font-size="15" font-weight="700" fill="#1d2433">Diseño visual:</text>
+<text x="528.0" y="687.775" font-size="14.5" font-weight="400" fill="#1d2433">Interfaz limpia basada en Material Design, con estados de</text>
+<text x="528.0" y="707.350" font-size="14.5" font-weight="400" fill="#1d2433">validación por colores y mensajes claros de error y advertencia.</text>
+<text x="528.0" y="738.925" font-size="15" font-weight="700" fill="#1d2433">Propiedades no funcionales:</text>
+<text x="528.0" y="761.175" font-size="14.5" font-weight="400" fill="#1d2433">Control de acceso por roles, validación de datos antes de</text>
+<text x="528.0" y="780.750" font-size="14.5" font-weight="400" fill="#1d2433">almacenarlos, trazabilidad entre requerimientos, historias,</text>
+<text x="528.0" y="800.325" font-size="14.5" font-weight="400" fill="#1d2433">reglas, casos y defectos, y despliegue local o en la nube.</text>
+<text x="528.0" y="835.900" font-size="14.5" font-weight="400" fill="#6b7280">Los prototipos de las pantallas se muestran en las figuras</text>
+<text x="528.0" y="855.475" font-size="14.5" font-weight="400" fill="#6b7280">siguientes.</text>
+<rect x="1046.4" y="330" width="523.6" height="660" fill="#ffffff" stroke="#c9ced8" stroke-width="1.5"/>
 <circle cx="1090.4" cy="374" r="26" fill="#3b4a63"/>
 <circle cx="1087.4" cy="371" r="9" fill="none" stroke="#ffffff" stroke-width="4"/>
 <line x1="1094.4" y1="378" x2="1102.4" y2="386" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
 <text x="1130.4" y="372" font-size="21" font-weight="800" fill="#1d2433" letter-spacing="0.5">DETALLE DEL PRODUCTO</text>
 <text x="1130.4" y="392" font-size="12.5" font-weight="400" fill="#6b7280">Épicas e historias de usuario, ordenadas por prioridad.</text>
-<rect x="1066.4" y="430" width="483.6" height="490" rx="6" fill="#eef1f6"/>
-<text x="1082.4" y="460" font-size="15" font-weight="700" fill="#1d2433">EP-01 Gestión de información histórica</text>
-<text x="1098.4" y="481.25" font-size="14.5" font-weight="400" fill="#1d2433">HU-01 Registrar información histórica</text>
-<text x="1098.4" y="500.825" font-size="14.5" font-weight="400" fill="#1d2433">HU-02 Cargar información histórica masivamente</text>
-<text x="1098.4" y="520.4" font-size="14.5" font-weight="400" fill="#1d2433">HU-03 Corregir y mantener información histórica</text>
-<text x="1082.4" y="549.975" font-size="15" font-weight="700" fill="#1d2433">EP-02 Generación de casos de prueba con LLM</text>
-<text x="1098.4" y="571.225" font-size="14.5" font-weight="400" fill="#1d2433">HU-04 Seleccionar información histórica relacionada</text>
-<text x="1098.4" y="590.8000000000001" font-size="14.5" font-weight="400" fill="#1d2433">HU-05 Generar casos de prueba con LLM</text>
-<text x="1082.4" y="620.3750000000001" font-size="15" font-weight="700" fill="#1d2433">EP-03 Revisión y regeneración de casos</text>
-<text x="1098.4" y="641.6250000000001" font-size="14.5" font-weight="400" fill="#1d2433">HU-06 Revisar casos y registrar observaciones</text>
-<text x="1098.4" y="661.2000000000002" font-size="14.5" font-weight="400" fill="#1d2433">HU-07 Regenerar casos con observaciones</text>
-<text x="1082.4" y="690.7750000000002" font-size="15" font-weight="700" fill="#1d2433">EP-04 Aprobación de casos de prueba</text>
-<text x="1098.4" y="712.0250000000002" font-size="14.5" font-weight="400" fill="#1d2433">HU-08 Enviar casos a aprobación</text>
-<text x="1098.4" y="731.6000000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-09 Aprobar o devolver casos</text>
-<text x="1098.4" y="751.1750000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-10 Exportar casos aprobados</text>
-<text x="1082.4" y="780.7500000000003" font-size="15" font-weight="700" fill="#1d2433">EP-05 Reportería</text>
-<text x="1098.4" y="802.0000000000003" font-size="14.5" font-weight="400" fill="#1d2433">HU-11 Consultar reportes del proceso</text>
-<text x="1098.4" y="821.5750000000004" font-size="14.5" font-weight="400" fill="#1d2433">HU-12 Consultar reporte de cobertura</text>
-<text x="1570" y="972" font-size="12" fill="#6b7280" text-anchor="end">Basado en la plantilla Product Canvas de Roman Pichler.</text>
+<rect x="1066.4" y="430" width="483.6" height="540" rx="6" fill="#eef1f6"/>
+<text x="1082.4" y="460.00" font-size="15" font-weight="700" fill="#1d2433">EP-01 Gestión de información histórica</text>
+<text x="1098.4" y="481.00" font-size="14.5" font-weight="400" fill="#1d2433">HU-01 Registrar requerimientos históricos</text>
+<text x="1098.4" y="500.30" font-size="14.5" font-weight="400" fill="#1d2433">HU-02 Registrar historias de usuario</text>
+<text x="1098.4" y="519.60" font-size="14.5" font-weight="400" fill="#1d2433">HU-03 Registrar reglas de negocio</text>
+<text x="1098.4" y="538.90" font-size="14.5" font-weight="400" fill="#1d2433">HU-04 Registrar casos de prueba ejecutados</text>
+<text x="1098.4" y="558.20" font-size="14.5" font-weight="400" fill="#1d2433">HU-05 Registrar defectos</text>
+<text x="1098.4" y="577.50" font-size="14.5" font-weight="400" fill="#1d2433">HU-06 Cargar información histórica masivamente</text>
+<text x="1098.4" y="596.80" font-size="14.5" font-weight="400" fill="#1d2433">HU-07 Revisar, corregir y confirmar la carga masiva</text>
+<text x="1098.4" y="616.10" font-size="14.5" font-weight="400" fill="#1d2433">HU-08 Consultar y buscar registros históricos</text>
+<text x="1098.4" y="635.40" font-size="14.5" font-weight="400" fill="#1d2433">HU-09 Editar y eliminar registros históricos</text>
+<text x="1082.4" y="663.40" font-size="15" font-weight="700" fill="#1d2433">EP-02 Generación de casos de prueba con LLM</text>
+<text x="1098.4" y="684.40" font-size="14.5" font-weight="400" fill="#1d2433">HU-10 Seleccionar información histórica relacionada</text>
+<text x="1098.4" y="703.70" font-size="14.5" font-weight="400" fill="#1d2433">HU-11 Generar casos de prueba con LLM</text>
+<text x="1082.4" y="731.70" font-size="15" font-weight="700" fill="#1d2433">EP-03 Revisión y regeneración de casos</text>
+<text x="1098.4" y="752.70" font-size="14.5" font-weight="400" fill="#1d2433">HU-12 Revisar casos y registrar observaciones</text>
+<text x="1098.4" y="772.00" font-size="14.5" font-weight="400" fill="#1d2433">HU-13 Regenerar casos con observaciones</text>
+<text x="1082.4" y="800.00" font-size="15" font-weight="700" fill="#1d2433">EP-04 Aprobación de casos de prueba</text>
+<text x="1098.4" y="821.00" font-size="14.5" font-weight="400" fill="#1d2433">HU-14 Enviar casos a aprobación</text>
+<text x="1098.4" y="840.30" font-size="14.5" font-weight="400" fill="#1d2433">HU-15 Aprobar o devolver casos</text>
+<text x="1098.4" y="859.60" font-size="14.5" font-weight="400" fill="#1d2433">HU-16 Exportar casos aprobados</text>
+<text x="1082.4" y="887.60" font-size="15" font-weight="700" fill="#1d2433">EP-05 Reportería</text>
+<text x="1098.4" y="908.60" font-size="14.5" font-weight="400" fill="#1d2433">HU-17 Consultar reportes del proceso</text>
+<text x="1098.4" y="927.90" font-size="14.5" font-weight="400" fill="#1d2433">HU-18 Consultar reporte de cobertura</text>
+<text x="1570" y="1022" font-size="12" fill="#6b7280" text-anchor="end">Basado en la plantilla Product Canvas de Roman Pichler.</text>
 </svg>
