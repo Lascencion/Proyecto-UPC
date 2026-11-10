@@ -41,7 +41,7 @@
 <rect x="1110" y="305" width="225" height="54" rx="5" fill="#fff" stroke="#7d8696"/>
 <rect x="1103" y="315" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1103" y="329" width="14" height="8" fill="#fff" stroke="#7d8696"/>
 <text x="1222.5" y="327" font-size="13" font-weight="700" fill="#222" text-anchor="middle">3. Recuperación</text>
-<text x="1222.5" y="344" font-size="11" font-weight="400" fill="#555" text-anchor="middle">vínculos directos y similitud</text>
+<text x="1222.5" y="344" font-size="11" font-weight="400" fill="#555" text-anchor="middle">vínculos directos y TF-IDF</text>
 <rect x="1365" y="305" width="225" height="54" rx="5" fill="#fff" stroke="#7d8696"/>
 <rect x="1358" y="315" width="14" height="8" fill="#fff" stroke="#7d8696"/><rect x="1358" y="329" width="14" height="8" fill="#fff" stroke="#7d8696"/>
 <text x="1477.5" y="327" font-size="13" font-weight="700" fill="#222" text-anchor="middle">4. Prompt</text>
@@ -81,6 +81,7 @@
 <path d="M1222.5 514 L1222.5 550 L1477.5 550 L1477.5 514" fill="none" stroke="#55607a" stroke-width="1.5"/>
 <polygon points="1477.5,514.0 1481.4,523.2 1473.6,523.2" fill="#55607a"/>
 <text x="1350.0" y="568" font-size="11.5" font-weight="400" fill="#333" text-anchor="middle">regenerar con observaciones</text>
+<text x="600" y="608" font-size="12" font-weight="400" fill="#4b5563" text-anchor="start">Los componentes 6, 7 y 8 corresponden a las historias HU12 a HU16 (Sprints 3 y 4).</text>
 <polygon points="560,760 578,742 998,742 980,760" fill="#f3c6d8" stroke="#c37f9c"/>
 <polygon points="980,760 998,742 998,932 980,950" fill="#e8adc5" stroke="#c37f9c"/>
 <rect x="560" y="760" width="420" height="190" fill="#f9d9e6" stroke="#c37f9c"/>
