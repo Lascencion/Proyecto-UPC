@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1264" viewBox="0 0 1700 1264" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<rect width="1700" height="1264" fill="#ffffff"/><rect x="6" y="6" width="1688" height="1252" fill="none" stroke="#c9ced8"/>
+<text x="850.0" y="44" font-size="26" font-weight="800" fill="#1d2433" text-anchor="middle">Diagrama de secuencia: generación y aprobación de casos de prueba</text>
+<text x="850.0" y="68" font-size="14" fill="#6b7280" text-anchor="middle">Escenario principal (HU10 a HU15) — notación UML</text>
+<line x1="95" y1="160" x2="95" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<circle cx="95" cy="90" r="10" fill="none" stroke="#333" stroke-width="1.6"/><line x1="95" y1="100" x2="95" y2="126" stroke="#333" stroke-width="1.6"/><line x1="80" y1="109" x2="110" y2="109" stroke="#333" stroke-width="1.6"/><line x1="95" y1="126" x2="82" y2="144" stroke="#333" stroke-width="1.6"/><line x1="95" y1="126" x2="108" y2="144" stroke="#333" stroke-width="1.6"/>
+<text x="95" y="164" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Analista QA</text>
+<line x1="320" y1="160" x2="320" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<rect x="228" y="110" width="184" height="46" rx="3" fill="#d9dbe0" stroke="#8a8f99"/>
+<text x="320" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Aplicación web</text>
+<line x1="530" y1="160" x2="530" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<rect x="438" y="110" width="184" height="46" rx="3" fill="#cdeec2" stroke="#8a8f99"/>
+<text x="530" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Servicio de generación</text>
+<line x1="740" y1="160" x2="740" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<rect x="648" y="110" width="184" height="46" rx="3" fill="#cdeec2" stroke="#8a8f99"/>
+<text x="740" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Recuperador de contexto</text>
+<line x1="950" y1="160" x2="950" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<rect x="858" y="110" width="184" height="46" rx="3" fill="#f8cfe0" stroke="#8a8f99"/>
+<text x="950" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Base de datos</text>
+<line x1="1160" y1="160" x2="1160" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<rect x="1068" y="110" width="184" height="46" rx="3" fill="#cdeec2" stroke="#8a8f99"/>
+<text x="1160" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Cliente LLM</text>
+<line x1="1370" y1="160" x2="1370" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<rect x="1278" y="110" width="184" height="46" rx="3" fill="#e3d7f7" stroke="#8a8f99"/>
+<text x="1370" y="138" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Proveedor LLM</text>
+<line x1="1600" y1="160" x2="1600" y2="1204" stroke="#9aa0aa" stroke-dasharray="4 5"/>
+<circle cx="1600" cy="90" r="10" fill="none" stroke="#333" stroke-width="1.6"/><line x1="1600" y1="100" x2="1600" y2="126" stroke="#333" stroke-width="1.6"/><line x1="1585" y1="109" x2="1615" y2="109" stroke="#333" stroke-width="1.6"/><line x1="1600" y1="126" x2="1587" y2="144" stroke="#333" stroke-width="1.6"/><line x1="1600" y1="126" x2="1613" y2="144" stroke="#333" stroke-width="1.6"/>
+<text x="1600" y="164" font-size="13.5" fill="#222" text-anchor="middle" font-weight="700">Líder QA</text>
+<line x1="95" y1="230" x2="318" y2="230" stroke="#333" stroke-width="1.4"/>
+<polygon points="309,225 320,230 309,235" fill="#333"/>
+<text x="107" y="223" font-size="13" fill="#222" text-anchor="start" font-weight="400">1. Selecciona proyecto, módulo y requerimiento o historia de usuario</text>
+<line x1="320" y1="266" x2="528" y2="266" stroke="#333" stroke-width="1.4"/>
+<polygon points="519,261 530,266 519,271" fill="#333"/>
+<text x="330" y="259" font-size="13" fill="#222" text-anchor="start" font-weight="400">2. POST /generation/context (JWT)</text>
+<path d="M530 294 h28 v22 h-22" fill="none" stroke="#333" stroke-width="1.4"/><path d="M536 316 l8 -5 v10 z" fill="#333" transform="rotate(180 536 316)"/>
+<text x="568" y="308" font-size="13" fill="#222" text-anchor="start" font-weight="400">3. Verifica permiso GENERATION:CREATE</text>
+<line x1="530" y1="348" x2="738" y2="348" stroke="#333" stroke-width="1.4"/>
+<polygon points="729,343 740,348 729,353" fill="#333"/>
+<text x="540" y="341" font-size="13" fill="#222" text-anchor="start" font-weight="400">4. Obtener contexto del requerimiento o historia</text>
+<line x1="740" y1="384" x2="948" y2="384" stroke="#333" stroke-width="1.4"/>
+<polygon points="939,379 950,384 939,389" fill="#333"/>
+<text x="750" y="377" font-size="13" fill="#222" text-anchor="start" font-weight="400">5. Consulta REQ, HU, RN, CP y DEF del proyecto</text>
+<line x1="950" y1="420" x2="742" y2="420" stroke="#333" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="750,415 740,420 750,425" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="754" y="413" font-size="13" fill="#222" text-anchor="start" font-weight="400">6. Registros</text>
+<path d="M740 448 h28 v22 h-22" fill="none" stroke="#333" stroke-width="1.4"/><path d="M746 470 l8 -5 v10 z" fill="#333" transform="rotate(180 746 470)"/>
+<text x="778" y="462" font-size="13" fill="#222" text-anchor="start" font-weight="400">7. Prioriza: vínculos directos (100 %) y similitud TF-IDF; máx. 15</text>
+<line x1="740" y1="502" x2="532" y2="502" stroke="#333" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="540,497 530,502 540,507" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="544" y="495" font-size="13" fill="#222" text-anchor="start" font-weight="400">8. Contexto sugerido</text>
+<line x1="530" y1="538" x2="322" y2="538" stroke="#333" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="330,533 320,538 330,543" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="334" y="531" font-size="13" fill="#222" text-anchor="start" font-weight="400">9. Registros sugeridos con su puntaje</text>
+<line x1="95" y1="574" x2="318" y2="574" stroke="#333" stroke-width="1.4"/>
+<polygon points="309,569 320,574 309,579" fill="#333"/>
+<text x="107" y="567" font-size="13" fill="#222" text-anchor="start" font-weight="400">10. Ajusta contexto y parámetros (escenarios, técnicas, máx. casos)</text>
+<line x1="320" y1="610" x2="528" y2="610" stroke="#333" stroke-width="1.4"/>
+<polygon points="519,605 530,610 519,615" fill="#333"/>
+<text x="330" y="603" font-size="13" fill="#222" text-anchor="start" font-weight="400">11. POST /generation (JWT)</text>
+<line x1="530" y1="646" x2="948" y2="646" stroke="#333" stroke-width="1.4"/>
+<polygon points="939,641 950,646 939,651" fill="#333"/>
+<text x="740.0" y="639" font-size="13" fill="#222" text-anchor="middle" font-weight="400">12. Guarda solicitud GEN-### (estado GENERANDO)</text>
+<path d="M530 674 h28 v22 h-22" fill="none" stroke="#333" stroke-width="1.4"/><path d="M536 696 l8 -5 v10 z" fill="#333" transform="rotate(180 536 696)"/>
+<text x="568" y="688" font-size="13" fill="#222" text-anchor="start" font-weight="400">13. Construye prompt (instrucciones + requerimiento + contexto + esquema JSON)</text>
+<line x1="530" y1="728" x2="1158" y2="728" stroke="#333" stroke-width="1.4"/>
+<polygon points="1149,723 1160,728 1149,733" fill="#333"/>
+<text x="845.0" y="721" font-size="13" fill="#222" text-anchor="middle" font-weight="400">14. generar(prompt)</text>
+<line x1="1160" y1="764" x2="1368" y2="764" stroke="#333" stroke-width="1.4"/>
+<polygon points="1359,759 1370,764 1359,769" fill="#333"/>
+<text x="1170" y="757" font-size="13" fill="#222" text-anchor="start" font-weight="400">15. Llamada HTTPS con API key</text>
+<line x1="1370" y1="800" x2="1162" y2="800" stroke="#333" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="1170,795 1160,800 1170,805" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="1174" y="793" font-size="13" fill="#222" text-anchor="start" font-weight="400">16. Respuesta (JSON estructurado)</text>
+<line x1="1160" y1="836" x2="532" y2="836" stroke="#333" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="540,831 530,836 540,841" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="845.0" y="829" font-size="13" fill="#222" text-anchor="middle" font-weight="400">17. Casos validados contra el esquema</text>
+<line x1="530" y1="872" x2="948" y2="872" stroke="#333" stroke-width="1.4"/>
+<polygon points="939,867 950,872 939,877" fill="#333"/>
+<text x="740.0" y="865" font-size="13" fill="#222" text-anchor="middle" font-weight="400">18. Guarda casos, tokens y tiempo (estado GENERADO)</text>
+<line x1="320" y1="908" x2="528" y2="908" stroke="#333" stroke-width="1.4"/>
+<polygon points="519,903 530,908 519,913" fill="#333"/>
+<text x="330" y="901" font-size="13" fill="#222" text-anchor="start" font-weight="400">19. GET /generation/:id (consulta del avance)</text>
+<line x1="530" y1="944" x2="322" y2="944" stroke="#333" stroke-width="1.4" stroke-dasharray="6 5"/>
+<polyline points="330,939 320,944 330,949" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="334" y="937" font-size="13" fill="#222" text-anchor="start" font-weight="400">20. Casos generados y contexto usado</text>
+<line x1="20" y1="980" x2="1680" y2="980" stroke="#c9ced8" stroke-width="1.2"/>
+<text x="1670" y="974" font-size="12.5" fill="#444" text-anchor="end" font-weight="600">Revisión y aprobación</text>
+<line x1="95" y1="1014" x2="318" y2="1014" stroke="#333" stroke-width="1.4"/>
+<polygon points="309,1009 320,1014 309,1019" fill="#333"/>
+<text x="107" y="1007" font-size="13" fill="#222" text-anchor="start" font-weight="400">21. Revisa, observa y regenera (pasos 11–20)</text>
+<line x1="320" y1="1050" x2="528" y2="1050" stroke="#333" stroke-width="1.4"/>
+<polygon points="519,1045 530,1050 519,1055" fill="#333"/>
+<text x="330" y="1043" font-size="13" fill="#222" text-anchor="start" font-weight="400">22. Enviar a aprobación</text>
+<line x1="1600" y1="1086" x2="322" y2="1086" stroke="#333" stroke-width="1.4"/>
+<polygon points="331,1081 320,1086 331,1091" fill="#333"/>
+<text x="960.0" y="1079" font-size="13" fill="#222" text-anchor="middle" font-weight="400">23. Aprueba o devuelve con observaciones</text>
+<line x1="320" y1="1122" x2="528" y2="1122" stroke="#333" stroke-width="1.4"/>
+<polygon points="519,1117 530,1122 519,1127" fill="#333"/>
+<text x="330" y="1115" font-size="13" fill="#222" text-anchor="start" font-weight="400">24. Actualiza estado (APROBADO / DEVUELTO)</text>
+<line x1="530" y1="1158" x2="948" y2="1158" stroke="#333" stroke-width="1.4"/>
+<polygon points="939,1153 950,1158 939,1163" fill="#333"/>
+<text x="740.0" y="1151" font-size="13" fill="#222" text-anchor="middle" font-weight="400">25. Guarda estado, autor y fecha (trazabilidad)</text>
+<text x="850.0" y="1236" font-size="12.5" fill="#6b7280" text-anchor="middle">Las flechas punteadas son respuestas. La generación se procesa en segundo plano: si el proveedor LLM falla o excede el tiempo límite, la solicitud queda en estado ERROR con el motivo y puede reintentarse.</text>
+</svg>
