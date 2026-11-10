@@ -7,7 +7,7 @@ export type GenerationStep = 'contexto' | 'instruccion' | 'respuesta' | 'complet
 
 @Schema({ _id: false })
 export class RequirementSnapshot {
-  @Prop({ enum: ['registrado', 'nuevo'], required: true }) source!: 'registrado' | 'nuevo';
+  @Prop({ enum: ['registrado', 'historia', 'nuevo'], required: true }) source!: 'registrado' | 'historia' | 'nuevo';
   @Prop() code?: string;
   @Prop({ required: true }) title!: string;
   @Prop({ required: true }) description!: string;

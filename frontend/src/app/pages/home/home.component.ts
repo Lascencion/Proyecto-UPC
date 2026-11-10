@@ -14,6 +14,7 @@ import { NotifyService } from '../../core/notify.service';
 
 const ICONS: Record<string, string> = {
   requirements: 'description',
+  'user-stories': 'assignment_ind',
   'business-rules': 'rule',
   'test-cases': 'fact_check',
   defects: 'bug_report',

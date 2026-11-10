@@ -23,6 +23,7 @@ function expectExamples(result: ParseResult) {
   expect((value.steps as unknown[]).length).toBe(4);
   expect(value.relatedRules).toEqual(['RN1']);
   expect(value.requirements).toEqual(['REQ1']);
+  expect(value.userStories).toEqual(['HU1']);
   const def1 = result.rows.find((r) => r.data.code === 'DEF1')!;
   expect(validateRecord(getDefinition('defects')!, def1.data).value.testCases).toEqual(['CP2']);
 }
@@ -43,7 +44,7 @@ describe('parseFiles (ida y vuelta con las plantillas)', () => {
   });
 
   it('lee las plantillas CSV (un archivo por tipo, pasos aparte)', async () => {
-    const types = ['requirements', 'business-rules', 'test-cases', 'defects', 'test-case-steps'];
+    const types = ['requirements', 'user-stories', 'business-rules', 'test-cases', 'defects', 'test-case-steps'];
     const files = types.map((t) => templates.csv(t)).map((f) => ({ originalname: f.fileName, buffer: f.buffer }));
     expectExamples(await parseFiles(files));
   });

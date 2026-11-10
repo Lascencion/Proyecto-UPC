@@ -12,7 +12,7 @@ export const TECHNIQUES = [
 export const PRIORITIES = ['Alta', 'Media', 'Baja'] as const;
 
 export interface ContextItem {
-  type: 'requirements' | 'business-rules' | 'test-cases' | 'defects';
+  type: 'requirements' | 'user-stories' | 'business-rules' | 'test-cases' | 'defects';
   code: string;
   title: string;
   /** Contenido resumido del registro que se envía al LLM. */

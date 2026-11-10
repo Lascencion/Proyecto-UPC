@@ -39,21 +39,22 @@
 
     <mat-radio-group [(ngModel)]="source" (change)="onSourceChange()" class="source">
       <mat-radio-button value="registrado">Requerimiento registrado</mat-radio-button>
+      <mat-radio-button value="historia">Historia de usuario registrada</mat-radio-button>
       <mat-radio-button value="nuevo">Nuevo requerimiento (texto libre)</mat-radio-button>
     </mat-radio-group>
 
-    @if (source === 'registrado') {
+    @if (source !== 'nuevo') {
       <mat-form-field class="full">
-        <mat-label>Requerimiento</mat-label>
+        <mat-label>{{ originLabel }}</mat-label>
         <mat-select [(ngModel)]="requirementCode" (selectionChange)="loadContext()" [disabled]="!module" required>
           @for (r of requirements(); track r.code) {
             <mat-option [value]="r.code"><strong>{{ r.code }}</strong> · {{ r.title }}</mat-option>
           } @empty {
-            <mat-option disabled>No hay requerimientos registrados en este módulo; puede ingresar uno nuevo en texto libre.</mat-option>
+            <mat-option disabled>No hay {{ source === 'historia' ? 'historias de usuario registradas' : 'requerimientos registrados' }} en este módulo; puede ingresar uno nuevo en texto libre.</mat-option>
           }
         </mat-select>
         @if (!module) {
-          <mat-hint>Seleccione primero el módulo para ver sus requerimientos.</mat-hint>
+          <mat-hint>Seleccione primero el módulo para ver {{ source === 'historia' ? 'sus historias de usuario' : 'sus requerimientos' }}.</mat-hint>
         }
       </mat-form-field>
       @if (requirement(); as r) {

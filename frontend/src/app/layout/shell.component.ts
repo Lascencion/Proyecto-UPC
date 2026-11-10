@@ -18,6 +18,7 @@ import { ChangePasswordDialogComponent } from './change-password-dialog.componen
 
 const KNOWLEDGE_ICONS: Record<string, string> = {
   requirements: 'description',
+  'user-stories': 'assignment_ind',
   'business-rules': 'rule',
   'test-cases': 'fact_check',
   defects: 'bug_report',

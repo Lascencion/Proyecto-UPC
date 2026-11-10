@@ -74,7 +74,7 @@ export class GenerationNewComponent implements OnInit {
 
   project = '';
   module = '';
-  source: 'registrado' | 'nuevo' = 'registrado';
+  source: 'registrado' | 'historia' | 'nuevo' = 'registrado';
   requirementCode = '';
   newTitle = '';
   newDescription = '';
@@ -114,12 +114,25 @@ export class GenerationNewComponent implements OnInit {
     }
   }
 
-  /** Al elegir el módulo solo se listan los requerimientos registrados en él. */
+  /** Registro de partida elegido en la lista: requerimiento o historia de usuario. */
+  get originType(): 'requirements' | 'user-stories' {
+    return this.source === 'historia' ? 'user-stories' : 'requirements';
+  }
+
+  get originLabel(): string {
+    return this.source === 'historia' ? 'Historia de usuario' : 'Requerimiento';
+  }
+
+  /** Al elegir el módulo solo se listan los requerimientos (o historias) registrados en él. */
   async onModuleChange(): Promise<void> {
     this.resetRequirement();
-    if (!this.project || !this.module) return;
+    await this.loadOptions();
+  }
+
+  private async loadOptions(): Promise<void> {
+    if (!this.project || !this.module || this.source === 'nuevo') return;
     try {
-      this.requirements.set(await firstValueFrom(this.api.recordOptions('requirements', this.project, this.module)));
+      this.requirements.set(await firstValueFrom(this.api.recordOptions(this.originType, this.project, this.module)));
     } catch (e) {
       this.notify.error(e);
     }
@@ -134,18 +147,19 @@ export class GenerationNewComponent implements OnInit {
     this.searched.set(false);
   }
 
-  onSourceChange(): void {
-    this.requirement.set(null);
-    this.candidates.set([]);
+  async onSourceChange(): Promise<void> {
+    this.resetRequirement();
+    await this.loadOptions();
   }
 
   /** HU09: recupera la información histórica relacionada con el requerimiento. */
   async loadContext(): Promise<void> {
     if (!this.project) return;
     const body: Parameters<ApiService['generationContext']>[0] = { project: this.project, module: this.module || undefined };
-    if (this.source === 'registrado') {
+    if (this.source !== 'nuevo') {
       if (!this.requirementCode) return;
-      body.requirementCode = this.requirementCode;
+      if (this.source === 'historia') body.userStoryCode = this.requirementCode;
+      else body.requirementCode = this.requirementCode;
     } else {
       if (!this.newTitle.trim() || !this.newDescription.trim()) {
         this.notify.warn('Ingrese el título y la descripción del requerimiento.');
@@ -190,7 +204,7 @@ export class GenerationNewComponent implements OnInit {
     const existing = new Set(this.candidates().map((c) => `${c.type}:${c.code}`));
     const res = await firstValueFrom(this.api.searchGenerationRecords(this.project, q));
     this.searchResults.set(
-      res.filter((r) => !existing.has(`${r.type}:${r.code}`) && !(r.type === 'requirements' && r.code === this.requirementCode)),
+      res.filter((r) => !existing.has(`${r.type}:${r.code}`) && !(r.type === this.originType && r.code === this.requirementCode)),
     );
     this.searched.set(true);
   }
@@ -231,6 +245,7 @@ export class GenerationNewComponent implements OnInit {
       instructions: this.instructions,
     };
     if (this.source === 'registrado') body['requirementCode'] = this.requirementCode;
+    else if (this.source === 'historia') body['userStoryCode'] = this.requirementCode;
     else body['requirement'] = { title: this.newTitle, description: this.newDescription, acceptanceCriteria: this.criteriaList() };
 
     this.submitting.set(true);

@@ -4,7 +4,7 @@
  * las plantillas descargables y los formularios dinámicos del frontend.
  */
 
-export type EntityType = 'requirements' | 'business-rules' | 'test-cases' | 'defects';
+export type EntityType = 'requirements' | 'user-stories' | 'business-rules' | 'test-cases' | 'defects';
 
 export type FieldType =
   | 'code' // código único dentro del proyecto, asignado por el sistema (p. ej. REQ-001)
@@ -62,12 +62,55 @@ export const REQUIREMENT_DEFINITION: EntityDefinition = {
   fields: [
     { key: 'code', label: 'Código', type: 'code', help: 'Lo asigna el sistema al guardar.', listColumn: true },
     { key: 'title', label: 'Título', type: 'string', required: true, listColumn: true },
-    { key: 'description', label: 'Descripción', type: 'text', required: true, help: 'Qué debe hacer el sistema. Puede usar el formato "Como… quiero… para…".' },
+    { key: 'description', label: 'Descripción', type: 'text', required: true, help: 'Qué debe hacer el sistema, desde el punto de vista del negocio.' },
     { key: 'priority', label: 'Prioridad', type: 'enum', options: PRIORITY, listColumn: true },
     { key: 'acceptanceCriteria', label: 'Criterios de aceptación', type: 'list', help: 'Uno por línea (en archivos, separados por ";").', aliases: ['Criterios'] },
     { key: 'version', label: 'Versión', type: 'string' },
     { key: 'date', label: 'Fecha', type: 'date' },
-    { key: 'source', label: 'Fuente', type: 'string', help: 'Documento, historia de usuario o ticket de origen.' },
+    { key: 'source', label: 'Fuente', type: 'string', help: 'Documento o ticket de origen.' },
+  ],
+};
+
+export const STORY_POINTS = ['1', '2', '3', '5', '8', '13', '21'];
+
+export const USER_STORY_DEFINITION: EntityDefinition = {
+  type: 'user-stories',
+  label: 'Historia de usuario',
+  labelPlural: 'Historias de usuario',
+  codePrefix: 'HU',
+  titleField: 'title',
+  collection: 'user_stories',
+  modelName: 'UserStory',
+  sheetName: 'HistoriasUsuario',
+  wordTypeLabel: 'Historia de usuario',
+  fields: [
+    { key: 'code', label: 'Código', type: 'code', help: 'Lo asigna el sistema al guardar.', listColumn: true },
+    { key: 'title', label: 'Título', type: 'string', required: true, listColumn: true },
+    { key: 'role', label: 'Como (rol)', type: 'string', required: true, help: 'Usuario que necesita la funcionalidad. Ej.: jugador.', aliases: ['Rol', 'Como'] },
+    { key: 'goal', label: 'Quiero (funcionalidad)', type: 'text', required: true, help: 'Lo que el usuario quiere hacer.', aliases: ['Funcionalidad', 'Quiero'] },
+    { key: 'benefit', label: 'Para (beneficio)', type: 'text', help: 'Para qué lo necesita.', aliases: ['Beneficio', 'Para', 'Razón'] },
+    { key: 'acceptanceCriteria', label: 'Criterios de aceptación', type: 'list', help: 'Uno por línea (en archivos, separados por ";").', aliases: ['Criterios'] },
+    {
+      key: 'requirements',
+      label: 'Requerimientos',
+      type: 'refList',
+      refType: 'requirements',
+      help: 'Requerimientos que detalla la historia.',
+      aliases: ['Requerimiento', 'Requerimiento relacionado', 'Requerimientos relacionados'],
+      listColumn: true,
+    },
+    {
+      key: 'relatedRules',
+      label: 'Reglas de negocio',
+      type: 'refList',
+      refType: 'business-rules',
+      help: 'Reglas de negocio que aplica la historia.',
+      aliases: ['Reglas relacionadas', 'Regla de negocio'],
+    },
+    { key: 'priority', label: 'Prioridad', type: 'enum', options: PRIORITY, listColumn: true },
+    { key: 'storyPoints', label: 'Puntos de historia', type: 'enum', options: STORY_POINTS, aliases: ['Puntos', 'SP'] },
+    { key: 'sprint', label: 'Sprint', type: 'string' },
+    { key: 'source', label: 'Fuente', type: 'string', help: 'Ticket o documento de origen (p. ej. Jira NX-125).' },
   ],
 };
 
@@ -128,6 +171,14 @@ export const TEST_CASE_DEFINITION: EntityDefinition = {
       help: 'Requerimientos que valida el caso.',
       aliases: ['Requerimiento', 'Requerimiento relacionado', 'Requerimientos relacionados'],
       listColumn: true,
+    },
+    {
+      key: 'userStories',
+      label: 'Historias de usuario',
+      type: 'refList',
+      refType: 'user-stories',
+      help: 'Historias de usuario que valida el caso.',
+      aliases: ['Historia de usuario', 'Historias', 'HU'],
     },
     {
       key: 'relatedRules',
@@ -228,6 +279,14 @@ export const DEFECT_DEFINITION: EntityDefinition = {
       help: 'Requerimientos afectados.',
       aliases: ['Requerimiento'],
     },
+    {
+      key: 'userStories',
+      label: 'Historias de usuario',
+      type: 'refList',
+      refType: 'user-stories',
+      help: 'Historias de usuario afectadas.',
+      aliases: ['Historia de usuario', 'Historias', 'HU'],
+    },
     { key: 'reportedDate', label: 'Fecha de reporte', type: 'date' },
     { key: 'reportedBy', label: 'Reportado por', type: 'string' },
   ],
@@ -235,6 +294,7 @@ export const DEFECT_DEFINITION: EntityDefinition = {
 
 export const ENTITY_DEFINITIONS: EntityDefinition[] = [
   REQUIREMENT_DEFINITION,
+  USER_STORY_DEFINITION,
   BUSINESS_RULE_DEFINITION,
   TEST_CASE_DEFINITION,
   DEFECT_DEFINITION,

@@ -19,7 +19,7 @@ export interface Session {
   permissions: PermissionMap;
 }
 
-export type EntityType = 'requirements' | 'business-rules' | 'test-cases' | 'defects';
+export type EntityType = 'requirements' | 'user-stories' | 'business-rules' | 'test-cases' | 'defects';
 export type FieldType = 'code' | 'string' | 'text' | 'enum' | 'date' | 'list' | 'ref' | 'refList' | 'steps';
 
 export interface FieldDefinition {
@@ -195,7 +195,7 @@ export interface GenerationRequest {
   code: string;
   project: NamedRef;
   module: NamedRef;
-  requirement: RequirementInput & { source: 'registrado' | 'nuevo' };
+  requirement: RequirementInput & { source: 'registrado' | 'historia' | 'nuevo' };
   context: (Omit<ContextCandidate, 'selected'> & { content: string })[];
   params: { scenarioTypes: string[]; techniques: string[]; maxCases: number; instructions: string };
   status: GenerationStatus;

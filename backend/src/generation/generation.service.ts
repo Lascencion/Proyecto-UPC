@@ -39,6 +39,7 @@ export class GenerationService implements OnModuleInit {
   }
 
   private async requirementOf(projectId: Types.ObjectId, dto: ContextQueryDto): Promise<RequirementInput> {
+    if (dto.userStoryCode) return this.context.userStoryByCode(projectId, dto.userStoryCode);
     if (dto.requirementCode) return this.context.requirementByCode(projectId, dto.requirementCode);
     const r = dto.requirement;
     if (!r?.title?.trim() || !r.description?.trim()) {
@@ -79,7 +80,7 @@ export class GenerationService implements OnModuleInit {
       code: await this.codes.next(SEQUENCE, scope.project),
       project: scope.project,
       module: scope.module,
-      requirement: { source: requirement.code ? 'registrado' : 'nuevo', ...requirement },
+      requirement: { source: dto.userStoryCode ? 'historia' : requirement.code ? 'registrado' : 'nuevo', ...requirement },
       context: contextItems.map((c) => {
         const s = byCode.get(`${c.type}:${c.code}`);
         return { ...c, score: s?.score ?? null, relation: s?.relation ?? 'manual' };

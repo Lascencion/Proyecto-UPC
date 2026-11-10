@@ -16,12 +16,13 @@ Los nombres deben escribirse exactamente así, porque la columna **Módulo** del
 ## 2. Carga del histórico
 
 1. Ir a **Carga masiva** y elegir el proyecto *Tienda Galaxia Online* con el módulo por defecto *Compra de monedas virtuales*.
-2. Subir `demo-historico-tienda-galaxia.xlsx`. El resultado esperado son **37 registros válidos, 0 errores**:
+2. Subir `demo-historico-tienda-galaxia.xlsx`. El resultado esperado son **46 registros válidos, 0 errores**:
    - 8 requerimientos
+   - 9 historias de usuario (HU1–HU9, vinculadas a requerimientos, reglas, casos y defectos)
    - 12 reglas de negocio
    - 12 casos ejecutados con sus pasos (5 fallidos)
    - 5 defectos
-3. Confirmar. Las referencias REQ1, RN1… se convierten en códigos REQ-001, RN-001…
+3. Confirmar. Las referencias REQ1, HU1, RN1… se convierten en códigos REQ-001, HU-001, RN-001…
 
 En una base con registros previos, los códigos continúan la numeración existente. En ese caso, busque los registros por título.
 
@@ -49,3 +50,10 @@ En cada escenario conviene enseñar:
 - el diálogo de progreso;
 - el detalle de la generación (casos con pasos, trazabilidad hacia el contexto usado, tokens y tiempo);
 - la lista **Mis generaciones**.
+
+### Escenario adicional: generación desde una historia de usuario
+
+En **Generar casos**, elegir el módulo *Control parental*, marcar **Historia de usuario registrada** y seleccionar
+**HU-006** *Limitar las compras diarias de un menor*. El contexto incluye como relación directa (100 %) su
+requerimiento REQ-005, la regla RN-005, los casos CP-008 y CP-009 y el defecto DEF-001. Esto muestra la trazabilidad
+requerimiento → historia → regla → caso → defecto.

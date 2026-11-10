@@ -11,7 +11,7 @@ virtuales es el caso de estudio y aparece en los ejemplos de las plantillas.
 | Inicio de sesión (JWT) con roles Analista QA, Líder QA y Administrador | ✅ |
 | Gestión de usuarios y matriz de permisos por rol y módulo | ✅ |
 | Catálogos de proyectos y módulos/flujos | ✅ |
-| Registro individual (formularios) de requerimientos, reglas de negocio, casos de prueba y defectos | ✅ |
+| Registro individual (formularios) de requerimientos, historias de usuario, reglas de negocio, casos de prueba y defectos | ✅ |
 | Códigos automáticos por proyecto (REQ-001, RN-001, CP-001, DEF-001) | ✅ |
 | Selección de registros relacionados (varios) desde listas con buscador | ✅ |
 | Carga masiva desde Excel, Word y CSV con revisión, corrección y confirmación | ✅ |

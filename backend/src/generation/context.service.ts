@@ -31,6 +31,15 @@ export interface ContextCandidate {
 
 const list = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : []);
 
+/** "Como jugador, quiero…, para…" a partir de los campos de la historia. */
+export function storySentence(r: Rec): string {
+  const lower = (v: unknown) => {
+    const s = String(v ?? '…').trim();
+    return s.charAt(0).toLowerCase() + s.slice(1);
+  };
+  return `Como ${lower(r.role)}, quiero ${lower(r.goal)}${r.benefit ? `, para ${lower(r.benefit)}` : ''}`;
+}
+
 /** Texto de un registro, usado para calcular la similitud y como contexto del LLM. */
 export function recordContent(type: EntityType, r: Rec): string {
   const lines: string[] = [];
@@ -41,6 +50,11 @@ export function recordContent(type: EntityType, r: Rec): string {
   switch (type) {
     case 'requirements':
       add('Título', r.title); add('Descripción', r.description); add('Criterios de aceptación', r.acceptanceCriteria);
+      break;
+    case 'user-stories':
+      add('Título', r.title);
+      add('Historia', storySentence(r));
+      add('Criterios de aceptación', r.acceptanceCriteria);
       break;
     case 'business-rules':
       add('Nombre', r.name); add('Descripción', r.description); add('Tipo', r.type); add('Condición', r.condition);
@@ -58,6 +72,45 @@ export function recordContent(type: EntityType, r: Rec): string {
       break;
   }
   return lines.join('\n');
+}
+
+/**
+ * Registros vinculados directamente al punto de partida (un requerimiento REQ-### o
+ * una historia de usuario HU-###), siguiendo la cadena de trazabilidad:
+ * requerimiento ↔ historias ↔ reglas, casos de prueba y defectos.
+ */
+export function directRelations(all: Map<EntityType, Rec[]>, code: string): Map<EntityType, Set<string>> {
+  const get = (t: EntityType) => all.get(t) ?? [];
+  const codes = (t: EntityType, pred: (r: Rec) => boolean) => new Set(get(t).filter(pred).map((r) => r.code));
+  const has = (v: unknown, set: Set<string>) => list(v).some((c) => set.has(c));
+  const self = new Set([code]);
+
+  let reqs: Set<string>;
+  let stories: Set<string>;
+  if (code.startsWith('HU-')) {
+    const story = get('user-stories').find((s) => s.code === code);
+    reqs = new Set(list(story?.requirements));
+    stories = self;
+  } else {
+    reqs = self;
+    stories = codes('user-stories', (s) => has(s.requirements, self));
+  }
+  const storyRules = new Set(get('user-stories').filter((s) => stories.has(s.code)).flatMap((s) => list(s.relatedRules)));
+  // Desde una historia, los casos y defectos directos son los de la propia historia;
+  // desde un requerimiento, también los de sus historias.
+  const fromStory = code.startsWith('HU-');
+  const cases = codes('test-cases', (c) => has(c.userStories, stories) || (!fromStory && has(c.requirements, reqs)));
+  const result = new Map<EntityType, Set<string>>([
+    ['requirements', fromStory ? reqs : new Set()],
+    ['user-stories', fromStory ? new Set() : stories],
+    ['business-rules', codes('business-rules', (r) => storyRules.has(r.code) || has(r.relatedRequirements, reqs))],
+    ['test-cases', cases],
+    [
+      'defects',
+      codes('defects', (d) => has(d.userStories, stories) || has(d.testCases, cases) || (!fromStory && has(d.requirements, reqs))),
+    ],
+  ]);
+  return result;
 }
 
 const titleOf = (type: EntityType, r: Rec) => String(r[getDefinition(type)!.titleField] ?? '');
@@ -78,6 +131,19 @@ export class ContextService {
     return result;
   }
 
+  /** Una historia de usuario registrada como punto de partida de la generación. */
+  async userStoryByCode(projectId: Types.ObjectId, code: string): Promise<RequirementInput> {
+    const def = getDefinition('user-stories')!;
+    const r = (await this.knowledge.model(def).findOne({ project: projectId, code: code.toUpperCase() }).lean()) as Rec | null;
+    if (!r) throw new NotFoundException(`La historia de usuario ${code} no existe en el proyecto.`);
+    return {
+      code: r.code,
+      title: r.title,
+      description: `${storySentence(r)}.`,
+      acceptanceCriteria: list(r.acceptanceCriteria),
+    };
+  }
+
   async requirementByCode(projectId: Types.ObjectId, code: string): Promise<RequirementInput> {
     const def = getDefinition('requirements')!;
     const r = (await this.knowledge.model(def).findOne({ project: projectId, code: code.toUpperCase() }).lean()) as Rec | null;
@@ -88,21 +154,13 @@ export class ContextService {
   async candidates(projectId: Types.ObjectId, moduleId: Types.ObjectId | null, requirement: RequirementInput): Promise<ContextCandidate[]> {
     const all = await this.records(projectId);
     const code = requirement.code;
-    const relatedCases = new Set(
-      code ? all.get('test-cases')!.filter((c) => list(c.requirements).includes(code)).map((c) => c.code) : [],
-    );
-    const isDirect = (type: EntityType, r: Rec): boolean => {
-      if (!code) return false;
-      if (type === 'business-rules') return list(r.relatedRequirements).includes(code);
-      if (type === 'test-cases') return relatedCases.has(r.code);
-      if (type === 'defects') return list(r.requirements).includes(code) || list(r.testCases).some((c) => relatedCases.has(c));
-      return false;
-    };
+    const direct = code ? directRelations(all, code) : new Map<EntityType, Set<string>>();
+    const isDirect = (type: EntityType, r: Rec): boolean => !!direct.get(type)?.has(r.code);
 
     const items: { type: EntityType; r: Rec; text: string }[] = [];
     for (const [type, recs] of all) {
       for (const r of recs) {
-        if (type === 'requirements' && r.code === code) continue;
+        if (r.code === code) continue;
         items.push({ type, r, text: recordContent(type, r) });
       }
     }
@@ -121,7 +179,8 @@ export class ContextService {
 
     let selected = 0;
     return ranked.map((i) => {
-      const select = selected < SUGGESTED && (i.direct || i.score >= MIN_SELECTED_SCORE);
+      // Los vinculados directamente siempre se sugieren; los similares, hasta completar SUGGESTED.
+      const select = i.direct || (selected < SUGGESTED && i.score >= MIN_SELECTED_SCORE);
       if (select) selected += 1;
       return {
         type: i.type,

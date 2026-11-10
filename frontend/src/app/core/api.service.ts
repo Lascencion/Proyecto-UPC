@@ -156,7 +156,7 @@ export class ApiService {
     return this.http.get<{ provider: string; simulated: boolean }>('/api/generation/config');
   }
 
-  generationContext(body: { project: string; module?: string; requirementCode?: string; requirement?: Partial<RequirementInput> }) {
+  generationContext(body: { project: string; module?: string; requirementCode?: string; userStoryCode?: string; requirement?: Partial<RequirementInput> }) {
     return this.http.post<{ requirement: RequirementInput; candidates: ContextCandidate[] }>('/api/generation/context', body);
   }
 

@@ -13,7 +13,7 @@ export class TemplatesController {
 
   @Get(':format')
   @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
-  @ApiQuery({ name: 'type', required: false, description: 'Solo CSV: requirements, business-rules, test-cases, test-case-steps, defects' })
+  @ApiQuery({ name: 'type', required: false, description: 'Solo CSV: requirements, user-stories, business-rules, test-cases, test-case-steps, defects' })
   async download(@Param('format') format: string, @Query('type') type: string, @Res({ passthrough: true }) res: Response) {
     let file: TemplateFile;
     if (format === 'xlsx') file = await this.templates.excel();

@@ -40,7 +40,24 @@ que sigue el sistema al leerlas.
 | Criterios de aceptación | lista | separados por `;` |
 | Versión | texto | |
 | Fecha | fecha | |
-| Fuente | texto | documento, historia de usuario o ticket |
+| Fuente | texto | documento o ticket de origen |
+
+### Historias de usuario (hoja `HistoriasUsuario`)
+| Columna | Tipo | Valores |
+|---|---|---|
+| Referencia | texto | p. ej. HU1 (temporal) |
+| Módulo | texto | |
+| Título * | texto | |
+| Como (rol) * | texto | p. ej. Jugador |
+| Quiero (funcionalidad) * | texto largo | |
+| Para (beneficio) | texto largo | |
+| Criterios de aceptación | lista | separados por `;` |
+| Requerimientos | varios | REQ1 |
+| Reglas de negocio | varios | RN1; RN3 |
+| Prioridad | lista | Alta, Media, Baja |
+| Puntos de historia | lista | 1, 2, 3, 5, 8, 13, 21 |
+| Sprint | texto | |
+| Fuente | texto | p. ej. Jira NX-125 |
 
 ### Reglas de negocio (hoja `ReglasNegocio`)
 | Columna | Tipo | Valores |
@@ -63,6 +80,7 @@ que sigue el sistema al leerlas.
 | Módulo | texto | |
 | Título * | texto | |
 | Requerimientos | varios | REQ1; REQ2 |
+| Historias de usuario | varios | HU1 |
 | Reglas de negocio | varios | RN1; RN-003 |
 | Tipo de escenario * | lista | Positivo, Negativo, Valor límite, Excepción |
 | Técnica de diseño | lista | Partición de equivalencia, Análisis de valores límite, Tabla de decisión, Transición de estados, Casos de uso, Conjetura de errores, Otra |
@@ -97,13 +115,14 @@ del mismo lote.
 | Estado * | lista | Abierto, En progreso, Resuelto, Cerrado, Rechazado |
 | Casos de prueba | varios | CP2 |
 | Requerimientos | varios | REQ2 |
+| Historias de usuario | varios | HU2 |
 | Fecha de reporte | fecha | |
 | Reportado por | texto | |
 
 ## Particularidades por formato
 
 ### Excel (.xlsx)
-Un libro con una hoja por tipo: `Requerimientos`, `ReglasNegocio`, `CasosPrueba`, `PasosCasoPrueba` y `Defectos`.
+Un libro con una hoja por tipo: `Requerimientos`, `HistoriasUsuario`, `ReglasNegocio`, `CasosPrueba`, `PasosCasoPrueba` y `Defectos`.
 La hoja `Instrucciones` se ignora. La primera fila es el encabezado. Las columnas de lista cerrada tienen menús
 desplegables.
 

@@ -40,6 +40,7 @@ export const GENERATION_STATUS_LABELS: Record<string, string> = {
 
 export const ENTITY_TYPE_LABELS: Record<string, string> = {
   requirements: 'Requerimiento',
+  'user-stories': 'Historia de usuario',
   'business-rules': 'Regla de negocio',
   'test-cases': 'Caso de prueba',
   defects: 'Defecto',

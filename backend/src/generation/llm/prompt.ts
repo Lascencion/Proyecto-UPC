@@ -5,7 +5,7 @@ import { GenerationInput, PRIORITIES, SCENARIO_TYPES, TECHNIQUES } from './types
  * el proveedor pueda reutilizarlas en caché.
  */
 export const SYSTEM_PROMPT = `Eres un analista de QA senior especializado en el diseño de casos de prueba funcionales.
-Tu tarea es diseñar casos de prueba para un requerimiento funcional, apoyándote en la información histórica del proyecto (requerimientos, reglas de negocio, casos de prueba ejecutados y defectos) que se te entrega como contexto.
+Tu tarea es diseñar casos de prueba para un requerimiento funcional, apoyándote en la información histórica del proyecto (requerimientos, historias de usuario, reglas de negocio, casos de prueba ejecutados y defectos) que se te entrega como contexto.
 
 Criterios:
 - Cubre los tipos de escenario solicitados: positivos (camino feliz), negativos (entradas o condiciones inválidas), de valor límite (bordes de rangos, montos, cantidades o fechas) y de excepción (fallas de servicios, tiempos de espera, duplicidad, concurrencia).
@@ -22,6 +22,7 @@ Criterios:
 
 const TYPE_LABELS: Record<string, string> = {
   requirements: 'Requerimiento',
+  'user-stories': 'Historia de usuario',
   'business-rules': 'Regla de negocio',
   'test-cases': 'Caso de prueba ejecutado',
   defects: 'Defecto',

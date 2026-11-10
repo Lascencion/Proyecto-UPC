@@ -37,6 +37,9 @@ export class ContextQueryDto {
   @ApiPropertyOptional({ description: 'Código de un requerimiento registrado' }) @IsOptional() @IsString()
   requirementCode?: string;
 
+  @ApiPropertyOptional({ description: 'Código de una historia de usuario registrada' }) @IsOptional() @IsString()
+  userStoryCode?: string;
+
   @ApiPropertyOptional({ type: NewRequirementDto }) @IsOptional() @ValidateNested() @Type(() => NewRequirementDto)
   requirement?: NewRequirementDto;
 }
