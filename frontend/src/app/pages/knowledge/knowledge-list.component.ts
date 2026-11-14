@@ -23,6 +23,7 @@ import { FieldDefinition, FlowModule, KnowledgeRecord, Project } from '../../cor
 import { NotifyService } from '../../core/notify.service';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog.component';
 import { displayValue } from '../../shared/display';
+import { TraceabilityDialogComponent } from '../../shared/traceability/traceability-dialog.component';
 
 @Component({
   selector: 'app-knowledge-list',
@@ -156,6 +157,15 @@ export class KnowledgeListComponent {
 
   open(record: KnowledgeRecord): void {
     this.router.navigate(['/conocimiento', this.type(), record.id]);
+  }
+
+  traceability(record: KnowledgeRecord, event: Event): void {
+    event.stopPropagation();
+    this.dialog.open(TraceabilityDialogComponent, {
+      data: { type: this.type(), id: record.id },
+      width: '960px',
+      maxWidth: '95vw',
+    });
   }
 
   async remove(record: KnowledgeRecord, event: Event): Promise<void> {

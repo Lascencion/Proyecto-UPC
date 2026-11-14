@@ -16,6 +16,7 @@ virtuales es el caso de estudio y aparece en los ejemplos de las plantillas.
 | Selección de registros relacionados (varios) desde listas con buscador | ✅ |
 | Carga masiva desde Excel, Word y CSV con revisión, corrección y confirmación | ✅ |
 | Consulta, búsqueda, edición y eliminación de la información registrada | ✅ |
+| Trazabilidad por registro (requerimiento ↔ historias ↔ reglas ↔ casos ↔ defectos) con alertas de cobertura | ✅ |
 | Selección de información histórica relacionada con un requerimiento (HU09) | ✅ |
 | Generación de casos de prueba funcionales con LLM (HU10) | ✅ |
 | Revisión, regeneración, aprobación, exportación y reportes (HU11 – HU17) | ⏳ Sprints 3 y 4 |
@@ -105,6 +106,20 @@ puede cambiar en *Permisos por rol*. Valores iniciales:
 | Catálogos (proyectos/módulos) | Ver | Todo | Todo |
 | Generación de casos | Ver, crear | Todo | Todo |
 | Administración (usuarios y permisos) | — | — | Todo (no se puede quitar) |
+
+## Trazabilidad
+
+Cada registro de la base de conocimiento muestra su cadena de trazabilidad (tarjeta *Trazabilidad* en su ficha, o
+el botón *Ver trazabilidad* del listado). Las relaciones se guardan en un solo sentido (por ejemplo, el caso de
+prueba apunta al requerimiento); el panel las recorre en ambos sentidos y marca como **indirectas** las que llegan a
+través de otro registro (p. ej. un defecto vinculado al caso de una historia). Para requerimientos e historias la
+cadena coincide con el contexto directo que se usa en la generación. Además señala:
+
+- reglas de negocio sin casos de prueba y tipos de escenario sin casos (positivo, negativo, alternativo, excepción);
+- defectos pendientes de solución;
+- casos fallidos sin defecto asociado y relaciones con códigos que no existen en el proyecto.
+
+Endpoint: `GET /api/knowledge/:type/:id/traceability`. Se considera una mejora de HU08 (consulta de registros).
 
 ## Carga masiva
 

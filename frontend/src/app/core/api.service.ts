@@ -18,6 +18,7 @@ import {
   RecordOption,
   Role,
   SaveResult,
+  Traceability,
   User,
 } from './models';
 
@@ -64,6 +65,10 @@ export class ApiService {
 
   getRecord(type: string, id: string) {
     return this.http.get<KnowledgeRecord>(`/api/knowledge/${type}/${id}`);
+  }
+
+  traceability(type: string, id: string) {
+    return this.http.get<Traceability>(`/api/knowledge/${type}/${id}/traceability`);
   }
 
   createRecord(type: string, body: Record<string, unknown>) {

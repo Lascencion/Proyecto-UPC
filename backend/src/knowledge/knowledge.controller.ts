@@ -43,6 +43,12 @@ export class KnowledgeController {
     return this.knowledge.list(type, query);
   }
 
+  @Get(':type/:id/traceability')
+  @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
+  traceability(@Param('type') type: string, @Param('id') id: string) {
+    return this.knowledge.traceability(type, id);
+  }
+
   @Get(':type/:id')
   @RequirePermission(AppModule.KNOWLEDGE, Action.VIEW)
   get(@Param('type') type: string, @Param('id') id: string) {

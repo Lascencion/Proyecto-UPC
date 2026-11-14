@@ -100,6 +100,9 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let r" class="actions-cell">
+        <button mat-icon-button matTooltip="Ver trazabilidad" (click)="traceability(r, $event)">
+          <mat-icon>account_tree</mat-icon>
+        </button>
         <button mat-icon-button [matTooltip]="auth.can('KNOWLEDGE', 'EDIT') ? 'Revisar / editar' : 'Ver'" (click)="open(r)">
           <mat-icon>{{ auth.can('KNOWLEDGE', 'EDIT') ? 'edit' : 'visibility' }}</mat-icon>
         </button>

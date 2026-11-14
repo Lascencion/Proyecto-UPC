@@ -1,0 +1,74 @@
+@if (loading()) {
+  <mat-progress-bar mode="indeterminate" />
+}
+@if (error()) {
+  <p class="error-box">{{ error() }}</p>
+}
+
+@if (data(); as d) {
+  @if (mode() === 'inline') {
+    <div class="current">
+      @if (history().length) {
+        <button mat-icon-button matTooltip="Volver al registro anterior" (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+      }
+      <mat-icon class="type-icon">{{ icons[d.record.type] }}</mat-icon>
+      <strong>{{ d.record.code }}</strong>
+      <span class="title">{{ d.record.title }}</span>
+    </div>
+  }
+
+  @for (a of d.alerts; track a.message) {
+    <p [class]="a.level === 'warning' ? 'warning-box' : 'info-box'">
+      <mat-icon class="alert-icon">{{ a.level === 'warning' ? 'warning' : 'info' }}</mat-icon>{{ a.message }}
+    </p>
+  }
+
+  @if (coverage().length) {
+    <div class="coverage" aria-label="Casos de prueba por tipo de escenario">
+      <span class="muted">Casos por tipo de escenario:</span>
+      @for (c of coverage(); track c[0]) {
+        <span class="cov" [class.empty]="!c[1]">{{ c[0] }} <strong>{{ c[1] }}</strong></span>
+      }
+    </div>
+  }
+
+  @if (!total()) {
+    <p class="muted">Este registro no tiene relaciones con otros registros del proyecto.</p>
+  }
+
+  <div class="groups">
+    @for (g of groups(); track g.type) {
+      <section class="group">
+        <h4><mat-icon>{{ icons[g.type] }}</mat-icon>{{ g.label }} <span class="count">{{ g.items.length }}</span></h4>
+        @if (!g.items.length) {
+          <p class="muted none">Sin registros relacionados</p>
+        }
+        <ul>
+          @for (i of g.items; track i.code) {
+            <li>
+              <button type="button" class="item" (click)="open(i)"
+                [matTooltip]="(mode() === 'route' ? 'Abrir ' : 'Ver trazabilidad de ') + i.code">
+                <span class="code">{{ i.code }}</span>
+                <span class="item-title">{{ i.title }}</span>
+              </button>
+              <span class="meta">
+                @if (i.detail) {
+                  <span class="tag" [attr.data-value]="i.detail">{{ i.detail }}</span>
+                }
+                @if (i.status) {
+                  <span class="tag" [attr.data-value]="i.status">{{ i.status }}</span>
+                }
+                @if (i.relation === 'indirecta') {
+                  <span class="via" [matTooltip]="relationText(i)"><mat-icon>subdirectory_arrow_right</mat-icon>{{ i.via }}</span>
+                }
+              </span>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  </div>
+  @if (total()) {
+    <p class="muted legend"><mat-icon>subdirectory_arrow_right</mat-icon> relación indirecta: el registro se vincula a través del código indicado.</p>
+  }
+}

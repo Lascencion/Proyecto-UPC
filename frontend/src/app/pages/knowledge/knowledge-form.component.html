@@ -22,6 +22,14 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else {
+    @if (!isNew() && id()) {
+      <mat-card appearance="outlined" class="trace-card">
+        <mat-card-content>
+          <h3><mat-icon>account_tree</mat-icon> Trazabilidad</h3>
+          <app-traceability-panel [type]="type()" [id]="id()!" />
+        </mat-card-content>
+      </mat-card>
+    }
     <mat-card appearance="outlined" class="form-card">
       <mat-card-content>
         @if (readonly()) {

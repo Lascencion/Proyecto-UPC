@@ -101,6 +101,24 @@ export interface RecordOption {
   title: string;
 }
 
+export interface TraceItem {
+  id: string;
+  type: EntityType;
+  code: string;
+  title: string;
+  relation: 'directa' | 'indirecta';
+  via?: string;
+  status?: string;
+  detail?: string;
+}
+
+export interface Traceability {
+  record: { id: string; type: EntityType; code: string; title: string };
+  groups: { type: EntityType; label: string; items: TraceItem[] }[];
+  alerts: { level: 'warning' | 'info'; message: string }[];
+  scenarioCoverage?: Record<string, number>;
+}
+
 export type RefOptions = Partial<Record<EntityType, RecordOption[]>>;
 
 export type BatchStatus = 'EN_REVISION' | 'CONFIRMADO' | 'CANCELADO';

@@ -8,6 +8,7 @@ import { escapeRegex } from '../common/utils/text';
 import { ENTITY_DEFINITIONS, EntityDefinition, EntityType, getDefinition } from './definitions/entity-definitions';
 import { CodeGeneratorService } from './code-generator.service';
 import { OriginType } from './knowledge.schemas';
+import { buildTraceability, TraceRec } from './traceability';
 import { collectReferences, FieldIssue, validateRecord } from './validation/record-validator';
 
 export interface ListQuery {
@@ -101,6 +102,21 @@ export class KnowledgeService {
     const doc = await this.model(def).findById(toObjectId(id)).populate(POPULATE).lean();
     if (!doc) throw new NotFoundException(`${def.label} no encontrado.`);
     return this.serialize(doc);
+  }
+
+  /** Cadena de trazabilidad del registro, en ambos sentidos, dentro de su proyecto. */
+  async traceability(type: string, id: string) {
+    const def = this.definition(type);
+    const doc = await this.model(def).findById(toObjectId(id)).lean<TraceRec & { project: Types.ObjectId }>();
+    if (!doc) throw new NotFoundException(`${def.label} no encontrado.`);
+    const all = new Map<EntityType, TraceRec[]>();
+    await Promise.all(
+      ENTITY_DEFINITIONS.map(async (d) => {
+        const docs = await this.model(d).find({ project: doc.project }, { steps: 0 }).lean<TraceRec[]>();
+        all.set(d.type, docs);
+      }),
+    );
+    return buildTraceability(all, def.type, doc.code);
   }
 
   /** Verifica que el módulo exista y pertenezca al proyecto. */
