@@ -6,6 +6,8 @@
   font-size: 13px;
 }
 
+/* El encabezado tiene el mismo ancho que la tarjeta para que el botón quede alineado a su borde derecho. */
+.form-header,
 .form-card {
   max-width: 1100px;
 }
