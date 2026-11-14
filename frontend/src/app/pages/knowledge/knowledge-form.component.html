@@ -17,6 +17,11 @@
         </p>
       }
     </div>
+    @if (!isNew() && record()) {
+      <div class="header-actions">
+        <button mat-stroked-button (click)="openTraceability()"><mat-icon>account_tree</mat-icon> Ver trazabilidad</button>
+      </div>
+    }
   </header>
 
   @if (loading()) {

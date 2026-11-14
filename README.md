@@ -109,8 +109,8 @@ puede cambiar en *Permisos por rol*. Valores iniciales:
 
 ## Trazabilidad
 
-En el listado de la base de conocimiento, el botón *Ver trazabilidad* de cada registro abre un diálogo de solo
-consulta con los requerimientos, historias de usuario, reglas de negocio, casos de prueba y defectos relacionados, con
+El botón *Ver trazabilidad* (en cada fila del listado de la base de conocimiento y en el encabezado de la ficha de
+cada registro) abre un diálogo de solo consulta con los requerimientos, historias de usuario, reglas de negocio, casos de prueba y defectos relacionados, con
 su estado. Las relaciones se guardan en un solo sentido (por ejemplo, el caso de prueba apunta al requerimiento); el
 diálogo las recorre en ambos sentidos y marca como **indirectas** las que llegan a través de otro registro (p. ej. un
 defecto vinculado al caso de una historia). Para requerimientos e historias la cadena coincide con el contexto directo

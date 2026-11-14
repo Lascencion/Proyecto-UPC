@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -16,6 +17,7 @@ import { EntityDefinition, EntityType, FlowModule, KnowledgeRecord, Project, Ref
 import { fieldErrors, NotifyService } from '../../core/notify.service';
 import { today } from '../../shared/display';
 import { RecordFormComponent } from '../../shared/record-form/record-form.component';
+import { TraceabilityDialogComponent } from '../../shared/traceability/traceability-dialog.component';
 
 @Component({
   selector: 'app-knowledge-form',
@@ -39,6 +41,7 @@ export class KnowledgeFormComponent {
   private readonly api = inject(ApiService);
   private readonly notify = inject(NotifyService);
   private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
 
   readonly type = input.required<string>();
   readonly id = input<string>();
@@ -131,6 +134,11 @@ export class KnowledgeFormComponent {
   async onProjectChange(): Promise<void> {
     this.module = '';
     await this.loadProjectData();
+  }
+
+  openTraceability(): void {
+    const id = this.id();
+    if (id) TraceabilityDialogComponent.open(this.dialog, this.type(), id);
   }
 
   back(): void {

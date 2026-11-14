@@ -161,11 +161,7 @@ export class KnowledgeListComponent {
 
   traceability(record: KnowledgeRecord, event: Event): void {
     event.stopPropagation();
-    this.dialog.open(TraceabilityDialogComponent, {
-      data: { type: this.type(), id: record.id },
-      width: '960px',
-      maxWidth: '95vw',
-    });
+    TraceabilityDialogComponent.open(this.dialog, this.type(), record.id);
   }
 
   async remove(record: KnowledgeRecord, event: Event): Promise<void> {
