@@ -6,16 +6,14 @@
 }
 
 @if (data(); as d) {
-  @if (mode() === 'inline') {
-    <div class="current">
-      @if (history().length) {
-        <button mat-icon-button matTooltip="Volver al registro anterior" (click)="back()"><mat-icon>arrow_back</mat-icon></button>
-      }
-      <mat-icon class="type-icon">{{ icons[d.record.type] }}</mat-icon>
-      <strong>{{ d.record.code }}</strong>
-      <span class="title">{{ d.record.title }}</span>
-    </div>
-  }
+  <div class="current">
+    @if (history().length) {
+      <button mat-icon-button matTooltip="Volver al registro anterior" (click)="back()"><mat-icon>arrow_back</mat-icon></button>
+    }
+    <mat-icon class="type-icon">{{ icons[d.record.type] }}</mat-icon>
+    <strong>{{ d.record.code }}</strong>
+    <span class="title">{{ d.record.title }}</span>
+  </div>
 
   @for (a of d.alerts; track a.message) {
     <p [class]="a.level === 'warning' ? 'warning-box' : 'info-box'">
@@ -47,7 +45,7 @@
           @for (i of g.items; track i.code) {
             <li>
               <button type="button" class="item" (click)="open(i)"
-                [matTooltip]="(mode() === 'route' ? 'Abrir ' : 'Ver trazabilidad de ') + i.code">
+                [matTooltip]="'Ver trazabilidad de ' + i.code">
                 <span class="code">{{ i.code }}</span>
                 <span class="item-title">{{ i.title }}</span>
               </button>

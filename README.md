@@ -109,8 +109,8 @@ puede cambiar en *Permisos por rol*. Valores iniciales:
 
 ## Trazabilidad
 
-Cada registro de la base de conocimiento muestra su cadena de trazabilidad (tarjeta *Trazabilidad* en su ficha, o
-el botón *Ver trazabilidad* del listado). Las relaciones se guardan en un solo sentido (por ejemplo, el caso de
+En el listado de la base de conocimiento, el botón *Ver trazabilidad* de cada registro abre su cadena de
+trazabilidad en un diálogo. Las relaciones se guardan en un solo sentido (por ejemplo, el caso de
 prueba apunta al requerimiento); el panel las recorre en ambos sentidos y marca como **indirectas** las que llegan a
 través de otro registro (p. ej. un defecto vinculado al caso de una historia). Para requerimientos e historias la
 cadena coincide con el contexto directo que se usa en la generación. Además señala:

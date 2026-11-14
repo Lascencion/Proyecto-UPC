@@ -12,7 +12,7 @@ import { TraceabilityPanelComponent } from './traceability-panel.component';
   template: `
     <h2 mat-dialog-title>Trazabilidad</h2>
     <mat-dialog-content>
-      <app-traceability-panel [type]="data.type" [id]="data.id" mode="inline" />
+      <app-traceability-panel [type]="data.type" [id]="data.id" />
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-button (click)="openRecord()"><mat-icon>open_in_new</mat-icon> Abrir registro</button>

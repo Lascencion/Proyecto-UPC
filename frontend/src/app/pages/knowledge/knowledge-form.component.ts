@@ -16,7 +16,6 @@ import { EntityDefinition, EntityType, FlowModule, KnowledgeRecord, Project, Ref
 import { fieldErrors, NotifyService } from '../../core/notify.service';
 import { today } from '../../shared/display';
 import { RecordFormComponent } from '../../shared/record-form/record-form.component';
-import { TraceabilityPanelComponent } from '../../shared/traceability/traceability-panel.component';
 
 @Component({
   selector: 'app-knowledge-form',
@@ -31,7 +30,6 @@ import { TraceabilityPanelComponent } from '../../shared/traceability/traceabili
     MatSelectModule,
     MatProgressBarModule,
     RecordFormComponent,
-    TraceabilityPanelComponent,
   ],
   templateUrl: './knowledge-form.component.html',
   styleUrl: './knowledge-form.component.scss',

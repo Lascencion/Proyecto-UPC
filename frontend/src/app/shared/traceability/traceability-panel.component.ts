@@ -3,7 +3,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ApiService } from '../../core/api.service';
 import { EntityType, TraceItem, Traceability } from '../../core/models';
@@ -19,8 +18,8 @@ export const TYPE_ICONS: Record<EntityType, string> = {
 /**
  * Trazabilidad de un registro (mejora de HU08): muestra en ambos sentidos los
  * requerimientos, historias, reglas, casos de prueba y defectos relacionados.
- * En modo `inline` (diálogo) al elegir un registro se muestra su trazabilidad en el
- * mismo panel; en modo `route` se abre la página del registro.
+ * Se usa en el diálogo del listado: al elegir un registro se muestra su trazabilidad
+ * en el mismo panel, con historial para volver atrás.
  */
 @Component({
   selector: 'app-traceability-panel',
@@ -30,13 +29,11 @@ export const TYPE_ICONS: Record<EntityType, string> = {
 })
 export class TraceabilityPanelComponent {
   private readonly api = inject(ApiService);
-  private readonly router = inject(Router);
 
   readonly type = input.required<string>();
   readonly id = input.required<string>();
-  readonly mode = input<'route' | 'inline'>('route');
 
-  /** Registro mostrado (en modo inline puede cambiar al navegar dentro del panel). */
+  /** Registro mostrado (cambia al navegar dentro del panel). */
   readonly current = signal<{ type: string; id: string } | null>(null);
   readonly data = signal<Traceability | null>(null);
   readonly loading = signal(false);
@@ -79,10 +76,6 @@ export class TraceabilityPanelComponent {
   }
 
   open(item: TraceItem): void {
-    if (this.mode() === 'route') {
-      this.router.navigate(['/conocimiento', item.type, item.id]);
-      return;
-    }
     this.history.update((h) => [...h, this.current()!]);
     this.show({ type: item.type, id: item.id });
   }
