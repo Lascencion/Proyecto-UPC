@@ -68,9 +68,9 @@ Esto ilustra la causa principal del Pareto (Tabla 6): escenarios no contemplados
 ## 3.1 Trazabilidad (antes de generar)
 
 En **Base de conocimiento › Requerimientos**, botón *Ver trazabilidad* de **REQ-007**: se ven HU-007, RN-006 a
-RN-009, CP-003, CP-004 y CP-009 con su estado, y DEF-001 y DEF-003. El panel avisa que **RN-009 no tiene casos** y que
-faltan escenarios **Alternativo** y **Excepción**. Es el hueco que luego cubre la generación (punto 2 de la tabla
-siguiente). Dentro del diálogo se puede hacer clic en cualquier código para seguir la cadena (p. ej. CP-003 → DEF-001).
+RN-009, CP-003, CP-004 y CP-009 con su estado, y DEF-001 y DEF-003. Se puede señalar que **RN-009 no aparece en
+ningún caso de prueba** y que los casos son solo Positivo y Negativo: es el hueco que luego cubre la generación
+(punto 2 de la tabla siguiente).
 
 ## 4. Generación de casos de prueba
 

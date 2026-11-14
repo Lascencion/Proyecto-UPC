@@ -7,28 +7,10 @@
 
 @if (data(); as d) {
   <div class="current">
-    @if (history().length) {
-      <button mat-icon-button matTooltip="Volver al registro anterior" (click)="back()"><mat-icon>arrow_back</mat-icon></button>
-    }
     <mat-icon class="type-icon">{{ icons[d.record.type] }}</mat-icon>
     <strong>{{ d.record.code }}</strong>
     <span class="title">{{ d.record.title }}</span>
   </div>
-
-  @for (a of d.alerts; track a.message) {
-    <p [class]="a.level === 'warning' ? 'warning-box' : 'info-box'">
-      <mat-icon class="alert-icon">{{ a.level === 'warning' ? 'warning' : 'info' }}</mat-icon>{{ a.message }}
-    </p>
-  }
-
-  @if (coverage().length) {
-    <div class="coverage" aria-label="Casos de prueba por tipo de escenario">
-      <span class="muted">Casos por tipo de escenario:</span>
-      @for (c of coverage(); track c[0]) {
-        <span class="cov" [class.empty]="!c[1]">{{ c[0] }} <strong>{{ c[1] }}</strong></span>
-      }
-    </div>
-  }
 
   @if (!total()) {
     <p class="muted">Este registro no tiene relaciones con otros registros del proyecto.</p>
@@ -44,11 +26,10 @@
         <ul>
           @for (i of g.items; track i.code) {
             <li>
-              <button type="button" class="item" (click)="open(i)"
-                [matTooltip]="'Ver trazabilidad de ' + i.code">
+              <div class="item">
                 <span class="code">{{ i.code }}</span>
                 <span class="item-title">{{ i.title }}</span>
-              </button>
+              </div>
               <span class="meta">
                 @if (i.detail) {
                   <span class="tag" [attr.data-value]="i.detail">{{ i.detail }}</span>
@@ -66,7 +47,7 @@
       </section>
     }
   </div>
-  @if (total()) {
+  @if (hasIndirect()) {
     <p class="muted legend"><mat-icon>subdirectory_arrow_right</mat-icon> relación indirecta: el registro se vincula a través del código indicado.</p>
   }
 }

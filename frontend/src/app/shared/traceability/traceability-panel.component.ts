@@ -1,5 +1,4 @@
 import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -18,12 +17,11 @@ export const TYPE_ICONS: Record<EntityType, string> = {
 /**
  * Trazabilidad de un registro (mejora de HU08): muestra en ambos sentidos los
  * requerimientos, historias, reglas, casos de prueba y defectos relacionados.
- * Se usa en el diálogo del listado: al elegir un registro se muestra su trazabilidad
- * en el mismo panel, con historial para volver atrás.
+ * Se usa en el diálogo del listado y es de solo consulta (los códigos no son enlaces).
  */
 @Component({
   selector: 'app-traceability-panel',
-  imports: [MatButtonModule, MatIconModule, MatProgressBarModule, MatTooltipModule],
+  imports: [MatIconModule, MatProgressBarModule, MatTooltipModule],
   templateUrl: './traceability-panel.component.html',
   styleUrl: './traceability-panel.component.scss',
 })
@@ -33,13 +31,9 @@ export class TraceabilityPanelComponent {
   readonly type = input.required<string>();
   readonly id = input.required<string>();
 
-  /** Registro mostrado (cambia al navegar dentro del panel). */
-  readonly current = signal<{ type: string; id: string } | null>(null);
   readonly data = signal<Traceability | null>(null);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
-  /** Historial para volver atrás dentro del panel. */
-  readonly history = signal<{ type: string; id: string }[]>([]);
 
   readonly icons = TYPE_ICONS;
   readonly groups = computed(() => {
@@ -49,20 +43,16 @@ export class TraceabilityPanelComponent {
     return d.groups.filter((g) => g.type !== d.record.type || g.items.length);
   });
   readonly total = computed(() => this.groups().reduce((n, g) => n + g.items.length, 0));
-  readonly coverage = computed(() => Object.entries(this.data()?.scenarioCoverage ?? {}));
+  readonly hasIndirect = computed(() => this.groups().some((g) => g.items.some((i) => i.relation === 'indirecta')));
 
   constructor() {
     effect(() => {
       const target = { type: this.type(), id: this.id() };
-      untracked(() => {
-        this.history.set([]);
-        this.show(target);
-      });
+      untracked(() => this.show(target));
     });
   }
 
   private async show(target: { type: string; id: string }): Promise<void> {
-    this.current.set(target);
     this.loading.set(true);
     this.error.set(null);
     try {
@@ -73,18 +63,6 @@ export class TraceabilityPanelComponent {
     } finally {
       this.loading.set(false);
     }
-  }
-
-  open(item: TraceItem): void {
-    this.history.update((h) => [...h, this.current()!]);
-    this.show({ type: item.type, id: item.id });
-  }
-
-  back(): void {
-    const h = this.history();
-    if (!h.length) return;
-    this.history.set(h.slice(0, -1));
-    this.show(h[h.length - 1]);
   }
 
   relationText(item: TraceItem): string {
